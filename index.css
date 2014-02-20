@@ -1,3 +1,5 @@
+@import 'hive-profile';
+
 * {
   box-sizing: border-box;
 }
@@ -35,40 +37,45 @@ body >.container {
   margin-bottom: 10px;
   background-size: contain;
   background-repeat: no-repeat;
+  background-position: center;
   width: 40px;
   height: 40px;
 }
 
 a[href='#profile'] {
-  background-image: url(../images/icon-tabbar-user__inactive.png);
+  background-image: url(../images/icon-profile-inactive.png);
 }
 
-a[href='#profile']:hover {
-  background-image: url(../images/icon-tabbar-user__active.png);
+a[href='#profile']:hover,
+.tab.active a[href='#profile'] {
+  background-image: url(../images/icon-profile-active.png);
 }
 
 a[href='#apps'] {
-  background-image: url(../images/icon-apps__inactive.png);
+  background-image: url(../images/icon-apps-inactive.png);
 }
 
-a[href='#apps']:hover {
-  background-image: url(../images/icon-apps__active.png);
+a[href='#apps']:hover,
+.tab.active a[href='#apps'] {
+  background-image: url(../images/icon-apps-active.png);
 }
 
 a[href='#contacts'] {
-  background-image: url(../images/icon-group__inactive.png);
+  background-image: url(../images/icon-contacts-inactive.png);
 }
 
-a[href='#contacts']:hover {
-  background-image: url(../images/icon-group__active.png);
+a[href='#contacts']:hover,
+.tab.active a[href='#contacts'] {
+  background-image: url(../images/icon-contacts-active.png);
 }
 
 a[href='#transactions'] {
-  background-image: url(../images/icon-tabbar-timeline__inactive.png);
+  background-image: url(../images/icon-timeline-inactive.png);
 }
 
-a[href='#transactions']:hover {
-  background-image: url(../images/icon-tabbar-timeline__active.png);
+a[href='#transactions']:hover,
+.tab.active a[href='#transactions'] {
+  background-image: url(../images/icon-timeline-active.png);
 }
 
 div.content {
@@ -92,6 +99,4 @@ div.content:target {
 @keyframes slide {
     100% { left: 0; }
 }
-
-@import 'hive-profile';
 
