@@ -1,0 +1,11 @@
+[submodule "lib/sheetify"]
+	path = lib/sheetify
+	url = git@github.com:requireio/sheetify.git
+	branch = dev
+[submodule "lib/style-deps"]
+	path = lib/style-deps
+	url = git@github.com:requireio/style-deps.git
+	branch = dev
+[submodule "lib/wrap-selectors"]
+	path = lib/wrap-selectors
+	url = git@github.com:requireio/wrap-selectors.git

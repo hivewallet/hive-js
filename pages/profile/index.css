@@ -1,49 +1,51 @@
-hr {
-  height: 1px;
-  border: 1px solid lightgrey;
-  color: transparent;
-  background: transparent;
-}
+@document wrap(#profile) {
+  hr {
+    height: 1px;
+    border: 1px solid lightgrey;
+    color: transparent;
+    background: transparent;
+  }
 
-.row {
-  position: relative;
-  overflow: hidden;
-  width: 100%;
-  padding-top: 20px;
-  padding-bottom: 20px;
-}
+  .row {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
 
-.left, .right {
-  float: left;
-}
+  .left, .right {
+    float: left;
+  }
 
-.left {
-  width: 30%;
-  padding-right: 1em;
-}
+  .left {
+    width: 30%;
+    padding-right: 1em;
+  }
 
-.right {
-  width: 70%;
-}
+  .right {
+    width: 70%;
+  }
 
-.label {
-  color: grey;
-  font-weight: bold;
-  margin-bottom: 5px;
-}
+  .label {
+    color: grey;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
 
-.panel {
-  background-color: white;
-  border: 1px solid lightgrey;
-  border-radius: 5px;
-  padding: 10px;
-}
+  .panel {
+    background-color: white;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+    padding: 10px;
+  }
 
-.user-image {
-  width: 100px;
-  height: 100px;
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: 100%;
-  border-radius: 5px;
+  .user-image {
+    width: 100px;
+    height: 100px;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    border-radius: 5px;
+  }
 }
