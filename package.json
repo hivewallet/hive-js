@@ -15,7 +15,8 @@
   },
   "dependencies": {
     "ractify": "~0.2.0",
-    "rework": "~0.20.2"
+    "rework": "~0.20.2",
+    "browserify-zepto": "~1.1.2"
   },
   "aperture": {
     "sources": [

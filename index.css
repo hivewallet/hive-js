@@ -19,7 +19,6 @@ body >.container {
 #sidebar {
   background: url(../images/bg-sidebar.png);
   width: 12%;
-  padding: 10px;
 }
 
 #main {
@@ -29,6 +28,10 @@ body >.container {
 
 .tabs .tab {
   text-align: center;
+}
+
+.tabs .tab.active {
+  background-image: url(../images/button_inset.png);
 }
 
 .tabs .tab a{
