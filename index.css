@@ -93,3 +93,5 @@ div.content:target {
     100% { left: 0; }
 }
 
+@import 'hive-profile';
+
