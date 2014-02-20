@@ -1,0 +1,51 @@
+<div class='row'>
+  <div class='left'>
+    <div class='user-image' style="background-image: url('{{user.picture}}')"></div>
+  </div>
+
+  <div class='right'>
+    <div class='name'>
+      {{user.name}}
+    </div>
+
+    <hr/>
+
+    <div class='bitcoin'>
+      <select>
+        <option>BTC</option>
+        <option>mBTC</option>
+        <option>uBTC</option>
+      </select>
+      <span class="amount">{{btcBalance}}</span>
+    </div>
+
+    <hr/>
+
+    <div class='fiat-currency'>
+      <select>
+        <option>USD</option>
+        <option>SGD</option>
+        <option>AUD</option>
+      </select>
+      <span class="amount">{{fiatBalance}}</span>
+    </div>
+  </div>
+</div>
+
+<hr/>
+
+<div class='row'>
+  <div class='label'>Bitcoin Address</div>
+  <div class='panel'>
+    main
+    <br/>
+    {{user.address}}
+  </div>
+</div>
+
+<div class='row'>
+  <div class='label'>Contact information</div>
+  <div class='panel'>
+    {{user.email}}
+  </div>
+</div>
