@@ -9,3 +9,6 @@
 [submodule "lib/wrap-selectors"]
 	path = lib/wrap-selectors
 	url = git@github.com:requireio/wrap-selectors.git
+[submodule "lib/bitcoinjs-lib"]
+	path = lib/bitcoinjs-lib
+	url = git@github.com:vbuterin/bitcoinjs-lib.git
