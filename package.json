@@ -8,7 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC",
+  "license": "GPL-3.0",
   "devDependencies": {
     "browserify": "~3.30.1",
     "aperture": "git+ssh://git@github.com:requireio/aperture.git",
