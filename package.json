@@ -20,7 +20,7 @@
     "ractify": "~0.2.0",
     "rework": "~0.20.2",
     "browserify-zepto": "~1.1.2",
-    "bitcoinjs-lib": "git://github.com/vbuterin/bitcoinjs-lib.git"
+    "bitcoinjs-lib": "git://github.com/bitcoinjs/bitcoinjs-lib.git"
   },
   "aperture": {
     "sources": [
