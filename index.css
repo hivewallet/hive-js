@@ -1,4 +1,5 @@
 @import 'hive-menu';
+@import 'hive-send-dialog';
 @import 'hive-profile';
 @import 'hive-apps';
 @import 'hive-landing';
@@ -71,4 +72,28 @@ hr {
   width: 100%;
   padding-top: 20px;
   padding-bottom: 20px;
+}
+
+button{
+  display: inline-block;
+  margin-bottom: 0;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  padding: 6px 12px;
+  border-radius: 4px;
+  -webkit-user-select: none;
+  color: #fff;
+}
+
+.btn-primary {
+  background-color: #428bca;
+  border-color: #357ebd;
+}
+
+.btn-success {
+  background-color: #5cb85c;
+  border-color: #4cae4c;
 }

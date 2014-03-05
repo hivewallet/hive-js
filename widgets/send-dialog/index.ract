@@ -1,0 +1,30 @@
+{{#visible}}
+<div on-click="cancel" class="modal modal-cancel">
+  <div class="modal-dialog">
+    <div class="modal-header">
+      Send Bitcoin
+    </div>
+    <hr/>
+    <div class="modal-content panel">
+      <form>
+        <fieldset>
+          <label for="to">To:</label>
+          <input id="to" type="text" value="{{to}}">
+        </fieldset>
+
+        <fieldset>
+          <label for="bitcoin">BTC:</label>
+          <input id="bitcoin" type="number" value="{{bitcoin}}">
+        </fieldset>
+      </form>
+    </div>
+    <hr/>
+    <div class="modal-footer">
+      <button on-click="cancel" class="btn-default modal-cancel">Cancel</button>
+      <button on-click="send" class="btn-primary">Send</button>
+    </div>
+  </div>
+</div>
+{{/visible}}
+
+<button on-click="open" class="btn-primary modal-open">Send</button>
