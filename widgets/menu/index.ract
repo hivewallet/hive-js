@@ -1,0 +1,6 @@
+<div class="tabs">
+  <div class="tab" on-click="select"><a href='#profile'></a></div>
+  <div class="tab" on-click="select"><a href='#apps'></a></div>
+  <div class="tab" on-click="select"><a href='#contacts'></a></div>
+  <div class="tab" on-click="select"><a href='#transactions'></a></div>
+</div>

@@ -1,3 +1,4 @@
+@import 'hive-menu';
 @import 'hive-profile';
 @import 'hive-apps';
 
@@ -26,62 +27,6 @@ body >.container {
 #main {
   width: 88%;
   overflow-x: hidden;
-}
-
-.tabs .tab {
-  text-align: center;
-}
-
-.tabs .tab.active {
-  background-image: url(../images/button_inset.png);
-  background-size: cover;
-}
-
-.tabs .tab a{
-  display: inline-block;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  width: 40px;
-  height: 40px;
-}
-
-a[href='#profile'] {
-  background-image: url(../images/icon-profile-inactive.png);
-}
-
-a[href='#profile']:hover,
-.tab.active a[href='#profile'] {
-  background-image: url(../images/icon-profile-active.png);
-}
-
-a[href='#apps'] {
-  background-image: url(../images/icon-apps-inactive.png);
-}
-
-a[href='#apps']:hover,
-.tab.active a[href='#apps'] {
-  background-image: url(../images/icon-apps-active.png);
-}
-
-a[href='#contacts'] {
-  background-image: url(../images/icon-contacts-inactive.png);
-}
-
-a[href='#contacts']:hover,
-.tab.active a[href='#contacts'] {
-  background-image: url(../images/icon-contacts-active.png);
-}
-
-a[href='#transactions'] {
-  background-image: url(../images/icon-timeline-inactive.png);
-}
-
-a[href='#transactions']:hover,
-.tab.active a[href='#transactions'] {
-  background-image: url(../images/icon-timeline-active.png);
 }
 
 div.content {
