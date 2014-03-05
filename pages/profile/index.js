@@ -1,6 +1,7 @@
 'use strict';
 
 var Ractive = require('ractify')
+var wallet = require('hive-wallet')
 
 module.exports = function(el){
   return new Ractive({
@@ -9,7 +10,7 @@ module.exports = function(el){
     data: {
       user: {
         name: 'Wei Lu',
-        address: '1Bu3bhwRmevHLAy1JrRB6AfcxfgDG2vXRd',
+        address: wallet.generateAddress(),
         email: 'wei@hivewallet.com',
         picture: 'https://pbs.twimg.com/media/BdrFa5WCUAAXFpZ.jpg'
       },
