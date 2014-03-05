@@ -1,13 +1,12 @@
-const wrapSelectors = require('wrap-selectors')
-const sheetify = require('sheetify')
-const bundler = sheetify(process.cwd() + '/' + (process.argv[2]))
+var wrapSelectors = require('wrap-selectors')
+var rework = require('rework')
+var fs = require('fs')
+var bl = require('bl')
 
-bundler.modifier(function(file, style, next) {
-  wrapSelectors()(style)
-  next()
-})
-
-bundler.bundle({debug: true}, function(err, css) {
-  if (err) throw err
-  console.log(css)
-})
+process.stdin.pipe(bl(function(err, css) {
+  console.log(
+    rework(css.toString())
+    .use(wrapSelectors())
+    .toString()
+  )
+}))
