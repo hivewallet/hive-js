@@ -10,17 +10,22 @@ module.exports = function(el){
   })
 
   var active;
-  ractive.on('select', function(event){
-    var node;
-    node = event.node
-
+  function highlightTab(node){
     if(node !== active && active && $(active).hasClass('active')) {
       $(active).removeClass('active')
     }
 
     $(node).addClass('active')
     active = node
+  }
+
+  ractive.on('select', function(event){
+    highlightTab(event.node)
   })
+
+  window.onhashchange = function(){
+    highlightTab(ractive.find("a[href='" + location.hash + "']").parentNode)
+  }
 
   return ractive
 }

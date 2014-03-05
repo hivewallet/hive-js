@@ -6,6 +6,7 @@ describe('menu', function() {
 
   beforeEach(function(){
     var el = document.createElement('div')
+    document.body.innerHTML = ''
     document.body.appendChild(el)
     menu(el)
     tabs = $(document).find('.tab')
