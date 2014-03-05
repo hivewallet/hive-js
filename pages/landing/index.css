@@ -1,0 +1,39 @@
+@document wrap(#landing) {
+  * {
+    font-size: 1em;
+  }
+
+  textarea {
+    display: block;
+    height: 100px;
+    width: 300px;
+    padding: 6px 12px;
+    color: #555;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+  button{
+    display: inline-block;
+    margin-bottom: 0;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    padding: 6px 12px;
+    border-radius: 4px;
+    -webkit-user-select: none;
+    color: #fff;
+  }
+
+  .btn-primary {
+    background-color: #428bca;
+    border-color: #357ebd;
+  }
+
+  .btn-success {
+    background-color: #5cb85c;
+    border-color: #4cae4c;
+  }
+}

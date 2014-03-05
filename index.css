@@ -1,6 +1,7 @@
 @import 'hive-menu';
 @import 'hive-profile';
 @import 'hive-apps';
+@import 'hive-landing';
 
 * {
   box-sizing: border-box;
@@ -38,6 +39,10 @@ div.content {
   left: -100%;
 }
 
+#landing {
+  left: 0;
+}
+
 div.content:target {
   -webkit-animation: slide 0.2s forwards;
   animation: slide 0.2s forwards;
@@ -51,3 +56,19 @@ div.content:target {
     100% { left: 0; }
 }
 
+/* shared */
+
+hr {
+  height: 1px;
+  border: 1px solid lightgrey;
+  color: transparent;
+  background: transparent;
+}
+
+.row {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}

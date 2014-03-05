@@ -1,11 +1,12 @@
 'use strict';
 
+var landing = require('./pages/landing')
 var menu = require('./widgets/menu')
-menu(document.getElementById("sidebar"))
-
 var profile = require('./pages/profile')
-profile(document.getElementById("profile"))
-
 var apps = require('./pages/apps')
+
+landing(document.getElementById("landing"))
+menu(document.getElementById("sidebar"))
+profile(document.getElementById("profile"))
 apps(document.getElementById("apps"))
 

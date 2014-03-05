@@ -1,19 +1,4 @@
 @document wrap(#profile) {
-  hr {
-    height: 1px;
-    border: 1px solid lightgrey;
-    color: transparent;
-    background: transparent;
-  }
-
-  .row {
-    position: relative;
-    overflow: hidden;
-    width: 100%;
-    padding-top: 20px;
-    padding-bottom: 20px;
-  }
-
   .left, .right {
     float: left;
   }
