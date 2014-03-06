@@ -13,7 +13,7 @@ module.exports = function(config) {
 
     preprocessors: {
       '**/*.html': ['html2js'],
-      'widgets/menu/test/*': ['browserify']
+      'widgets/*/test/*': ['browserify']
     },
 
     browserify: {
@@ -26,7 +26,7 @@ module.exports = function(config) {
     files: [
       'public/**/*.css',
       'public/**/*.html',
-      'widgets/menu/test/*'
+      'widgets/*/test/*'
     ],
 
 
