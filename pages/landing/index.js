@@ -1,9 +1,10 @@
 'use strict';
 
 var Ractive = require('ractify')
-var mnemonic = require('mnemonic')
+var bip39 = require('bip39')
 var wallet = require('hive-wallet')
 var emitter = require('hive-emitter')
+var convert = require('bitcoinjs-lib').convert
 
 module.exports = function(el){
   var ractive = new Ractive({
@@ -21,7 +22,8 @@ module.exports = function(el){
   })
 
   function getSeed(){
-    return mnemonic.decode(ractive.get('passphrase').split(' '))
+    var seedHex = bip39.mnemonicToSeed(ractive.get('passphrase').trim())
+    return convert.bytesToString(convert.hexToBytes(seedHex))
   }
 
   function getNetwork() {

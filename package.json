@@ -36,7 +36,8 @@
     "browserify-zepto": "~1.1.2",
     "bitcoinjs-lib": "git://github.com/bitcoinjs/bitcoinjs-lib.git",
     "mnemonic": "^1.0.1",
-    "events": "^1.0.0"
+    "events": "^1.0.0",
+    "bip39": "^0.1.0"
   },
   "aperture": {
     "sources": [
