@@ -30,14 +30,14 @@
     "stream-browserify": "^0.1.3",
     "bl": "^0.7.0",
     "ractify": "~0.2.0",
-    "rework": "~0.20.2"
+    "rework": "~0.20.2",
+    "folderify": "~0.6.0",
+    "karma-safari-launcher": "~0.1.1"
   },
   "dependencies": {
     "browserify-zepto": "~1.1.2",
-    "bitcoinjs-lib": "git://github.com/bitcoinjs/bitcoinjs-lib.git",
-    "mnemonic": "^1.0.1",
-    "events": "^1.0.0",
-    "bip39": "^0.1.0"
+    "bitcoinjs-lib": "git://github.com/bitcoinjs/bitcoinjs-lib.git#hd-keychain-structure",
+    "events": "^1.0.0"
   },
   "aperture": {
     "sources": [
