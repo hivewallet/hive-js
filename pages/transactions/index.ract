@@ -2,8 +2,8 @@
   {{#transactions}}
     <li>
       <i class="fa fa-bitcoin"></i>
-      <span class="{{direction}}"></span>
-      <span>{{direction}}</span>
+      <i class="{{directionClass(direction)}}"></i>
+      <span>{{directionVerb(direction)}}</span>
       <b>{{amount}}</b>
 
       {{#toAddress}}
@@ -11,7 +11,7 @@
         <b>{{toAddress}}</b>
       {{/toAddress}}
 
-      <span>{{timestamp}}</span>
+      <span>{{formatTimestamp(timestamp)}}</span>
     </li>
   {{/transactions}}
 </ul>

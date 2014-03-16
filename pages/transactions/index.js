@@ -10,7 +10,29 @@ module.exports = function(el){
     el: el,
     template: require('./index.ract'),
     data: {
-      transactions: transactions
+      transactions: transactions,
+      directionVerb: function(direction){
+        return {
+          incoming: 'Received',
+          outgoing: 'Sent'
+        }[direction]
+      },
+      directionClass: function(direction){
+        return {
+          incoming: 'fa fa-plus-circle',
+          outgoing: 'fa fa-minus-circle'
+        }[direction]
+      },
+      formatTimestamp: function(timestamp){
+        var date = new Date(timestamp)
+        var options = {
+          day: "numeric",
+          month: "short",
+          hour: "2-digit",
+          minute: "2-digit"
+        }
+        return date.toLocaleTimeString(navigator.language, options)
+      }
     }
   });
 
