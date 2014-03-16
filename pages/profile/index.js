@@ -11,17 +11,18 @@ module.exports = function(el){
     data: {
       user: {
         name: 'Wei Lu',
-        address: '1Bu3bhwRmevHLAy1JrRB6AfcxfgDG2vXRd',
+        address: '',
         email: 'wei@hivewallet.com',
         picture: 'https://pbs.twimg.com/media/BdrFa5WCUAAXFpZ.jpg'
       },
-      btcBalance: 0.6,
-      fiatBalance: 36
+      btcBalance: 'unknown',
+      fiatBalance: 'unknown'
     }
   })
 
   emitter.on('wallet-ready', function(){
     ractive.set('user.address', wallet.nextReceiveAddress)
+    ractive.set('btcBalance', wallet.balance * 0.00000001)
   })
 
   return ractive

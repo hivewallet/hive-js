@@ -13,8 +13,6 @@
     <div class='bitcoin'>
       <select>
         <option>BTC</option>
-        <option>mBTC</option>
-        <option>uBTC</option>
       </select>
       <span class="amount">{{btcBalance}}</span>
     </div>
