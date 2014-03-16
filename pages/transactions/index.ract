@@ -1,7 +1,7 @@
 <ul>
   {{#transactions}}
     <li>
-      <i class="fa fa-bitcoin" />
+      <i class="fa fa-bitcoin"></i>
       <span class="{{direction}}"></span>
       <span>{{direction}}</span>
       <b>{{amount}}</b>
