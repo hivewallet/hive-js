@@ -11,7 +11,7 @@
         <b>{{toAddress}}</b>
       {{/toAddress}}
 
-      <span>{{formatTimestamp(timestamp)}}</span>
+      <span class='timestamp'>{{formatTimestamp(timestamp)}}</span>
     </li>
   {{/transactions}}
 </ul>

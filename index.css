@@ -3,6 +3,7 @@
 @import 'hive-profile';
 @import 'hive-apps';
 @import 'hive-landing';
+@import 'hive-transactions';
 
 * {
   box-sizing: border-box;
@@ -58,6 +59,10 @@ div.content:target {
 }
 
 /* shared */
+
+b {
+  font-weight: bold;
+}
 
 hr {
   height: 1px;
