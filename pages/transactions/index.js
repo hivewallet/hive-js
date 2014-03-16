@@ -3,6 +3,7 @@
 var Ractive = require('ractify')
 var emitter = require('hive-emitter')
 var wallet = require('hive-wallet')
+var Big = require('big.js')
 
 module.exports = function(el){
   var transactions = []
@@ -32,6 +33,10 @@ module.exports = function(el){
           minute: "2-digit"
         }
         return date.toLocaleTimeString(navigator.language, options)
+      },
+      satoshiToBTC: function(amount){
+        var satoshi = new Big(amount)
+        return satoshi.times(0.00000001)
       }
     }
   });

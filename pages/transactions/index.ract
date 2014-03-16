@@ -4,7 +4,7 @@
       <i class="fa fa-bitcoin"></i>
       <i class="{{directionClass(direction)}}"></i>
       <span>{{directionVerb(direction)}}</span>
-      <b>{{amount}}</b>
+      <b>{{satoshiToBTC(amount)}} BTC</b>
 
       {{#toAddress}}
         <span>to</span>

@@ -14,7 +14,7 @@
       <select>
         <option>BTC</option>
       </select>
-      <span class="amount">{{btcBalance}}</span>
+      <span class="amount">{{satoshiToBTC(btcBalance)}}</span>
     </div>
 
     <hr/>

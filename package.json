@@ -32,7 +32,8 @@
     "ractify": "~0.2.0",
     "rework": "~0.20.2",
     "folderify": "~0.6.0",
-    "karma-safari-launcher": "~0.1.1"
+    "karma-safari-launcher": "~0.1.1",
+    "big.js": "^2.5.0"
   },
   "dependencies": {
     "browserify-zepto": "~1.1.2",
