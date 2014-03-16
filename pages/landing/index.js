@@ -12,7 +12,7 @@ module.exports = function(el){
 
   ractive.on('open-wallet', function(event){
     event.original.preventDefault()
-    wallet.openWallet(getPassphrase(), getNetwork(), onSyncDone)
+    wallet.openWallet(getPassphrase(), getNetwork(), onSyncDone, onTransactionsLoaded)
   })
 
   function onSyncDone(err) {
@@ -20,6 +20,12 @@ module.exports = function(el){
 
     emitter.emit('wallet-ready')
     location.hash = '#profile'
+  }
+
+  function onTransactionsLoaded(err, transactions) {
+    if(err) alert(err)
+
+    emitter.emit('transactions-loaded', transactions)
   }
 
   function getPassphrase(){
