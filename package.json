@@ -38,7 +38,8 @@
   "dependencies": {
     "browserify-zepto": "~1.1.2",
     "bitcoinjs-lib": "git://github.com/bitcoinjs/bitcoinjs-lib.git#hd-keychain-structure",
-    "events": "^1.0.0"
+    "events": "^1.0.0",
+    "st": "^0.3.1"
   },
   "aperture": {
     "sources": [
