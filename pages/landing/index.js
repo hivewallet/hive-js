@@ -12,12 +12,15 @@ module.exports = function(el){
 
   ractive.on('open-wallet', function(event){
     event.original.preventDefault()
-
-    wallet.openWallet(getPassphrase(), getNetwork())
-    emitter.emit('wallet-ready')
-
-    location.hash = '#profile'
+    wallet.openWallet(getPassphrase(), getNetwork(), onSyncDone)
   })
+
+  function onSyncDone(err) {
+    if(err) alert(err)
+
+    emitter.emit('wallet-ready')
+    location.hash = '#profile'
+  }
 
   function getPassphrase(){
     return ractive.get('passphrase').trim()

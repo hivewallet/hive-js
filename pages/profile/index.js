@@ -21,7 +21,7 @@ module.exports = function(el){
   })
 
   emitter.on('wallet-ready', function(){
-    ractive.set('user.address', wallet.generateAddress())
+    ractive.set('user.address', wallet.nextReceiveAddress)
   })
 
   return ractive
