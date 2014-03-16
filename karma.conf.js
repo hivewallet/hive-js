@@ -26,7 +26,8 @@ module.exports = function(config) {
     files: [
       'public/**/*.css',
       'public/**/*.html',
-      '@(widgets|lib)/*/test/*'
+      'lib/*/test/*',
+      'widgets/*/test/*'
     ],
 
 
