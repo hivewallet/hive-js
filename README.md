@@ -10,3 +10,7 @@ Work in progress
     npm install
     npm start
     open public/index.html
+
+### Running tests
+
+    karma start
