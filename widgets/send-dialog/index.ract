@@ -14,7 +14,7 @@
 
         <fieldset>
           <label for="bitcoin">BTC:</label>
-          <input id="bitcoin" type="number" value="{{bitcoin}}">
+          <input id="bitcoin" type="number" value="{{value}}">
         </fieldset>
       </form>
     </div>

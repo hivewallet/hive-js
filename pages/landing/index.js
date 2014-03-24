@@ -16,14 +16,14 @@ module.exports = function(el){
   })
 
   function onSyncDone(err) {
-    if(err) alert("error synchronizing. " + err)
+    if(err) return alert("error synchronizing. " + err)
 
     emitter.emit('wallet-ready')
     location.hash = '#profile'
   }
 
   function onTransactionsLoaded(err, transactions) {
-    if(err) alert("error loading transactions. " + err)
+    if(err) return alert("error loading transactions. " + err)
 
     emitter.emit('transactions-loaded', transactions)
   }
