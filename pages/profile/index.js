@@ -27,7 +27,7 @@ module.exports = function(el){
 
   emitter.on('wallet-ready', function(){
     var wallet = getWallet()
-    ractive.set('user.address', wallet.nextReceiveAddress)
+    ractive.set('user.address', wallet.currentAddress)
     ractive.set('btcBalance', wallet.balance)
   })
 
