@@ -35,7 +35,7 @@ module.exports = function(el){
         return date.toLocaleTimeString(navigator.language, options)
       },
       satoshiToBTC: function(amount){
-        var satoshi = new Big(amount)
+        var satoshi = new Big(Math.abs(amount))
         return satoshi.times(0.00000001)
       }
     }
