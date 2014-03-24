@@ -1,7 +1,7 @@
 'use strict';
 
 var Ractive = require('ractify')
-var wallet = require('hive-wallet')
+var getWallet = require('hive-wallet').getWallet
 var emitter = require('hive-emitter')
 var Big = require('big.js')
 
@@ -26,6 +26,7 @@ module.exports = function(el){
   })
 
   emitter.on('wallet-ready', function(){
+    var wallet = getWallet()
     ractive.set('user.address', wallet.nextReceiveAddress)
     ractive.set('btcBalance', wallet.balance)
   })

@@ -1,7 +1,7 @@
 'use strict';
 
 var Ractive = require('ractify')
-var wallet = require('hive-wallet')
+var openWallet = require('hive-wallet').openWallet
 var emitter = require('hive-emitter')
 
 module.exports = function(el){
@@ -12,18 +12,18 @@ module.exports = function(el){
 
   ractive.on('open-wallet', function(event){
     event.original.preventDefault()
-    wallet.openWallet(getPassphrase(), getNetwork(), onSyncDone, onTransactionsLoaded)
+    openWallet(getPassphrase(), getNetwork(), onSyncDone, onTransactionsLoaded)
   })
 
   function onSyncDone(err) {
-    if(err) alert(err)
+    if(err) alert("error synchronizing. " + err)
 
     emitter.emit('wallet-ready')
     location.hash = '#profile'
   }
 
   function onTransactionsLoaded(err, transactions) {
-    if(err) alert(err)
+    if(err) alert("error loading transactions. " + err)
 
     emitter.emit('transactions-loaded', transactions)
   }
