@@ -28,12 +28,12 @@ module.exports = function(el){
     var value = btcToSatoshi(ractive.get('value'))
 
     var wallet = getWallet()
-    try{
-      var tx = wallet.createTx(to, value) //TODO: bitcoinjs-lib to provide async interface
+
+    wallet.createTxAsync(to, value, function(err, tx){
+      if(err) return alert(err)
+
       wallet.sendTx(tx, onTxSent)
-    } catch(err){
-      alert(err)
-    }
+    })
   })
 
   function btcToSatoshi(amount){
