@@ -4,6 +4,11 @@
     border-bottom: 1px solid lightgrey;
   }
 
+  li > * {
+    display: inline-block;
+    vertical-align: middle;
+  }
+
   .fa.fa-bitcoin {
     font-size: 2em;
     color: lightgrey;
@@ -23,5 +28,11 @@
     float: right;
     color: gray;
     font-size: small;
+    vertical-align: top;
+  }
+
+  .pending {
+    text-transform: uppercase;
+    color: gray;
   }
 }

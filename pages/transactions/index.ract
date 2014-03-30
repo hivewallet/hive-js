@@ -3,13 +3,19 @@
     <li>
       <i class="fa fa-bitcoin"></i>
       <i class="{{directionClass(direction)}}"></i>
-      <span>{{directionVerb(direction)}}</span>
-      <b>{{satoshiToBTC(amount)}} BTC</b>
+      <div>
+        <span>{{directionVerb(direction)}}</span>
+        <b>{{satoshiToBTC(amount)}} BTC</b>
 
-      {{#toAddress}}
-        <span>to</span>
-        <b>{{toAddress}}</b>
-      {{/toAddress}}
+        {{#toAddress}}
+          <span>to</span>
+          <b>{{toAddress}}</b>
+        {{/toAddress}}
+
+        {{#pending}}
+          <div class='pending'>pending</div>
+        {{/pending}}
+      </div>
 
       <span class='timestamp'>{{formatTimestamp(timestamp)}}</span>
     </li>
