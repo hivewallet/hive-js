@@ -7,8 +7,11 @@ var emitter = require('hive-emitter')
 module.exports = function(el){
   var ractive = new Ractive({
     el: el,
+    data: {
+      visible: true
+    },
     template: require('./index.ract')
-  });
+  })
 
   ractive.on('open-wallet', function(event){
     event.original.preventDefault()
@@ -24,6 +27,7 @@ module.exports = function(el){
     if(err) return alert("error synchronizing. " + err)
 
     emitter.emit('wallet-ready')
+    ractive.set('visible', false)
     location.hash = '#profile'
   }
 

@@ -1,8 +1,8 @@
 @import 'hive-menu';
 @import 'hive-send-dialog';
+@import 'hive-landing-dialog';
 @import 'hive-profile';
 @import 'hive-apps';
-@import 'hive-landing';
 @import 'hive-transactions';
 
 * {
@@ -101,6 +101,29 @@ button{
 .btn-success {
   background-color: #5cb85c;
   border-color: #4cae4c;
+}
+
+/* modal */
+
+.modal {
+  overflow: auto;
+  overflow-y: scroll;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 999;
+}
+
+.modal-dialog {
+  width: 50%;
+  margin: 30px auto;
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  z-index: 1000;
 }
 
 /* report bug ribbon */
