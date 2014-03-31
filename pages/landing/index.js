@@ -15,6 +15,11 @@ module.exports = function(el){
     openWallet(getPassphrase(), getNetwork(), onSyncDone, onTransactionsLoaded)
   })
 
+  ractive.on('create-wallet', function(event){
+    event.original.preventDefault()
+    openWallet(null, getNetwork(), onSyncDone, onTransactionsLoaded)
+  })
+
   function onSyncDone(err) {
     if(err) return alert("error synchronizing. " + err)
 

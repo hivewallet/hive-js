@@ -4,5 +4,6 @@
   </div>
   <div class='row'>
     <button on-click="open-wallet" class="btn-primary">Open wallet</button>
+    <button on-click="create-wallet" class="btn-success">Create new wallet</button>
   </div>
 </form>
