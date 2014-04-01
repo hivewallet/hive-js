@@ -1,21 +1,6 @@
 @document wrap(#profile) {
-  .left, .right {
-    float: left;
-  }
-
-  .left {
-    width: 30%;
-    padding-right: 1em;
-  }
-
-  .right {
-    width: 70%;
-  }
-
-  .label {
-    color: grey;
-    font-weight: bold;
-    margin-bottom: 5px;
+  .amount {
+    margin-top: 10px;
   }
 
   .panel {

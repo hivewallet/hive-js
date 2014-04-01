@@ -1,48 +1,48 @@
 <div class='row'>
-  <div class='left'>
+  <div class='medium-3 columns'>
     <div class='user-image' style="background-image: url('{{user.picture}}')"></div>
   </div>
 
-  <div class='right'>
-    <div class='name'>
+  <div class='medium-9 columns'>
+    <div class='name row'>
       {{user.name}}
+      <hr/>
     </div>
 
-    <hr/>
-
-    <div class='bitcoin'>
-      <select>
+    <div class='bitcoin row'>
+      <select class='large-2 small-4 columns'>
         <option>BTC</option>
       </select>
-      <span class="amount">{{satoshiToBTC(bitcoinBalance)}}</span>
+      <span class="amount large-10 small-8 columns">
+        {{satoshiToBTC(bitcoinBalance)}}
+      </span>
+      <hr/>
     </div>
 
-    <hr/>
-
-    <div class='fiat-currency'>
-      <select value="{{selectedFiat}}">
+    <div class='fiat-currency row'>
+      <select class='large-2 small-4 columns' value="{{selectedFiat}}">
         {{#currencies}}
           <option value="{{.}}">{{.}}</option>
         {{/currencies}}
       </select>
-      <span class="amount">{{bitcoinToFiat(bitcoinBalance, exchangeRates[selectedFiat])}}</span>
+      <span class="amount large-10 small-8 columns">
+        {{bitcoinToFiat(bitcoinBalance, exchangeRates[selectedFiat])}}
+      </span>
     </div>
   </div>
+
+  <hr/>
 </div>
 
-<hr/>
-
 <div class='row'>
-  <div class='label'>Bitcoin Address</div>
+  <h5>Bitcoin Address</h5>
   <div class='panel'>
-    main
-    <br/>
     {{user.address}}
   </div>
 </div>
 
 <div class='row'>
-  <div class='label'>Contact information</div>
+  <h5>Contact information</h5>
   <div class='panel'>
     {{user.email}}
   </div>

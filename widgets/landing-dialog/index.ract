@@ -1,18 +1,20 @@
 {{#visible}}
 <div class="modal">
   <div class="modal-dialog">
-    <div class="modal-header">
-      Open Wallet
-    </div>
-    <hr/>
+    <h5 class="modal-header">Open Wallet</h5>
     <div class="modal-content panel">
-      <textarea placeholder="12 word passphrase" value="{{passphrase}}"></textarea>
+      <div class="row">
+        <div class="large-12 columns">
+          <label>Passphrase
+            <input type="text" placeholder="12-word passphrase" value="{{passphrase}}"/>
+          </label>
+        </div>
+      </div>
     </div>
-    <hr/>
     <div class="modal-footer">
       {{^opening}}
-        <button on-click="open-wallet" class="btn-primary">Open wallet</button>
-        <button on-click="create-wallet" class="btn-success">Create new wallet</button>
+        <button on-click="open-wallet" class="radius primary">Open wallet</button>
+        <button on-click="create-wallet" class="radius success">Create new wallet</button>
       {{/opening}}
       {{#opening}}
         <p>{{progress}}</p>
