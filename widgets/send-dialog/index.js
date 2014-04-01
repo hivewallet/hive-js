@@ -5,11 +5,16 @@ var Ractive = require('ractify')
 var getWallet = require('hive-wallet').getWallet
 var Big = require('big.js')
 var emitter = require('hive-emitter')
+var db = require('hive-db')
 
 module.exports = function(el){
   var ractive = new Ractive({
     el: el,
-    template: require('./index.ract')
+    template: require('./index.ract'),
+    data: {
+      exchangeRates: {},
+      bitcoinToFiat: bitcoinToFiat
+    }
   })
 
   ractive.on('cancel', function(event){
@@ -19,13 +24,17 @@ module.exports = function(el){
   })
 
   ractive.on('open', function(event){
+    db.get('systemInfo', function(err, info){
+      if(err) return console.error(err);
+      ractive.set('selectedFiat', info.preferredCurrency)
+    })
     ractive.set('visible', true)
   })
 
   ractive.on('send', function(event){
     ractive.set('visible', false)
     var to = ractive.get('to')
-    var value = btcToSatoshi(ractive.get('value'))
+    var value = bitcoinToSatoshi(ractive.get('value'))
 
     var wallet = getWallet()
 
@@ -36,9 +45,18 @@ module.exports = function(el){
     })
   })
 
-  function btcToSatoshi(amount){
+  emitter.on('ticker', function(rates){
+    ractive.set('exchangeRates', rates)
+  })
+
+  function bitcoinToSatoshi(amount){
     var btc = new Big(amount)
     return parseInt(btc.times(100000000).toFixed(0))
+  }
+
+  function bitcoinToFiat(amount, exchangeRate){
+    var btc = new Big(amount)
+    return btc.times(exchangeRate).toFixed(2)
   }
 
   function onTxSent(err, transaction){

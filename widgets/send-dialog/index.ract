@@ -11,6 +11,10 @@
         <label for="bitcoin">BTC:
           <input id="bitcoin" type="number" value="{{value}}">
         </label>
+
+        <label for="fiat">{{selectedFiat}}:
+          <input id="fiat" type="number" value="{{bitcoinToFiat(value, exchangeRates[selectedFiat])}}" disabled="disabled">
+        </label>
       </form>
     </div>
     <div class="modal-footer">
