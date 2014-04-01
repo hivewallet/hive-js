@@ -7,6 +7,15 @@
   "license": "GPL-3.0",
   "dependencies": {
     "xhr": "^1.4.1",
-    "bip39": "~1.0.4"
+    "bip39": "~1.0.4",
+    "workerify": "git://github.com/weilu/workerify.git"
+  },
+  "browserify": {
+    "transform": [
+      [
+        "workerify",
+        "./index.js"
+      ]
+    ]
   }
 }
