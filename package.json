@@ -6,7 +6,7 @@
   "scripts": {
     "start": "bash build.sh",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "postinstall": "npm start"
+    "postinstall": "aperture open; npm start"
   },
   "author": "",
   "license": "GPL-3.0",
