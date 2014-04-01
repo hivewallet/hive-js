@@ -20,7 +20,6 @@ module.exports = function(el){
       },
       currencies: currencies,
       bitcoinBalance: 'unknown',
-      fiatBalance: 'unknown',
       exchangeRates: {},
       satoshiToBTC: satoshiToBTC,
       bitcoinToFiat: bitcoinToFiat
@@ -33,21 +32,21 @@ module.exports = function(el){
     ractive.set('bitcoinBalance', wallet.getBalance())
   })
 
+  emitter.on('db-ready', function(){
+    db.get('systemInfo', function(err, info){
+      if(err) return console.error(err);
+      ractive.set('selectedFiat', info.preferredCurrency)
+    })
+  })
+
   emitter.on('ticker', function(rates){
     ractive.set('exchangeRates', rates)
   })
 
-  ractive.observe('selectedFiat', savePreferredCurrency)
+  ractive.observe('selectedFiat', setPreferredCurrency)
 
-  function savePreferredCurrency(currency){
-    var id = getWallet().id
-    var value = {
-      systemInfo: {
-        preferredCurrency: currency
-      }
-    }
-
-    db.upsert(id, value, function(err, response){
+  function setPreferredCurrency(currency){
+    db.set('systemInfo', { preferredCurrency: currency }, function(err, response){
       if(err) return console.error(response)
     })
   }
