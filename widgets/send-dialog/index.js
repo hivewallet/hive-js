@@ -45,6 +45,16 @@ module.exports = function(el){
     })
   })
 
+  ractive.on('fiat-to-bitcoin', function(event){
+    var fiatAmount = event.node.value
+    if(fiatAmount === '') return;
+
+    var exchangeRate = ractive.get('exchangeRates')[ractive.get('selectedFiat')]
+
+    var bitcoin = new Big(fiatAmount).div(exchangeRate).toFixed(8)
+    ractive.set('value', bitcoin)
+  })
+
   emitter.on('ticker', function(rates){
     ractive.set('exchangeRates', rates)
   })

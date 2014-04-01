@@ -13,7 +13,7 @@
         </label>
 
         <label for="fiat">{{selectedFiat}}:
-          <input id="fiat" type="number" value="{{bitcoinToFiat(value, exchangeRates[selectedFiat])}}" disabled="disabled">
+          <input id="fiat" type="number" value="{{bitcoinToFiat(value, exchangeRates[selectedFiat])}}" on-keyup="fiat-to-bitcoin">
         </label>
       </form>
     </div>
