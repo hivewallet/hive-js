@@ -8,7 +8,8 @@ module.exports = function(el){
   var ractive = new Ractive({
     el: el,
     data: {
-      visible: true
+      visible: true,
+      opening: false,
     },
     template: require('./index.ract')
   })
@@ -23,7 +24,18 @@ module.exports = function(el){
     openWallet(null, getNetwork(), onSyncDone, onTransactionsLoaded)
   })
 
+  emitter.on('wallet-opening', function(progress){
+    ractive.set('opening', true)
+    ractive.set('progress', progress)
+
+    window.setInterval(function(){
+      var text = ractive.get('progress')
+      ractive.set('progress', text + '.')
+    }, 500)
+  })
+
   function onSyncDone(err) {
+    ractive.set('opening', false)
     if(err) return alert("error synchronizing. " + err)
 
     emitter.emit('wallet-ready')
