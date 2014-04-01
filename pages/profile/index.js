@@ -16,7 +16,8 @@ module.exports = function(el){
         name: 'Wei Lu',
         address: '',
         email: 'wei@hivewallet.com',
-        picture: 'https://pbs.twimg.com/media/BdrFa5WCUAAXFpZ.jpg'
+        picture: 'https://pbs.twimg.com/media/BdrFa5WCUAAXFpZ.jpg',
+        mnemonic: ''
       },
       currencies: currencies,
       bitcoinBalance: 'unknown',
@@ -29,6 +30,7 @@ module.exports = function(el){
   emitter.on('wallet-ready', function(){
     var wallet = getWallet()
     ractive.set('user.address', wallet.currentAddress)
+    ractive.set('user.mnemonic', wallet.getMnemonic())
     ractive.set('bitcoinBalance', wallet.getBalance())
   })
 
