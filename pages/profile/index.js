@@ -5,6 +5,7 @@ var getWallet = require('hive-wallet').getWallet
 var emitter = require('hive-emitter')
 var Big = require('big.js')
 var currencies = require('hive-ticker-api').currencies
+var db = require('hive-db')
 
 module.exports = function(el){
   var ractive = new Ractive({
@@ -35,6 +36,21 @@ module.exports = function(el){
   emitter.on('ticker', function(rates){
     ractive.set('exchangeRates', rates)
   })
+
+  ractive.observe('selectedFiat', savePreferredCurrency)
+
+  function savePreferredCurrency(currency){
+    var id = getWallet().id
+    var value = {
+      systemInfo: {
+        preferredCurrency: currency
+      }
+    }
+
+    db.upsert(id, value, function(err, response){
+      if(err) return console.error(response)
+    })
+  }
 
   function satoshiToBTC(amount){
     var satoshi = new Big(amount)
