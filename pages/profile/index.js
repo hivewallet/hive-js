@@ -20,6 +20,7 @@ module.exports = function(el){
       currencies: currencies,
       bitcoinBalance: 'unknown',
       fiatBalance: 'unknown',
+      exchangeRates: {},
       satoshiToBTC: satoshiToBTC,
       bitcoinToFiat: bitcoinToFiat
     }
@@ -32,8 +33,7 @@ module.exports = function(el){
   })
 
   emitter.on('ticker', function(rates){
-    var currency = ractive.get('selectedFiat')
-    ractive.set('exchangeRate', rates[currency])
+    ractive.set('exchangeRates', rates)
   })
 
   function satoshiToBTC(amount){
