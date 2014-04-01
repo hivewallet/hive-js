@@ -14,18 +14,18 @@
       <select>
         <option>BTC</option>
       </select>
-      <span class="amount">{{satoshiToBTC(btcBalance)}}</span>
+      <span class="amount">{{satoshiToBTC(bitcoinBalance)}}</span>
     </div>
 
     <hr/>
 
     <div class='fiat-currency'>
-      <select>
-        <option>USD</option>
-        <option>SGD</option>
-        <option>AUD</option>
+      <select value="{{selectedFiat}}">
+        {{#currencies}}
+          <option value="{{.}}">{{.}}</option>
+        {{/currencies}}
       </select>
-      <span class="amount">{{fiatBalance}}</span>
+      <span class="amount">{{bitcoinToFiat(bitcoinBalance, exchangeRate)}}</span>
     </div>
   </div>
 </div>
