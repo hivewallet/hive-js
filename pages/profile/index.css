@@ -9,13 +9,4 @@
     border-radius: 5px;
     padding: 10px;
   }
-
-  .user-image {
-    width: 100px;
-    height: 100px;
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: 100%;
-    border-radius: 5px;
-  }
 }

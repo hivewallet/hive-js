@@ -1,6 +1,6 @@
 <div class='row'>
   <div class='medium-3 columns'>
-    <div class='user-image' style="background-image: url('{{user.picture}}')"></div>
+    <img src="{{emailToAvatar(formatEmail(user.email))}}" />
   </div>
 
   <div class='medium-9 columns'>
@@ -32,11 +32,10 @@
       </span>
     </div>
   </div>
-
-  <hr/>
 </div>
 
 <div class='row'>
+  <hr/>
   <h5>Bitcoin Address</h5>
   <div class='panel'>
     {{user.address}}
@@ -53,6 +52,6 @@
 <div class='row'>
   <h5>Contact information</h5>
   <div class='panel'>
-    {{user.email}}
+    {{formatEmail(user.email)}}
   </div>
 </div>

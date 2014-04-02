@@ -6,6 +6,7 @@ var emitter = require('hive-emitter')
 var Big = require('big.js')
 var currencies = require('hive-ticker-api').currencies
 var db = require('hive-db')
+var crypto = require('crypto')
 
 module.exports = function(el){
   var ractive = new Ractive({
@@ -17,14 +18,15 @@ module.exports = function(el){
         lastName: '',
         address: '',
         email: '',
-        picture: 'https://pbs.twimg.com/media/BdrFa5WCUAAXFpZ.jpg',
         mnemonic: ''
       },
       currencies: currencies,
       bitcoinBalance: 'unknown',
       exchangeRates: {},
       satoshiToBTC: satoshiToBTC,
-      bitcoinToFiat: bitcoinToFiat
+      bitcoinToFiat: bitcoinToFiat,
+      emailToAvatar: emailToAvatar,
+      formatEmail: formatEmail
     }
   })
 
@@ -66,6 +68,18 @@ module.exports = function(el){
   function bitcoinToFiat(amount, exchangeRate){
     var btc = satoshiToBTC(amount)
     return btc.times(exchangeRate).toFixed(2)
+  }
+
+  function formatEmail(email){
+    return email.trim().toLowerCase()
+  }
+
+  function emailToAvatar(email){
+    return [
+      'https://www.gravatar.com/avatar/',
+      crypto.createHash('md5').update(email).digest('hex'),
+      '?size=200'
+    ].join('')
   }
 
   return ractive
