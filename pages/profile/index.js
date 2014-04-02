@@ -21,6 +21,7 @@ module.exports = function(el){
         mnemonic: ''
       },
       editingName: false,
+      editingEmail: false,
       currencies: currencies,
       bitcoinBalance: 'unknown',
       exchangeRates: {},
@@ -67,6 +68,19 @@ module.exports = function(el){
       lastName: ractive.get('user.lastName')
     }
     db.set('userInfo', name, function(err, response){
+      if(err) return console.error(response)
+    })
+  })
+
+  ractive.on('edit-email', function(){
+    ractive.set('editingEmail', true)
+  })
+
+  ractive.on('edited-email', function(){
+    ractive.set('editingEmail', false)
+
+    var email = { email: ractive.get('user.email') }
+    db.set('userInfo', email, function(err, response){
       if(err) return console.error(response)
     })
   })

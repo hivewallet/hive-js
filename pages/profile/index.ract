@@ -62,7 +62,15 @@
 
 <div class='row'>
   <h5>Contact information</h5>
-  <div class='panel'>
+  {{^editingEmail}}
+  <div on-click='edit-email' class='panel'>
     {{formatEmail(user.email)}}
   </div>
+  {{/editingEmail}}
+
+  {{#editingEmail}}
+    <div class="medium-6 small-12 columns">
+      <input type="text" value={{user.email}} on-blur='edited-email'/>
+    </div>
+  {{/editingEmail}}
 </div>
