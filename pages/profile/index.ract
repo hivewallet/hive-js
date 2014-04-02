@@ -5,9 +5,20 @@
 
   <div class='medium-9 columns'>
     <div class='name row'>
-      <div class='panel'>
+      {{^editingName}}
+      <div on-click='edit-name' class='panel'>
         {{user.firstName}} {{user.lastName}}
       </div>
+      {{/editingName}}
+
+      {{#editingName}}
+        <div class="medium-6 small-12 columns">
+          <input type="text" value={{user.firstName}} />
+        </div>
+        <div class="medium-6 small-12 columns">
+          <input type="text" value={{user.lastName}} on-blur='edited-name'/>
+        </div>
+      {{/editingName}}
       <hr/>
     </div>
 

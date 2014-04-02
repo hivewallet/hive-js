@@ -20,6 +20,7 @@ module.exports = function(el){
         email: '',
         mnemonic: ''
       },
+      editingName: false,
       currencies: currencies,
       bitcoinBalance: 'unknown',
       exchangeRates: {},
@@ -54,8 +55,24 @@ module.exports = function(el){
 
   ractive.observe('selectedFiat', setPreferredCurrency)
 
+  ractive.on('edit-name', function(){
+    ractive.set('editingName', true)
+  })
+
+  ractive.on('edited-name', function(){
+    ractive.set('editingName', false)
+
+    var name = {
+      firstName: ractive.get('user.firstName'),
+      lastName: ractive.get('user.lastName')
+    }
+    db.set('userInfo', name, function(err, response){
+      if(err) return console.error(response)
+    })
+  })
+
   function setPreferredCurrency(currency){
-    db.set('systemInfo.preferredCurrency', currency, function(err, response){
+    db.set('systemInfo', {preferredCurrency: currency}, function(err, response){
       if(err) return console.error(response)
     })
   }
