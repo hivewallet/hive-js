@@ -12,8 +12,7 @@ module.exports = function(el){
     el: el,
     template: require('./index.ract'),
     data: {
-      exchangeRates: {},
-      bitcoinToFiat: bitcoinToFiat
+      exchangeRates: {}
     }
   })
 
@@ -26,7 +25,7 @@ module.exports = function(el){
   ractive.on('open', function(event){
     db.get('systemInfo', function(err, info){
       if(err) return console.error(err);
-      ractive.set('selectedFiat', info.preferredCurrency)
+      ractive.set('fiatCurrency', info.preferredCurrency)
     })
     ractive.set('visible', true)
   })
@@ -46,13 +45,23 @@ module.exports = function(el){
   })
 
   ractive.on('fiat-to-bitcoin', function(event){
-    var fiatAmount = event.node.value
-    if(fiatAmount === '') return;
+    var fiat = event.node.value
+    if(fiat === '') return;
 
-    var exchangeRate = ractive.get('exchangeRates')[ractive.get('selectedFiat')]
+    var exchangeRate = ractive.get('exchangeRates')[ractive.get('fiatCurrency')]
+    var bitcoin = new Big(fiat).div(exchangeRate).toFixed(8)
 
-    var bitcoin = new Big(fiatAmount).div(exchangeRate).toFixed(8)
     ractive.set('value', bitcoin)
+  })
+
+  ractive.on('bitcoin-to-fiat', function(event){
+    var bitcoin = event.node.value
+    if(bitcoin === '') return;
+
+    var exchangeRate = ractive.get('exchangeRates')[ractive.get('fiatCurrency')]
+    var fiat = new Big(bitcoin).times(exchangeRate).toFixed(2)
+
+    ractive.set('fiatValue', fiat)
   })
 
   emitter.on('ticker', function(rates){
@@ -62,11 +71,6 @@ module.exports = function(el){
   function bitcoinToSatoshi(amount){
     var btc = new Big(amount)
     return parseInt(btc.times(100000000).toFixed(0))
-  }
-
-  function bitcoinToFiat(amount, exchangeRate){
-    var btc = new Big(amount)
-    return btc.times(exchangeRate).toFixed(2)
   }
 
   function onTxSent(err, transaction){

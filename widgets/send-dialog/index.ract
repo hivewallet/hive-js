@@ -9,11 +9,11 @@
         </label>
 
         <label for="bitcoin">BTC:
-          <input id="bitcoin" type="number" value="{{value}}">
+          <input id="bitcoin" type="number" value="{{value}}" on-keyup="bitcoin-to-fiat">
         </label>
 
-        <label for="fiat">{{selectedFiat}}:
-          <input id="fiat" type="number" value="{{bitcoinToFiat(value, exchangeRates[selectedFiat])}}" on-keyup="fiat-to-bitcoin">
+        <label for="fiat">{{fiatCurrency}}:
+          <input id="fiat" type="number" value="{{fiatValue}}" on-keyup="fiat-to-bitcoin">
         </label>
       </form>
     </div>
