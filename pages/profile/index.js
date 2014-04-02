@@ -55,7 +55,7 @@ module.exports = function(el){
   ractive.observe('selectedFiat', setPreferredCurrency)
 
   function setPreferredCurrency(currency){
-    db.set('systemInfo', { preferredCurrency: currency }, function(err, response){
+    db.set('systemInfo.preferredCurrency', currency, function(err, response){
       if(err) return console.error(response)
     })
   }
