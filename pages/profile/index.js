@@ -13,9 +13,10 @@ module.exports = function(el){
     template: require('./index.ract'),
     data: {
       user: {
-        name: 'Wei Lu',
+        firstName: '',
+        lastName: '',
         address: '',
-        email: 'wei@hivewallet.com',
+        email: '',
         picture: 'https://pbs.twimg.com/media/BdrFa5WCUAAXFpZ.jpg',
         mnemonic: ''
       },
@@ -35,9 +36,13 @@ module.exports = function(el){
   })
 
   emitter.on('db-ready', function(){
-    db.get('systemInfo', function(err, info){
+    db.get(function(err, doc){
       if(err) return console.error(err);
-      ractive.set('selectedFiat', info.preferredCurrency)
+
+      ractive.set('selectedFiat', doc.systemInfo.preferredCurrency)
+      ractive.set('user.firstName', doc.userInfo.firstName)
+      ractive.set('user.lastName', doc.userInfo.lastName)
+      ractive.set('user.email', doc.userInfo.email)
     })
   })
 

@@ -5,7 +5,9 @@
 
   <div class='medium-9 columns'>
     <div class='name row'>
-      {{user.name}}
+      <div class='panel'>
+        {{user.firstName}} {{user.lastName}}
+      </div>
       <hr/>
     </div>
 
