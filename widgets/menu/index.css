@@ -1,6 +1,7 @@
 @document wrap(#sidebar) {
   .tabs .tab {
     text-align: center;
+    display: block;
   }
 
   .tabs .tab.active {
@@ -8,7 +9,7 @@
     background-size: cover;
   }
 
-  .tabs .tab a{
+  .tabs .tab__icon {
     display: inline-block;
     margin-top: 10px;
     margin-bottom: 10px;
@@ -19,39 +20,39 @@
     height: 40px;
   }
 
-  a[href='#profile'] {
+  .img-profile {
     background-image: url(../images/icon-profile-inactive.png);
   }
 
-  a[href='#profile']:hover,
-  .tab.active a[href='#profile'] {
+  .tab:hover .img-profile,
+  .tab.active .img-profile {
     background-image: url(../images/icon-profile-active.png);
   }
 
-  a[href='#apps'] {
+  .img-apps {
     background-image: url(../images/icon-apps-inactive.png);
   }
 
-  a[href='#apps']:hover,
-  .tab.active a[href='#apps'] {
+  .tab:hover .img-apps,
+  .tab.active .img-apps {
     background-image: url(../images/icon-apps-active.png);
   }
 
-  a[href='#contacts'] {
+  .img-contacts {
     background-image: url(../images/icon-contacts-inactive.png);
   }
 
-  a[href='#contacts']:hover,
-  .tab.active a[href='#contacts'] {
+  .tab:hover .img-contacts,
+  .tab.active .img-contacts {
     background-image: url(../images/icon-contacts-active.png);
   }
 
-  a[href='#transactions'] {
+  .img-transactions {
     background-image: url(../images/icon-timeline-inactive.png);
   }
 
-  a[href='#transactions']:hover,
-  .tab.active a[href='#transactions'] {
+  .tab:hover .img-transactions,
+  .tab.active .img-transactions {
     background-image: url(../images/icon-timeline-active.png);
   }
 }

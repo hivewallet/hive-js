@@ -24,7 +24,7 @@ module.exports = function(el){
   })
 
   window.onhashchange = function(){
-    highlightTab(ractive.find("a[href='" + location.hash + "']").parentNode)
+    highlightTab(ractive.find("a[href='" + location.hash + "']"))
   }
 
   return ractive
