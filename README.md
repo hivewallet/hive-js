@@ -7,9 +7,11 @@ Work in progress
 
     git clone git@github.com:weilu/hive-js.git
     cd hive-js
+    npm install -g aperture
     npm install
-    npm start
-    open public/index.html
+    aperture open
+    aperture link
+    gulp
 
 ### Running tests
 

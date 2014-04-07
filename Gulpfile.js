@@ -21,7 +21,7 @@ server.use(livereload({
   port: livereloadport
 }));
 
-server.use(express.static('./public'));
+server.use(express.static('./build'));
 
 gulp.task('serve', function() {
   server.listen(serverport);
@@ -34,7 +34,7 @@ gulp.task('styles', function(){
   gulp.src('./app/sass/application.scss')
     .pipe(sass()) // {sourceComments: 'map'} doesn't work in windows :/
     .pipe(prefix())
-    .pipe(gulp.dest('./public/assets/css/'))
+    .pipe(gulp.dest('./build/assets/css/'))
     .pipe(refresh(lrserver));
 });
 
@@ -44,7 +44,7 @@ gulp.task('scripts', function(){
       transform: ['ractify'],
       extensions: ['.ract']
     }))
-    .pipe(gulp.dest('./public/assets/js/'))
+    .pipe(gulp.dest('./build/assets/js/'))
     .pipe(refresh(lrserver));
 
   // browserify -t ractify app/js/app.js > public/assets/js/app.js
@@ -52,13 +52,13 @@ gulp.task('scripts', function(){
 
 gulp.task('html', function(){
   gulp.src('./app/index.html')
-    .pipe(gulp.dest('./public/'))
+    .pipe(gulp.dest('./build/'))
     .pipe(refresh(lrserver));
 });
 
 gulp.task('assets', function(){
   gulp.src('./app/assets/**/*')
-    .pipe(gulp.dest('./public/assets/'))
+    .pipe(gulp.dest('./build/assets/'))
     .pipe(refresh(lrserver));
 });
 
