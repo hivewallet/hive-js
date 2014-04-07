@@ -1,0 +1,19 @@
+
+
+
+// Icon mixin - most useful for grunticons
+// ---------------------------------------------------------------------------------------
+
+
+@mixin icon($width, $height, $display) {
+  display: $display;
+  width: $width;
+  height: $height;
+
+  background-position: center center;
+  -ms-background-size: $width $height;
+  -webkit-background-size: $width $height;
+  -o-background-size: $width $height;
+  -moz-background-size: $width $height;   
+  background-size: $width $height;
+}

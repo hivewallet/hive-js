@@ -1,0 +1,36 @@
+
+
+
+// Breakpoint Mixin
+// ---------------------------------------------------------------------------------------
+
+
+$mquery: false !default;
+
+$portrait: 48em;    // based on ipad ~ 768px
+$landscape: 64em;   // based on ipad ~ 1024px
+
+@mixin breakpoint($point) {
+
+  @if $point == portrait {
+
+    $width: $portrait;
+
+    @media (min-width: $width) { 
+      $mquery: true;
+      @content;
+      $mquery: false;
+    }
+  }
+
+  @if $point == landscape {
+
+    $width: $landscape;
+
+    @media (min-width: $width) { 
+      $mquery: true;
+      @content;
+      $mquery: false;
+    } 
+  }
+}
