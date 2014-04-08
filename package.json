@@ -53,7 +53,7 @@
   },
   "aperture": {
     "sources": [
-      "lib/*",
+      "app/js/lib/*",
       "app/js/pages/*",
       "app/js/widgets/*"
     ]
