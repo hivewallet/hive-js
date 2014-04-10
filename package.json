@@ -53,9 +53,9 @@
   },
   "aperture": {
     "sources": [
-      "app/js/lib/*",
-      "app/js/pages/*",
-      "app/js/widgets/*"
+      "app/lib/*",
+      "app/pages/*",
+      "app/widgets/*"
     ]
   },
   "engines": {

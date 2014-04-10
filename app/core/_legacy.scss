@@ -1341,130 +1341,9 @@ meta.foundation-version{font-family:"/5.2.1/"}meta.foundation-mq-small{font-fami
 }
 
 
-#sidebar .tabs .tab {
-  text-align: center;
-  display: block;
-}
 
-#sidebar .tabs .tab.active {
-  background-image: url(../img/button_inset.png);
-  background-size: cover;
-}
 
-#sidebar .tabs .tab__icon {
-  display: inline-block;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  width: 40px;
-  height: 40px;
-}
 
-#sidebar .img-profile {
-  background-image: url(../img/icon-profile-inactive.png);
-}
-
-#sidebar .tab:hover .img-profile,
-#sidebar .tab.active .img-profile {
-  background-image: url(../img/icon-profile-active.png);
-}
-
-#sidebar .img-apps {
-  background-image: url(../img/icon-apps-inactive.png);
-}
-
-#sidebar .tab:hover .img-apps,
-#sidebar .tab.active .img-apps {
-  background-image: url(../img/icon-apps-active.png);
-}
-
-#sidebar .img-contacts {
-  background-image: url(../img/icon-contacts-inactive.png);
-}
-
-#sidebar .tab:hover .img-contacts,
-#sidebar .tab.active .img-contacts {
-  background-image: url(../img/icon-contacts-active.png);
-}
-
-#sidebar .img-transactions {
-  background-image: url(../img/icon-timeline-inactive.png);
-}
-
-#sidebar .tab:hover .img-transactions,
-#sidebar .tab.active .img-transactions {
-  background-image: url(../img/icon-timeline-active.png);
-}
-
-#send-dialog .modal-open {
-  width: 12%;
-  position: absolute;
-  bottom: 0;
-  font-size: 0.8em;
-  height: 40px;
-}
-
-#send-dialog fieldset {
-  margin: 15px 0;
-}
-
-#profile .amount {
-  margin-top: 10px;
-}
-
-#profile .panel {
-  background-color: white;
-  border: 1px solid lightgrey;
-  border-radius: 5px;
-  padding: 10px;
-}
-
-.content#apps {
-  padding: 0;
-}
-
-#transactions ul {
-  list-style: none;
-}
-
-#transactions ul > li {
-  padding: 15px 0;
-  border-bottom: 1px solid lightgrey;
-}
-
-#transactions li > * {
-  display: inline-block;
-  vertical-align: middle;
-}
-
-#transactions .fa.fa-bitcoin {
-  font-size: 2em;
-  color: lightgrey;
-  text-shadow: 1px 1px 1px #333;
-  margin-right: 15px;
-}
-
-#transactions .fa.fa-plus-circle {
-  color: limegreen;
-}
-
-#transactions .fa.fa-minus-circle {
-  color: deepskyblue;
-}
-
-#transactions .timestamp {
-  float: right;
-  color: gray;
-  font-size: small;
-  vertical-align: top;
-}
-
-#transactions .pending {
-  text-transform: uppercase;
-  color: gray;
-}
 
 * {
   box-sizing: border-box;
@@ -1615,3 +1494,4 @@ hr {
     box-shadow: 4px 4px 10px rgba(0,0,0,0.8);
   }
 }
+

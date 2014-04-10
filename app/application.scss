@@ -1,0 +1,38 @@
+
+
+
+// Include file - converts to application.css
+// ------------------------------------------------------------------------------------
+
+
+// Assets (used in variables)
+@import "core/_fonts";
+
+// Global Variables
+@import "core/_variables";
+
+// Mixins
+@import "core/mixins/_compass";
+@import "core/mixins/_snippets";
+@import "core/mixins/_breakpoints";
+@import "core/mixins/_icons";
+
+// Reset
+@import "core/reset/_normalize";
+@import "core/reset/_formalize";
+@import "core/_javascript";
+@import "core/_base";
+@import "core/_legacy";
+
+// --------------------------------------------
+// Components should import here
+// --------------------------------------------
+
+@import "pages/profile/_profile";
+@import "pages/transactions/_transactions";
+@import "widgets/menu/_sidebar";
+@import "widgets/send-dialog/_send-dialog";
+
+
+// "nar cbf m8..."
+@import "_shamefile";

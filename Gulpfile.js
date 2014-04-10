@@ -31,15 +31,15 @@ gulp.task('serve', function() {
 // main tasks ------------------------------ //
  
 gulp.task('styles', function(){
-  gulp.src('./app/sass/application.scss')
-    .pipe(sass()) // {sourceComments: 'map'} doesn't work in windows :/
+  gulp.src('./app/application.scss')
+    .pipe(sass({sourceComments: 'map'})) // {sourceComments: 'map'} doesn't work in windows :/
     .pipe(prefix())
     .pipe(gulp.dest('./build/assets/css/'))
     .pipe(refresh(lrserver));
 });
 
 gulp.task('scripts', function(){
-  gulp.src('./app/js/app.js')
+  gulp.src('./app/application.js')
     .pipe(browserify({
       transform: ['ractify'],
       extensions: ['.ract']
@@ -66,8 +66,8 @@ gulp.task('assets', function(){
 
 gulp.task('watch', function() {
 
-  gulp.watch('app/sass/**', ['styles']);
-  gulp.watch(['app/js/**', '!app/js/**/node_modules/**/*'], ['scripts']);
+  gulp.watch(['app/**.scss'], ['styles']);
+  gulp.watch(['app/**.js', 'app/**.ract', '!app/js/**/node_modules/**/*'], ['scripts']);
   gulp.watch('app/assets/**', ['assets']);
   gulp.watch('app/index.html', ['html']);
 

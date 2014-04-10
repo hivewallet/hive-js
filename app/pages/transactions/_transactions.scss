@@ -1,0 +1,42 @@
+
+
+#transactions ul {
+  list-style: none;
+}
+
+#transactions ul > li {
+  padding: 15px 0;
+  border-bottom: 1px solid lightgrey;
+}
+
+#transactions li > * {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+#transactions .fa.fa-bitcoin {
+  font-size: 2em;
+  color: lightgrey;
+  text-shadow: 1px 1px 1px #333;
+  margin-right: 15px;
+}
+
+#transactions .fa.fa-plus-circle {
+  color: limegreen;
+}
+
+#transactions .fa.fa-minus-circle {
+  color: deepskyblue;
+}
+
+#transactions .timestamp {
+  float: right;
+  color: gray;
+  font-size: small;
+  vertical-align: top;
+}
+
+#transactions .pending {
+  text-transform: uppercase;
+  color: gray;
+}

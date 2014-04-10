@@ -1,0 +1,58 @@
+
+
+#sidebar .tabs .tab {
+  text-align: center;
+  display: block;
+}
+
+#sidebar .tabs .tab.active {
+  background-image: url(../img/button_inset.png);
+  background-size: cover;
+}
+
+#sidebar .tabs .tab__icon {
+  display: inline-block;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 40px;
+  height: 40px;
+}
+
+#sidebar .img-profile {
+  background-image: url(../img/icon-profile-inactive.png);
+}
+
+#sidebar .tab:hover .img-profile,
+#sidebar .tab.active .img-profile {
+  background-image: url(../img/icon-profile-active.png);
+}
+
+#sidebar .img-apps {
+  background-image: url(../img/icon-apps-inactive.png);
+}
+
+#sidebar .tab:hover .img-apps,
+#sidebar .tab.active .img-apps {
+  background-image: url(../img/icon-apps-active.png);
+}
+
+#sidebar .img-contacts {
+  background-image: url(../img/icon-contacts-inactive.png);
+}
+
+#sidebar .tab:hover .img-contacts,
+#sidebar .tab.active .img-contacts {
+  background-image: url(../img/icon-contacts-active.png);
+}
+
+#sidebar .img-transactions {
+  background-image: url(../img/icon-timeline-inactive.png);
+}
+
+#sidebar .tab:hover .img-transactions,
+#sidebar .tab.active .img-transactions {
+  background-image: url(../img/icon-timeline-active.png);
+}
