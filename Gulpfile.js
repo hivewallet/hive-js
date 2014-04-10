@@ -29,7 +29,7 @@ gulp.task('serve', function() {
 });
 
 // main tasks ------------------------------ //
- 
+
 gulp.task('styles', function(){
   gulp.src('./app/application.scss')
     .pipe(sass({sourceComments: 'map'})) // {sourceComments: 'map'} doesn't work in windows :/
@@ -46,8 +46,6 @@ gulp.task('scripts', function(){
     }))
     .pipe(gulp.dest('./build/assets/js/'))
     .pipe(refresh(lrserver));
-
-  // browserify -t ractify app/js/app.js > public/assets/js/app.js
 });
 
 gulp.task('html', function(){
@@ -78,5 +76,5 @@ gulp.task('watch', function() {
 gulp.task('build', ['html', 'scripts', 'styles', 'assets']);
 
 // $ gulp ---------------------------------- //
- 
+
 gulp.task('default', ['scripts', 'styles', 'html', 'assets', 'serve', 'watch']);
