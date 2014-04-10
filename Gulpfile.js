@@ -66,9 +66,9 @@ gulp.task('assets', function(){
 
 gulp.task('watch', function() {
 
-  gulp.watch(['app/**.scss'], ['styles']);
-  gulp.watch(['app/**.js', 'app/**.ract', '!app/js/**/node_modules/**/*'], ['scripts']);
-  gulp.watch('app/assets/**', ['assets']);
+  gulp.watch(['app/**/*.scss'], ['styles']);
+  gulp.watch(['app/**/*.js', 'app/**/*.ract', '!app/**/node_modules/**/*'], ['scripts']);
+  gulp.watch('app/assets/**/*', ['assets']);
   gulp.watch('app/index.html', ['html']);
 
 });
