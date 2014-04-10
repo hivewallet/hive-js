@@ -56,6 +56,15 @@ gulp.task('assets', function(){
     .pipe(refresh(lrserver));
 });
 
+gulp.task('tests', function(){
+  gulp.src('./app/@(widgets|lib)/*/test/*')
+    .pipe(browserify({
+      transform: ['ractify'],
+      extensions: ['.ract']
+    }))
+    .pipe(gulp.dest('./build/assets/js/tests/'));
+});
+
 // watch ---------------------------------- //
 
 gulp.task('watch', function() {
@@ -64,6 +73,7 @@ gulp.task('watch', function() {
   gulp.watch(['app/**/*.js', 'app/**/*.ract', '!app/**/node_modules/**/*'], ['scripts']);
   gulp.watch('app/assets/**/*', ['assets']);
   gulp.watch('app/index.html', ['html']);
+  gulp.watch(['app/**/test/*.js', '!app/**/node_modules/**/*'], ['tests']);
 
 });
 
@@ -73,4 +83,4 @@ gulp.task('build', ['html', 'scripts', 'styles', 'assets']);
 
 // $ gulp ---------------------------------- //
 
-gulp.task('default', ['scripts', 'styles', 'html', 'assets', 'serve', 'watch']);
+gulp.task('default', ['scripts', 'styles', 'html', 'assets', 'tests', 'serve', 'watch']);

@@ -7,27 +7,18 @@ module.exports = function(config) {
     // base path, that will be used to resolve files and exclude
     basePath: '',
 
-
     // frameworks to use
     frameworks: ['jasmine', 'browserify'],
 
     preprocessors: {
-      '**/*.html': ['html2js'],
-      '@(widgets|lib)/*/test/*': ['browserify']
-    },
-
-    browserify: {
-      transform: ['ractify'],
-      watch: true,
-      debug: true
+      '**/*.html': ['html2js']
     },
 
     // list of files / patterns to load in the browser
     files: [
-      'public/**/*.css',
-      'public/**/*.html',
-      'lib/*/test/*',
-      'widgets/*/test/*'
+      'build/**/*.css',
+      'build/assets/js/tests/**/test/*.js',
+      'build/index.html'
     ],
 
 
