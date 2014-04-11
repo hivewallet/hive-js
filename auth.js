@@ -23,7 +23,6 @@ function register(name, password, callback){
     if(err && err.error === 'not_found'){
       createUser(name, password, callback)
     } else if(err) {
-      console.error('get error', err)
       callback(err)
     } else {
       callback({error: 'user_exists'})

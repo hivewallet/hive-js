@@ -10,7 +10,6 @@ app.use(express.bodyParser());
 app.use(express.static(path.join(__dirname, 'build')))
 
 app.post('/register', function(req, res) {
-  console.log('body', req.body)
   var name = req.body.wallet_id
   var password = req.body.pin
   if (!name || !password) {
