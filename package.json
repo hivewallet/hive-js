@@ -46,7 +46,8 @@
     "bitcoinjs-lib": "git://github.com/bitcoinjs/bitcoinjs-lib.git",
     "events": "^1.0.0",
     "st": "^0.3.1",
-    "esprima": "^1.0.4"
+    "esprima": "^1.0.4",
+    "cradle": "~0.6.7"
   },
   "aperture": {
     "sources": [
