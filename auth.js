@@ -31,9 +31,10 @@ function register(name, password, callback){
   })
 }
 
-function createUser(name, password, callback){
-  var hashAndSalt = generatePasswordHash(password)
+function createUser(name, pin, callback){
   var longPassword = generateLongPassword()
+  var password = longPassword + pin
+  var hashAndSalt = generatePasswordHash(password)
 
   db.save("org.couchdb.user:" + name, {
     name: name,
