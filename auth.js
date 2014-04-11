@@ -56,8 +56,7 @@ function generatePasswordHash(password){
   var salt = crypto.randomBytes(16).toString('hex');
   var hash = crypto.createHash('sha1');
   hash.update(password + salt);
-  hash = '-hashed-' + hash.digest('hex') + ',' + salt
-  return [hash, salt];
+  return [hash.digest('hex'), salt];
 }
 
 function getUser(name) {
