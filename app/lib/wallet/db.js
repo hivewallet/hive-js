@@ -2,21 +2,19 @@
 
 var PouchDB = require('pouchdb')
 var db = new PouchDB('hive-local')
-var AES = require('hive-aes')
 
 var credentials = "credentials"
 
-function saveSeed(id, seed, token, callback) {
+function saveEncrypedSeed(id, encryptedSeed, callback) {
   db.get(credentials, function(err, doc){
     if(doc) {
       return db.remove(doc, function(err, doc){
         if(err) return callback(err);
 
-        saveSeed(id, seed, token, callback)
+        saveEncrypedSeed(id, encryptedSeed, callback)
       })
     }
 
-    var encryptedSeed = AES.encrypt(seed, token)
     var doc = {
       _id: credentials,
       id: id,
@@ -27,5 +25,5 @@ function saveSeed(id, seed, token, callback) {
 }
 
 module.exports = {
-  saveSeed: saveSeed
+  saveEncrypedSeed: saveEncrypedSeed
 }

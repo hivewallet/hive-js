@@ -6,6 +6,7 @@ var auth = require('./auth')
 var db = require('./db')
 var emitter = require('hive-emitter')
 var crypto = require('crypto')
+var AES = require('hive-aes')
 var ThirdParty = require('hive-thrid-party-api')
 var API = ThirdParty.Blockchain
 var txToHiveTx = ThirdParty.txToHiveTx
@@ -73,7 +74,10 @@ function setPin(pin, callback) {
   wallet.pin = pin
 
   auth.register(wallet.id, wallet.pin, function(err, token){
-    db.saveSeed(wallet.id, wallet.getSeed(), token, function(err, res){
+    if(err) return callback(err);
+
+    var encrypted = AES.encrypt(seed, token)
+    db.saveEncrypedSeed(wallet.id, encrypted, function(err, res){
       if(err) return callback(err);
 
       sync(callback)
