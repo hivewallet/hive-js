@@ -81,39 +81,35 @@ function verifyPin(user, name, pin, callback) {
   var hash = crypto.createHash('sha1')
   var sha = hash.update(password + user.salt).digest('hex')
   if(sha === user.password_sha) {
-    if(user.failed_attempts) return resetFailCount(user, callback);
+    if(user.failed_attempts) updateFailCount(user._id, 0)
 
     callback(null, user.token)
   } else {
-    incrementFailCount(user, callback)
+    var counter = user.failed_attempts + 1
+    if(counter >= 5) return deleteUser(user, callback);
+
+    updateFailCount(user._id, counter)
+    callback({error: 'auth_failed'})
   }
 }
 
-function resetFailCount(user, callback) {
-  var counter = { failed_attempts: 0 }
-  db.merge(user._id, counter, function(err, res){
+// ignores db op outcome
+function updateFailCount(id, counter) {
+  db.merge(id, { failed_attempts: counter }, function(err, res){
     if(err) {
-      console.error('FATAL: failed to reset counter')
+      console.error('FATAL: failed to update counter to', counter)
     }
-
-    callback(null, user.token)
   })
 }
 
-function incrementFailCount(user, callback) {
-  var counter = { failed_attempts: user.failed_attempts + 1 }
-  db.merge(user._id, counter, function(err, res){
+function deleteUser(user, callback) {
+  db.remove(user._id, user._rev, function(err, res){
     if(err) {
-      console.error('FATAL: failed to increament counter')
+      console.error('FATAL: failed to delete user')
+      return callback({error: 'auth_failed'})
     }
 
-    callback({error: 'auth_failed'})
-  })
-}
-
-function getUser(name) {
-  db.get(name, function (err, doc) {
-    console.log(arguments)
+    callback({error: 'user_deleted'})
   })
 }
 
