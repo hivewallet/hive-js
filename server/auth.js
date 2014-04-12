@@ -47,8 +47,8 @@ function login(name, pin, callback) {
 }
 
 function createUser(name, pin, callback){
-  var longPassword = generateLongPassword()
-  var password = longPassword + pin
+  var token = generateToken()
+  var password = token + pin
   var hashAndSalt = generatePasswordHash(password)
 
   db.save(userPrefix + name, {
@@ -57,15 +57,15 @@ function createUser(name, pin, callback){
     salt: hashAndSalt[1],
     password_scheme: 'simple',
     type: 'user',
-    long_password: longPassword,
+    token: token,
     failed_attempts: 0
   }, function(err, res){
     if(err) return callback(err);
-    callback(null, longPassword)
+    callback(null, token)
   })
 }
 
-function generateLongPassword(){
+function generateToken(){
   return crypto.randomBytes(64).toString('hex')
 }
 
@@ -77,13 +77,13 @@ function generatePasswordHash(password){
 }
 
 function verifyPin(user, name, pin, callback) {
-  var password = user.long_password + pin
+  var password = user.token + pin
   var hash = crypto.createHash('sha1')
   var sha = hash.update(password + user.salt).digest('hex')
   if(sha === user.password_sha) {
     if(user.failed_attempts) return resetFailCount(user, callback);
 
-    callback(null, user.long_password)
+    callback(null, user.token)
   } else {
     incrementFailCount(user, callback)
   }
@@ -96,7 +96,7 @@ function resetFailCount(user, callback) {
       console.error('FATAL: failed to reset counter')
     }
 
-    callback(null, user.long_password)
+    callback(null, user.token)
   })
 }
 
