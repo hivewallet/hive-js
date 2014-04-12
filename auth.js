@@ -81,10 +81,23 @@ function verifyPin(user, name, pin, callback) {
   var hash = crypto.createHash('sha1')
   var sha = hash.update(password + user.salt).digest('hex')
   if(sha === user.password_sha) {
+    if(user.failed_attempts) return resetFailCount(user, callback);
+
     callback(null, user.long_password)
   } else {
     incrementFailCount(user, callback)
   }
+}
+
+function resetFailCount(user, callback) {
+  var counter = { failed_attempts: 0 }
+  db.merge(user._id, counter, function(err, res){
+    if(err) {
+      console.error('FATAL: failed to reset counter')
+    }
+
+    callback(null, user.long_password)
+  })
 }
 
 function incrementFailCount(user, callback) {
