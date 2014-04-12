@@ -9,19 +9,15 @@ var gulp            = require('gulp'),
     refresh         = require('gulp-livereload'),
     livereload      = require('connect-livereload'),
     lrserver        = require('tiny-lr')(),
-    express         = require('express'),
+    server          = require('./server/express'),
     livereloadport  = 35729,
     serverport      = 8080;
 
 // server --------------------------------- //
 
-var server = express();
-
 server.use(livereload({
   port: livereloadport
 }));
-
-server.use(express.static('./build'));
 
 gulp.task('serve', function() {
   server.listen(serverport);
