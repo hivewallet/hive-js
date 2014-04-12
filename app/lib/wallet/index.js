@@ -73,7 +73,11 @@ function setPin(pin, callback) {
   wallet.pin = pin
 
   auth.register(wallet.id, wallet.pin, function(err, token){
-    db.saveSeed(wallet.id, wallet.getSeed(), token, callback)
+    db.saveSeed(wallet.id, wallet.getSeed(), token, function(err, res){
+      if(err) return callback(err);
+
+      sync(callback)
+    })
   })
 }
 
@@ -84,9 +88,6 @@ function openWallet (passphrase, network, syncDone, transactionsLoaded) {
   worker.addEventListener('message', function(e) {
     initWallet(e.data, network)
 
-    var defaultCallback = function(err){ if(err) console.error(err) }
-    syncDone = syncDone || defaultCallback
-    transactionsLoaded = transactionsLoaded || defaultCallback
     sync(syncDone, transactionsLoaded)
   }, false)
 }
@@ -107,6 +108,11 @@ function initWallet(data, network) {
 function sync(done, transactionsLoaded){
   emitter.emit('wallet-opening', 'Synchronizing wallet balance and transaction history')
   wallet.synchronizing = true
+
+  var defaultCallback = function(err){ if(err) console.error(err) }
+  done = done || defaultCallback
+  transactionsLoaded = transactionsLoaded || defaultCallback
+
   var addresses = generateAddresses(5)
   api.listAddresses(addresses, onAddresses, onTransactions)
 
