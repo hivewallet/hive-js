@@ -1,5 +1,7 @@
-var cradle = require('cradle');
-var crypto = require('crypto');
+"use strict"
+
+var cradle = require('cradle')
+var crypto = require('crypto')
 
 var userPrefix = "org.couchdb.user:"
 
@@ -64,14 +66,14 @@ function createUser(name, pin, callback){
 }
 
 function generateLongPassword(){
-  return crypto.randomBytes(64).toString('hex');
+  return crypto.randomBytes(64).toString('hex')
 }
 
 function generatePasswordHash(password){
-  var salt = crypto.randomBytes(16).toString('hex');
-  var hash = crypto.createHash('sha1');
-  hash.update(password + salt);
-  return [hash.digest('hex'), salt];
+  var salt = crypto.randomBytes(16).toString('hex')
+  var hash = crypto.createHash('sha1')
+  hash.update(password + salt)
+  return [hash.digest('hex'), salt]
 }
 
 function verifyPin(user, name, pin, callback) {
