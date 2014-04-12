@@ -1,3 +1,5 @@
+'use strict';
+
 var emitter = require('hive-emitter')
 var PouchDB = require('pouchdb')
 var getWallet = require('hive-wallet').getWallet

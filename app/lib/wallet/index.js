@@ -2,9 +2,11 @@
 
 var Bitcoin = require('bitcoinjs-lib')
 var worker = new Worker('./worker.js')
+var auth = require('./auth')
+var db = require('./db')
 var emitter = require('hive-emitter')
-var ThirdParty = require('hive-thrid-party-api')
 var crypto = require('crypto')
+var ThirdParty = require('hive-thrid-party-api')
 var API = ThirdParty.Blockchain
 var txToHiveTx = ThirdParty.txToHiveTx
 
@@ -67,14 +69,12 @@ function createWallet(callback, network) {
   }, false)
 }
 
-function openWalletWithPin(pin, syncDone, transactionsLoaded) {
+function setPin(pin, callback) {
   wallet.pin = pin
 
-  var defaultCallback = function(err){ if(err) console.error(err) }
-  syncDone = syncDone || defaultCallback
-  transactionsLoaded = transactionsLoaded || defaultCallback
-
-  sync(syncDone, transactionsLoaded)
+  auth.register(wallet.id, wallet.pin, function(err, token){
+    db.saveSeed(wallet.id, wallet.getSeed(), token, callback)
+  })
 }
 
 function openWallet (passphrase, network, syncDone, transactionsLoaded) {
@@ -168,7 +168,8 @@ function getWallet(){
 }
 
 module.exports = {
-  openWallet: openWalletWithPin,
+  openWallet: openWallet,
   createWallet: createWallet,
+  setPin: setPin,
   getWallet: getWallet
 }

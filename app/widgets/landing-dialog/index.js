@@ -2,8 +2,6 @@
 
 var Ractive = require('hive-ractive')
 var Hive = require('hive-wallet')
-var openWallet = Hive.openWallet
-var createWallet = Hive.createWallet
 var emitter = require('hive-emitter')
 
 var timerId = null
@@ -21,16 +19,16 @@ module.exports = function(el){
 
   ractive.on('open-wallet', function(event){
     event.original.preventDefault()
-    openWallet(getPassphrase(), getNetwork(), onSyncDone, onTransactionsLoaded)
+    Hive.openWallet(getPassphrase(), getNetwork(), onSyncDone, onTransactionsLoaded)
   })
 
   ractive.on('create-wallet', function(event){
     event.original.preventDefault()
-    createWallet(onWalletCreated, getNetwork())
+    Hive.createWallet(onWalletCreated, getNetwork())
   })
 
-  ractive.on('open-wallet-with-pin', function(event){
-    openWallet(ractive.get('pin'), onSyncDone, onTransactionsLoaded)
+  ractive.on('set-pin', function(event){
+    Hive.setPin(ractive.get('pin'), onSyncDone)
   })
 
   emitter.on('wallet-opening', function(progress){

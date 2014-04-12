@@ -1,3 +1,5 @@
+'use strict';
+
 var BIP39 = require('bip39')
 var bip39 = new BIP39()
 
