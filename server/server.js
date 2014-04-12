@@ -14,7 +14,7 @@ app.post('/register', validate_params, function(req, res) {
   auth.register(name, req.body.pin, function(err, token){
     if(err) {
       console.error('error', err)
-      return res.send(500, err)
+      return res.send(400, err)
     }
 
     console.log('registered wallet %s', name)
@@ -27,7 +27,7 @@ app.post('/login', validate_params, function(req, res) {
   auth.login(name, req.body.pin, function(err, token){
     if(err) {
       console.error('error', err)
-      return res.send(500, err)
+      return res.send(400, err)
     }
 
     console.log('authenticated wallet %s', name)
