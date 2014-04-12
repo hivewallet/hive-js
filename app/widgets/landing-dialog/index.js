@@ -1,8 +1,12 @@
 'use strict';
 
-var Ractive = require('ractify')
-var openWallet = require('hive-wallet').openWallet
+var Ractive = require('hive-ractive')
+var Hive = require('hive-wallet')
+var openWallet = Hive.openWallet
+var createWallet = Hive.createWallet
 var emitter = require('hive-emitter')
+
+var timerId = null
 
 module.exports = function(el){
   var ractive = new Ractive({
@@ -10,6 +14,7 @@ module.exports = function(el){
     data: {
       visible: true,
       opening: false,
+      enterPin: false
     },
     template: require('./index.ract')
   })
@@ -21,18 +26,25 @@ module.exports = function(el){
 
   ractive.on('create-wallet', function(event){
     event.original.preventDefault()
-    openWallet(null, getNetwork(), onSyncDone, onTransactionsLoaded)
+    createWallet(onWalletCreated, getNetwork())
+  })
+
+  ractive.on('open-wallet-with-pin', function(event){
+    openWallet(ractive.get('pin'), onSyncDone, onTransactionsLoaded)
   })
 
   emitter.on('wallet-opening', function(progress){
     ractive.set('opening', true)
     ractive.set('progress', progress)
 
-    window.setInterval(function(){
-      var text = ractive.get('progress')
-      ractive.set('progress', text + '.')
-    }, 500)
+    loading()
   })
+
+  function onWalletCreated() {
+    pauseLoading()
+    ractive.set('progress', 'Please set a pin for quick wallet access')
+    ractive.set('enterPin', true)
+  }
 
   function onSyncDone(err) {
     ractive.set('opening', false)
@@ -57,6 +69,18 @@ module.exports = function(el){
     if(location.search.indexOf('testnet=true') > 0) {
       return 'testnet'
     }
+  }
+
+  function loading() {
+    timerId = setInterval(function(){
+      var text = ractive.get('progress')
+      ractive.set('progress', text + '.')
+    }, 500)
+  }
+
+  function pauseLoading() {
+    clearInterval(timerId)
+    timerId = null
   }
 
   return ractive

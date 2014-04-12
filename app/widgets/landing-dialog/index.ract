@@ -5,15 +5,22 @@
     <div class="modal-content panel">
       <div class="row">
         <div class="large-12 columns">
-          <label>Passphrase
-            <input type="text" placeholder="12-word passphrase" value="{{passphrase}}"/>
-          </label>
+          {{^enterPin}}
+            <label>Passphrase
+              <input type="text" placeholder="12-word passphrase" value="{{passphrase}}">
+            </label>
+          {{/enterPin}}
+          {{#enterPin}}
+            <label>Pin
+              <input type="password" placeholder="6-digit pin" value="{{pin}}" on-enter='open-wallet-with-pin'/>
+            </label>
+          {{/enterPin}}
         </div>
       </div>
     </div>
     <div class="modal-footer">
       {{^opening}}
-        <button on-click="open-wallet" class="radius primary">Open wallet</button>
+        <!-- <button on&#45;click="open&#45;wallet" class="radius primary">Open wallet</button> -->
         <button on-click="create-wallet" class="radius success">Create new wallet</button>
       {{/opening}}
       {{#opening}}

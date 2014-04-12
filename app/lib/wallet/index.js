@@ -57,27 +57,51 @@ function nextReceiveAddress() {
   return address
 }
 
+function createWallet(callback, network) {
+  emitter.emit('wallet-opening', 'Generating seed phrase')
+  worker.postMessage()
+  worker.addEventListener('message', function(e) {
+    initWallet(e.data, network)
+
+    callback()
+  }, false)
+}
+
+function openWalletWithPin(pin, syncDone, transactionsLoaded) {
+  wallet.pin = pin
+
+  var defaultCallback = function(err){ if(err) console.error(err) }
+  syncDone = syncDone || defaultCallback
+  transactionsLoaded = transactionsLoaded || defaultCallback
+
+  sync(syncDone, transactionsLoaded)
+}
+
 function openWallet (passphrase, network, syncDone, transactionsLoaded) {
-  emitter.emit('wallet-opening', 'Decoding seed passphrase')
+  emitter.emit('wallet-opening', 'Decoding seed phrase')
   worker.postMessage({passphrase: passphrase})
 
   worker.addEventListener('message', function(e) {
-    seed = e.data.seed
-    mnemonic = e.data.mnemonic
-    wallet = new Wallet(convert.hexToBytes(seed), network)
-
-    wallet.balance = 0
-    wallet.transactions = []
-    wallet.getSeed = getSeed
-    wallet.getMnemonic = getMnemonic
-    wallet.sendTx = sendTx
-    wallet.id = crypto.createHash('sha256').update(seed).digest('base64')
+    initWallet(e.data, network)
 
     var defaultCallback = function(err){ if(err) console.error(err) }
     syncDone = syncDone || defaultCallback
     transactionsLoaded = transactionsLoaded || defaultCallback
     sync(syncDone, transactionsLoaded)
   }, false)
+}
+
+function initWallet(data, network) {
+  seed = data.seed
+  mnemonic = data.mnemonic
+  wallet = new Wallet(convert.hexToBytes(seed), network)
+
+  wallet.balance = 0
+  wallet.transactions = []
+  wallet.getSeed = getSeed
+  wallet.getMnemonic = getMnemonic
+  wallet.sendTx = sendTx
+  wallet.id = crypto.createHash('sha256').update(seed).digest('base64')
 }
 
 function sync(done, transactionsLoaded){
@@ -144,6 +168,7 @@ function getWallet(){
 }
 
 module.exports = {
-  openWallet: openWallet,
+  openWallet: openWalletWithPin,
+  createWallet: createWallet,
   getWallet: getWallet
 }
