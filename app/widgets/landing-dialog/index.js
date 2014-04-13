@@ -19,15 +19,14 @@ function register(el){
 
   includeSharedBehaviors(ractive)
 
-  ractive.on('open-wallet', function(event){
+  ractive.on('open-wallet-with-passphrase', function(event){
     event.original.preventDefault()
-    Hive.openWallet(getPassphrase(), ractive.getNetwork(),
-                    ractive.onSyncDone, ractive.onTransactionsLoaded)
+    Hive.createWallet(getPassphrase(), ractive.getNetwork(), onWalletCreated)
   })
 
   ractive.on('create-wallet', function(event){
     event.original.preventDefault()
-    Hive.createWallet(onWalletCreated, ractive.getNetwork())
+    Hive.createWallet(null, ractive.getNetwork(), onWalletCreated)
   })
 
   ractive.on('set-pin', function(event){

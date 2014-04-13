@@ -7,7 +7,7 @@
         <div class="large-12 columns">
           {{^setPin}}
             <label>Passphrase
-              <input type="text" placeholder="12-word passphrase" value="{{passphrase}}">
+              <input type="text" placeholder="12-word passphrase" value="{{passphrase}}" on-enter="open-wallet-with-passphrase">
             </label>
           {{/setPin}}
           {{#setPin}}
@@ -20,7 +20,7 @@
     </div>
     <div class="modal-footer">
       {{^opening}}
-        <button on-click="open-wallet" class="radius primary">Open wallet</button>
+        <button on-click="open-wallet-with-passphrase" class="radius primary">Open wallet</button>
         <button on-click="create-wallet" class="radius success">Create new wallet</button>
       {{/opening}}
 

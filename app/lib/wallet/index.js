@@ -60,9 +60,10 @@ function nextReceiveAddress() {
   return address
 }
 
-function createWallet(callback, network) {
-  emitter.emit('wallet-opening', 'Generating seed phrase')
-  worker.postMessage()
+function createWallet(passphrase, network, callback) {
+  var message = passphrase ? 'Decoding seed phrase' : 'Generating seed phrase'
+  emitter.emit('wallet-opening', message)
+  worker.postMessage({passphrase: passphrase})
   worker.addEventListener('message', function(e) {
     initWallet(e.data, network)
 
@@ -102,17 +103,6 @@ function openWalletWithPin(pin, network, syncDone, transactionsLoaded) {
       sync(syncDone, transactionsLoaded)
     })
   })
-}
-
-function openWallet (passphrase, network, syncDone, transactionsLoaded) {
-  emitter.emit('wallet-opening', 'Decoding seed phrase')
-  worker.postMessage({passphrase: passphrase})
-
-  worker.addEventListener('message', function(e) {
-    initWallet(e.data, network)
-
-    sync(syncDone, transactionsLoaded)
-  }, false)
 }
 
 function initWallet(data, network) {
@@ -204,7 +194,6 @@ function walletExists(callback) {
 }
 
 module.exports = {
-  openWallet: openWallet,
   openWalletWithPin: openWalletWithPin,
   createWallet: createWallet,
   setPin: setPin,
