@@ -46,7 +46,7 @@ emitter.on('wallet-ready', function(){
   db.get(id, function(err, doc){
     if(err) {
       if(err.status === 404) return initializeRecord();
-      return callback(err)
+      return console.error(err)
     }
 
     emitter.emit('db-ready')
