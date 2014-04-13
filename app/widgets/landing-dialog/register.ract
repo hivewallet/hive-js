@@ -5,16 +5,16 @@
     <div class="modal-content panel">
       <div class="row">
         <div class="large-12 columns">
-          {{^enterPin}}
+          {{^setPin}}
             <label>Passphrase
               <input type="text" placeholder="12-word passphrase" value="{{passphrase}}">
             </label>
-          {{/enterPin}}
-          {{#enterPin}}
+          {{/setPin}}
+          {{#setPin}}
             <label>Pin
               <input type="password" placeholder="6-digit pin" value="{{pin}}" on-enter='set-pin'/>
             </label>
-          {{/enterPin}}
+          {{/setPin}}
         </div>
       </div>
     </div>
@@ -23,6 +23,7 @@
         <button on-click="open-wallet" class="radius primary">Open wallet</button>
         <button on-click="create-wallet" class="radius success">Create new wallet</button>
       {{/opening}}
+
       {{#opening}}
         <p>{{progress}}</p>
       {{/opening}}

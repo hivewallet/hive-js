@@ -24,6 +24,18 @@ function saveEncrypedSeed(id, encryptedSeed, callback) {
   })
 }
 
+function getCredentials(callback) {
+  db.get(credentials, callback)
+}
+
+function deleteCredentials(doc) {
+  return db.remove(doc, function(err){
+    if(err) console.error('failed to delete credentials')
+  })
+}
+
 module.exports = {
-  saveEncrypedSeed: saveEncrypedSeed
+  saveEncrypedSeed: saveEncrypedSeed,
+  getCredentials: getCredentials,
+  deleteCredentials: deleteCredentials
 }

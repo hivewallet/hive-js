@@ -17,7 +17,7 @@ app.post('/register', validate_params, function(req, res) {
     }
 
     console.log('registered wallet %s', name)
-    res.send(201, token)
+    res.send(200, token)
   })
 })
 

@@ -1,0 +1,26 @@
+{{#visible}}
+<div class="modal">
+  <div class="modal-dialog">
+    <h5 class="modal-header">Open Wallet</h5>
+    <div class="modal-content panel">
+      <div class="row">
+        <div class="large-12 columns">
+          <label>Pin
+            <input type="password" placeholder="6-digit pin" value="{{pin}}" on-enter='open-wallet-with-pin'/>
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      {{^opening}}
+        <button on-click="open-wallet-with-pin" class="radius primary">Open wallet</button>
+      {{/opening}}
+
+      {{#opening}}
+        <p>{{progress}}</p>
+      {{/opening}}
+    </div>
+  </div>
+</div>
+{{/visible}}
+

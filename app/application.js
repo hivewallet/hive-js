@@ -1,5 +1,7 @@
 'use strict';
 
+var walletExists = require('hive-wallet').walletExists
+
 var menu = require('./widgets/menu')
 var sendDialog = require('./widgets/send-dialog')
 var landingDialog = require('./widgets/landing-dialog')
@@ -14,8 +16,11 @@ profile(document.getElementById("profile"))
 // apps(document.getElementById("apps"))
 transactions(document.getElementById("transactions"))
 sendDialog(document.getElementById("send-dialog"))
-landingDialog(document.getElementById("landing-dialog"))
 
+walletExists(function(exists){
+  var landingEl = document.getElementById("landing-dialog")
+  exists ? landingDialog.login(landingEl) : landingDialog.register(landingEl)
+})
 
 function updateExchangeRates(){
   var tickerUpdateInterval = 1000 * 60 * 2

@@ -85,6 +85,25 @@ function setPin(pin, callback) {
   })
 }
 
+function openWalletWithPin(pin, network, syncDone, transactionsLoaded) {
+  db.getCredentials(function(err, credentials){
+    if(err) return syncDone(err);
+
+    var id = credentials.id
+    var encryptedSeed = credentials.seed
+    auth.login(id, pin, function(err, token){
+      if(err){
+        if(err.error === 'user_deleted') {
+          db.deleteCredentials(credentials)
+        }
+        return syncDone(err.error)
+      }
+      initWallet({seed: AES.decrypt(encryptedSeed, token)}, network)
+      sync(syncDone, transactionsLoaded)
+    })
+  })
+}
+
 function openWallet (passphrase, network, syncDone, transactionsLoaded) {
   emitter.emit('wallet-opening', 'Decoding seed phrase')
   worker.postMessage({passphrase: passphrase})
@@ -177,9 +196,18 @@ function getWallet(){
   return wallet
 }
 
+function walletExists(callback) {
+  db.getCredentials(function(err, doc){
+    if(doc) return callback(true);
+    return callback(false)
+  })
+}
+
 module.exports = {
   openWallet: openWallet,
+  openWalletWithPin: openWalletWithPin,
   createWallet: createWallet,
   setPin: setPin,
-  getWallet: getWallet
+  getWallet: getWallet,
+  walletExists: walletExists
 }

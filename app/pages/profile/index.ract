@@ -53,12 +53,14 @@
   </div>
 </div>
 
-<div class='row'>
-  <h5>Seed Phrase</h5>
-  <div class='panel'>
-    {{user.mnemonic}}
+{{#user.mnemonic}}
+  <div class='row'>
+    <h5>Seed Phrase</h5>
+    <div class='panel'>
+      {{user.mnemonic}}
+    </div>
   </div>
-</div>
+{{/user.mnemonic}}
 
 <div class='row'>
   <h5>Contact information</h5>

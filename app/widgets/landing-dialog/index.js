@@ -6,43 +6,80 @@ var emitter = require('hive-emitter')
 
 var timerId = null
 
-module.exports = function(el){
+function register(el){
   var ractive = new Ractive({
     el: el,
     data: {
       visible: true,
       opening: false,
-      enterPin: false
+      setPin: false
     },
-    template: require('./index.ract')
+    template: require('./register.ract')
   })
+
+  includeSharedBehaviors(ractive)
 
   ractive.on('open-wallet', function(event){
     event.original.preventDefault()
-    Hive.openWallet(getPassphrase(), getNetwork(), onSyncDone, onTransactionsLoaded)
+    Hive.openWallet(getPassphrase(), ractive.getNetwork(),
+                    ractive.onSyncDone, ractive.onTransactionsLoaded)
   })
 
   ractive.on('create-wallet', function(event){
     event.original.preventDefault()
-    Hive.createWallet(onWalletCreated, getNetwork())
+    Hive.createWallet(onWalletCreated, ractive.getNetwork())
   })
 
   ractive.on('set-pin', function(event){
-    Hive.setPin(ractive.get('pin'), onSyncDone)
+    Hive.setPin(ractive.get('pin'), ractive.onSyncDone)
   })
 
+  function onWalletCreated() {
+    ractive.pauseLoading()
+    ractive.set('progress', 'Please set a pin for quick wallet access')
+    ractive.set('setPin', true)
+  }
+
+  function getPassphrase(){
+    return ractive.get('passphrase').trim()
+  }
+
+  return ractive
+}
+
+function login(el){
+  var ractive = new Ractive({
+    el: el,
+    data: {
+      visible: true,
+      opening: false
+    },
+    template: require('./login.ract')
+  })
+
+  includeSharedBehaviors(ractive)
+
+  ractive.on('open-wallet-with-pin', function(event){
+    event.original.preventDefault()
+    Hive.openWalletWithPin(getPin(), ractive.getNetwork(),
+                    ractive.onSyncDone, ractive.onTransactionsLoaded)
+  })
+
+  function getPin(){
+    return ractive.get('pin')
+  }
+
+  return ractive
+}
+
+
+function includeSharedBehaviors(ractive) {
   emitter.on('wallet-opening', function(progress){
     ractive.set('opening', true)
     ractive.set('progress', progress)
 
     loading()
   })
-
-  function onWalletCreated() {
-    pauseLoading()
-    ractive.set('progress', 'Please set a pin for quick wallet access')
-    ractive.set('enterPin', true)
-  }
 
   function onSyncDone(err) {
     ractive.set('opening', false)
@@ -57,10 +94,6 @@ module.exports = function(el){
     if(err) return alert("error loading transactions. " + err)
 
     emitter.emit('transactions-loaded', transactions)
-  }
-
-  function getPassphrase(){
-    return ractive.get('passphrase').trim()
   }
 
   function getNetwork() {
@@ -81,5 +114,14 @@ module.exports = function(el){
     timerId = null
   }
 
-  return ractive
+  ractive.onSyncDone = onSyncDone
+  ractive.onTransactionsLoaded = onTransactionsLoaded
+  ractive.getNetwork = getNetwork
+  ractive.loading = loading
+  ractive.pauseLoading = pauseLoading
+}
+
+module.exports = {
+  login: login,
+  register: register
 }
