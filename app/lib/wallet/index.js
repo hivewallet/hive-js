@@ -67,15 +67,16 @@ function createWallet(passphrase, network, callback) {
   worker.addEventListener('message', function(e) {
     initWallet(e.data, network)
 
-    callback()
+    callback() //TODO: check remote db if new user or existing
   }, false)
 }
 
 function setPin(pin, callback) {
   wallet.pin = pin
 
+  //TODO: captcha
   auth.register(wallet.id, wallet.pin, function(err, token){
-    if(err) return callback(err);
+    if(err) return callback(err.error);
 
     var encrypted = AES.encrypt(seed, token)
     db.saveEncrypedSeed(wallet.id, encrypted, function(err, res){

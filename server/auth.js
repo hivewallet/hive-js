@@ -23,13 +23,13 @@ var conn = new (cradle.Connection)({
 var db = conn.database('_users')
 
 function register(name, pin, callback){
-  db.get(name, function (err, doc) {
+  db.get(userPrefix + name, function (err, doc) {
     if(err && err.error === 'not_found'){
       createUser(name, pin, callback)
     } else if(err) {
       callback(err)
     } else {
-      callback({error: 'user_exists'})
+      login(name, pin, callback)
     }
   })
 }
