@@ -1,7 +1,7 @@
 'use strict';
 
 var xhr = require('xhr')
-var uriRoot = "http://localhost:8080/"
+var uriRoot = getUriRoot()
 
 function register(wallet_id, pin, callback) {
   postCredentials('register', wallet_id, pin, callback)
@@ -24,6 +24,14 @@ function postCredentials(endpoint, wallet_id, pin, callback) {
     }
     callback(null, body)
   })
+}
+
+function getUriRoot(){
+  if (process.env['NODE_ENV'] === "production") {
+    return "https://hive-js.herokuapp.com/"
+  } else {
+    return "http://localhost:8080/"
+  }
 }
 
 module.exports = {
