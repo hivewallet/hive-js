@@ -37,7 +37,7 @@ gulp.task('styles', function(){
 gulp.task('scripts', function(){
   gulp.src('./app/application.js')
     .pipe(browserify({
-      transform: ['ractify', 'envify'],
+      transform: ['ractify'],
       extensions: ['.ract']
     }))
     .pipe(gulp.dest('./build/assets/js/'))

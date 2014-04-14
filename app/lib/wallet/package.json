@@ -9,14 +9,10 @@
     "xhr": "^1.4.1",
     "bip39": "~1.0.4",
     "workerify": "git://github.com/weilu/workerify.git",
+    "envify": "^1.2.1",
     "pouchdb": "^2.1.2"
   },
   "browserify": {
-    "transform": [
-      [
-        "workerify",
-        "./index.js"
-      ]
-    ]
+    "transform": [ "workerify", "envify" ]
   }
 }
