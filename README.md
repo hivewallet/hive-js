@@ -8,8 +8,5 @@ Work in progress
     git clone git@github.com:weilu/hive-js.git
     cd hive-js
     npm install
-    gulp
+    DB_HOST=[DB_HOST] DB_USER=[DB_USER] DB_PASSWORD=[DB_PASSWORD] gulp
 
-### Running tests
-
-    karma start
