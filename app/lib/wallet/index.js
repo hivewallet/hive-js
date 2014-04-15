@@ -196,10 +196,21 @@ function walletExists(callback) {
   })
 }
 
+function reset(callback){
+  db.getCredentials(function(err, credentials){
+    if(err) return callback(err);
+
+    db.deleteCredentials(credentials, function(deleteError){
+      callback(deleteError)
+    })
+  })
+}
+
 module.exports = {
   openWalletWithPin: openWalletWithPin,
   createWallet: createWallet,
   setPin: setPin,
   getWallet: getWallet,
-  walletExists: walletExists
+  walletExists: walletExists,
+  reset: reset
 }

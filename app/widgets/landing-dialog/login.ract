@@ -14,6 +14,7 @@
     <div class="modal-footer">
       {{^opening}}
         <button on-click="open-wallet-with-pin" class="radius primary">Open wallet</button>
+        <button on-click="clear-credentials" class="radius success">Start over</button>
       {{/opening}}
 
       {{#opening}}

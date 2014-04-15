@@ -64,6 +64,13 @@ function login(el){
                     ractive.onSyncDone, ractive.onTransactionsLoaded)
   })
 
+  ractive.on('clear-credentials', function(event){
+    event.original.preventDefault()
+    Hive.reset(function(err){
+      location.reload(false);
+    })
+  })
+
   function getPin(){
     return ractive.get('pin')
   }
@@ -83,7 +90,7 @@ function includeSharedBehaviors(ractive) {
   function onSyncDone(err) {
     ractive.set('opening', false)
     if(err) {
-      if(err === 'user_deleted') return location.reload(true);
+      if(err === 'user_deleted') return location.reload(false);
       return alert("error synchronizing. " + err)
     }
 
