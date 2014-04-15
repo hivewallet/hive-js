@@ -16,6 +16,7 @@ function postCredentials(endpoint, wallet_id, pin, callback) {
     uri: uriRoot + endpoint,
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
     method: 'POST',
+    timeout: 10000,
     body: "wallet_id=" + wallet_id + "&pin=" + pin
   }, function(err, resp, body){
     if(resp.statusCode !== 200) {
