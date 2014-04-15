@@ -28,9 +28,10 @@ function getCredentials(callback) {
   db.get(credentials, callback)
 }
 
-function deleteCredentials(doc) {
-  return db.remove(doc, function(err){
-    if(err) console.error('failed to delete credentials')
+function deleteCredentials(doc, callback) {
+  db.remove(doc, function(err, res){
+    if(err) console.error('failed to delete credentials');
+    return callback(err)
   })
 }
 

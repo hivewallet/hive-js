@@ -82,7 +82,10 @@ function includeSharedBehaviors(ractive) {
 
   function onSyncDone(err) {
     ractive.set('opening', false)
-    if(err) return alert("error synchronizing. " + err)
+    if(err) {
+      if(err === 'user_deleted') return location.reload(true);
+      return alert("error synchronizing. " + err)
+    }
 
     emitter.emit('wallet-ready')
     ractive.set('visible', false)

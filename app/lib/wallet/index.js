@@ -96,7 +96,9 @@ function openWalletWithPin(pin, network, syncDone, transactionsLoaded) {
     auth.login(id, pin, function(err, token){
       if(err){
         if(err.error === 'user_deleted') {
-          db.deleteCredentials(credentials)
+          return db.deleteCredentials(credentials, function(deleteError){
+            syncDone(err.error);
+          })
         }
         return syncDone(err.error)
       }
