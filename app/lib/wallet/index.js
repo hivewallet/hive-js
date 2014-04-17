@@ -8,7 +8,7 @@ var emitter = require('hive-emitter')
 var crypto = require('crypto')
 var AES = require('hive-aes')
 var ThirdParty = require('hive-thrid-party-api')
-var API = ThirdParty.Blockchain
+var API = ThirdParty.Blockr
 var txToHiveTx = ThirdParty.txToHiveTx
 
 var convert = Bitcoin.convert

@@ -1,4 +1,5 @@
 var Blockchain = require('./blockchain')
+var Blockr = require('./blockr')
 var Transaction = require('./transaction')
 var convert = require('bitcoinjs-lib').convert
 
@@ -17,5 +18,6 @@ function txToHiveTx(tx) {
 
 module.exports = {
   Blockchain: Blockchain,
+  Blockr: Blockr,
   txToHiveTx: txToHiveTx
 }
