@@ -31,7 +31,7 @@ function getUriRoot(){
   if (process.env.NODE_ENV === "production") {
     return "https://hive-js.herokuapp.com/"
   } else {
-    return "http://localhost:8080/"
+    return "http://local.dev:8080/"
   }
 }
 
