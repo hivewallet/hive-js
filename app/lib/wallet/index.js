@@ -72,12 +72,12 @@ function createWallet(passphrase, network, callback) {
 }
 
 function setPin(pin, callback) {
-  wallet.pin = pin
-
   //TODO: captcha
-  auth.register(wallet.id, wallet.pin, function(err, token){
+  auth.register(wallet.id, pin, function(err, token){
     if(err) return callback(err.error);
 
+    wallet.token = token
+    wallet.pin = pin
     var encrypted = AES.encrypt(seed, token)
     db.saveEncrypedSeed(wallet.id, encrypted, function(err, res){
       if(err) return callback(err);
@@ -102,7 +102,10 @@ function openWalletWithPin(pin, network, syncDone, transactionsLoaded) {
         }
         return syncDone(err.error)
       }
+
       initWallet({seed: AES.decrypt(encryptedSeed, token)}, network)
+      wallet.token = token
+      wallet.pin = pin
       sync(syncDone, transactionsLoaded)
     })
   })
