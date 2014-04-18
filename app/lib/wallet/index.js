@@ -118,7 +118,7 @@ function initWallet(data, network) {
   wallet.getSeed = getSeed
   wallet.getMnemonic = getMnemonic
   wallet.sendTx = sendTx
-  wallet.id = crypto.createHash('sha256').update(seed).digest('base64')
+  wallet.id = crypto.createHash('sha256').update(seed).digest('hex')
 }
 
 function sync(done, transactionsLoaded){
