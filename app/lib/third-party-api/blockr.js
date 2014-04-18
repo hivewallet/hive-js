@@ -126,7 +126,7 @@ function toTransaction(tx){
   var result = new Transaction(tx['tx'])
   result.timestamp = Date.parse(tx['time_utc'])
   result.amount = btcToSatoshi(tx['amount'])
-  result.pending = tx['confirmations'] > 5
+  result.pending = tx['confirmations'] < 6
   if(result.amount > 0) {
     result.direction = 'incoming'
   } else {
