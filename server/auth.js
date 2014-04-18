@@ -25,7 +25,14 @@ var db = conn.database('_users')
 function register(name, pin, callback){
   db.get(userPrefix + name, function (err, doc) {
     if(err && err.error === 'not_found'){
-      createUser(name, pin, callback)
+      createUser(name, pin, function(err, token){
+        if(err) return callback(err);
+        createDatabase(name, function(err){
+          if(err) return callback(err);
+
+          callback(null, token)
+        })
+      })
     } else if(err) {
       callback(err)
     } else {
@@ -64,6 +71,27 @@ function createUser(name, pin, callback){
     callback(null, token)
   })
 }
+
+function createDatabase(name, callback) {
+  var hiveDB = conn.database('hive' + name)
+  hiveDB.create(function(err){
+    if(err) return callback(err);
+    createSecurityDoc()
+  })
+
+  function createSecurityDoc() {
+    hiveDB.save('_security', {
+      couchdb_auth_only: true,
+      admins: { names: ["hive"], roles: [] },
+      members: { names: [name], roles: [] }
+    }, function(err, res){
+      if(err) return callback(err);
+
+      callback(null)
+    })
+  }
+}
+
 
 function generateToken(){
   return crypto.randomBytes(64).toString('hex')
