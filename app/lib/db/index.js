@@ -9,6 +9,7 @@ var encrypt = AES.encrypt
 var decrypt = AES.decrypt
 
 var db = new PouchDB('hive')
+var remote = null
 var id = null
 var sercret = null
 
@@ -21,6 +22,10 @@ function set(key, value, callback){
 
     doc.data = encrypt(JSON.stringify(data), sercret)
     db.put(doc, callback)
+
+    PouchDB.replicate(db, remote, function(err, res){
+      if(err) console.error("failed to replicate changes to server", err)
+    })
   })
 }
 
@@ -43,15 +48,15 @@ emitter.on('wallet-ready', function(){
   id = wallet.id
   sercret = wallet.getSeed()
 
-  var remote = [
+  remote = [
     "https://",
     id, ":", wallet.token, wallet.pin,
     "@hive.cloudant.com/hive", wallet.id
   ].join('')
+  remote = new PouchDB(remote)
 
   PouchDB.sync(db, remote, {
     complete: function(){
-      live: true,
       db.get(id, function(err, doc){
         if(err) {
           if(err.status === 404) return initializeRecord();
@@ -60,6 +65,13 @@ emitter.on('wallet-ready', function(){
 
         emitter.emit('db-ready')
       })
+    }
+  })
+
+  PouchDB.replicate(remote, db, {
+    live: true,
+    onChange: function() {
+      emitter.emit('db-ready')
     }
   })
 })
