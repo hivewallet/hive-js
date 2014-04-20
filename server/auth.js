@@ -75,7 +75,10 @@ function createUser(name, pin, callback){
 function createDatabase(name, callback) {
   var hiveDB = conn.database('hive' + name)
   hiveDB.create(function(err){
-    if(err) return callback(err);
+    if(err) {
+      if(err.error === 'file_exists') return callback(null);
+      return callback(err);
+    }
     createSecurityDoc()
   })
 
