@@ -8,8 +8,7 @@ var AES = require('hive-aes')
 var encrypt = AES.encrypt
 var decrypt = AES.decrypt
 
-var name = 'hive'
-var db = new PouchDB(name)
+var db = new PouchDB('hive')
 var id = null
 var sercret = null
 
@@ -50,8 +49,9 @@ emitter.on('wallet-ready', function(){
     "@hive.cloudant.com/hive", wallet.id
   ].join('')
 
-  PouchDB.sync(name, remote, {
+  PouchDB.sync(db, remote, {
     complete: function(){
+      live: true,
       db.get(id, function(err, doc){
         if(err) {
           if(err.status === 404) return initializeRecord();
