@@ -100,5 +100,7 @@ function initializeRecord(){
 
 module.exports = {
   set: set,
-  get: get
+  get: get,
+  _local: db,
+  _remote: remote
 }
