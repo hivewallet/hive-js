@@ -8,7 +8,7 @@ module.exports = function(config) {
     basePath: '',
 
     // frameworks to use
-    frameworks: ['jasmine', 'browserify'],
+    frameworks: ['jasmine', 'sinon'],
 
     preprocessors: {
       '**/*.html': ['html2js']
@@ -17,7 +17,7 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
       'build/**/*.css',
-      'build/assets/js/tests/**/test/*.js',
+      'build/assets/js/tests/index.js',
       'build/index.html'
     ],
 

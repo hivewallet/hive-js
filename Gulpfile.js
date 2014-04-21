@@ -13,6 +13,10 @@ var gulp            = require('gulp'),
     livereloadport  = 35729,
     serverport      = 8080;
 
+var b = require('browserify')
+var source = require('vinyl-source-stream')
+var glob = require('glob')
+
 // server --------------------------------- //
 
 server.use(livereload({
@@ -57,11 +61,18 @@ gulp.task('assets', function(){
 });
 
 gulp.task('tests', function(){
-  gulp.src('./app/@(widgets|lib)/*/test/*')
-    .pipe(browserify({
-      transform: ['ractify'],
-      extensions: ['.ract']
-    }))
+  var bundler = b()
+  glob.sync("./app/@(widgets|lib)/*/test/*").forEach(function(file){
+    bundler.add(file)
+  })
+  bundler
+    .transform('ractify')
+    .bundle()
+    .on('error', function (err) {
+      console.log(err.toString());
+      this.emit("end");
+    })
+    .pipe(source('./index.js'))
     .pipe(gulp.dest('./build/assets/js/tests/'));
 });
 
