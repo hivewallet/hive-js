@@ -2,7 +2,6 @@
 var gulp            = require('gulp'),
     gutil           = require('gulp-util'),
     sass            = require('gulp-sass'),
-    browserify      = require('gulp-browserify'),
     prefix          = require('gulp-autoprefixer'),
     concat          = require('gulp-concat'),
     embedlr         = require('gulp-embedlr'),
@@ -13,7 +12,7 @@ var gulp            = require('gulp'),
     livereloadport  = 35729,
     serverport      = 8080;
 
-var b = require('browserify')
+var browserify = require('browserify')
 var source = require('vinyl-source-stream')
 var glob = require('glob')
 
@@ -39,11 +38,8 @@ gulp.task('styles', function(){
 });
 
 gulp.task('scripts', function(){
-  gulp.src('./app/application.js')
-    .pipe(browserify({
-      transform: ['ractify'],
-      extensions: ['.ract']
-    }))
+  var bundler = browserify('./app/application.js')
+  bundle(bundler, './application.js')
     .pipe(gulp.dest('./build/assets/js/'))
     .pipe(refresh(lrserver));
 });
@@ -61,20 +57,24 @@ gulp.task('assets', function(){
 });
 
 gulp.task('tests', function(){
-  var bundler = b()
+  var bundler = browserify()
   glob.sync("./app/@(widgets|lib)/*/test/*").forEach(function(file){
     bundler.add(file)
   })
-  bundler
+  bundle(bundler, './index.js')
+    .pipe(gulp.dest('./build/assets/js/tests/'));
+});
+
+function bundle(bundler, outFilename){
+  return bundler
     .transform('ractify')
     .bundle()
     .on('error', function (err) {
       console.log(err.toString());
       this.emit("end");
     })
-    .pipe(source('./index.js'))
-    .pipe(gulp.dest('./build/assets/js/tests/'));
-});
+    .pipe(source(outFilename))
+}
 
 // watch ---------------------------------- //
 
