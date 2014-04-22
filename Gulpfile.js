@@ -1,26 +1,24 @@
-
-var gulp            = require('gulp'),
-    gutil           = require('gulp-util'),
-    sass            = require('gulp-sass'),
-    prefix          = require('gulp-autoprefixer'),
-    concat          = require('gulp-concat'),
-    embedlr         = require('gulp-embedlr'),
-    refresh         = require('gulp-livereload'),
-    livereload      = require('connect-livereload'),
-    lrserver        = require('tiny-lr')(),
-    server          = require('./server/express'),
-    livereloadport  = 35729,
-    serverport      = 8080;
-
+var gulp = require('gulp')
+var gutil = require('gulp-util')
+var sass = require('gulp-sass')
+var prefix = require('gulp-autoprefixer')
+var concat = require('gulp-concat')
+var embedlr = require('gulp-embedlr')
 var browserify = require('browserify')
 var source = require('vinyl-source-stream')
 var glob = require('glob')
+var refresh = require('gulp-livereload')
+var livereload = require('connect-livereload')
+var lrserver = require('tiny-lr')()
+var buildServer = require('./server/express')
 
 // server --------------------------------- //
 
-server.use(livereload({
+var livereloadport = 35729
+var serverport = 8080
+var server = buildServer(livereload({
   port: livereloadport
-}));
+}))
 
 gulp.task('serve', function() {
   server.listen(serverport);
