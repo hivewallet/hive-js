@@ -34,6 +34,11 @@ app.post('/login', validate_params, function(req, res) {
   })
 })
 
+app.use(function(err, req, res, next){
+  console.error(err.stack);
+  res.send(500, 'Oops! something went wrong.');
+})
+
 function validate_params(req, res, next) {
   if (!req.body.wallet_id || !req.body.pin) {
     return res.send(400, 'Bad request')
