@@ -7,13 +7,13 @@ var userPrefix = "org.couchdb.user:"
 
 cradle.setup({
   host: process.env.DB_HOST,
-  port: 80,
+  port: process.env.DB_PORT,
   cache: false,
   timeout: 5000
 })
 
 var conn = new (cradle.Connection)({
-  secure: true,
+  secure: (process.env.NODE_ENV === "production"),
   auth: {
     username: process.env.DB_USER,
     password: process.env.DB_PASSWORD
@@ -64,6 +64,7 @@ function createUser(name, pin, callback){
     salt: hashAndSalt[1],
     password_scheme: 'simple',
     type: 'user',
+    roles: [],
     token: token,
     failed_attempts: 0
   }, function(err, res){

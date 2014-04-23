@@ -5,12 +5,45 @@ Work in progress
 
 ## Development
 
+### Grab the source
+
     git clone git@github.com:weilu/hive-js.git
     cd hive-js
     npm install
-    DB_HOST=[DB_HOST] DB_USER=[DB_USER] DB_PASSWORD=[DB_PASSWORD] gulp
 
-    # cloudant CORS doesn't accept localhost as an origin
-    # https://gist.github.com/chewbranca/0f690f8c2bfad37a712a
-    sudo echo '127.0.0.1	local.dev' >> /etc/hosts
-    open local.dev:8080
+### Setup CouchDB
+
+    # while npm install is running, let's install couchdb
+    brew install couchdb
+
+    # enable cors
+    vim /usr/local/etc/couchdb/local.ini
+
+add the following config:
+
+    [httpd]
+    enable_cors = true
+
+    [cors]
+    credentials = true
+    origins = http://localhost:8080
+    headers= accept, authorization, content-type, origin
+
+<!-- separator! -->
+
+    # start couchdb upon login
+    ln -sfv /usr/local/opt/couchdb/*.plist ~/Library/LaunchAgents
+    # kick it off
+    launchctl load ~/Library/LaunchAgents/homebrew.mxcl.couchdb.plist
+    open http://127.0.0.1:5984/_utils/index.html
+
+Click on the bottom link "fix this" to create an admin user, say:
+
+> username: admin
+> password: password
+
+### Profit
+
+    DB_HOST=127.0.0.1:5984 DB_USER=admin DB_PASSWORD=password gulp
+    open http://localhost:8080
+

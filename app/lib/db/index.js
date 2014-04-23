@@ -48,10 +48,11 @@ emitter.on('wallet-ready', function(){
   id = wallet.id
   sercret = wallet.getSeed()
 
+  var scheme = (process.env.NODE_ENV === "production") ? "https" : "http"
   remote = [
-    "https://",
+    scheme, "://",
     id, ":", wallet.token, wallet.pin,
-    "@hive.cloudant.com/hive", wallet.id
+    "@", process.env.DB_HOST, ':', process.env.DB_PORT, "/hive", wallet.id
   ].join('')
   remote = new PouchDB(remote)
 
