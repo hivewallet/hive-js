@@ -1,7 +1,7 @@
-// extracted from https://github.com/RactiveJS/Ractive-events-keys
 'use strict';
-
 var Ractive = require('ractify')
+
+// extracted from https://github.com/RactiveJS/Ractive-events-keys
 var makeKeyDefinition = function ( code ) {
   return function ( node, fire ) {
     var keydownHandler;
@@ -38,5 +38,13 @@ events.leftarrow = makeKeyDefinition(37);
 events.rightarrow = makeKeyDefinition(39);
 events.downarrow = makeKeyDefinition(40);
 events.uparrow = makeKeyDefinition(38);
+
+Ractive.prototype.hide = function(){
+  this.el.classList.remove('current')
+}
+
+Ractive.prototype.show = function(){
+  this.el.classList.add('current')
+}
 
 module.exports = Ractive

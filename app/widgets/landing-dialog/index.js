@@ -3,6 +3,7 @@
 var Ractive = require('hive-ractive')
 var Hive = require('hive-wallet')
 var emitter = require('hive-emitter')
+var router = require('hive-router').router
 
 var timerId = null
 
@@ -96,7 +97,7 @@ function includeSharedBehaviors(ractive) {
 
     emitter.emit('wallet-ready')
     ractive.set('visible', false)
-    location.hash = '#profile'
+    router.parse('/profile')
   }
 
   function onTransactionsLoaded(err, transactions) {

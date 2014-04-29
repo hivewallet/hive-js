@@ -2,6 +2,7 @@
 
 var $ = require('browserify-zepto');
 var Ractive = require('ractify')
+var hasher = require('hive-router').hasher
 
 module.exports = function(el){
   var ractive = new Ractive({
@@ -20,12 +21,14 @@ module.exports = function(el){
   }
 
   ractive.on('select', function(event){
+    hasher.setHash(event.node.dataset.hash)
     highlightTab(event.node)
+    event.original.preventDefault()
   })
 
-  window.onhashchange = function(){
-    highlightTab(ractive.find("a[href='" + location.hash + "']"))
-  }
+  hasher.changed.add(function(newHash, oldHash){
+    highlightTab(ractive.find("[data-hash='" + newHash + "']"))
+  })
 
   return ractive
 }

@@ -1381,7 +1381,7 @@ div.content {
   left: -100%;
 }
 
-div.content:target {
+div.content.current {
   -webkit-animation: slide 0.2s forwards;
   animation: slide 0.2s forwards;
 }
