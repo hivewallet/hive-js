@@ -1,33 +1,38 @@
 {{#visible}}
 <div class="modal">
   <div class="modal-dialog">
-    <h5 class="modal-header">Open Wallet</h5>
-    <div class="modal-content panel">
-      <div class="row">
-        <div class="large-12 columns">
-          {{^setPin}}
-            <label>Passphrase
-              <input type="text" placeholder="12-word passphrase" value="{{passphrase}}" on-enter="open-wallet-with-passphrase">
-            </label>
-          {{/setPin}}
-          {{#setPin}}
-            <label>Pin
-              <input type="password" placeholder="6-digit pin" value="{{pin}}" on-enter='set-pin'/>
-            </label>
-          {{/setPin}}
-        </div>
-      </div>
-    </div>
-    <div class="modal-footer">
-      {{^opening}}
-        <button on-click="open-wallet-with-passphrase" class="radius primary">Open wallet</button>
-        <button on-click="create-wallet" class="radius success">Create new wallet</button>
-      {{/opening}}
 
-      {{#opening}}
-        <p>{{progress}}</p>
-      {{/opening}}
+    {{! modal content ---------------------- }}
+
+    <div class="login__header">
+      <div class="_img">
+        <img src="/assets/img/logo_temp.png" />
+      </div>
+      <h2 class="_title">Hive</h2>
     </div>
+
+    {{^setPin}}
+      <label>Passphrase
+        <input type="text" placeholder="12-word passphrase" value="{{passphrase}}" on-enter="open-wallet-with-passphrase">
+      </label>
+    {{/setPin}}
+    {{#setPin}}
+      <label>Pin
+        <input type="password" placeholder="6-digit pin" value="{{pin}}" on-enter='set-pin'/>
+      </label>
+    {{/setPin}}
+
+    {{^opening}}
+      <button on-click="open-wallet-with-passphrase" class="radius primary">Open wallet</button>
+      <button on-click="create-wallet" class="radius success">Create new wallet</button>
+    {{/opening}}
+
+    {{#opening}}
+      <p>{{progress}}</p>
+    {{/opening}}
+
+    {{! end modal content ---------------------- }}
+
   </div>
 </div>
 {{/visible}}

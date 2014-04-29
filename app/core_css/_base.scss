@@ -199,7 +199,7 @@ hr {
 
 .modal {
   overflow: auto;
-  overflow-y: scroll;
+  // overflow-y: scroll;
   position: fixed;
   top: 0;
   right: 0;
@@ -210,7 +210,7 @@ hr {
 }
 
 .modal-dialog {
-  width: 50%;
+  max-width: 500px;
   margin: 30px auto;
   background: white;
   padding: 30px;
