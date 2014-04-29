@@ -2,6 +2,7 @@
 
 #transactions ul {
   list-style: none;
+  padding: 0;
 }
 
 #transactions ul > li {
@@ -34,6 +35,7 @@
   color: gray;
   font-size: small;
   vertical-align: top;
+  padding-right: 20px;
 }
 
 #transactions .pending {
