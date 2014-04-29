@@ -176,7 +176,7 @@ div.content {
   display: none;
 }
 
-div.content:target {
+div.content.current {
   display: block;
 }
 

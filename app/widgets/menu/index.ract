@@ -1,15 +1,15 @@
 <div class="tabs">
 
-  <a href='#profile' class="tab" on-click="select">
+  <a data-hash='#profile' class="tab" on-click="select">
     <span class="tab__icon ss-icon">user</span>
   </a>
-  <a href='#apps' class="tab" on-click="select">
+  <a data-hash='#apps' class="tab" on-click="select">
     <span class="tab__icon ss-icon">cloud</span>
   </a>
-  <a href='#contacts' class="tab" on-click="select">
+  <a data-hash='#contacts' class="tab" on-click="select">
     <span class="tab__icon ss-icon">users</span>
   </a>
-  <a href='#transactions' class="tab" on-click="select">
+  <a data-hash='#transactions' class="tab" on-click="select">
     <span class="tab__icon ss-icon">time</span>
   </a>
 </div>
