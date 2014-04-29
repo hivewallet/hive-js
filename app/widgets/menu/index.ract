@@ -6,9 +6,9 @@
     <span class="tab__icon ss-icon">cloud</span>
   </a>
   <a href='#contacts' class="tab" on-click="select">
-    <span class="tab__icon ss-icon">time</span>
+    <span class="tab__icon ss-icon">users</span>
   </a>
   <a href='#transactions' class="tab" on-click="select">
-    <span class="tab__icon ss-icon">users</span>
+    <span class="tab__icon ss-icon">time</span>
   </a>
 </div>
