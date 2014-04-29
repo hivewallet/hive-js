@@ -10,5 +10,4 @@
   </a>
   <a data-hash='#transactions' class="tab" on-click="select">
     <span class="tab__icon ss-icon">time</span>
-  </a>
 </div>
