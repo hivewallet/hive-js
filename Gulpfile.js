@@ -68,7 +68,9 @@ function bundle(bundler, outFilename){
     .transform('ractify')
     .bundle()
     .on('error', function (err) {
-      console.log(err.toString());
+      console.error('Browserify Error')
+      console.error(err.message);
+      console.error(err.stack)
       this.emit("end");
     })
     .pipe(source(outFilename))
