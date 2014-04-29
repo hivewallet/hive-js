@@ -5,9 +5,7 @@
     {{! modal content ---------------------- }}
 
     <div class="login__header">
-      <div class="_img">
-        <img src="/assets/img/logo_temp.png" />
-      </div>
+      <img class="_img" src="/assets/img/logo_temp.png" />
       <h2 class="_title">Hive</h2>
     </div>
 
