@@ -1,14 +1,14 @@
 <div class="tabs">
   <a href='#profile' class="tab" on-click="select">
-    <span class="tab__icon img-profile"></span>
+    <span class="tab__icon img-profile">Profile</span>
   </a>
   <a href='#apps' class="tab" on-click="select">
-    <span class="tab__icon img-apps"></span>
+    <span class="tab__icon img-apps">Apps</span>
   </a>
   <a href='#contacts' class="tab" on-click="select">
-    <span class="tab__icon img-contacts"></span>
+    <span class="tab__icon img-contacts">Contacts</span>
   </a>
   <a href='#transactions' class="tab" on-click="select">
-    <span class="tab__icon img-transactions"></span>
+    <span class="tab__icon img-transactions">Wallet</span>
   </a>
 </div>
