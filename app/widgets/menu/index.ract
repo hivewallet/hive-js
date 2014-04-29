@@ -1,5 +1,4 @@
 <div class="tabs">
-
   <a data-hash='#profile' class="tab" on-click="select">
     <span class="tab__icon ss-icon">user</span>
   </a>
