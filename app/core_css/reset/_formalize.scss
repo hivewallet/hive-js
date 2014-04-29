@@ -149,7 +149,7 @@ input[type="button"] {
     @include box-shadow(none);
     border-color: none;
 
-    @include tabfocus();
+    // @include tabfocus();
   }
 }
 
@@ -325,3 +325,52 @@ optgroup {
     padding: 0;
   }
 }
+
+
+// Sensible Table Styles
+
+.table-wrap {
+  overflow-x: scroll;
+}
+
+table {
+overflow: scroll; /* Scrollbar are always visible */
+overflow: auto;   /* Scrollbar is displayed as it's needed */
+}
+
+caption {
+  border-bottom: 1px solid $silver;
+  text-align: left;
+}
+
+tbody, tfoot {
+  border-top: 1px solid darken($light-silver, 10%);
+}
+
+th {
+  font-weight: $bold;
+  text-align: left;
+
+  padding-right: 10px;
+
+  & + th {
+    padding-left: 10px;
+  }
+
+  &:last-child {
+    padding-right: 0;
+  }
+}
+
+td {
+  padding-right: 10px;
+
+  & + td {
+    padding-left: 10px;
+  }
+
+  &:last-child {
+    padding-right: 0;
+  }
+}
+

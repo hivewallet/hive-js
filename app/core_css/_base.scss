@@ -126,146 +126,18 @@ a {
 
 
 
+// Primary button default
 
-// inputs
-// --------------------------------------------------------------------
-
-
-// add margin to adjacent inputs
-
-input, select {
-  & + input {
-    margin-top: 15px;
-  }
-
-  & + label {
-    margin-top: 15px;
-  }
-
-  & + select {
-    margin-top: 15px;
-  }
-}
-
-
-// force checkboxes and radios to sit right underneath each other...
-
-input[type="radio"], input[type="checkbox"] {
-  & + input[type="radio"], + input[type="checkbox"] {
-    margin-top: 0;
-  }
-}
-
-label {
-  display: block;
-
-  & + label {
-    margin-top: 15px;
-  }
-}
-
-legend {
-  font-size: 14px;
-  padding-bottom: 15px;
-}
-
-
-// ------ Text Style ------
-
-// use a less jarring highlight colour
-mark {
-  background-color: $light-yellow;
-}
-
-button,
-input[type="reset"],
-input[type="submit"],
-input[type="button"] {
-  font-size: 13px;
-  padding: 4px 8px;
-  color: $silver;
-  background-color: $light-silver;
+.btn-primary {
+  background-color: #228be2;
+  color: white;
 
   &:hover {
-    background-color: darken($light-silver, 5%);
-    color: darken($silver, 10%);
-   }
-
-  &:active, &:focus {
-    outline: 2px solid darken($light-silver, 10%);
+    background-color: #1968aa;
+    color: white;
   }
 }
 
-button[disabled],
-input[disabled],
-select[disabled],
-select[disabled] option,
-select[disabled] optgroup,
-textarea[disabled] {
-  @include box-shadow(none);
-  -moz-user-select: -moz-none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  user-select: none;
-  color: lighten($foreground, 40%);
-  background-color: $background;
-  outline: 2px solid lighten($foreground, 50%);
-  outline-offset: -2px;
-  cursor: default;
-
-  &:hover {
-    color: lighten($foreground, 40%);
-    background-color: $background;
-  }
-}
-
-
-// Sensible Table Styles
-
-.table-wrap {
-  overflow-x: scroll;
-}
-
-table {
-overflow: scroll; /* Scrollbar are always visible */
-overflow: auto;   /* Scrollbar is displayed as it's needed */
-}
-
-caption {
-  border-bottom: 1px solid $silver;
-  text-align: left;
-}
-
-tbody, tfoot {
-  border-top: 1px solid darken($light-silver, 10%);
-}
-
-th {
-  font-weight: $bold;
-  text-align: left;
-
-  padding-right: 10px;
-
-  & + th {
-    padding-left: 10px;
-  }
-
-  &:last-child {
-    padding-right: 0;
-  }
-}
-
-td {
-  padding-right: 10px;
-
-  & + td {
-    padding-left: 10px;
-  }
-
-  &:last-child {
-    padding-right: 0;
-  }
-}
 
 
 // ------------------------------------------------------------
@@ -286,7 +158,7 @@ body >.container {
 }
 
 #sidebar {
-  background: url(../img/bg-sidebar.png);
+  background-color: #8a8991;
   width: 12%;
 }
 
