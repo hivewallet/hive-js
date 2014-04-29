@@ -171,27 +171,14 @@ div.content {
   width: 100%;
   height: 100%;
   background: rgb(240, 240, 240);
-  padding: 30px;
-  position: absolute;
-  left: -100%;
+  display: none;
 }
 
 div.content:target {
-  -webkit-animation: slide 0.2s forwards;
-  animation: slide 0.2s forwards;
+  display: block;
 }
 
-@-webkit-keyframes slide {
-  100% {
-    left: 0;
-  }
-}
 
-@keyframes slide {
-  100% {
-    left: 0;
-  }
-}
 
 /* shared */
 
