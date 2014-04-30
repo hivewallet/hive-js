@@ -50,6 +50,11 @@
   user-select: none;
 }
 
+@mixin clickbtn() {
+  @include noselect;
+  cursor: pointer;
+}
+
 
 // get rid of z-index glitching
 

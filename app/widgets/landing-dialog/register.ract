@@ -1,33 +1,50 @@
 {{#visible}}
 <div class="modal">
-  <div class="modal-dialog">
+  <div class="modal-dialog login">
 
     {{! modal content ---------------------- }}
 
-    <div class="login__header">
-      <img class="_img" src="/assets/img/logo_temp.png" />
-      <h2 class="_title">Hive</h2>
+    <div class="login">
+
+      <div class="login__info ss-icon">info</div>
+
+      <div class="login__header">
+        <img class="_img" src="/assets/img/logo_temp.png" />
+        <h2 class="_title">Hive</h2>
+      </div>
+
+      <div class="login__btngroup">
+
+        {{^setPin}}
+        {{/setPin}}
+        {{#setPin}}
+          <label>Pin
+            <input type="password" placeholder="6-digit pin" value="{{pin}}" on-enter='set-pin'/>
+          </label>
+        {{/setPin}}
+
+        {{^opening}}
+          
+          <div on-click="create-wallet" class="login__btn">Create a new wallet</div>
+
+          <div class="login__btn--existing">Login to existing wallet</div>
+
+          <div style="display: none;">
+            <label>Passphrase
+              <input type="text" placeholder="12-word passphrase" value="{{passphrase}}" on-enter="open-wallet-with-passphrase">
+            </label>
+            <button on-click="open-wallet-with-passphrase" class="radius primary">Open wallet</button>
+          </div>
+
+        {{/opening}}
+
+        {{#opening}}
+          <p>{{progress}}</p>
+        {{/opening}}
+
+      </div>
+
     </div>
-
-    {{^setPin}}
-      <label>Passphrase
-        <input type="text" placeholder="12-word passphrase" value="{{passphrase}}" on-enter="open-wallet-with-passphrase">
-      </label>
-    {{/setPin}}
-    {{#setPin}}
-      <label>Pin
-        <input type="password" placeholder="6-digit pin" value="{{pin}}" on-enter='set-pin'/>
-      </label>
-    {{/setPin}}
-
-    {{^opening}}
-      <button on-click="open-wallet-with-passphrase" class="radius primary">Open wallet</button>
-      <button on-click="create-wallet" class="radius success">Create new wallet</button>
-    {{/opening}}
-
-    {{#opening}}
-      <p>{{progress}}</p>
-    {{/opening}}
 
     {{! end modal content ---------------------- }}
 
