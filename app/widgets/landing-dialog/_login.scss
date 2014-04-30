@@ -69,10 +69,22 @@
   background-color: $blue;
   box-shadow: 0 3px 0 0 darken($blue, 10%);
 
-  cursor: pointer;
 
-  &:focus, &:active {
-    box-shadow: 0 3px 0 0 darken($blue, 10%);
+  transition: none;
+  position: relative;
+
+  &:active {
+    transform: translate(0px, 3px);
+    box-shadow: 0 0px 0 0;
+  }
+
+  &:after {
+    content: "";
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
   }
 }
 
@@ -86,10 +98,6 @@
   font-weight: $roman;
   background-color: $yellow;
   box-shadow: 0 3px 0 0 darken($yellow, 20%);
-
-  &:focus, &:active {
-    box-shadow: 0 3px 0 0 darken($yellow, 20%);
-  }
 }
 
 // inputs ---------------------------------------- //
