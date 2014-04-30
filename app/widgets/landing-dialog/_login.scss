@@ -6,6 +6,16 @@
   position: relative;
 }
 
+// component header ---------------------------------------- //
+
+.login__info {
+  @include clickbtn;
+  position: absolute;
+  top: -5px;
+  right: 0;
+  font-size: 20px;
+  color: #949494;
+}
 
 .login__header {
   text-align: center;
@@ -25,14 +35,8 @@
   }
 }
 
-.login__info {
-  @include clickbtn;
-  position: absolute;
-  top: -5px;
-  right: 0;
-  font-size: 20px;
-  color: #949494;
-}
+
+// buttons ---------------------------------------- //
 
 
 .login__btngroup {
@@ -86,6 +90,31 @@
   &:focus, &:active {
     box-shadow: 0 3px 0 0 darken($yellow, 20%);
   }
+}
+
+// inputs ---------------------------------------- //
+
+.login__passphrase {
+  padding-bottom: 20px;
+  label {
+    @include clickbtn;
+  }
+}
+
+.login__pin {
+  padding-bottom: 20px;
+  label {
+    @include clickbtn;
+  }
+}
+
+
+
+// text nodes ---------------------------------------- //
+
+.login__progress {
+  padding-top: 20px;
+  text-align: center;
 }
 
 .login__altmsg {

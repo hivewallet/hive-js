@@ -44,12 +44,14 @@ function register(el){
 
   ractive.on('set-pin', function(event){
     Hive.setPin(ractive.get('pin'), ractive.onSyncDone)
+    ractive.set('progress', 'Saving pin...')
   })
 
   function onWalletCreated() {
     ractive.pauseLoading()
-    ractive.set('progress', 'Please set a pin for quick wallet access')
+    ractive.set('progress', 'Please set a pin for quick access')
     ractive.set('setPin', true)
+    ractive.nodes.setPin.focus()
   }
 
   function getPassphrase(){

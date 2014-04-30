@@ -1,26 +1,47 @@
 {{#visible}}
 <div class="modal">
   <div class="modal-dialog">
-    <h5 class="modal-header">Open Wallet</h5>
-    <div class="modal-content panel">
-      <div class="row">
-        <div class="large-12 columns">
-          <label>Pin
+
+
+    {{! modal content ---------------------- }}
+
+    <div class="login">
+
+      <div class="login__info ss-icon">info</div>
+
+      <div class="login__header">
+        <img class="_img" src="/assets/img/logo_temp.png" />
+        <h2 class="_title">Hive</h2>
+      </div>
+
+      <div class="login__btngroup">
+
+        <div class="login__pin">
+          <label>Enter your Pin:
             <input type="password" placeholder="6-digit pin" value="{{pin}}" on-enter='open-wallet-with-pin'/>
           </label>
         </div>
-      </div>
-    </div>
-    <div class="modal-footer">
-      {{^opening}}
-        <button on-click="open-wallet-with-pin" class="radius primary">Open wallet</button>
-        <button on-click="clear-credentials" class="radius success">Start over</button>
-      {{/opening}}
+      
+        {{^opening}}
 
-      {{#opening}}
-        <p>{{progress}}</p>
-      {{/opening}}
+          <div class="login__btn--existing" on-click="open-wallet-with-pin">Open wallet</div>
+
+          <div class="login__altmsg">
+            <span class="_link" on-click="clear-credentials">Open a different wallet</span>
+          </div>
+        
+        {{/opening}}
+
+        {{#opening}}
+          <p class="login__progress">{{progress}}</p>
+        {{/opening}}
+
+      </div>
+
     </div>
+
+    {{! modal content ---------------------- }}
+
   </div>
 </div>
 {{/visible}}
