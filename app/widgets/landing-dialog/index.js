@@ -13,6 +13,7 @@ function register(el){
     data: {
       visible: true,
       opening: false,
+      newUser: true,
       setPin: false
     },
     template: require('./register.ract')
@@ -23,6 +24,17 @@ function register(el){
   ractive.on('open-wallet-with-passphrase', function(event){
     event.original.preventDefault()
     Hive.createWallet(getPassphrase(), ractive.getNetwork(), onWalletCreated)
+  })
+
+  ractive.on('reveal-passphrase-input', function(event){
+    event.original.preventDefault()
+    ractive.set('newUser', false);
+    ractive.nodes.passphraseField.focus();
+  })
+
+  ractive.on('hide-passphrase-input', function(event){
+    event.original.preventDefault()
+    ractive.set('newUser', true);
   })
 
   ractive.on('create-wallet', function(event){

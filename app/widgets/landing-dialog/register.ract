@@ -24,17 +24,27 @@
         {{/setPin}}
 
         {{^opening}}
+
+          {{#newUser}}
           
-          <div on-click="create-wallet" class="login__btn">Create a new wallet</div>
+            <div on-click="create-wallet" class="login__btn">Create a new wallet</div>
 
-          <div class="login__btn--existing">Login to existing wallet</div>
+            <div class="login__btn--existing" on-click="reveal-passphrase-input">Login to existing wallet</div>
+          
+          {{/newUser}}
 
-          <div style="display: none;">
+          {{^newUser}}
+
             <label>Passphrase
-              <input type="text" placeholder="12-word passphrase" value="{{passphrase}}" on-enter="open-wallet-with-passphrase">
+              <input id="passphraseField" type="text" placeholder="12-word passphrase" value="{{passphrase}}" on-enter="open-wallet-with-passphrase" />
             </label>
-            <button on-click="open-wallet-with-passphrase" class="radius primary">Open wallet</button>
-          </div>
+            <div on-click="open-wallet-with-passphrase" class="login__btn--existing">Open wallet</div>
+
+            <div class="login__altmsg">
+              <span class="_link" on-click="hide-passphrase-input">Create new wallet instead</span>
+            </div>
+
+          {{/newUser}}
 
         {{/opening}}
 

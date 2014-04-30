@@ -87,3 +87,17 @@
     box-shadow: 0 3px 0 0 darken($yellow, 20%);
   }
 }
+
+.login__altmsg {
+  text-align: center;
+  padding-top: 20px;
+  
+  ._link {
+    color: $blue;
+    @include clickbtn;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
