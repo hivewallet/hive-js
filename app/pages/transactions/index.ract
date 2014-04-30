@@ -1,8 +1,8 @@
 <ul>
   {{#transactions}}
     <li>
-      <i class="fa fa-bitcoin"></i>
-      <i class="{{directionClass(direction)}}"></i>
+      <i class="ss-icon">dollarsign</i>
+      <i class="ss-icon {{directionClass(direction)}}">{{directionIcon(direction)}}</i>
       <div>
         <span>{{directionVerb(direction)}}</span>
         <b>{{satoshiToBTC(amount)}} BTC</b>

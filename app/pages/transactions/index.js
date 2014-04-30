@@ -20,8 +20,14 @@ module.exports = function(el){
       },
       directionClass: function(direction){
         return {
-          incoming: 'fa fa-plus-circle',
-          outgoing: 'fa fa-minus-circle'
+          incoming: 'green',
+          outgoing: 'blue'
+        }[direction]
+      },
+      directionIcon: function(direction){
+        return {
+          incoming: 'plus',
+          outgoing: 'minus'
         }[direction]
       },
       formatTimestamp: function(timestamp){
