@@ -146,7 +146,8 @@ function makeRequest(endpoint, params, callback){
   }
 
   xhr({
-    uri: uri
+    uri: uri,
+    timeout: 10000
   }, callback)
 }
 

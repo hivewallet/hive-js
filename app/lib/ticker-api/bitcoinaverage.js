@@ -12,6 +12,7 @@ function getExchangeRates(callback){
   var uri = BitcoinAverage.apiRoot + "global/all"
   xhr({
     uri: uri,
+    timeout: 10000,
     method: 'GET'
   }, function(err, resp, body){
     if(resp.statusCode !== 200) {
