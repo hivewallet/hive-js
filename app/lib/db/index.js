@@ -48,13 +48,7 @@ emitter.on('wallet-ready', function(){
   id = wallet.id
   sercret = wallet.getSeed()
 
-  var scheme = (process.env.NODE_ENV === "production") ? "https" : "http"
-  remote = [
-    scheme, "://",
-    id, ":", wallet.token, wallet.pin,
-    "@", process.env.DB_HOST, ':', process.env.DB_PORT, "/hive", wallet.id
-  ].join('')
-  remote = new PouchDB(remote)
+  remote = getRemote(wallet)
 
   PouchDB.sync(db, remote, {
     complete: function(){
@@ -76,6 +70,20 @@ emitter.on('wallet-ready', function(){
     }
   })
 })
+
+function getRemote(wallet){
+  var scheme = (process.env.NODE_ENV === "production") ? "https" : "http"
+  var url = [
+    scheme, "://",
+    wallet.id, ":", wallet.token, wallet.pin,
+    "@", process.env.DB_HOST
+  ]
+  if(process.env.NODE_ENV !== "production"){
+    url = url.concat([":", process.env.DB_PORT])
+  }
+  url = url.concat(["/hive", wallet.id]).join('')
+  return new PouchDB(url)
+}
 
 function initializeRecord(){
   var defaultValue = {
