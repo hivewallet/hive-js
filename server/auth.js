@@ -1,29 +1,13 @@
 "use strict"
 
-var cradle = require('cradle')
+var db = require('./db')
+var userDB = db('_users')
 var crypto = require('crypto')
 
 var userPrefix = "org.couchdb.user:"
 
-cradle.setup({
-  host: process.env.DB_HOST,
-  port: process.env.DB_PORT,
-  cache: false,
-  timeout: 5000
-})
-
-var conn = new (cradle.Connection)({
-  secure: (process.env.NODE_ENV === "production"),
-  auth: {
-    username: process.env.DB_USER,
-    password: process.env.DB_PASSWORD
-  }
-})
-
-var db = conn.database('_users')
-
 function register(name, pin, callback){
-  db.get(userPrefix + name, function (err, doc) {
+  userDB.get(userPrefix + name, function (err, doc) {
     if(err && err.error === 'not_found'){
       createUser(name, pin, function(err, token){
         if(err) return callback(err);
@@ -43,7 +27,7 @@ function register(name, pin, callback){
 
 function login(name, pin, callback) {
   name = userPrefix + name
-  db.get(name, function (err, doc) {
+  userDB.get(name, function (err, doc) {
     if(err){
       console.error('error getting doc', err)
       callback({error: 'auth_failed'})
@@ -58,7 +42,7 @@ function createUser(name, pin, callback){
   var password = token + pin
   var hashAndSalt = generatePasswordHash(password)
 
-  db.save(userPrefix + name, {
+  userDB.save(userPrefix + name, {
     name: name,
     password_sha: hashAndSalt[0],
     salt: hashAndSalt[1],
@@ -74,7 +58,7 @@ function createUser(name, pin, callback){
 }
 
 function createDatabase(name, callback) {
-  var hiveDB = conn.database('hive' + name)
+  var hiveDB = db('hive' + name)
   hiveDB.create(function(err){
     if(err) {
       if(err.error === 'file_exists') return callback(null);
@@ -127,7 +111,7 @@ function verifyPin(user, name, pin, callback) {
 
 // ignores db op outcome
 function updateFailCount(id, counter) {
-  db.merge(id, { failed_attempts: counter }, function(err, res){
+  userDB.merge(id, { failed_attempts: counter }, function(err, res){
     if(err) {
       console.error('FATAL: failed to update counter to', counter)
     }
@@ -135,7 +119,7 @@ function updateFailCount(id, counter) {
 }
 
 function deleteUser(user, callback) {
-  db.remove(user._id, user._rev, function(err, res){
+  userDB.remove(user._id, user._rev, function(err, res){
     if(err) {
       console.error('FATAL: failed to delete user')
       return callback({error: 'auth_failed'})
