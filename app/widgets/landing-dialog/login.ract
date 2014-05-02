@@ -1,7 +1,5 @@
 {{#visible}}
-<div class="modal">
-  <div class="modal-dialog">
-
+<div class="login__modal">
 
     {{! modal content ---------------------- }}
 
@@ -42,7 +40,6 @@
 
     {{! modal content ---------------------- }}
 
-  </div>
 </div>
 {{/visible}}
 
