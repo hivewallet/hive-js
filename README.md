@@ -25,7 +25,11 @@ add the following config in `/usr/local/etc/couchdb/local.ini`:
     [cors]
     credentials = true
     origins = http://localhost:8080
-    headers= accept, authorization, content-type, origin
+    headers = accept, authorization, content-type, origin
+
+If you want to be able to access the app from a mobile device on your local network, remember to add your host machine IP or alias to the cors origins list.
+
+    origins = http://localhost:8080, http://192.168.1.109:8080, http://alice-computer.local:8080
 
 __Start CouchDB__
 
