@@ -47,27 +47,22 @@ emitter.on('wallet-ready', function(){
   var wallet = getWallet()
   id = wallet.id
   sercret = wallet.getSeed()
-
   remote = getRemote(wallet)
 
-  PouchDB.sync(db, remote, {
-    complete: function(){
-      db.get(id, function(err, doc){
-        if(err) {
-          if(err.status === 404) return initializeRecord();
-          return console.error(err)
-        }
+  db.get(id, function(err, doc){
+    if(err) {
+      if(err.status === 404) {
+        return firstTimePull()
+      }
+      return console.error(err)
+    }
 
+    PouchDB.replicate(db, remote, {
+      complete: function(){
         emitter.emit('db-ready')
-      })
-    }
-  })
-
-  PouchDB.replicate(remote, db, {
-    live: true,
-    onChange: function() {
-      emitter.emit('db-ready')
-    }
+        setupPulling()
+      }
+    })
   })
 })
 
@@ -83,6 +78,21 @@ function getRemote(wallet){
   }
   url = url.concat(["/hive", wallet.id]).join('')
   return new PouchDB(url)
+}
+
+function firstTimePull() {
+  PouchDB.replicate(remote, db, {
+    complete: function(){
+      db.get(id, function(err, doc){
+        if(err) {
+          if(err.status === 404) return initializeRecord();
+          return console.error(err)
+        }
+
+        emitter.emit('db-ready')
+      })
+    }
+  })
 }
 
 function initializeRecord(){
@@ -104,6 +114,15 @@ function initializeRecord(){
     if(err) return console.error(err);
 
     emitter.emit('db-ready')
+  })
+}
+
+function setupPulling(options){
+  PouchDB.replicate(remote, db, {
+    live: true,
+    onChange: function() {
+      emitter.emit('db-ready')
+    }
   })
 }
 
