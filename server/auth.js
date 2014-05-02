@@ -70,7 +70,7 @@ function createDatabase(name, callback) {
   function createSecurityDoc() {
     hiveDB.save('_security', {
       couchdb_auth_only: true,
-      admins: { names: ["hive"], roles: [] },
+      admins: { names: [process.env.DB_USER], roles: [] },
       members: { names: [name], roles: [] }
     }, function(err, res){
       if(err) return callback(err);
