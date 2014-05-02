@@ -1,7 +1,7 @@
 'use strict';
 
 var xhr = require('xhr')
-var uriRoot = getUriRoot()
+var uriRoot = window.location.origin
 
 function register(wallet_id, pin, callback) {
   postCredentials('register', wallet_id, pin, callback)
@@ -13,7 +13,7 @@ function login(wallet_id, pin, callback) {
 
 function postCredentials(endpoint, wallet_id, pin, callback) {
   xhr({
-    uri: uriRoot + endpoint,
+    uri: uriRoot + "/" +  endpoint,
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
     method: 'POST',
     timeout: 10000,
@@ -25,14 +25,6 @@ function postCredentials(endpoint, wallet_id, pin, callback) {
     }
     callback(null, body)
   })
-}
-
-function getUriRoot(){
-  if (process.env.NODE_ENV === "production") {
-    return "https://hive-js.herokuapp.com/"
-  } else {
-    return "http://localhost:8080/"
-  }
 }
 
 module.exports = {
