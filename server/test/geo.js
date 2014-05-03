@@ -39,4 +39,24 @@ describe('geo', function(){
       })
     })
   })
+
+  describe('save', function(){
+    it('stores geohash, user id, user name and email', function(done){
+      var userInfo = {userid: "foobar", name: "Wei Lu", email: "wei@example.com"}
+      geo.save(34.2308391, 108.8686767, userInfo, function(){
+        var geohash = 'wqj6trec04ch'
+        db.get(geohash, function(err, doc){
+          assert.equal(err, null)
+          assert.equal(doc._id, geohash)
+
+          delete doc._id
+          delete doc._rev
+          delete userInfo._rev //why does couchdb do this?
+
+          assert.deepEqual(doc, userInfo)
+          done()
+        })
+      })
+    })
+  })
 })
