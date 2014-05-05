@@ -1,38 +1,22 @@
-var db = require('./db')('geo')
-var geohash = require('geo-hash')
+var geomodel = require('geomodel').create_geomodel()
 
-function setup(callback) {
-  db.exists(function(err, exist){
-    if(err) {
-      return callback(err)
-    } else if(!exist) {
-      db.create(function(err, res){
-        if(err) return callback(err);
-        createSecurityDoc()
-      })
-    } else callback()
-  })
+var all = []
 
-  function createSecurityDoc() {
-    db.save('_security', {
-      couchdb_auth_only: true,
-      admins: { names: [process.env.DB_USER], roles: [] },
-      members: { names: [process.env.DB_USER], roles: [] }
-    }, function(err, res){
-      callback(err)
-    })
+function save(lat, lon, userInfo, callback) {
+  var user = {
+    id: 'foobar',
+    name: 'Wei Lu',
+    email: 'wei@example.com',
+    location: geomodel.create_point(lat, lon),
   }
-}
+  user.geocells = geomodel.generate_geocells(user.location)
 
-function save(lat, lon, info, callback) {
-  db.save(geohash.encode(lat, lon), info, callback)
-}
+  all.push(user)
 
-setup(function (err){
-  if(err) console.error(err);
-})
+  callback()
+}
 
 module.exports = {
-  setup: setup,
+  all: all,
   save: save
 }
