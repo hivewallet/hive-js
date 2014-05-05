@@ -4,7 +4,7 @@ var walletExists = require('hive-wallet').walletExists
 
 var menu = require('./widgets/menu')
 var sendDialog = require('./widgets/send-dialog')
-var landingDialog = require('./widgets/landing-dialog')
+var auth = require('./widgets/auth')
 var initProfile = require('./pages/profile')
 var initTransactions = require('./pages/transactions')
 var Ticker = require('hive-ticker-api').BitcoinAverage
@@ -34,8 +34,8 @@ function showPage(page){
 
 // Wallet ops
 walletExists(function(exists){
-  var landingEl = document.getElementById("landing-dialog")
-  exists ? landingDialog.login(landingEl) : landingDialog.register(landingEl)
+  var landingEl = document.getElementById("auth")
+  exists ? auth.login(landingEl) : auth.register(landingEl)
 })
 
 function updateExchangeRates(){

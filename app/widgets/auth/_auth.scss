@@ -1,4 +1,4 @@
-.login__modal {
+.auth__modal {
   background-color: #2f3138;
   display: flex;
   flex-flow: row nowrap;
@@ -11,7 +11,7 @@
   padding-bottom: 20px; 
 }
 
-.login {
+.auth {
   max-width: 400px;
   background-color: white;
   padding: 40px;
@@ -21,7 +21,7 @@
 
 // component header ---------------------------------------- //
 
-.login__info {
+.auth__info {
   @include clickbtn;
   position: absolute;
   top: 15px; 
@@ -30,7 +30,7 @@
   color: #949494;
 }
 
-.login__header {
+.auth__header {
   text-align: center;
   padding-bottom: 30px;
 
@@ -52,7 +52,7 @@
 // buttons ---------------------------------------- //
 
 
-.login__btngroup {
+.auth__btngroup {
   max-width: 280px;
   margin: 0 auto;
   padding: 20px;
@@ -61,7 +61,7 @@
   box-shadow: inset 0 7px 5px -6px #949494;
 }
 
-.login__btn {
+.auth__btn {
   @include clickbtn;
   display: block;
   width: 100%;
@@ -101,8 +101,8 @@
   }
 }
 
-.login__btn--existing {
-  @extend .login__btn;
+.auth__btn--existing {
+  @extend .auth__btn;
   
   margin-bottom: 0;
 
@@ -115,14 +115,14 @@
 
 // inputs ---------------------------------------- //
 
-.login__passphrase {
+.auth__passphrase {
   padding-bottom: 20px;
   label {
     @include clickbtn;
   }
 }
 
-.login__pin {
+.auth__pin {
   padding-bottom: 20px;
   label {
     @include clickbtn;
@@ -133,12 +133,12 @@
 
 // text nodes ---------------------------------------- //
 
-.login__progress {
+.auth__progress {
   padding-top: 20px;
   text-align: center;
 }
 
-.login__altmsg {
+.auth__altmsg {
   text-align: center;
   padding-top: 20px;
   

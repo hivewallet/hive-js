@@ -1,15 +1,15 @@
 {{#visible}}
 
-  <div class="login">
+  <div class="auth">
 
-    <div class="login__info ss-icon">info</div>
+    <div class="auth__info ss-icon">info</div>
 
-    <div class="login__header">
+    <div class="auth__header">
       <img class="_img" src="/assets/img/logo_temp.png" />
       <h2 class="_title">Hive</h2>
     </div>
 
-    <div class="login__btngroup">
+    <div class="auth__btngroup">
 
       {{^setPin}} 
       
@@ -17,15 +17,15 @@
 
           {{#newUser}}
           
-            <div on-click="create-wallet" class="login__btn">Create a new wallet</div>
+            <div on-click="create-wallet" class="auth__btn">Create a new wallet</div>
 
-            <div class="login__btn--existing" on-click="reveal-passphrase-input">Login to existing wallet</div>
+            <div class="auth__btn--existing" on-click="reveal-passphrase-input">auth to existing wallet</div>
           
           {{/newUser}}
 
           {{^newUser}}
 
-            <div class="login__passphrase">
+            <div class="auth__passphrase">
 
               <label>Enter Passphrase:
                 <input id="passphraseField" type="text" placeholder="12-word passphrase" value="{{passphrase}}" on-enter="open-wallet-with-passphrase" />
@@ -33,9 +33,9 @@
 
             </div>
               
-            <div class="login__btn--existing" on-click="open-wallet-with-passphrase">Open wallet</div>
+            <div class="auth__btn--existing" on-click="open-wallet-with-passphrase">Open wallet</div>
 
-            <div class="login__altmsg">
+            <div class="auth__altmsg">
               <span class="_link" on-click="hide-passphrase-input">Create new wallet instead</span>
             </div>
 
@@ -47,18 +47,18 @@
 
       {{#setPin}}
 
-        <div class="login__pin">
+        <div class="auth__pin">
           <label>Set your pin:
             <input id="setPin" type="password" placeholder="6-digit pin" value="{{pin}}" on-enter='set-pin'/>
           </label>
         </div>
 
-        <div class="login__btn--existing" on-click="set-pin">Set pin &amp; open wallet</div>
+        <div class="auth__btn--existing" on-click="set-pin">Set pin &amp; open wallet</div>
 
       {{/setPin}}
 
       {{#opening}}
-        <p class="login__progress">{{progress}}</p>
+        <p class="auth__progress">{{progress}}</p>
       {{/opening}}
 
     </div>

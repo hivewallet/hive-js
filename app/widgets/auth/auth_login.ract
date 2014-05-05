@@ -1,17 +1,17 @@
 {{#visible}}
 
-  <div class="login">
+  <div class="auth">
 
-    <div class="login__info ss-icon">info</div>
+    <div class="auth__info ss-icon">info</div>
 
-    <div class="login__header">
+    <div class="auth__header">
       <img class="_img" src="/assets/img/logo_temp.png" />
       <h2 class="_title">Hive</h2>
     </div>
 
-    <div class="login__btngroup">
+    <div class="auth__btngroup">
 
-      <div class="login__pin">
+      <div class="auth__pin">
         <label>Enter your Pin:
           <input type="password" placeholder="6-digit pin" value="{{pin}}" on-enter='open-wallet-with-pin'/>
         </label>
@@ -19,16 +19,16 @@
     
       {{^opening}}
 
-        <div class="login__btn--existing" on-click="open-wallet-with-pin">Open wallet</div>
+        <div class="auth__btn--existing" on-click="open-wallet-with-pin">Open wallet</div>
 
-        <div class="login__altmsg">
+        <div class="auth__altmsg">
           <span class="_link" on-click="clear-credentials">Open a different wallet</span>
         </div>
       
       {{/opening}}
 
       {{#opening}}
-        <p class="login__progress">{{progress}}</p>
+        <p class="auth__progress">{{progress}}</p>
       {{/opening}}
 
     </div>
