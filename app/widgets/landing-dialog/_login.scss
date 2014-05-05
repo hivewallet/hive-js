@@ -1,10 +1,21 @@
 .login__modal {
   background-color: #2f3138;
+  display: flex;
+  flex-flow: row nowrap;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  min-width: 100%;
+  min-height: 100%;
+  padding-top: 20px;
+  padding-bottom: 20px; 
 }
 
 .login {
-  padding-top: 30px;
-  padding-bottom: 40px;
+  max-width: 400px;
+  background-color: white;
+  padding: 40px;
+  border-radius: 15px;
   position: relative;
 }
 
@@ -13,8 +24,8 @@
 .login__info {
   @include clickbtn;
   position: absolute;
-  top: -5px;
-  right: 0;
+  top: 15px; 
+  right: 15px;
   font-size: 20px;
   color: #949494;
 }

@@ -75,6 +75,7 @@ del,s {
 
 html {
   width: 100%;
+  height: 100%;
 
   font-size: $base_font_size;
   line-height: $base_line_height;
@@ -96,6 +97,7 @@ html {
 
 body {
   width: 100%;
+  height: 100%;
 }
 
 img {
@@ -146,6 +148,7 @@ a {
 
 body >.container {
   width: 100%;
+  display: none;
   // height: 100%;
 }
 
