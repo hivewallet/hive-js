@@ -34,8 +34,8 @@ function showPage(page){
 
 // Wallet ops
 walletExists(function(exists){
-  var landingEl = document.getElementById("auth")
-  exists ? auth.login(landingEl) : auth.register(landingEl)
+  var authEl = document.getElementById("auth")
+  exists ? auth.login(authEl) : auth.register(authEl)
 })
 
 function updateExchangeRates(){
