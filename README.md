@@ -11,6 +11,10 @@ Work in progress
     cd hive-js
     npm install
 
+### Install Gulp globally
+
+    npm install -g gulp
+
 ### Setup CouchDB
 
     brew install couchdb
