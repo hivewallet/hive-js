@@ -17,6 +17,8 @@ sendDialog(document.getElementById("send-dialog"))
 var profile = initProfile(document.getElementById("profile"))
 var transactions = initTransactions(document.getElementById("transactions"))
 var currentPage = profile;
+var appEl = document.getElementById("app")
+var authEl = document.getElementById("auth")
 
 router.addRoute('/profile', function(){
   showPage(profile)
@@ -34,8 +36,12 @@ function showPage(page){
 
 // Wallet ops
 walletExists(function(exists){
-  var authEl = document.getElementById("auth")
   exists ? auth.login(authEl) : auth.register(authEl)
+})
+
+emitter.on('wallet-ready', function(){
+  authEl.style.display = "none";
+  appEl.style.display = "block";
 })
 
 function updateExchangeRates(){
