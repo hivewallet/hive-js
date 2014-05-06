@@ -49,6 +49,7 @@
 }
 
 #main {  
+  overflow-x: hidden;
   position: relative;
   padding: 10px;
   background-color: $background;
