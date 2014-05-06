@@ -1,0 +1,12 @@
+
+// Primary button default
+
+.btn-primary {
+  background-color: #222125;
+  color: white;
+
+  &:hover {
+    background-color: #050505;
+    color: white;
+  }
+}

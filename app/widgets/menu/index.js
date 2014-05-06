@@ -3,6 +3,7 @@
 var $ = require('browserify-zepto');
 var Ractive = require('ractify')
 var hasher = require('hive-router').hasher
+var router = require('hive-router').router
 
 module.exports = function(el){
   var ractive = new Ractive({

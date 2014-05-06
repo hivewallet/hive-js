@@ -2,6 +2,7 @@
 
 var walletExists = require('hive-wallet').walletExists
 
+var $ = require('browserify-zepto');
 var menu = require('./widgets/menu')
 var sendDialog = require('./widgets/send-dialog')
 var auth = require('./widgets/auth')
@@ -12,7 +13,7 @@ var emitter = require('hive-emitter')
 var router = require('hive-router').router
 
 // UI initializations
-menu(document.getElementById("sidebar"))
+menu(document.getElementById("menu"))
 sendDialog(document.getElementById("send-dialog"))
 var profile = initProfile(document.getElementById("profile"))
 var transactions = initTransactions(document.getElementById("transactions"))
@@ -41,7 +42,7 @@ walletExists(function(exists){
 
 emitter.on('wallet-ready', function(){
   authEl.style.display = "none";
-  appEl.style.display = "block";
+  $(appEl).addClass('open')
 })
 
 function updateExchangeRates(){
@@ -55,3 +56,26 @@ function updateExchangeRates(){
 }
 
 updateExchangeRates()
+
+
+// shameful hacks
+
+// temp menu toggle, this should probably be driven through ractive?
+
+var toggleEl = $(document.getElementById("menu_btn"))
+var menuEl = $(document.getElementById("menu"))
+var contentEl = $(document.getElementById("main"))
+var menu_is_open = false;
+
+toggleEl.on('click', function(){
+  if(!menu_is_open) {
+    menuEl.removeClass('closed');
+    contentEl.addClass('hidden');
+    menu_is_open = true;
+  } else {
+    menuEl.addClass('closed');
+    contentEl.removeClass('hidden');
+    menu_is_open = false;
+  }
+})
+

@@ -1,0 +1,80 @@
+
+// structural style for the app
+
+#app {
+  display: none;
+  width: 100%;
+  min-height: 100%;
+
+  &.open {
+    display: flex;
+  }
+}
+
+#menu_btn {
+  @include clickbtn;
+  @include breakpoint(portrait) {
+    display: none;
+  }
+}
+
+#menu {
+  display: block;
+  background-color: #3e3c43;
+  min-height: 100%;
+  flex: 1; // take up full width
+  margin-right: 10%;
+
+  @include breakpoint(portrait) {
+    margin-right: 0;
+    flex: none;
+    width: 80px;
+  }
+
+  &.closed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+    transform: translateX(-100%);
+
+    @include breakpoint(portrait) {
+      position: static;
+      transform: none;
+      overflow-y: auto;
+    }
+  }
+}
+
+#main {  
+  position: relative;
+  padding: 10px;
+  background-color: $background;
+  flex: 1; // take up full width
+  
+  &.hidden {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    transform: translateX(90%);
+    overflow: hidden;
+
+    @include breakpoint(portrait) {
+      position: static;
+      transform: none;
+      overflow-y: auto;
+    }
+  }
+
+  .content {
+    display: none;
+    &.current {
+      display: block;
+    }
+  }
+}
+

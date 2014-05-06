@@ -1,17 +1,17 @@
 
 
-#sidebar .tabs .tab {
+#menu .tabs .tab {
   text-align: center;
   display: block;
   color: white;
   cursor: pointer;
 }
 
-#sidebar .tabs .tab.active {
+#menu .tabs .tab.active {
   background-color: #222125;
 }
 
-#sidebar .tabs .tab__icon {
+#menu .tabs .tab__icon {
   display: inline-block;
   margin-top: 25px;
   margin-bottom: 6px;

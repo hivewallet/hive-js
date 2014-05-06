@@ -22,15 +22,14 @@
 @import "core_css/reset/_formalize";
 @import "core_css/_javascript";
 @import "core_css/_base";
+@import "core_css/_atoms";
 @import "core_css/_symbol-set";
+@import "core_css/_app";
 
-// --------------------------------------------
-// Components should import here
-// --------------------------------------------
-
+// components
 @import "pages/profile/_profile";
 @import "pages/transactions/_transactions";
-@import "widgets/menu/_sidebar";
+@import "widgets/menu/_menu";
 @import "widgets/send-dialog/_send-dialog";
 @import "widgets/auth/_auth";
 
