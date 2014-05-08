@@ -11,6 +11,8 @@ var initTransactions = require('./pages/transactions')
 var Ticker = require('hive-ticker-api').BitcoinAverage
 var emitter = require('hive-emitter')
 var router = require('hive-router').router
+var Arrival = require('./helpers/arrival');
+var FastClick = require('./helpers/fastclick');
 
 // UI initializations
 menu(document.getElementById("menu"))
@@ -66,16 +68,56 @@ var toggleEl = $(document.getElementById("menu_btn"))
 var menuEl = $(document.getElementById("menu"))
 var contentEl = $(document.getElementById("main"))
 var menu_is_open = false;
+var menu_is_animating = false;
+
+FastClick(document.getElementById("menu_btn"));
 
 toggleEl.on('click', function(){
+  //alert('clicked');
+  menu_is_animating = true;
+  menuEvents();
+});
+
+emitter.on('toggle-menu', function(){
+  //alert('emitted');
+  menu_is_animating = true;
+  menuEvents();
+});
+
+function menuEvents() {
+
+  //alert('functional');
   if(!menu_is_open) {
-    menuEl.removeClass('closed');
-    contentEl.addClass('hidden');
-    menu_is_open = true;
+    menuEl.addClass('is_opening');
+    contentEl.addClass('is_about_to_open');
+    contentEl.addClass('is_opening');
+    Arrival.complete(appEl, menuHasOpened);
   } else {
-    menuEl.addClass('closed');
-    contentEl.removeClass('hidden');
-    menu_is_open = false;
+    toggleEl.css('background-color', 'grey');
+    contentEl.addClass('is_closing');
+    menuEl.addClass('is_about_to_close');
+    Arrival.complete(appEl, menuHasClosed);
   }
-})
+}
+
+// animation callbacks
+function menuHasOpened() {
+  contentEl.addClass('hidden');
+  contentEl.removeClass('is_about_to_open');
+  contentEl.removeClass('is_opening');
+  menuEl.removeClass('closed');
+  menuEl.removeClass('is_opening');
+  menu_is_open = true;
+  menu_is_animating = false;
+}
+
+function menuHasClosed() { 
+  contentEl.removeClass('hidden');
+  contentEl.removeClass('is_closing');
+  menuEl.addClass('closed');
+  menuEl.removeClass('is_about_to_close');
+  menu_is_open = false;
+  menu_is_animating = false;
+}
+
 

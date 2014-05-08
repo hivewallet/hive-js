@@ -4,6 +4,8 @@ var $ = require('browserify-zepto');
 var Ractive = require('ractify')
 var hasher = require('hive-router').hasher
 var router = require('hive-router').router
+var emitter = require('hive-emitter')
+var FastClick = require('../../helpers/fastclick');
 
 module.exports = function(el){
   var ractive = new Ractive({
@@ -21,10 +23,15 @@ module.exports = function(el){
     active = node
   }
 
+  $(ractive.findAll('.tab')).each(function(){
+    FastClick(this);
+  });
+
   ractive.on('select', function(event){
-    hasher.setHash(event.node.dataset.hash)
-    highlightTab(event.node)
-    event.original.preventDefault()
+    event.original.preventDefault();
+    emitter.emit('toggle-menu');
+    hasher.setHash(event.node.dataset.hash);
+    highlightTab(event.node);
   })
 
   hasher.changed.add(function(newHash, oldHash){

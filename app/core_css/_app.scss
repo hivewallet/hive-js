@@ -13,6 +13,10 @@
 
 #menu_btn {
   @include clickbtn;
+  width: 50px;
+  height: 50px;
+  background-color: grey;
+  margin-bottom: 10px;
   @include breakpoint(portrait) {
     display: none;
   }
@@ -23,14 +27,17 @@
   background-color: #3e3c43;
   min-height: 100%;
   flex: 1; // take up full width
-  margin-right: 10%;
+  margin-right: 20%;
+
+  transition: transform .3s ease;
 
   @include breakpoint(portrait) {
     margin-right: 0;
     flex: none;
     width: 80px;
+    transition: none;
   }
-
+  
   &.closed {
     position: fixed;
     top: 0;
@@ -46,6 +53,22 @@
       overflow-y: auto;
     }
   }
+
+  &.is_opening {
+    transform: translateX(0);
+
+    @include breakpoint(portrait) {
+      transform: none;
+    }
+  }
+
+  &.is_about_to_close {
+    transform: translateX(-100%);
+
+    @include breakpoint(portrait) {
+      transform: none;
+    }
+  }
 }
 
 #main {  
@@ -54,6 +77,12 @@
   padding: 10px;
   background-color: $background;
   flex: 1; // take up full width
+
+  transition: transform .3s ease;
+  
+  @include breakpoint(portrait) {
+    transition: none;
+  }
   
   &.hidden {
     position: fixed;
@@ -61,13 +90,37 @@
     bottom: 0;
     left: 0;
     right: 0;
-    transform: translateX(90%);
+    transform: translateX(80%);
     overflow: hidden;
 
     @include breakpoint(portrait) {
       position: static;
       transform: none;
       overflow-y: auto;
+    }
+  }
+
+  &.is_about_to_open {
+    transform: translateX(0);
+
+    @include breakpoint(portrait) {
+      transform: none;
+    }
+  }
+
+  &.is_opening {
+    transform: translateX(80%);
+
+    @include breakpoint(portrait) {
+      transform: none;
+    }
+  }
+
+  &.is_closing {
+    transform: translateX(0);
+
+    @include breakpoint(portrait) {
+      transform: none;
     }
   }
 
