@@ -103,7 +103,10 @@ function openMenu() {
     menuEl.removeClass('closed');
     menuEl.removeClass('is_opening');
     menu_is_open = true;
-    menu_is_animating = false;
+
+    setTimeout(function(){
+      menu_is_animating = false;
+    }, 100);
   }
 
   Arrival.complete($(appEl), my_func);
@@ -118,14 +121,15 @@ function closeMenu() {
 
     console.log('complete close');
  
-    setTimeout(function(){
-      contentEl.removeClass('is_closing');
-    }, 300);
     contentEl.removeClass('hidden');
     menuEl.addClass('closed');
     menuEl.removeClass('is_about_to_close');
     menu_is_open = false;
-    menu_is_animating = false;
+
+    setTimeout(function(){
+      contentEl.removeClass('is_closing');
+      menu_is_animating = false;
+    }, 100);
   }
 
   Arrival.complete($(appEl), my_func);

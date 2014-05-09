@@ -5,11 +5,7 @@ var prefix = require('../prefix');
 var transitionDuration = 'transitionDuration',
     transitionDelay = 'transitionDelay',
     transitionend = 'transitionend';
-
-    console.log(transitionDuration);
-    console.log(transitionDelay);
-    console.log(transitionend);
-
+    
 // Arrival 0.0.2
 // Copyright (c) 2014 Max Wheeler, Icelab
 // Licensed under the MIT license
