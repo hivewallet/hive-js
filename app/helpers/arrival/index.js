@@ -3,9 +3,14 @@
 // Licensed under the MIT license
 "use strict";
 
-var $ = require('jquery');
+var $ = require('browserify-zepto');
+var prefix = require('vendor-prefix');
 
 var getLongestTransitionElementAndTime, getElementTransitionTime, parseSecondsToMilliseconds;
+
+var transitionDuration = prefix('transitionDuration'),
+    transitionDelay = prefix('transitionDelay');
+
 // Iterate through descendants to get transition times
 getLongestTransitionElementAndTime = function(scope, descendantSelector, longestTotal, longestTransitionElement) {
   var descendants = scope.find(descendantSelector);
@@ -25,10 +30,10 @@ getLongestTransitionElementAndTime = function(scope, descendantSelector, longest
 // Find the sum of the transition duration/delay for a given element
 getElementTransitionTime = function(element) {
   var duration = parseSecondsToMilliseconds(
-      element.css("transitionDuration")
+      element.css(transitionDuration)
     ),
     delay = parseSecondsToMilliseconds(
-      element.css("transitionDelay")
+      element.css(transitionDelay)
     );
   return delay + duration;
 };

@@ -73,51 +73,48 @@ var menu_is_animating = false;
 FastClick(document.getElementById("menu_btn"));
 
 toggleEl.on('click', function(){
-  //alert('clicked');
   menu_is_animating = true;
-  menuEvents();
+  menu_is_open ? closeMenu() : openMenu();
 });
 
 emitter.on('toggle-menu', function(){
-  //alert('emitted');
   menu_is_animating = true;
-  menuEvents();
+  menu_is_open ? closeMenu() : openMenu();
 });
 
-function menuEvents() {
-
-  //alert('functional');
-  if(!menu_is_open) {
-    menuEl.addClass('is_opening');
-    contentEl.addClass('is_about_to_open');
-    contentEl.addClass('is_opening');
-    Arrival.complete(appEl, menuHasOpened);
-  } else {
-    toggleEl.css('background-color', 'grey');
-    contentEl.addClass('is_closing');
-    menuEl.addClass('is_about_to_close');
-    Arrival.complete(appEl, menuHasClosed);
-  }
-}
-
 // animation callbacks
-function menuHasOpened() {
-  contentEl.addClass('hidden');
-  contentEl.removeClass('is_about_to_open');
-  contentEl.removeClass('is_opening');
-  menuEl.removeClass('closed');
-  menuEl.removeClass('is_opening');
-  menu_is_open = true;
-  menu_is_animating = false;
+function openMenu() {
+
+  menuEl.addClass('is_opening');
+  contentEl.addClass('is_about_to_open');
+  contentEl.addClass('is_opening');
+
+  Arrival.complete(appEl, function(){
+
+    contentEl.addClass('hidden');
+    contentEl.removeClass('is_about_to_open');
+    contentEl.removeClass('is_opening');
+    menuEl.removeClass('closed');
+    menuEl.removeClass('is_opening');
+    menu_is_open = true;
+    menu_is_animating = false;
+  });
 }
 
-function menuHasClosed() { 
-  contentEl.removeClass('hidden');
-  contentEl.removeClass('is_closing');
-  menuEl.addClass('closed');
-  menuEl.removeClass('is_about_to_close');
-  menu_is_open = false;
-  menu_is_animating = false;
+function closeMenu() { 
+
+  contentEl.addClass('is_closing');
+  menuEl.addClass('is_about_to_close');
+
+  Arrival.complete(appEl, function() {
+ 
+    contentEl.removeClass('hidden');
+    contentEl.removeClass('is_closing');
+    menuEl.addClass('closed');
+    menuEl.removeClass('is_about_to_close');
+    menu_is_open = false;
+    menu_is_animating = false;
+  });
 }
 
 
