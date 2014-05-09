@@ -73,13 +73,17 @@ var menu_is_animating = false;
 FastClick(document.getElementById("menu_btn"));
 
 toggleEl.on('click', function(){
-  menu_is_animating = true;
-  menu_is_open ? closeMenu() : openMenu();
+  if(!menu_is_animating){ 
+    menu_is_animating = true;
+    menu_is_open ? closeMenu() : openMenu();
+  }
 });
 
 emitter.on('toggle-menu', function(){
-  menu_is_animating = true;
-  menu_is_open ? closeMenu() : openMenu();
+  if(!menu_is_animating){ 
+    menu_is_animating = true;
+    menu_is_open ? closeMenu() : openMenu();
+  }
 });
 
 // animation callbacks
@@ -89,8 +93,10 @@ function openMenu() {
   contentEl.addClass('is_about_to_open');
   contentEl.addClass('is_opening');
 
-  Arrival.complete(appEl, function(){
+  var my_func = function(){
 
+    console.log('complete open');
+    
     contentEl.addClass('hidden');
     contentEl.removeClass('is_about_to_open');
     contentEl.removeClass('is_opening');
@@ -98,7 +104,9 @@ function openMenu() {
     menuEl.removeClass('is_opening');
     menu_is_open = true;
     menu_is_animating = false;
-  });
+  }
+
+  Arrival.complete($(appEl), my_func);
 }
 
 function closeMenu() { 
@@ -106,15 +114,21 @@ function closeMenu() {
   contentEl.addClass('is_closing');
   menuEl.addClass('is_about_to_close');
 
-  Arrival.complete(appEl, function() {
+  var my_func = function() {
+
+    console.log('complete close');
  
+    setTimeout(function(){
+      contentEl.removeClass('is_closing');
+    }, 300);
     contentEl.removeClass('hidden');
-    contentEl.removeClass('is_closing');
     menuEl.addClass('closed');
     menuEl.removeClass('is_about_to_close');
     menu_is_open = false;
     menu_is_animating = false;
-  });
+  }
+
+  Arrival.complete($(appEl), my_func);
 }
 
 
