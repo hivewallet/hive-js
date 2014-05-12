@@ -27,12 +27,24 @@ module.exports = function(el){
     FastClick(this);
   });
 
+  var menu_animating = false;
+
   ractive.on('select', function(event){
     event.original.preventDefault();
-    emitter.emit('toggle-menu');
-    hasher.setHash(event.node.dataset.hash);
-    highlightTab(event.node);
+    if(!menu_animating) {
+      emitter.emit('toggle-menu');
+      hasher.setHash(event.node.dataset.hash);
+      highlightTab(event.node);
+    }
   })
+
+  emitter.on('menu_animation_start', function() {
+    menu_animating = true;
+  });
+
+  emitter.on('menu_animation_end', function(){
+    menu_animating = false;
+  });
 
   hasher.changed.add(function(newHash, oldHash){
     highlightTab(ractive.find("[data-hash='" + newHash + "']"))

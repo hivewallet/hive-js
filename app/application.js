@@ -3,6 +3,7 @@
 var walletExists = require('hive-wallet').walletExists
 
 var $ = require('browserify-zepto');
+var header = require('./widgets/header')
 var menu = require('./widgets/menu')
 var sendDialog = require('./widgets/send-dialog')
 var auth = require('./widgets/auth')
@@ -15,6 +16,7 @@ var Arrival = require('./helpers/arrival');
 var FastClick = require('./helpers/fastclick');
 
 // UI initializations
+header(document.getElementById("header"))
 menu(document.getElementById("menu"))
 sendDialog(document.getElementById("send-dialog"))
 var profile = initProfile(document.getElementById("profile"))
@@ -61,26 +63,16 @@ updateExchangeRates()
 
 
 // shameful hacks
-
 // temp menu toggle, this should probably be driven through ractive?
 
-var toggleEl = $(document.getElementById("menu_btn"))
 var menuEl = $(document.getElementById("menu"))
 var contentEl = $(document.getElementById("main"))
 var menu_is_open = false;
 var menu_is_animating = false;
 
-FastClick(document.getElementById("menu_btn"));
-
-toggleEl.on('click', function(){
-  if(!menu_is_animating){ 
-    menu_is_animating = true;
-    menu_is_open ? closeMenu() : openMenu();
-  }
-});
-
 emitter.on('toggle-menu', function(){
   if(!menu_is_animating){ 
+    emitter.emit('menu_animation_start');
     menu_is_animating = true;
     menu_is_open ? closeMenu() : openMenu();
   }
@@ -106,6 +98,7 @@ function openMenu() {
 
     setTimeout(function(){
       menu_is_animating = false;
+      emitter.emit('menu_animation_end');
     }, 100);
   }
 
@@ -129,6 +122,7 @@ function closeMenu() {
     setTimeout(function(){
       contentEl.removeClass('is_closing');
       menu_is_animating = false;
+      emitter.emit('menu_animation_end');
     }, 100);
   }
 

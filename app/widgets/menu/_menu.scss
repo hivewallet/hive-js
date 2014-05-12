@@ -1,10 +1,10 @@
 
 
 #menu .tabs .tab {
+  @include clickbtn;
   text-align: center;
   display: block;
   color: white;
-  cursor: pointer;
 }
 
 #menu .tabs .tab.active {
