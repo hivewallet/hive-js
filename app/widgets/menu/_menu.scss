@@ -2,9 +2,18 @@
 
 #menu .tabs .tab {
   @include clickbtn;
-  text-align: center;
-  display: block;
   color: white;
+  display: block;
+  padding-left: 20px;
+
+  @include breakpoint(portrait) {
+    text-align: center;
+    padding-left: 0;
+  }
+
+  &:hover {
+    background-color: #222125;
+  }
 }
 
 #menu .tabs .tab.active {
@@ -16,4 +25,14 @@
   margin-top: 25px;
   margin-bottom: 6px;
   height: 40px;
+}
+
+
+.hide--portrait {
+  display: inline-block;
+  padding-left: 10px;
+  font-family: $sans;
+  @include breakpoint(portrait) {
+    display: none;
+  }
 }

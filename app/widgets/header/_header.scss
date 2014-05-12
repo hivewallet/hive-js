@@ -1,4 +1,8 @@
 
+#header {
+  display: flex;
+  justify-content: space-between;
+}
 
 .header__toggle {
   @include clickbtn;
@@ -11,4 +15,10 @@
   @include breakpoint(portrait) {
     display: none;
   }
+}
+
+.header__balance {
+  font-size: 32px;
+  color: black;
+  font-weight: $light;
 }
