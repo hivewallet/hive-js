@@ -18,7 +18,7 @@
   height: 50px;
   background-color: grey;
   margin-bottom: 10px;
-  @include breakpoint(landscape) {
+  @include breakpoint(portrait) {
     display: none;
   }
 }
@@ -32,7 +32,7 @@
 
   transition: transform .3s ease;
 
-  @include breakpoint(landscape) {
+  @include breakpoint(portrait) {
     margin-right: 0;
     flex: none;
     width: 80px;
@@ -48,7 +48,7 @@
     overflow: hidden;
     transform: translateX(-100%);
 
-    @include breakpoint(landscape) {
+    @include breakpoint(portrait) {
       position: static;
       transform: none;
       overflow-y: auto;
@@ -58,7 +58,7 @@
   &.is_opening {
     transform: translateX(0);
 
-    @include breakpoint(landscape) {
+    @include breakpoint(portrait) {
       transform: none;
     }
   }
@@ -66,7 +66,7 @@
   &.is_about_to_close {
     transform: translateX(-100%);
 
-    @include breakpoint(landscape) {
+    @include breakpoint(portrait) {
       transform: none;
     }
   }
@@ -81,7 +81,7 @@
 
   transition: transform .3s ease;
   
-  @include breakpoint(landscape) {
+  @include breakpoint(portrait) {
     transition: none;
   }
   
@@ -94,7 +94,7 @@
     transform: translateX(80%);
     overflow: hidden;
 
-    @include breakpoint(landscape) {
+    @include breakpoint(portrait) {
       position: static;
       transform: none;
       overflow-y: auto;
@@ -104,7 +104,7 @@
   &.is_about_to_open {
     transform: translateX(0);
 
-    @include breakpoint(landscape) {
+    @include breakpoint(portrait) {
       transform: none;
     }
   }
@@ -112,7 +112,7 @@
   &.is_opening {
     transform: translateX(80%);
 
-    @include breakpoint(landscape) {
+    @include breakpoint(portrait) {
       transform: none;
     }
   }
@@ -120,7 +120,7 @@
   &.is_closing {
     transform: translateX(0);
 
-    @include breakpoint(landscape) {
+    @include breakpoint(portrait) {
       transform: none;
     }
   }
