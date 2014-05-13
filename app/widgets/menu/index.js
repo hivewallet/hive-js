@@ -27,6 +27,10 @@ module.exports = function(el){
     FastClick(this);
   });
 
+  emitter.on('wallet-ready', function() {
+    highlightTab(ractive.nodes.home_tab);
+  });
+
   var menu_animating = false;
 
   ractive.on('select', function(event){

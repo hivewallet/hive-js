@@ -1,36 +1,69 @@
 'use strict';
 
-var walletExists = require('hive-wallet').walletExists
+// remove hash to avoid router bugs
+if (location.hash) {
+  var loc = window.location;
+  if ("pushState" in history) {
+      history.pushState("", document.title, loc.pathname + loc.search);
+  }
+}
 
+var walletExists = require('hive-wallet').walletExists
 var $ = require('browserify-zepto');
 var header = require('./widgets/header')
 var menu = require('./widgets/menu')
 var sendDialog = require('./widgets/send-dialog')
 var auth = require('./widgets/auth')
-var initProfile = require('./pages/profile')
+var initHome = require('./pages/home')
 var initTransactions = require('./pages/transactions')
+var initContacts = require('./pages/contacts')
+var initApps = require('./pages/apps')
+var initSettings = require('./pages/settings')
 var Ticker = require('hive-ticker-api').BitcoinAverage
 var emitter = require('hive-emitter')
 var router = require('hive-router').router
-var Arrival = require('./helpers/arrival');
-var FastClick = require('./helpers/fastclick');
+var Arrival = require('./helpers/arrival')
+var FastClick = require('./helpers/fastclick')
 
 // UI initializations
-header(document.getElementById("header"))
-menu(document.getElementById("menu"))
-sendDialog(document.getElementById("send-dialog"))
-var profile = initProfile(document.getElementById("profile"))
-var transactions = initTransactions(document.getElementById("transactions"))
-var currentPage = profile;
-var appEl = document.getElementById("app")
-var authEl = document.getElementById("auth")
 
-router.addRoute('/profile', function(){
-  showPage(profile)
+// widgets
+header(document.getElementById("header"));
+menu(document.getElementById("menu"));
+sendDialog(document.getElementById("send-dialog"));
+
+// pages
+var home = initHome(document.getElementById("home")),
+    transactions = initTransactions(document.getElementById("transactions")),
+    contacts = initContacts(document.getElementById("contacts")),
+    apps = initApps(document.getElementById("apps")),
+    settings = initSettings(document.getElementById("settings"));
+
+var currentPage = home;
+
+// non-ractive elements
+var appEl = document.getElementById("app"),
+    authEl = document.getElementById("auth");
+
+// define routes
+router.addRoute('/home', function(){
+  showPage(home)
 })
 
 router.addRoute('/transactions', function(){
   showPage(transactions)
+})
+
+router.addRoute('/contacts', function(){
+  showPage(contacts)
+})
+
+router.addRoute('/apps', function(){
+  showPage(apps)
+})
+
+router.addRoute('/settings', function(){
+  showPage(settings)
 })
 
 function showPage(page){
@@ -85,9 +118,7 @@ function openMenu() {
   contentEl.addClass('is_about_to_open');
   contentEl.addClass('is_opening');
 
-  var my_func = function(){
-
-    console.log('complete open');
+  Arrival.complete($(appEl), function(){
     
     contentEl.addClass('hidden');
     contentEl.removeClass('is_about_to_open');
@@ -100,9 +131,7 @@ function openMenu() {
       menu_is_animating = false;
       emitter.emit('menu_animation_end');
     }, 100);
-  }
-
-  Arrival.complete($(appEl), my_func);
+  });
 }
 
 function closeMenu() { 
@@ -110,10 +139,8 @@ function closeMenu() {
   contentEl.addClass('is_closing');
   menuEl.addClass('is_about_to_close');
 
-  var my_func = function() {
+  Arrival.complete($(appEl), function() {
 
-    console.log('complete close');
- 
     contentEl.removeClass('hidden');
     menuEl.addClass('closed');
     menuEl.removeClass('is_about_to_close');
@@ -124,9 +151,7 @@ function closeMenu() {
       menu_is_animating = false;
       emitter.emit('menu_animation_end');
     }, 100);
-  }
-
-  Arrival.complete($(appEl), my_func);
+  });
 }
 
 

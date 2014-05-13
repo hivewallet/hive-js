@@ -108,9 +108,8 @@ function includeSharedBehaviors(ractive) {
       return alert("error synchronizing. " + err)
     }
 
+    hasher.setHash('#home');
     emitter.emit('wallet-ready')
-    router.parse('/profile')
-    hasher.setHash('#profile')
   }
 
   function onTransactionsLoaded(err, transactions) {
