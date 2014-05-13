@@ -1,0 +1,2 @@
+<div id="menu_btn" class="header__toggle ss-icon" on-click="toggle">{{ menu_icon }}</div>
+<div class="header__balance">{{satoshiToBTC(bitcoinBalance)}}</div>

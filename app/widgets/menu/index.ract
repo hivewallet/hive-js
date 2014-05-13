@@ -1,13 +1,17 @@
 <div class="tabs">
-  <a data-hash='#profile' class="tab" on-click="select">
-    <span class="tab__icon ss-icon">user</span>
-  </a>
-  <a data-hash='#apps' class="tab" on-click="select">
-    <span class="tab__icon ss-icon">cloud</span>
-  </a>
-  <a data-hash='#contacts' class="tab" on-click="select">
-    <span class="tab__icon ss-icon">users</span>
+  <a id="home_tab" data-hash='#home' class="tab" on-click="select">
+    <span class="tab__icon ss-icon">home<span class="hide--portrait"> My Wallet</span></span>
   </a>
   <a data-hash='#transactions' class="tab" on-click="select">
-    <span class="tab__icon ss-icon">time</span>
+    <span class="tab__icon ss-icon">dollarsign<span class="hide--portrait"> Transactions</span></span>
+  </a>  
+  <a data-hash='#contacts' class="tab" on-click="select">
+    <span class="tab__icon ss-icon">users<span class="hide--portrait"> Contacts</span></span>
+  </a>
+  <a data-hash='#apps' class="tab" on-click="select">
+    <span class="tab__icon ss-icon">cloud<span class="hide--portrait"> Apps</span></span>
+  </a>
+  <a data-hash='#settings' class="tab" on-click="select">
+    <span class="tab__icon ss-icon">cog<span class="hide--portrait"> Settings</span></span>
+  </a>
 </div>

@@ -4,6 +4,7 @@ var Ractive = require('hive-ractive')
 var Hive = require('hive-wallet')
 var emitter = require('hive-emitter')
 var router = require('hive-router').router
+var hasher = require('hive-router').hasher
 
 var timerId = null
 
@@ -11,12 +12,11 @@ function register(el){
   var ractive = new Ractive({
     el: el,
     data: {
-      visible: true,
       opening: false,
       newUser: true,
       setPin: false
     },
-    template: require('./register.ract')
+    template: require('./auth_register.ract')
   })
 
   includeSharedBehaviors(ractive)
@@ -65,16 +65,17 @@ function login(el){
   var ractive = new Ractive({
     el: el,
     data: {
-      visible: true,
       opening: false
     },
-    template: require('./login.ract')
+    template: require('./auth_login.ract')
   })
 
   includeSharedBehaviors(ractive)
 
   ractive.on('open-wallet-with-pin', function(event){
     event.original.preventDefault()
+    ractive.set('opening', true)
+    ractive.set('progress', 'Checking PIN...')
     Hive.openWalletWithPin(getPin(), ractive.getNetwork(),
                     ractive.onSyncDone, ractive.onTransactionsLoaded)
   })
@@ -96,9 +97,7 @@ function login(el){
 
 function includeSharedBehaviors(ractive) {
   emitter.on('wallet-opening', function(progress){
-    ractive.set('opening', true)
     ractive.set('progress', progress)
-
     loading()
   })
 
@@ -109,9 +108,8 @@ function includeSharedBehaviors(ractive) {
       return alert("error synchronizing. " + err)
     }
 
+    hasher.setHash('#home');
     emitter.emit('wallet-ready')
-    ractive.set('visible', false)
-    router.parse('/profile')
   }
 
   function onTransactionsLoaded(err, transactions) {

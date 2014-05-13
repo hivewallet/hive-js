@@ -75,6 +75,7 @@ del,s {
 
 html {
   width: 100%;
+  height: 100%;
 
   font-size: $base_font_size;
   line-height: $base_line_height;
@@ -96,6 +97,7 @@ html {
 
 body {
   width: 100%;
+  height: 100%;
 }
 
 img {
@@ -123,98 +125,3 @@ a {
     color: darken($foreground, 10%);
   }
 }
-
-
-
-// Primary button default
-
-.btn-primary {
-  background-color: #222125;
-  color: white;
-
-  &:hover {
-    background-color: #050505;
-    color: white;
-  }
-}
-
-
-
-// ------------------------------------------------------------
-// legacy base
-// ------------------------------------------------------------
-
-body >.container {
-  width: 100%;
-  height: 100%;
-  position: fixed;
-}
-
-#sidebar,
-#main {
-  float: left;
-  position: relative;
-  height: 100%;
-}
-
-#sidebar {
-  background-color: #3e3c43;
-  width: 12%;
-}
-
-#main {
-  width: 88%;
-  overflow-x: hidden;
-}
-
-div.content {
-  width: 100%;
-  height: 100%;  
-  padding: 10px;
-  background: rgb(240, 240, 240);
-
-  display: none;
-}
-
-div.content.current {
-  display: block;
-}
-
-
-
-/* shared */
-
-b {
-  font-weight: bold;
-}
-
-hr {
-  height: 1px;
-  border: 1px solid lightgrey;
-  color: transparent;
-  background: transparent;
-}
-
-/* modal */
-
-.modal {
-  overflow: auto;
-  // overflow-y: scroll;
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, 0.6);
-  z-index: 999;
-}
-
-.modal-dialog {
-  max-width: 500px;
-  margin: 30px auto;
-  background: white;
-  padding: 30px;
-  border-radius: 10px;
-  z-index: 1000;
-}
-

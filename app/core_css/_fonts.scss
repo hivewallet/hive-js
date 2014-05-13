@@ -19,6 +19,19 @@
 
 @font-face {
   font-family: 'jigsaw';
+  src: url('../fonts/jigsaw-light.eot');
+  src: url('../fonts/jigsaw-light.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/jigsaw-light.woff') format('woff'),
+       url('../fonts/jigsaw-light.ttf') format('truetype'),
+       url('../fonts/jigsaw-light.svg#jigsawlight') format('svg');
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: normal;
+}
+
+
+@font-face {
+  font-family: 'jigsaw';
   src: url('../fonts/jigsaw-medium.eot');
   src: url('../fonts/jigsaw-medium.eot?#iefix') format('embedded-opentype'),
        url('../fonts/jigsaw-medium.woff') format('woff'),

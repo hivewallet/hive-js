@@ -3,33 +3,47 @@
 <head>
   <title>Hive - home for your money</title>
   <link rel="icon" sizes="16x16 24x24 32x32 48x48 64x64" href="assets/img/favicon.ico">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   <link rel="stylesheet" href="assets/css/application.css">
 </head>
 <body>
-  <div class="container">
-    <div id="sidebar">
-    </div>
-    <div id="main">
-      <div id="profile" class="content">
-        profile etc.
-      </div>
 
-      <div id="apps" class="content">
-        Apps here!
-      </div>
+  <div id="app">
 
-      <div id="contacts" class="content">
-        I have lots of friends, really
+    <div id="menu" class="closed animate_in"></div>
+
+    <div id="main" class="animate_in">
+
+      <div id="header"></div>
+
+      <div id="home" class="content">
+        Your
       </div>
 
       <div id="transactions" class="content">
-        Money going in and out
+        Browser
       </div>
+
+      <div id="contacts" class="content">
+        Doesn't
+      </div>
+
+      <div id="apps" class="content">
+        Support
+      </div>
+
+      <div id="settings" class="content">
+        Javascript :(
+      </div>
+
     </div>
+
   </div>
-  <div id="send-dialog"></div>
-  <div id="landing-dialog"></div>
+  
+  <!-- <div id="send-dialog"></div> -->
+  <div id="auth" class="auth__modal"></div>
   <script src='assets/js/application.js'></script>
 </body>
 </html>
