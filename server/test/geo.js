@@ -8,7 +8,7 @@ describe('geo', function(){
     userInfo = {id: "foobar", name: "Wei Lu", email: "wei@example.com"}
     lat = 34.2308391
     lon = 108.8686767
-    while(geo.all.length > 0) { geo.all.pop() }
+    geo.reset()
   })
 
   describe('save', function(){
@@ -19,8 +19,8 @@ describe('geo', function(){
       ]
 
       geo.save(lat, lon, userInfo, function(){
-        assert.equal(geo.all.length, 1)
-        assert.deepEqual(geo.all[0], {
+        assert.equal(geo.all().length, 1)
+        assert.deepEqual(geo.all()[0], {
           id: userInfo.id,
           name: userInfo.name,
           email: userInfo.email,
@@ -29,6 +29,15 @@ describe('geo', function(){
         })
 
         done()
+      })
+    })
+
+    it('overwrites data with the same user id', function(done){
+      geo.save(lat, lon, userInfo, function(){
+        geo.save(1.0, 1.0, userInfo, function(){
+          assert.equal(geo.all().length, 1)
+          done()
+        })
       })
     })
 

@@ -1,21 +1,31 @@
 var geomodel = require('geomodel').create_geomodel()
 
 var SEARCH_RADIUS = 1000
-var all = []
+var records = {}
+
+function all(){
+  return Object.keys(records).map(function(key){
+    return records[key]
+  })
+}
+
+function reset(){
+  records = {}
+}
 
 function save(lat, lon, userInfo, callback) {
   var user = cloneObject(userInfo)
   user.location = geomodel.create_point(lat, lon),
   user.geocells = geomodel.generate_geocells(user.location)
 
-  all.push(user)
+  records[user.id] = user
 
   search(user.location, callback)
 }
 
 function search(location, callback){
   var onGeocells = function(geocells, finderCallback) {
-    var candidates = all.filter(function(record){
+    var candidates = all().filter(function(record){
       return haveIntersection(record.geocells, geocells)
     })
     finderCallback(null, candidates)
@@ -42,5 +52,6 @@ function cloneObject(obj){
 module.exports = {
   SEARCH_RADIUS: SEARCH_RADIUS,
   all: all,
+  reset: reset,
   save: save
 }
