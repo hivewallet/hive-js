@@ -4,7 +4,7 @@
   </a>
   <a data-hash='#transactions' class="tab" on-click="select">
     <span class="tab__icon ss-icon">dollarsign<span class="hide--portrait"> Transactions</span></span>
-  </a>  
+  </a>
   <a data-hash='#contacts' class="tab" on-click="select">
     <span class="tab__icon ss-icon">users<span class="hide--portrait"> Contacts</span></span>
   </a>
@@ -14,4 +14,9 @@
   <a data-hash='#settings' class="tab" on-click="select">
     <span class="tab__icon ss-icon">cog<span class="hide--portrait"> Settings</span></span>
   </a>
+</div>
+
+<div class="tabs">
+  <a data-hash='#logout' class="tab footer" on-click="select">
+  <span class="tab__icon ss-icon">logout<span class="hide--portrait"> Logout</span></span>
 </div>
