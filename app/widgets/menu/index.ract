@@ -3,7 +3,7 @@
     <span class="tab__icon ss-icon">home<span class="hide--portrait"> My Wallet</span></span>
   </a>
   <a data-hash='#transactions' class="tab" on-click="select">
-    <span class="tab__icon ss-icon">time<span class="hide--portrait"> Transactions</span></span>
+    <span class="tab__icon ss-icon">dollarsign<span class="hide--portrait"> Transactions</span></span>
   </a>  
   <a data-hash='#contacts' class="tab" on-click="select">
     <span class="tab__icon ss-icon">users<span class="hide--portrait"> Contacts</span></span>
