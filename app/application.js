@@ -23,7 +23,7 @@ var Ticker = require('hive-ticker-api').BitcoinAverage
 var emitter = require('hive-emitter')
 var router = require('hive-router').router
 var Arrival = require('./helpers/arrival')
-var FastClick = require('./helpers/fastclick')
+var FastClick = require('fastclick')
 
 // UI initializations
 
@@ -118,7 +118,7 @@ function openMenu() {
   contentEl.addClass('is_about_to_open');
   contentEl.addClass('is_opening');
 
-  Arrival.complete($(appEl), function(){
+  Arrival.complete(appEl, function(){
     
     contentEl.addClass('hidden');
     contentEl.removeClass('is_about_to_open');
@@ -139,7 +139,7 @@ function closeMenu() {
   contentEl.addClass('is_closing');
   menuEl.addClass('is_about_to_close');
 
-  Arrival.complete($(appEl), function() {
+  Arrival.complete(appEl, function() {
 
     contentEl.removeClass('hidden');
     menuEl.addClass('closed');

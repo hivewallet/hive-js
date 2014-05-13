@@ -3,7 +3,7 @@
 var $ = require('browserify-zepto'),
     Ractive = require('ractify'),
     emitter = require('hive-emitter'),
-    FastClick = require('../../helpers/fastclick'),
+    FastClick = require('fastclick'),
     Big = require('big.js'),
     getWallet = require('hive-wallet').getWallet;
 

@@ -5,7 +5,7 @@ var Ractive = require('ractify')
 var hasher = require('hive-router').hasher
 var router = require('hive-router').router
 var emitter = require('hive-emitter')
-var FastClick = require('../../helpers/fastclick');
+var FastClick = require('fastclick');
 
 module.exports = function(el){
   var ractive = new Ractive({
