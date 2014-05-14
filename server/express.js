@@ -39,12 +39,12 @@ module.exports = function (prependMiddleware){
       console.log('authenticated wallet %s', name)
       req.session.regenerate(function(){
         req.session.wallet_id = name
+        res.send(200, token)
       })
-      res.send(200, token)
     })
   })
 
-  app.post('/location', function(req, res) {
+  app.post('/location', restrict, function(req, res) {
     var data = req.body
 
     var lat = data.lat
@@ -68,6 +68,14 @@ module.exports = function (prependMiddleware){
       return res.send(400, 'Bad request')
     }
     next()
+  }
+
+  function restrict(req, res, next) {
+    if (req.session.wallet_id) {
+      next()
+    } else {
+      return res.send(401)
+    }
   }
 
   return app
