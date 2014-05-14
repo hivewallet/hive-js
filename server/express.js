@@ -11,7 +11,7 @@ module.exports = function (prependMiddleware){
     app.use(prependMiddleware)
   }
   app.use(express.bodyParser())
-  app.use(express.cookieParser('shhhh, very secret')) //TODO: env var
+  app.use(express.cookieParser(process.env.COOKIE_SALT))
   app.use(express.session())
   app.use(express.static(path.join(__dirname, '..', 'build')))
 
