@@ -1,0 +1,40 @@
+/* TODO: refactor me. copied from auth__btn */
+.search__btn {
+  @include clickbtn;
+  display: block;
+  width: 100%;
+
+  margin-bottom: 20px;
+
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  border-radius: 7px;
+
+  color: white;
+  text-align: center;
+  font-family: $sans;
+  font-weight: $roman;
+  font-size: 18px;
+  background-color: $blue;
+  box-shadow: 0 3px 0 0 darken($blue, 10%);
+
+
+  transition: none;
+  position: relative;
+
+  &:active {
+    transform: translate(0px, 3px);
+    box-shadow: 0 0px 0 0;
+  }
+
+  &:after {
+    content: "";
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+  }
+}

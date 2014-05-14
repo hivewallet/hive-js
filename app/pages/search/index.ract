@@ -1,1 +1,1 @@
-<h1>Search Nearby</h1>
+<div class='search__btn' on-click="search-nearby">Search Nearby</div>
