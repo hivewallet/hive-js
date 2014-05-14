@@ -3,6 +3,7 @@
 var express = require('express')
 var path = require('path')
 var auth = require('./auth')
+var geo = require('./geo')
 
 module.exports = function (prependMiddleware){
   var app = express()
@@ -35,6 +36,20 @@ module.exports = function (prependMiddleware){
 
       console.log('authenticated wallet %s', name)
       res.send(200, token)
+    })
+  })
+
+  app.post('/location', function(req, res) {
+    var data = req.body
+
+    var lat = data.lat
+    var lon = data.lon
+    delete data.lat
+    delete data.lon
+
+    geo.save(lat, lon, data, function(err, found) {
+      if(err) return res.json(400, err)
+      res.json(200, found)
     })
   })
 
