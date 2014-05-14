@@ -1,13 +1,5 @@
 'use strict';
 
-// remove hash to avoid router bugs
-if (location.hash) {
-  var loc = window.location;
-  if ("pushState" in history) {
-      history.pushState("", document.title, loc.pathname + loc.search);
-  }
-}
-
 var walletExists = require('hive-wallet').walletExists
 var $ = require('browserify-zepto');
 var header = require('./widgets/header')
@@ -17,7 +9,7 @@ var auth = require('./widgets/auth')
 var initHome = require('./pages/home')
 var initTransactions = require('./pages/transactions')
 var initContacts = require('./pages/contacts')
-var initApps = require('./pages/apps')
+var initSearch = require('./pages/search')
 var initSettings = require('./pages/settings')
 var Ticker = require('hive-ticker-api').BitcoinAverage
 var emitter = require('hive-emitter')
@@ -25,25 +17,33 @@ var router = require('hive-router').router
 var Arrival = require('./helpers/arrival')
 var FastClick = require('fastclick')
 
+// remove hash to avoid router bugs
+if (location.hash) {
+  var loc = window.location
+  if ("pushState" in history) {
+      history.pushState("", document.title, loc.pathname + loc.search)
+  }
+}
+
 // UI initializations
 
 // widgets
-header(document.getElementById("header"));
-menu(document.getElementById("menu"));
-sendDialog(document.getElementById("send-dialog"));
+header(document.getElementById("header"))
+menu(document.getElementById("menu"))
+sendDialog(document.getElementById("send-dialog"))
 
 // pages
-var home = initHome(document.getElementById("home")),
-    transactions = initTransactions(document.getElementById("transactions")),
-    contacts = initContacts(document.getElementById("contacts")),
-    apps = initApps(document.getElementById("apps")),
-    settings = initSettings(document.getElementById("settings"));
+var home = initHome(document.getElementById("home"))
+var transactions = initTransactions(document.getElementById("transactions"))
+var contacts = initContacts(document.getElementById("contacts"))
+var search = initSearch(document.getElementById("search"))
+var settings = initSettings(document.getElementById("settings"))
 
-var currentPage = home;
+var currentPage = home
 
 // non-ractive elements
-var appEl = document.getElementById("app"),
-    authEl = document.getElementById("auth");
+var appEl = document.getElementById("app")
+var authEl = document.getElementById("auth")
 
 // define routes
 router.addRoute('/home', function(){
@@ -58,8 +58,8 @@ router.addRoute('/contacts', function(){
   showPage(contacts)
 })
 
-router.addRoute('/apps', function(){
-  showPage(apps)
+router.addRoute('/search', function(){
+  showPage(search)
 })
 
 router.addRoute('/settings', function(){

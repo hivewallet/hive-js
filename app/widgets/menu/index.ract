@@ -8,8 +8,8 @@
   <a data-hash='#contacts' class="tab" on-click="select">
     <span class="tab__icon ss-icon">users<span class="hide--portrait"> Contacts</span></span>
   </a>
-  <a data-hash='#apps' class="tab" on-click="select">
-    <span class="tab__icon ss-icon">cloud<span class="hide--portrait"> Apps</span></span>
+  <a data-hash='#search' class="tab" on-click="select">
+    <span class="tab__icon ss-icon">cloud<span class="hide--portrait"> Search</span></span>
   </a>
   <a data-hash='#settings' class="tab" on-click="select">
     <span class="tab__icon ss-icon">cog<span class="hide--portrait"> Settings</span></span>
