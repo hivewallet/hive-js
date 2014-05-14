@@ -13,6 +13,10 @@ var remote = null
 var id = null
 var sercret = null
 
+function userID(){
+  return id
+}
+
 function set(key, value, callback){
   if(id == null) return;
 
@@ -127,6 +131,7 @@ function setupPulling(options){
 }
 
 module.exports = {
+  userID: userID,
   set: set,
   get: get
 }
