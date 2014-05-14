@@ -1,1 +1,16 @@
 <div class='search__btn' on-click="search-nearby">Search Nearby</div>
+
+{{#searching}}
+  <p>Searching...</p>
+{{/searching}}
+
+<ul>
+  {{#nearbys}}
+    <li>
+      <div>
+        <img src="{{emailToAvatar(email)}}" />
+        <span>{{name}}</span>
+      </div>
+    </li>
+  {{/nearbys}}
+</ul>

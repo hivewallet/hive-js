@@ -2,6 +2,7 @@
 
 var Ractive = require('ractify')
 var geo = require('hive-geo')
+var emailToAvatar = require('hive-gravatar').emailToAvatar
 
 module.exports = function(el){
   var nearbys = []
@@ -10,7 +11,8 @@ module.exports = function(el){
     template: require('./index.ract'),
     data: {
       nearbys: nearbys,
-      searching: false
+      searching: false,
+      emailToAvatar: emailToAvatar
     }
   })
 
@@ -20,9 +22,10 @@ module.exports = function(el){
       if(err) return alert(err);
 
       ractive.set('searching', false)
-      nearbys = results
-      ractive.update('nearbys')
-      console.log(nearbys)
+      nearbys = results.map(function(record){
+        return record[0]
+      })
+      ractive.set('nearbys', nearbys)
     })
   })
 

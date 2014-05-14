@@ -3,6 +3,7 @@
 var Ractive = require('ractify')
 var getWallet = require('hive-wallet').getWallet
 var emitter = require('hive-emitter')
+var emailToAvatar = require('hive-gravatar').emailToAvatar
 var Big = require('big.js')
 var currencies = require('hive-ticker-api').currencies
 var db = require('hive-db')
@@ -27,8 +28,7 @@ module.exports = function(el){
       exchangeRates: {},
       satoshiToBTC: satoshiToBTC,
       bitcoinToFiat: bitcoinToFiat,
-      emailToAvatar: emailToAvatar,
-      formatEmail: formatEmail
+      emailToAvatar: emailToAvatar
     }
   })
 
@@ -99,18 +99,6 @@ module.exports = function(el){
   function bitcoinToFiat(amount, exchangeRate){
     var btc = satoshiToBTC(amount)
     return btc.times(exchangeRate).toFixed(2)
-  }
-
-  function formatEmail(email){
-    return email.trim().toLowerCase()
-  }
-
-  function emailToAvatar(email){
-    return [
-      'https://www.gravatar.com/avatar/',
-      crypto.createHash('md5').update(email).digest('hex'),
-      '?size=200'
-    ].join('')
   }
 
   return ractive
