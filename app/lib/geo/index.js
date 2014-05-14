@@ -35,7 +35,7 @@ function search(callback){
     }, function(err, resp, body){
       if(resp.statusCode !== 200) {
         console.error(body)
-        return callback(JSON.parse(body))
+        return callback(body)
       }
       callback(null, JSON.parse(body))
     })
