@@ -23,8 +23,10 @@ module.exports = function (prependMiddleware){
         return res.send(400, err)
       }
 
-      console.log('registered wallet %s', name)
-      res.send(200, token)
+      setCookie(req, name, function(){
+        console.log('registered wallet %s', name)
+        res.send(200, token)
+      })
     })
   })
 
@@ -36,9 +38,8 @@ module.exports = function (prependMiddleware){
         return res.send(400, err)
       }
 
-      console.log('authenticated wallet %s', name)
-      req.session.regenerate(function(){
-        req.session.wallet_id = name
+      setCookie(req, name, function(){
+        console.log('authenticated wallet %s', name)
         res.send(200, token)
       })
     })
@@ -76,6 +77,13 @@ module.exports = function (prependMiddleware){
     } else {
       return res.send(401)
     }
+  }
+
+  function setCookie(req, wallet_id, callback){
+    req.session.regenerate(function(){
+      req.session.wallet_id = wallet_id
+      callback()
+    })
   }
 
   return app

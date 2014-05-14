@@ -31,12 +31,21 @@ var fakeGeo = {
 var app = proxyquire('../express', { './auth': fakeAuth, './geo': fakeGeo })()
 
 describe('/register', function(){
-  it('returns ok on auth.register success', function(done){
+
+  // TODO: clean db & setup db
+  // beforeEach(function(){
+  // })
+
+  it('sets user session on auth.register success', function(done){
     request(app)
       .post('/register')
       .send({wallet_id: 'valid', pin: 123})
-      .expect(200)
-      .end(done)
+      .end(function(err, res){
+        assert.equal(res.status, 200)
+        assert.deepEqual(res.text, token)
+        assert(res.headers['set-cookie'])
+        done()
+      })
   })
 
   it('returns bad request when register returns error', function(done){

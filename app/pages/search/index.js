@@ -20,6 +20,7 @@ module.exports = function(el){
       if(err) return alert(err);
 
       ractive.set('searching', false)
+      nearbys = results
       ractive.update('nearbys')
       console.log(nearbys)
     })
