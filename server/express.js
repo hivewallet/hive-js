@@ -11,6 +11,8 @@ module.exports = function (prependMiddleware){
     app.use(prependMiddleware)
   }
   app.use(express.bodyParser())
+  app.use(express.cookieParser('shhhh, very secret')) //TODO: env var
+  app.use(express.session())
   app.use(express.static(path.join(__dirname, '..', 'build')))
 
   app.post('/register', validate_params, function(req, res) {
@@ -35,6 +37,9 @@ module.exports = function (prependMiddleware){
       }
 
       console.log('authenticated wallet %s', name)
+      req.session.regenerate(function(){
+        req.session.wallet_id = name
+      })
       res.send(200, token)
     })
   })

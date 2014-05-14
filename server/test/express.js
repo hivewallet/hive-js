@@ -2,13 +2,17 @@ var request = require('supertest')
 var proxyquire =  require('proxyquire')
 var assert = require('assert')
 
+var token = 'sometoken'
 var fakeAuth = {
   register: function(name, pin, callback){
     if(name === 'valid') {
-      callback(null, 'sometoken')
+      callback(null, token)
     } else {
       callback(new Error('boo'), null)
     }
+  },
+  login: function(name, pin, callback) {
+    callback(null, token)
   }
 }
 
@@ -60,6 +64,20 @@ describe('/register', function(){
   })
 })
 
+describe('/login', function(){
+  it('sets user session on successful login', function(done){
+    request(app)
+      .post('/login')
+      .send({wallet_id: 'valid', pin: 123})
+      .end(function(err, res){
+        assert.equal(res.status, 200)
+        assert.deepEqual(res.text, token)
+        assert(res.headers['set-cookie'])
+        done()
+      })
+  })
+})
+
 describe('/location', function(){
   it('returns ok on geo.save success', function(done){
     var data = {
@@ -73,7 +91,7 @@ describe('/location', function(){
     request(app)
       .post('/location')
       .send(data)
-      .end(function(req, res){
+      .end(function(err, res){
         assert.equal(res.status, 200)
         assert.deepEqual(JSON.parse(res.text), geoRes)
         done()
