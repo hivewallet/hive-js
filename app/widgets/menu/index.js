@@ -31,24 +31,21 @@ module.exports = function(el){
     highlightTab(ractive.nodes.home_tab);
   });
 
-  var menu_animating = false;
-
-  ractive.on('select', function(event){
-    event.original.preventDefault();
-    if(!menu_animating) {
-      emitter.emit('toggle-menu');
-      hasher.setHash(event.node.dataset.hash);
-      highlightTab(event.node);
+  emitter.on('toggle-menu', function(open) {
+    var classes = ractive.el.classList
+    if(open) {
+      classes.add('open')
+    } else {
+      classes.remove('open')
     }
   })
 
-  emitter.on('menu_animation_start', function() {
-    menu_animating = true;
-  });
-
-  emitter.on('menu_animation_end', function(){
-    menu_animating = false;
-  });
+  ractive.on('select', function(event){
+    event.original.preventDefault();
+    emitter.emit('toggle-menu', false);
+    hasher.setHash(event.node.dataset.hash);
+    highlightTab(event.node);
+  })
 
   hasher.changed.add(function(newHash, oldHash){
     highlightTab(ractive.find("[data-hash='" + newHash + "']"))

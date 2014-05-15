@@ -1,2 +1,10 @@
-<div id="menu_btn" class="header__toggle ss-icon" on-click="toggle">{{ menu_icon }}</div>
+<div id="menu_btn" class="header__toggle ss-icon" on-click="toggle">
+  {{#menu_closed}}
+    rows
+  {{/menu_closed}}
+
+  {{^menu_closed}}
+    left
+  {{/menu_closed}}
+</div>
 <div class="header__balance">{{satoshiToBTC(bitcoinBalance)}}</div>

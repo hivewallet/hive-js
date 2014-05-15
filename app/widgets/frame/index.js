@@ -2,7 +2,7 @@
 
 var $ = require('browserify-zepto')
 var Ractive = require('hive-ractive')
-var header = require('hive-header')
+var initHeader = require('hive-header')
 var menu = require('hive-menu')
 var sendDialog = require('hive-send-dialog')
 var initAuth = require('hive-auth')
@@ -33,7 +33,7 @@ module.exports = function(el){
   })
 
   // widgets
-  header(frame.find("#header"))
+  var header = initHeader(frame.find("#header"))
   menu(frame.find("#menu"))
   // sendDialog(frame.find("#send-dialog"))
 
@@ -78,65 +78,16 @@ module.exports = function(el){
     frame.show()
   })
 
-  // shameful hacks
-  // temp menu toggle, this should probably be driven through ractive?
-
-  var menuEl = $(frame.find("#menu"))
-  var contentEl = $(frame.find("#main"))
-  var menu_is_open = false;
-  var menu_is_animating = false;
-
-  emitter.on('toggle-menu', function(){
-    if(!menu_is_animating){
-      emitter.emit('menu_animation_start');
-      menu_is_animating = true;
-      menu_is_open ? closeMenu() : openMenu();
+  emitter.on('toggle-menu', function(open) {
+    var classes = frame.find("#main").classList
+    if(open) {
+      classes.add('closed')
+    } else {
+      classes.remove('closed')
     }
-  });
 
-  // animation callbacks
-  function openMenu() {
-
-    menuEl.addClass('is_opening');
-    contentEl.addClass('is_about_to_open');
-    contentEl.addClass('is_opening');
-
-    Arrival.complete(frame.el, function(){
-
-      contentEl.addClass('hidden');
-      contentEl.removeClass('is_about_to_open');
-      contentEl.removeClass('is_opening');
-      menuEl.removeClass('closed');
-      menuEl.removeClass('is_opening');
-      menu_is_open = true;
-
-      setTimeout(function(){
-        menu_is_animating = false;
-        emitter.emit('menu_animation_end');
-      }, 100);
-    });
-  }
-
-  function closeMenu() {
-
-    contentEl.addClass('is_closing');
-    menuEl.addClass('is_about_to_close');
-
-    Arrival.complete(frame.el, function() {
-
-      contentEl.removeClass('hidden');
-      menuEl.addClass('closed');
-      menuEl.removeClass('is_about_to_close');
-      menu_is_open = false;
-
-      setTimeout(function(){
-        contentEl.removeClass('is_closing');
-        menu_is_animating = false;
-        emitter.emit('menu_animation_end');
-      }, 100);
-    });
-  }
-
+    header.toggleMenu()
+  })
 
   return frame
 }

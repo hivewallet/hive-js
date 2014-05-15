@@ -1,11 +1,11 @@
 'use strict';
 
-var $ = require('browserify-zepto'),
-    Ractive = require('hive-ractive'),
-    emitter = require('hive-emitter'),
-    FastClick = require('fastclick'),
-    Big = require('big.js'),
-    getWallet = require('hive-wallet').getWallet;
+var $ = require('browserify-zepto')
+var Ractive = require('hive-ractive')
+var emitter = require('hive-emitter')
+var FastClick = require('fastclick')
+var Big = require('big.js')
+var getWallet = require('hive-wallet').getWallet
 
 module.exports = function(el){
   var ractive = new Ractive({
@@ -14,49 +14,36 @@ module.exports = function(el){
     data: {
       bitcoinBalance: 'unknown',
       satoshiToBTC: satoshiToBTC,
-      menu_icon: 'rows'
+      menu_closed: true
     }
   })
 
   emitter.on('wallet-ready', function(){
     var wallet = getWallet();
-    ractive.set('bitcoinBalance', wallet.getBalance());
+    ractive.set('bitcoinBalance', wallet.getBalance())
   });
 
-  FastClick(ractive.nodes.menu_btn);
-
-  var menu_animating = false;
-  var menu_closed = true;
+  FastClick(ractive.nodes.menu_btn)
 
   ractive.on('toggle', function(event){
     event.original.preventDefault();
-    emitter.emit('toggle-menu');
-  });
+    emitter.emit('toggle-menu', ractive.get('menu_closed'))
+  })
 
-  emitter.on('menu_animation_start', function() {
-    menu_animating = true;
-  });
-
-  emitter.on('menu_animation_end', function(){
-    menu_animating = false;
-  });
-
-  emitter.on('toggle-menu', function(){
-    if(!menu_animating) {
-      if(menu_closed) {
-        ractive.set('menu_icon', 'left');
-        menu_closed = false;
-      } else {
-        ractive.set('menu_icon', 'rows');
-        menu_closed = true;
-      }
+  function toggleMenu(){
+    if(ractive.get('menu_closed')) {
+      ractive.set('menu_closed', false);
+    } else {
+      ractive.set('menu_closed', true);
     }
-  });
+  }
 
   function satoshiToBTC(amount){
     var satoshi = new Big(amount)
     return satoshi.times(0.00000001)
   }
+
+  ractive.toggleMenu = toggleMenu
 
   return ractive
 }
