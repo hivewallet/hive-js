@@ -8,12 +8,25 @@ if (location.hash) {
   }
 }
 
-var $ = require('browserify-zepto')
 var Ticker = require('hive-ticker-api').BitcoinAverage
 var emitter = require('hive-emitter')
-var frame = require('hive-frame')
+var initFrame = require('hive-frame')
+var initAuth = require('hive-auth')
+var walletExists = require('hive-wallet').walletExists
 
-frame(document.getElementById('app'))
+var frame = initFrame(document.getElementById('app'))
+var authEl = document.getElementById("auth")
+var auth = null
+
+walletExists(function(exists){
+  auth = exists ? initAuth.login(authEl) : initAuth.register(authEl)
+  auth.show()
+})
+
+emitter.on('wallet-ready', function(){
+  auth.hide()
+  frame.show()
+})
 
 function updateExchangeRates(){
   var tickerUpdateInterval = 1000 * 60 * 2

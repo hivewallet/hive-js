@@ -11,7 +11,6 @@ var initContacts = require('hive-contacts')
 var initSearch = require('hive-search')
 var initSettings = require('hive-settings')
 var router = require('hive-router').router
-var walletExists = require('hive-wallet').walletExists
 var emitter = require('hive-emitter')
 var Arrival = require('./arrival')
 
@@ -61,20 +60,6 @@ module.exports = function(el){
     page.show()
     currentPage = page
   }
-
-  // auth
-  var authEl = document.getElementById("auth")
-  var auth = null
-
-  walletExists(function(exists){
-    auth = exists ? initAuth.login(authEl) : initAuth.register(authEl)
-    auth.show()
-  })
-
-  emitter.on('wallet-ready', function(){
-    auth.hide()
-    frame.show()
-  })
 
   // menu toggle
   emitter.on('toggle-menu', function(open) {
