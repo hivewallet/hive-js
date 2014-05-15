@@ -1,3 +1,10 @@
+#auth {
+  display: none;
+  &.current {
+    display: flex;
+  }
+}
+
 .auth__modal {
   background-color: #2f3138;
   display: flex;

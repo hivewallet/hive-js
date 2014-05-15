@@ -1,6 +1,6 @@
 'use strict';
 
-var Ractive = require('ractive/build/ractive.runtime')
+var Ractive = require('hive-ractive')
 
 module.exports = function(el){
   return new Ractive({

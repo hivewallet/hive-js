@@ -1,7 +1,7 @@
 'use strict';
 
 var $ = require('browserify-zepto'),
-    Ractive = require('ractive/build/ractive.runtime'),
+    Ractive = require('hive-ractive'),
     emitter = require('hive-emitter'),
     FastClick = require('fastclick'),
     Big = require('big.js'),

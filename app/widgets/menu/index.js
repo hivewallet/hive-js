@@ -1,7 +1,7 @@
 'use strict';
 
 var $ = require('browserify-zepto');
-var Ractive = require('ractive/build/ractive.runtime')
+var Ractive = require('hive-ractive')
 var hasher = require('hive-router').hasher
 var router = require('hive-router').router
 var emitter = require('hive-emitter')

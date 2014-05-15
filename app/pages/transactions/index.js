@@ -1,6 +1,6 @@
 'use strict';
 
-var Ractive = require('ractive/build/ractive.runtime')
+var Ractive = require('hive-ractive')
 var emitter = require('hive-emitter')
 var wallet = require('hive-wallet')
 var Big = require('big.js')

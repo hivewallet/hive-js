@@ -1,6 +1,6 @@
 'use strict';
 
-var Ractive = require('ractive/build/ractive.runtime')
+var Ractive = require('hive-ractive')
 var getWallet = require('hive-wallet').getWallet
 var emitter = require('hive-emitter')
 var emailToAvatar = require('hive-gravatar').emailToAvatar
