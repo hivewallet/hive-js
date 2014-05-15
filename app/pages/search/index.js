@@ -12,16 +12,18 @@ module.exports = function(el){
     data: {
       nearbys: nearbys,
       searching: false,
+      search_msg: 'Search Nearby',
       emailToAvatar: emailToAvatar
     }
   })
 
   ractive.on('search-nearby', function(){
-    ractive.set('searching', true)
+    ractive.set('searching', true);
     geo.search(function(err, results){
       if(err) return alert(err);
 
-      ractive.set('searching', false)
+      ractive.set('searching', false);
+      ractive.set('search_msg', 'Search Again');
       nearbys = results.map(function(record){
         return record[0]
       })

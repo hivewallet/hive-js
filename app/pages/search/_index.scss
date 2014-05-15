@@ -14,10 +14,21 @@
   color: darken($yellow, 20%);
   background-color: $yellow;
   box-shadow: 0 3px 0 0 darken($yellow, 20%);
+
+  &.is_searching {
+    color: darken(#b9b9bd, 20%);
+    background-color: #b9b9bd;
+    box-shadow: 0 3px 0 0 darken(#b9b9bd, 20%);
+
+    &:active {
+      box-shadow: 0 3px 0 0 darken(#b9b9bd, 20%);
+      transform: translate(0px, 0px);
+    }
+  }
 }
 
 .search__status {
-  padding: 10px;
+  padding-top: 20px;
   text-align: center;
 }
 
@@ -29,6 +40,7 @@
 }
 
 .search__item {
+  @include clickbtn;
   display: flex;
   margin-bottom: 10px;
   padding-bottom: 10px;

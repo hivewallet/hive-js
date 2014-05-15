@@ -1,10 +1,12 @@
 
 <div class="search">
 
-  <div class='search__btn' on-click="search-nearby">Search Nearby</div>
+  {{^searching}}
+    <div class='search__btn' on-click="search-nearby">{{search_msg}}</div>
+  {{/searching}}
 
   {{#searching}}
-    <p class="search__status">Searching...</p>
+    <div class='search__btn is_searching'>Searching...</div>
   {{/searching}}
 
   <div class="search__list">
