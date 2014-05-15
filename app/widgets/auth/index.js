@@ -16,7 +16,7 @@ function register(el){
       newUser: true,
       setPin: false
     },
-    template: require('./auth_register.ract')
+    template: require('./auth_register.ract').template
   })
 
   includeSharedBehaviors(ractive)
@@ -67,7 +67,7 @@ function login(el){
     data: {
       opening: false
     },
-    template: require('./auth_login.ract')
+    template: require('./auth_login.ract').template
   })
 
   includeSharedBehaviors(ractive)

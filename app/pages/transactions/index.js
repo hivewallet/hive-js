@@ -1,6 +1,6 @@
 'use strict';
 
-var Ractive = require('ractify')
+var Ractive = require('ractive/build/ractive.runtime')
 var emitter = require('hive-emitter')
 var wallet = require('hive-wallet')
 var Big = require('big.js')
@@ -9,7 +9,7 @@ module.exports = function(el){
   var transactions = []
   var ractive = new Ractive({
     el: el,
-    template: require('./index.ract'),
+    template: require('./index.ract').template,
     data: {
       transactions: transactions,
       directionVerb: function(direction){

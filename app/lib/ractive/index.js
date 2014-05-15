@@ -1,5 +1,5 @@
 'use strict';
-var Ractive = require('ractify')
+var Ractive = require('ractive/build/ractive.runtime')
 
 // extracted from https://github.com/RactiveJS/Ractive-events-keys
 var makeKeyDefinition = function ( code ) {

@@ -5,5 +5,8 @@
   "main": "index.js",
   "style": "index.css",
   "author": "",
-  "license": "GPL-3.0"
+  "license": "GPL-3.0",
+  "browserify": {
+    "transform": ["ractify"]
+  }
 }

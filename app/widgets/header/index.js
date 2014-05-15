@@ -1,7 +1,7 @@
 'use strict';
 
 var $ = require('browserify-zepto'),
-    Ractive = require('ractify'),
+    Ractive = require('ractive/build/ractive.runtime'),
     emitter = require('hive-emitter'),
     FastClick = require('fastclick'),
     Big = require('big.js'),
@@ -10,7 +10,7 @@ var $ = require('browserify-zepto'),
 module.exports = function(el){
   var ractive = new Ractive({
     el: el,
-    template: require('./index.ract'),
+    template: require('./index.ract').template,
     data: {
       bitcoinBalance: 'unknown',
       satoshiToBTC: satoshiToBTC,

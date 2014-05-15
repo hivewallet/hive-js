@@ -1,6 +1,6 @@
 'use strict';
 
-var Ractive = require('ractify')
+var Ractive = require('ractive/build/ractive.runtime')
 var geo = require('hive-geo')
 var emailToAvatar = require('hive-gravatar').emailToAvatar
 
@@ -8,7 +8,7 @@ module.exports = function(el){
   var nearbys = []
   var ractive = new Ractive({
     el: el,
-    template: require('./index.ract'),
+    template: require('./index.ract').template,
     data: {
       nearbys: nearbys,
       searching: false,

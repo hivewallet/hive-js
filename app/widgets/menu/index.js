@@ -1,7 +1,7 @@
 'use strict';
 
 var $ = require('browserify-zepto');
-var Ractive = require('ractify')
+var Ractive = require('ractive/build/ractive.runtime')
 var hasher = require('hive-router').hasher
 var router = require('hive-router').router
 var emitter = require('hive-emitter')
@@ -10,7 +10,7 @@ var FastClick = require('fastclick');
 module.exports = function(el){
   var ractive = new Ractive({
     el: el,
-    template: require('./index.ract')
+    template: require('./index.ract').template
   })
 
   var active;

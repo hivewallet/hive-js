@@ -6,6 +6,6 @@
   "author": "",
   "license": "GPL-3.0",
   "dependencies": {
-    "ractify": "~0.2.0"
+    "ractify": "~0.4.0"
   }
 }
