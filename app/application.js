@@ -1,5 +1,13 @@
 'use strict';
 
+// remove hash to avoid router bugs
+if (location.hash) {
+  var loc = window.location
+  if ("pushState" in history) {
+      history.pushState("", document.title, loc.pathname + loc.search)
+  }
+}
+
 var walletExists = require('hive-wallet').walletExists
 var $ = require('browserify-zepto');
 var header = require('./widgets/header')
@@ -16,14 +24,6 @@ var emitter = require('hive-emitter')
 var router = require('hive-router').router
 var Arrival = require('./helpers/arrival')
 var FastClick = require('fastclick')
-
-// remove hash to avoid router bugs
-if (location.hash) {
-  var loc = window.location
-  if ("pushState" in history) {
-      history.pushState("", document.title, loc.pathname + loc.search)
-  }
-}
 
 // UI initializations
 
