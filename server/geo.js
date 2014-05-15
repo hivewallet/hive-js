@@ -20,22 +20,18 @@ function save(lat, lon, userInfo, callback) {
 
   records[user.id] = user
 
-  search(user.location, callback)
+  search(user.location, user.id, callback)
 }
 
-function search(location, callback){
+function search(location, id, callback){
   var onGeocells = function(geocells, finderCallback) {
     var candidates = all().filter(function(record){
-      return haveIntersection(record.geocells, geocells)
+      return record.id !== id && haveIntersection(record.geocells, geocells)
     })
     finderCallback(null, candidates)
   }
 
-  function rejectSelf(err, results){
-    callback(err, results.slice(1))
-  }
-
-  geomodel.proximity_fetch(location, 10, SEARCH_RADIUS, onGeocells, rejectSelf)
+  geomodel.proximity_fetch(location, 10, SEARCH_RADIUS, onGeocells, callback)
 }
 
 
