@@ -29,6 +29,10 @@ module.exports = function(el){
     })
   })
 
+  ractive.on('select', function(event){
+    event.original.preventDefault();
+  });
+
   return ractive
 }
 

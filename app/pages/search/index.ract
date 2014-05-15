@@ -1,16 +1,19 @@
-<div class='search__btn' on-click="search-nearby">Search Nearby</div>
 
-{{#searching}}
-  <p>Searching...</p>
-{{/searching}}
+<div class="search">
 
-<ul>
-  {{#nearbys}}
-    <li>
-      <div>
-        <img src="{{emailToAvatar(email)}}" />
-        <span>{{name}}</span>
-      </div>
-    </li>
-  {{/nearbys}}
-</ul>
+  <div class='search__btn' on-click="search-nearby">Search Nearby</div>
+
+  {{#searching}}
+    <p class="search__status">Searching...</p>
+  {{/searching}}
+
+  <div class="search__list">
+    {{#nearbys}}
+      <a href="#" class="search__item" on-click="select">
+          <img class="_avatar" src="{{emailToAvatar(email)}}" />
+          <h3 class="_name">{{name}}</span>
+      </a>
+    {{/nearbys}}
+  </div>
+
+</div>
