@@ -3,7 +3,6 @@
 var Ractive = require('hive-ractive')
 var initHeader = require('hive-header')
 var menu = require('hive-menu')
-var sendDialog = require('hive-send-dialog')
 var initAuth = require('hive-auth')
 var initHome = require('hive-home')
 var initTransactions = require('hive-transactions')
@@ -22,7 +21,6 @@ module.exports = function(el){
   // widgets
   var header = initHeader(frame.find("#header"))
   menu(frame.find("#menu"))
-  // sendDialog(frame.find("#send-dialog"))
 
   // pages
   var home = initHome(frame.find("#home"))

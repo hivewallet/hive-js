@@ -1,14 +1,14 @@
 
 
 .search {
-  @include breakpoint(portrait) {    
+  @include breakpoint(portrait) {
     max-width: 400px;
   }
 }
 
 .search__btn {
   @extend .hivebtn;
-  
+
   margin-top: 20px;
 
   color: darken($yellow, 20%);

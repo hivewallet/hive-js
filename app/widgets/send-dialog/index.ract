@@ -18,11 +18,11 @@
       </form>
     </div>
     <div class="modal-footer">
-      <button on-click="cancel" class="secondary modal-cancel">Cancel</button>
-      <button on-click="send" class="primary">Send</button>
+      <button on-click="send" class="send__btn half__btn">Send</button>
+      <button on-click="cancel" class="cancel__btn half__btn modal-cancel">Cancel</button>
     </div>
   </div>
 </div>
 {{/visible}}
 
-<button on-click="open" class="btn-primary modal-open">Send</button>
+<div on-click="open" class="send__btn modal-open">Send</div>

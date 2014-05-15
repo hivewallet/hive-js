@@ -14,7 +14,7 @@
         <input type="password" placeholder="6-digit pin" value="{{pin}}" on-enter='open-wallet-with-pin'/>
       </label>
     </div>
-  
+
     {{^opening}}
 
       <div class="auth__btn--existing" on-click="open-wallet-with-pin">Open wallet</div>
@@ -22,7 +22,7 @@
       <div class="auth__altmsg">
         <span class="_link" on-click="clear-credentials">Open a different wallet</span>
       </div>
-    
+
     {{/opening}}
 
     {{#opening}}

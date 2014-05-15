@@ -1,15 +1,25 @@
 
 
-#send-dialog .modal-open {
-  width: 12%;
-  position: absolute;
-  bottom: 0;
-  font-size: 0.8em;
-  height: 40px;
-}
-
 #send-dialog fieldset {
   margin: 15px 0;
+}
+
+.send__btn {
+  @extend .hivebtn;
+}
+
+.cancel__btn {
+  @extend .hivebtn;
+
+  color: darken($silver, 20%);
+  background-color: $silver;
+  box-shadow: 0 3px 0 0 darken($silver, 20%);
+}
+
+.half__btn {
+  width: 33%;
+  display: inline-block;
+  margin-top: 20px;
 }
 
 /* modal */
