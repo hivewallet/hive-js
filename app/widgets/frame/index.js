@@ -12,7 +12,6 @@ var initSearch = require('hive-search')
 var initSettings = require('hive-settings')
 var router = require('hive-router').router
 var emitter = require('hive-emitter')
-var Arrival = require('./arrival')
 
 module.exports = function(el){
   var frame = new Ractive({
