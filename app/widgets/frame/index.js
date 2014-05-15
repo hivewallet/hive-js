@@ -1,6 +1,5 @@
 'use strict';
 
-var $ = require('browserify-zepto')
 var Ractive = require('hive-ractive')
 var initHeader = require('hive-header')
 var menu = require('hive-menu')
@@ -22,16 +21,6 @@ module.exports = function(el){
     template: require('./index.ract').template
   })
 
-  // UI initializations
-
-  // auth
-  var authEl = document.getElementById("auth")
-  var auth
-  walletExists(function(exists){
-    auth = exists ? initAuth.login(authEl) : initAuth.register(authEl)
-    auth.show()
-  })
-
   // widgets
   var header = initHeader(frame.find("#header"))
   menu(frame.find("#menu"))
@@ -46,7 +35,7 @@ module.exports = function(el){
 
   var currentPage = home
 
-  // define routes
+  // routes
   router.addRoute('/home', function(){
     showPage(home)
   })
@@ -73,11 +62,21 @@ module.exports = function(el){
     currentPage = page
   }
 
+  // auth
+  var authEl = document.getElementById("auth")
+  var auth = null
+
+  walletExists(function(exists){
+    auth = exists ? initAuth.login(authEl) : initAuth.register(authEl)
+    auth.show()
+  })
+
   emitter.on('wallet-ready', function(){
     auth.hide()
     frame.show()
   })
 
+  // menu toggle
   emitter.on('toggle-menu', function(open) {
     var classes = frame.find("#main").classList
     if(open) {
@@ -86,7 +85,7 @@ module.exports = function(el){
       classes.remove('closed')
     }
 
-    header.toggleMenu()
+    header.toggleIcon(open)
   })
 
   return frame

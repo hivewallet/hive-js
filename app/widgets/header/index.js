@@ -1,6 +1,5 @@
 'use strict';
 
-var $ = require('browserify-zepto')
 var Ractive = require('hive-ractive')
 var emitter = require('hive-emitter')
 var FastClick = require('fastclick')
@@ -14,28 +13,23 @@ module.exports = function(el){
     data: {
       bitcoinBalance: 'unknown',
       satoshiToBTC: satoshiToBTC,
-      menu_closed: true
+      menuOpen: false
     }
   })
 
   emitter.on('wallet-ready', function(){
     var wallet = getWallet();
     ractive.set('bitcoinBalance', wallet.getBalance())
-  });
+  })
 
   FastClick(ractive.nodes.menu_btn)
 
   ractive.on('toggle', function(event){
-    event.original.preventDefault();
-    emitter.emit('toggle-menu', ractive.get('menu_closed'))
+    emitter.emit('toggle-menu', !ractive.get('menuOpen'))
   })
 
-  function toggleMenu(){
-    if(ractive.get('menu_closed')) {
-      ractive.set('menu_closed', false);
-    } else {
-      ractive.set('menu_closed', true);
-    }
+  function toggleIcon(open){
+    ractive.set('menuOpen', open)
   }
 
   function satoshiToBTC(amount){
@@ -43,7 +37,7 @@ module.exports = function(el){
     return satoshi.times(0.00000001)
   }
 
-  ractive.toggleMenu = toggleMenu
+  ractive.toggleIcon = toggleIcon
 
   return ractive
 }
