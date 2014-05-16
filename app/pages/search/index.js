@@ -39,6 +39,10 @@ module.exports = function(el){
     geo.remove()
   })
 
+  window.onbeforeunload = function() {
+    geo.remove()
+  }
+
   return ractive
 }
 
