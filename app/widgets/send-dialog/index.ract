@@ -1,27 +1,40 @@
 {{#visible}}
   <div class="send">
 
-    <h3 class="send__header">Send Bitcoin</h3>
+    <div class="send__content">
 
-    <div class="send__form">
-      <form>
-        <label for="to">To:
-          <input id="to" type="text" value="{{walletData.to}}">
-        </label>
+      <a href="#" class="send__close" on-click="cancel">X</a>
 
-        <label for="bitcoin">BTC:
-          <input id="bitcoin" type="number" value="{{value}}" on-keyup="bitcoin-to-fiat">
-        </label>
+      <h3 class="send__header">Send Bitcoin{{walletData.heading}}</h3>
 
-        <label for="fiat">{{fiatCurrency}}:
-          <input id="fiat" type="number" value="{{fiatValue}}" on-keyup="fiat-to-bitcoin">
-        </label>
-      </form>
-    </div>
+      <div class="send__form">
+        <form>
 
-    <div class="send__buttons">
-      <a href="#" on-click="send" class="send__btn half__btn attach_fastclick">Send</a>
-      <a href="#" on-click="cancel" class="cancel__btn half__btn modal-cancel attach_fastclick">Cancel</a>
+          {{^hide_address}}
+            <label for="to">To:
+              <input id="to" type="text" value="{{walletData.to}}">
+            </label>
+          {{/hide_address}}
+
+          {{#hide_address}}
+            <span class="send__address--text">address: {{walletData.to}}</span>
+              <input class="hidden_element" id="to" type="text" value="{{walletData.to}}">
+          {{/hide_address}}
+          <label for="bitcoin">BTC:
+            <input id="bitcoin" type="number" value="{{value}}" on-keyup="bitcoin-to-fiat">
+          </label>
+
+          <label for="fiat">{{fiatCurrency}}:
+            <input id="fiat" type="number" value="{{fiatValue}}" on-keyup="fiat-to-bitcoin">
+          </label>
+        </form>
+      </div>
+
+      <div class="send__buttons">
+        <a href="#" on-click="send" class="send__btn attach_fastclick">Send</a>
+        <a href="#" on-click="cancel" class="cancel__btn attach_fastclick">Cancel</a>
+      </div>
+
     </div>
 
   </div>

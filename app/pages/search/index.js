@@ -34,15 +34,18 @@ module.exports = function(el){
 
   ractive.on('select', function(event){
     event.original.preventDefault();
-    
+
+    var named_heading = ' to: ' + event.node.getAttribute( 'data-name' );
+
     var data = {
-      to: '1J3jePABR9RjyLmbU4pnBrPatctoneid3H',
+      to: event.node.getAttribute( 'data-wallet' ),
       amount: '',
       contact: {
-        name: '',
-        avatar: ''
+        name: event.node.getAttribute( 'data-name' ),
+        avatar: event.node.getAttribute( 'data-email' )
       },
-      someValue: true
+      heading: named_heading,
+      hide_address: true
     }
 
     emitter.emit('open-send-dialog', data);

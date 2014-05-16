@@ -22,9 +22,10 @@ module.exports = function(el){
   })
 
   ractive.on('cancel', function(event){
-    if($(event.original.srcElement).hasClass('modal-cancel')) {
-      ractive.set('visible', false)
-    }
+    event.original.preventDefault();
+    ractive.set('visible', false)
+    ractive.set('hide_address', false)
+    emitter.emit('close-send-dialog')
   })
 
   emitter.on('open-send-dialog', function(data){
@@ -33,6 +34,9 @@ module.exports = function(el){
       ractive.set('fiatCurrency', info.preferredCurrency)
     })
     ractive.set('walletData', data)
+    if(ractive.get('walletData.hide_address')) {
+      ractive.set('hide_address', true);
+    }
     ractive.set('visible', true)
   })
 
@@ -47,6 +51,7 @@ module.exports = function(el){
 
       ractive.set('visible', false)
       emitter.emit('close-send-dialog')
+      ractive.set('hide_address', false)
       wallet.sendTx(tx, onTxSent)
     })
   })

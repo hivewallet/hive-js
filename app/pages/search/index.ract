@@ -11,7 +11,10 @@
 
   <div class="search__list">
     {{#nearbys}}
-      <a href="#" class="search__item" on-click="select">
+      <a href="#" class="search__item" on-click="select" 
+         data-wallet={{address}}
+         data-name={{name}} 
+         data-email={{email}}>
           <img class="_avatar" src="{{emailToAvatar(email)}}" />
           <h3 class="_name">{{name}}</span>
       </a>
