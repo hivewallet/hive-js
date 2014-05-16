@@ -3,6 +3,7 @@
 var xhr = require('xhr')
 var emitter = require('hive-emitter')
 var db = require('hive-db')
+var getWallet = require('hive-wallet').getWallet
 var uriRoot = window.location.origin
 var userInfo = {}
 
@@ -16,6 +17,7 @@ emitter.on('db-ready', function(){
     ].join(' ')
     userInfo.email = doc.userInfo.email
     userInfo.id = db.userID()
+    userInfo.address = getWallet().currentAddress
   })
 })
 
