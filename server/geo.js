@@ -23,6 +23,11 @@ function save(lat, lon, userInfo, callback) {
   search(user.location, user.id, callback)
 }
 
+function remove(id, callback) {
+  delete records[id]
+  callback()
+}
+
 function search(location, id, callback){
   var onGeocells = function(geocells, finderCallback) {
     var candidates = all().filter(function(record){
@@ -49,5 +54,6 @@ module.exports = {
   SEARCH_RADIUS: SEARCH_RADIUS,
   all: all,
   reset: reset,
-  save: save
+  save: save,
+  remove: remove
 }

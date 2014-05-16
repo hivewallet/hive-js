@@ -21,16 +21,23 @@ var user2 = {id: "bar", name: "Wendell", email: "wendell@example.com"}
 var geoRes = [[user1, 50], [user2, 123]]
 var fakeGeo = {
   save: function(lat, lon, userInfo, callback){
-    if(userInfo.id === 'valid') {
+    if(userInfo.name !== 'Fail Me') {
       callback(null, geoRes)
     } else {
-      callback(new Error('boo'), null)
+      callback(new Error('save error'), null)
+    }
+  },
+  remove: function(id, callback) {
+    if(id === 'valid') {
+      callback(null)
+    } else {
+      callback(new Error('remove error'), null)
     }
   }
 }
 var app = proxyquire('../express', { './auth': fakeAuth, './geo': fakeGeo })()
 
-describe('/register', function(){
+describe('POST /register', function(){
 
   // TODO: clean db & setup db
   // beforeEach(function(){
@@ -73,7 +80,7 @@ describe('/register', function(){
   })
 })
 
-describe('/login', function(){
+describe('POST /login', function(){
   it('sets user session on successful login', function(done){
     request(app)
       .post('/login')
@@ -87,7 +94,7 @@ describe('/login', function(){
   })
 })
 
-describe('/location', function(){
+describe('POST /location', function(){
   function postWithCookie(endpoint, data, callback){
     request(app)
       .post('/login')
@@ -117,7 +124,7 @@ describe('/location', function(){
   })
 
   it('returns vad request on geo.save error', function(done){
-    var data = { id: "invalid" }
+    var data = { id: "valid", name: 'Fail Me' }
 
     postWithCookie('/location', data, function(err, res){
       assert.equal(res.status, 400)
@@ -133,5 +140,47 @@ describe('/location', function(){
       .send(data)
       .expect(401)
       .end(done)
+  })
+})
+
+describe('DELETE /location', function(){
+  function deleteWithCookie(endpoint, data, callback){
+    request(app)
+      .post('/login')
+      .send({wallet_id: 'valid', pin: 123})
+      .end(function(err, res){
+        request(app)
+          .delete(endpoint)
+          .set('cookie', res.headers['set-cookie'])
+          .send(data)
+          .end(callback)
+      })
+  }
+
+  it('returns ok on geo.remove success', function(done){
+    var data = { id: "valid" }
+    deleteWithCookie('/location', data, function(err, res){
+      assert.equal(res.status, 200)
+      done()
+    })
+  })
+
+  it('returns unauthorized if session cookie is not found', function(done){
+    var data = { id: "valid" }
+
+    request(app)
+      .delete('/location')
+      .send(data)
+      .expect(401)
+      .end(done)
+  })
+
+  it('returns unauthorized if session cookie does not match the specified id', function(done){
+    var data = { id: "doesnotmatch" }
+
+    deleteWithCookie('/location', data, function(err, res){
+      assert.equal(res.status, 401)
+      done()
+    })
   })
 })

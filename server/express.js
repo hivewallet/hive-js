@@ -59,6 +59,15 @@ module.exports = function (prependMiddleware){
     })
   })
 
+  app.delete('/location', restrict, function(req, res) {
+    var id = req.body.id
+
+    geo.remove(id, function(err, found) {
+      if(err) return res.json(400, err)
+      res.json(200, found)
+    })
+  })
+
   app.use(function(err, req, res, next){
     console.error(err.stack);
     res.send(500, 'Oops! something went wrong.');
@@ -72,7 +81,7 @@ module.exports = function (prependMiddleware){
   }
 
   function restrict(req, res, next) {
-    if (req.session.wallet_id) {
+    if (req.session.wallet_id && req.session.wallet_id === req.body.id) {
       next()
     } else {
       return res.send(401)

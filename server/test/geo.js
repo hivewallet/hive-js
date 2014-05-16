@@ -67,4 +67,17 @@ describe('geo', function(){
       })
     })
   })
+
+  describe('remove', function(){
+    it('deletes user data for the specified id', function(done){
+      geo.save(lat, lon, userInfo, function(){
+        assert.equal(geo.all().length, 1)
+
+        geo.remove(userInfo.id, function(){
+          assert.equal(geo.all().length, 0)
+          done()
+        })
+      })
+    })
+  })
 })
