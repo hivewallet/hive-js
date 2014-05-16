@@ -92,7 +92,9 @@ html {
   color: $foreground;
   background-color: $background;
 
-  overflow-y: scroll;
+//  overflow-y: scroll;
+
+  -webkit-overflow-scrolling: touch;
 }
 
 body {

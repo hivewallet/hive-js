@@ -1,7 +1,9 @@
 'use strict';
 
+var $ = require('browserify-zepto')
 var Ractive = require('hive-ractive')
-var sendDialog = require('hive-send-dialog')
+var emitter = require('hive-emitter')
+var fastclick = require('fastclick')
 
 module.exports = function(el){
   var ractive = new Ractive({
@@ -9,7 +11,14 @@ module.exports = function(el){
     template: require('./index.ract').template
   })
 
-  sendDialog(ractive.find("#send-dialog"))
+  $(ractive.findAll('.attach_fastclick')).each(function(){
+    fastclick(this);
+  })
+
+  ractive.on('send', function(event) {
+    event.original.preventDefault();
+    emitter.emit('open-send-dialog');
+  })
 
   return ractive
 }

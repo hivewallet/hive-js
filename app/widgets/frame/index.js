@@ -11,23 +11,24 @@ var initSearch = require('hive-search')
 var initSettings = require('hive-settings')
 var router = require('hive-router').router
 var emitter = require('hive-emitter')
+var sendDialog = require('hive-send-dialog')
 
 module.exports = function(el){
-  var frame = new Ractive({
+  var ractive = new Ractive({
     el: el,
     template: require('./index.ract').template
   })
 
   // widgets
-  var header = initHeader(frame.find("#header"))
-  menu(frame.find("#menu"))
+  var header = initHeader(ractive.find("#header"))
+  menu(ractive.find("#menu"))
 
   // pages
-  var home = initHome(frame.find("#home"))
-  var transactions = initTransactions(frame.find("#transactions"))
-  var contacts = initContacts(frame.find("#contacts"))
-  var search = initSearch(frame.find("#search"))
-  var settings = initSettings(frame.find("#settings"))
+  var home = initHome(ractive.find("#home"))
+  var transactions = initTransactions(ractive.find("#transactions"))
+  var contacts = initContacts(ractive.find("#contacts"))
+  var search = initSearch(ractive.find("#search"))
+  var settings = initSettings(ractive.find("#settings"))
 
   var currentPage = home
 
@@ -58,9 +59,19 @@ module.exports = function(el){
     currentPage = page
   }
 
+  sendDialog(ractive.find("#send-dialog"))
+
+  emitter.on('open-send-dialog', function(){
+    ractive.set('view_state', 'is_hidden');
+  })
+
+  emitter.on('close-send-dialog', function(){
+    ractive.set('view_state', '');
+  })
+
   // menu toggle
   emitter.on('toggle-menu', function(open) {
-    var classes = frame.find("#main").classList
+    var classes = ractive.find("#main").classList
     if(open) {
       classes.add('closed')
     } else {
@@ -70,5 +81,5 @@ module.exports = function(el){
     header.toggleIcon(open)
   })
 
-  return frame
+  return ractive
 }

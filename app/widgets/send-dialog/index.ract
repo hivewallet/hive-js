@@ -1,11 +1,12 @@
 {{#visible}}
-<div on-click="cancel" class="modal modal-cancel">
-  <div class="modal-dialog">
-    <h5 class="modal-header">Send Bitcoin</h5>
-    <div class="modal-content">
+  <div class="send">
+
+    <h3 class="send__header">Send Bitcoin</h3>
+
+    <div class="send__form">
       <form>
         <label for="to">To:
-          <input id="to" type="text" value="{{to}}">
+          <input id="to" type="text" value="{{walletData.to}}">
         </label>
 
         <label for="bitcoin">BTC:
@@ -17,12 +18,11 @@
         </label>
       </form>
     </div>
-    <div class="modal-footer">
-      <button on-click="send" class="send__btn half__btn">Send</button>
-      <button on-click="cancel" class="cancel__btn half__btn modal-cancel">Cancel</button>
-    </div>
-  </div>
-</div>
-{{/visible}}
 
-<div on-click="open" class="send__btn modal-open">Send</div>
+    <div class="send__buttons">
+      <a href="#" on-click="send" class="send__btn half__btn attach_fastclick">Send</a>
+      <a href="#" on-click="cancel" class="cancel__btn half__btn modal-cancel attach_fastclick">Cancel</a>
+    </div>
+
+  </div>
+{{/visible}}

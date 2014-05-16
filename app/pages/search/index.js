@@ -3,6 +3,7 @@
 var Ractive = require('hive-ractive')
 var geo = require('hive-geo')
 var emailToAvatar = require('hive-gravatar').emailToAvatar
+var emitter = require('hive-emitter')
 
 module.exports = function(el){
   var nearbys = []
@@ -33,6 +34,18 @@ module.exports = function(el){
 
   ractive.on('select', function(event){
     event.original.preventDefault();
+    
+    var data = {
+      to: '1J3jePABR9RjyLmbU4pnBrPatctoneid3H',
+      amount: '',
+      contact: {
+        name: '',
+        avatar: ''
+      },
+      someValue: true
+    }
+
+    emitter.emit('open-send-dialog', data);
   })
 
   ractive.on('before-hide', function(){

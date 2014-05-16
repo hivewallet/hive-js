@@ -6,6 +6,7 @@ var getWallet = require('hive-wallet').getWallet
 var Big = require('big.js')
 var emitter = require('hive-emitter')
 var db = require('hive-db')
+var fastclick = require('fastclick')
 
 module.exports = function(el){
   var ractive = new Ractive({
@@ -16,23 +17,27 @@ module.exports = function(el){
     }
   })
 
+  $(ractive.findAll('.attach_fastclick')).each(function(){
+    fastclick(this);
+  })
+
   ractive.on('cancel', function(event){
     if($(event.original.srcElement).hasClass('modal-cancel')) {
       ractive.set('visible', false)
     }
   })
 
-  ractive.on('open', function(event){
+  emitter.on('open-send-dialog', function(data){
     db.get('systemInfo', function(err, info){
       if(err) return console.error(err);
       ractive.set('fiatCurrency', info.preferredCurrency)
     })
+    ractive.set('walletData', data)
     ractive.set('visible', true)
   })
 
   ractive.on('send', function(event){
-    ractive.set('visible', false)
-    var to = ractive.get('to')
+    var to = ractive.get('walletData.to')
     var value = bitcoinToSatoshi(ractive.get('value'))
 
     var wallet = getWallet()
@@ -40,6 +45,8 @@ module.exports = function(el){
     wallet.createTxAsync(to, value, function(err, tx){
       if(err) return alert(err)
 
+      ractive.set('visible', false)
+      emitter.emit('close-send-dialog')
       wallet.sendTx(tx, onTxSent)
     })
   })

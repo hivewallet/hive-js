@@ -5,7 +5,7 @@ var Ractive = require('hive-ractive')
 var hasher = require('hive-router').hasher
 var router = require('hive-router').router
 var emitter = require('hive-emitter')
-var FastClick = require('fastclick');
+var fastclick = require('fastclick')
 
 module.exports = function(el){
   var ractive = new Ractive({
@@ -24,7 +24,7 @@ module.exports = function(el){
   }
 
   $(ractive.findAll('.tab')).each(function(){
-    FastClick(this);
+    fastclick(this);
   });
 
   emitter.on('wallet-ready', function() {
