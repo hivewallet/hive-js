@@ -40,10 +40,12 @@ events.downarrow = makeKeyDefinition(40);
 events.uparrow = makeKeyDefinition(38);
 
 Ractive.prototype.hide = function(){
+  this.fire('before-hide')
   this.el.classList.remove('current')
 }
 
 Ractive.prototype.show = function(){
+  this.fire('before-show')
   this.el.classList.add('current')
 }
 

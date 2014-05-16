@@ -81,7 +81,8 @@ module.exports = function (prependMiddleware){
   }
 
   function restrict(req, res, next) {
-    if (req.session.wallet_id && req.session.wallet_id === req.body.id) {
+    var session_id = req.session.wallet_id
+    if (session_id && session_id === req.body.id) {
       next()
     } else {
       return res.send(401)

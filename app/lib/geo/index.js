@@ -42,6 +42,20 @@ function search(callback){
   })
 }
 
+function remove(){
+  xhr({
+    uri: uriRoot + "/location",
+      headers: { "Content-Type": "application/json" },
+    method: 'DELETE',
+    timeout: 10000,
+    body: JSON.stringify({id: userInfo.id})
+  }, function(err, resp, body){
+    if(resp.statusCode !== 200) {
+      console.error(body)
+    }
+  })
+}
+
 function getLocation(callback){
   if (!navigator.geolocation){
     return callback(new Error('Your browser does not support geolocation'))
@@ -59,5 +73,6 @@ function getLocation(callback){
 }
 
 module.exports = {
-  search: search
+  search: search,
+  remove: remove
 }

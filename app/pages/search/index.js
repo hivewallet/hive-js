@@ -33,7 +33,11 @@ module.exports = function(el){
 
   ractive.on('select', function(event){
     event.original.preventDefault();
-  });
+  })
+
+  ractive.on('before-hide', function(){
+    geo.remove()
+  })
 
   return ractive
 }
