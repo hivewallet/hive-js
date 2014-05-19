@@ -76,8 +76,7 @@ function login(el){
     event.original.preventDefault()
     ractive.set('opening', true)
     ractive.set('progress', 'Checking PIN...')
-    Hive.openWalletWithPin(getPin(), ractive.getNetwork(),
-                    ractive.onSyncDone, ractive.onTransactionsLoaded)
+    Hive.openWalletWithPin(getPin(), ractive.getNetwork(), ractive.onSyncDone)
   })
 
   ractive.on('clear-credentials', function(event){
@@ -101,7 +100,7 @@ function includeSharedBehaviors(ractive) {
     loading()
   })
 
-  function onSyncDone(err) {
+  function onSyncDone(err, transactions) {
     ractive.set('opening', false)
     if(err) {
       if(err === 'user_deleted') return location.reload(false);
@@ -110,11 +109,6 @@ function includeSharedBehaviors(ractive) {
 
     hasher.setHash('#home');
     emitter.emit('wallet-ready')
-  }
-
-  function onTransactionsLoaded(err, transactions) {
-    if(err) return alert("error loading transactions. " + err)
-
     emitter.emit('transactions-loaded', transactions)
   }
 
@@ -137,7 +131,6 @@ function includeSharedBehaviors(ractive) {
   }
 
   ractive.onSyncDone = onSyncDone
-  ractive.onTransactionsLoaded = onTransactionsLoaded
   ractive.getNetwork = getNetwork
   ractive.loading = loading
   ractive.pauseLoading = pauseLoading

@@ -88,7 +88,7 @@ function setPin(pin, callback) {
   })
 }
 
-function openWalletWithPin(pin, network, syncDone, transactionsLoaded) {
+function openWalletWithPin(pin, network, syncDone) {
   db.getCredentials(function(err, credentials){
     if(err) return syncDone(err);
 
@@ -107,7 +107,7 @@ function openWalletWithPin(pin, network, syncDone, transactionsLoaded) {
       initWallet({seed: AES.decrypt(encryptedSeed, token)}, network)
       wallet.token = token
       wallet.pin = pin
-      firstTimeSync(syncDone, transactionsLoaded)
+      firstTimeSync(syncDone)
     })
   })
 }
@@ -127,7 +127,7 @@ function sync(done) {
   var pending = 3
   var transactions = []
 
-  api.listAddresses(wallet.addresses, defaultCallback, function(err, transactions){
+  api.getTransactions(wallet.addresses, function(err, transactions){
     if(err) return done(err);
     maybeDone(transactions)
   })
@@ -151,6 +151,15 @@ function sync(done) {
   }
 }
 
+function fetchChangeAddressSentTransactions(callback){
+  api.getTransactions(wallet.changeAddresses, function(err, txs){
+    if(err) return callback(err)
+      callback(null, txs.filter(function(tx){
+        return tx.amount < 0 // include only sent transactions
+      }))
+  })
+}
+
 function consolidateTransactions(transactions){
   return uniqueify(transactions).sort(function(tx1, tx2){
     return tx1.timestamp > tx2.timestamp ? -1 : 1
@@ -172,15 +181,13 @@ function setUnspentOutputs(done){
   })
 }
 
-function firstTimeSync(done, transactionsLoaded){
+function firstTimeSync(done){
   emitter.emit('wallet-opening', 'Synchronizing wallet balance and transaction history')
-  wallet.synchronizing = true
 
   done = done || defaultCallback
-  transactionsLoaded = transactionsLoaded || defaultCallback
 
   var addresses = generateAddresses(5)
-  api.listAddresses(addresses, onAddresses, transactionsLoaded)
+  api.listAddresses(addresses, onAddresses)
 
   function onAddresses(err, addresses) {
     if(err) return done(err)
@@ -196,25 +203,12 @@ function firstTimeSync(done, transactionsLoaded){
 
     if(unusedAddress) {
       wallet.currentAddress = unusedAddress
-      wallet.synchronizing = false
-
       wallet.generateChangeAddress() // one and only change address
-      fetchChangeAddressSentTransactions(transactionsLoaded)
-
-      setUnspentOutputs(done)
+      sync(done)
     } else {
-      firstTimeSync(done, transactionsLoaded)
+      firstTimeSync(done)
     }
   }
-}
-
-function fetchChangeAddressSentTransactions(callback){
-  api.getTransactions(wallet.changeAddresses, function(err, txs){
-    if(err) return callback(err)
-      callback(null, txs.filter(function(tx){
-        return tx.amount < 0 // include only sent transactions
-      }))
-  })
 }
 
 function generateAddresses(n) {

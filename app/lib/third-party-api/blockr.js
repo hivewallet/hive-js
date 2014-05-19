@@ -17,7 +17,7 @@ function Blockr(testnet){
   }
 }
 
-function listAddresses(addresses, onAddresses, onTransactions){
+function listAddresses(addresses, onAddresses){
   if(!addresses || !addresses.length) {
     var error = new Error("Addresses can't be blank")
     return onAddresses(error)
@@ -33,7 +33,6 @@ function listAddresses(addresses, onAddresses, onTransactions){
     }
 
     onAddresses(null, parseAddresses(JSON.parse(resp.body).data))
-    getTransactions(addresses, onTransactions)
   })
 
   function parseAddresses(apiAddresses){
