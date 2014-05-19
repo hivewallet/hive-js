@@ -10,6 +10,7 @@ var AES = require('hive-aes')
 var ThirdParty = require('hive-thrid-party-api')
 var API = ThirdParty.Blockr
 var txToHiveTx = ThirdParty.txToHiveTx
+var uniqueify = require('uniqueify')
 
 var convert = Bitcoin.convert
 var Transaction = Bitcoin.Transaction
@@ -123,14 +124,36 @@ function initWallet(data, network) {
 }
 
 function sync(done) {
+  var pending = 3
+  var transactions = []
+
   api.listAddresses(wallet.addresses, defaultCallback, function(err, transactions){
+    if(err) return done(err);
+    maybeDone(transactions)
+  })
+
+  setUnspentOutputs(function(err){
     if(err) return done(err)
+    maybeDone()
+  })
 
-    setUnspentOutputs(function(err){
-      if(err) return done(err)
+  fetchChangeAddressSentTransactions(function(err, transactions){
+    if(err) return done(err)
+    maybeDone(transactions)
+  })
 
-      done(null, transactions)
-    })
+  function maybeDone(txs){
+    if(txs) transactions = transactions.concat(txs)
+
+    if(--pending === 0) {
+      done(null, consolidateTransactions(transactions))
+    }
+  }
+}
+
+function consolidateTransactions(transactions){
+  return uniqueify(transactions).sort(function(tx1, tx2){
+    return tx1.timestamp > tx2.timestamp ? -1 : 1
   })
 }
 
@@ -157,7 +180,7 @@ function firstTimeSync(done, transactionsLoaded){
   transactionsLoaded = transactionsLoaded || defaultCallback
 
   var addresses = generateAddresses(5)
-  api.listAddresses(addresses, onAddresses, onTransactions)
+  api.listAddresses(addresses, onAddresses, transactionsLoaded)
 
   function onAddresses(err, addresses) {
     if(err) return done(err)
@@ -176,17 +199,22 @@ function firstTimeSync(done, transactionsLoaded){
       wallet.synchronizing = false
 
       wallet.generateChangeAddress() // one and only change address
+      fetchChangeAddressSentTransactions(transactionsLoaded)
+
       setUnspentOutputs(done)
     } else {
       firstTimeSync(done, transactionsLoaded)
     }
   }
+}
 
-  function onTransactions(err, transactions){
-    if(err) return transactionsLoaded(err)
-
-    return transactionsLoaded(null, transactions)
-  }
+function fetchChangeAddressSentTransactions(callback){
+  api.getTransactions(wallet.changeAddresses, function(err, txs){
+    if(err) return callback(err)
+      callback(null, txs.filter(function(tx){
+        return tx.amount < 0 // include only sent transactions
+      }))
+  })
 }
 
 function generateAddresses(n) {

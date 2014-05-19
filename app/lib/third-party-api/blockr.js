@@ -114,7 +114,8 @@ function getTransactions(addresses, callback) {
 }
 
 function parseTransactions(apiTxs, callback){
-  if(!apiTxs || !apiTxs.length) return callback(null, []);
+  if(!apiTxs) return callback(null, []);
+  if(!Array.isArray(apiTxs)) { apiTxs = [apiTxs] }
 
   var result = {}
   apiTxs.forEach(function(address){
@@ -132,18 +133,18 @@ function parseTransactions(apiTxs, callback){
     if(err) return callback(err)
 
     var txs = JSON.parse(resp.body).data
-    if(!Array.isArray(txs)) {
-      txs = [txs]
-    }
+    if(!Array.isArray(txs)) { txs = [txs] }
 
     txs.forEach(function(tx){
       var firstOut = tx.vouts[0]
-      result[tx.tx].toAddress = firstOut.address
+      var id = tx.tx
+      result[id].toAddress = firstOut.address
+      if(result[id].amount < 0) {
+        result[id].amount = -firstOut.amount
+      }
     })
 
-    return callback(null, values(result).map(toTransaction).sort(function(tx1, tx2){
-      return tx1.timestamp > tx2.timestamp ? -1 : 1
-    }))
+    return callback(null, values(result).map(toTransaction))
   })
 }
 
@@ -185,4 +186,5 @@ function makeRequest(endpoint, params, callback){
 Blockr.prototype.listAddresses = listAddresses
 Blockr.prototype.getUnspent = getUnspent
 Blockr.prototype.sendTx = Blockchain.prototype.sendTx //for now
+Blockr.prototype.getTransactions = getTransactions
 module.exports = Blockr
