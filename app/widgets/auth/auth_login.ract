@@ -1,7 +1,5 @@
 <div class="auth">
 
-  <div class="auth__info ss-icon">info</div>
-
   <div class="auth__header">
     <img class="_img" src="/assets/img/logo_temp.png" />
     <h2 class="_title">Hive</h2>
