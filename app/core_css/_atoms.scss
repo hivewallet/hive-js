@@ -28,6 +28,10 @@
     box-shadow: 0 0px 0 0;
   }
 
+  &:hover {
+    color: white;
+  }
+
   &:after {
     content: "";
     position: absolute;

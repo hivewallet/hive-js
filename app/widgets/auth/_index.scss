@@ -1,17 +1,17 @@
 #auth {
   display: none;
   &.current {
-    display: flex;
+    display: block;
   }
 }
 
 .auth__modal {
   background-color: #e7e7e6;
-  display: flex;
-  flex-flow: row nowrap;
-  align-content: center;
-  justify-content: center;
-  align-items: center;
+  // display: flex;
+  // flex-flow: row nowrap;
+  // align-content: center;
+  // justify-content: center;
+  // align-items: center;
   min-width: 100%;
   min-height: 100%;
   padding-top: 20px;
@@ -19,7 +19,8 @@
 }
 
 .auth {
-  max-width: 400px;
+  max-width: 320px;
+  margin: 0 auto;
   position: relative;
 }
 
@@ -40,7 +41,24 @@
 
   ._img {
     width: 100px;
+    height: 97px;
     margin: 0 auto;
+    display: block;
+  }
+
+  ._img--large {
+    width: 100px;
+    height: 117px;
+    margin: 0 auto;
+    display: block;
+  }
+
+  ._img--small {
+    width: 50px;
+    height: 57px;
+    margin: 0 auto;
+    margin-top: 10px;
+    margin-bottom: 20px;
     display: block;
   }
 
@@ -50,6 +68,18 @@
     font-weight: $bold;
     color: $dark-blue;
   }
+
+  ._subtitle {
+    font-size: 20px;
+    line-height: 1.3;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  ._text {
+    font-size: 14px;
+    line-height: 1.3;
+  }
 }
 
 
@@ -57,9 +87,8 @@
 
 
 .auth__btngroup {
-  max-width: 280px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 10px;
 }
 
 .auth__btn {
@@ -70,9 +99,10 @@
 .auth__btn--existing {
   @extend .hivebtn;
 
-  color: darken($yellow, 20%);
-  background-color: $yellow;
-  box-shadow: 0 3px 0 0 darken($yellow, 20%);
+  color: white;
+  background-color: #619ee7;
+  box-shadow: 0 3px 0 0 darken(#619ee7, 20%);
+  margin-bottom: 20px;
 }
 
 // inputs ---------------------------------------- //
@@ -91,7 +121,48 @@
   }
 }
 
+.auth__passviewer {
+  position: relative;
+  background-color: white;
+  padding: 10px;
+  border: 1px solid #d7d5d4;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 20px;
+  margin-bottom: 20px;
+  overflow: hidden;
+  height: 50px;
 
+  ._word {
+    display: block;
+    position: absolute;
+    margin-top: -16px;
+    top: 50%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    transform: translateX(100%);
+    transition: transform .3s ease;
+
+    &.middle {
+      transform: translateX(0);
+    }
+    
+    &.left {
+      transform: translateX(-100%);
+    }
+  }
+
+  ._progress {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 3px;
+    background-color: #589fdd;
+    width: 20px;
+  }
+}
 
 // text nodes ---------------------------------------- //
 
@@ -102,14 +173,19 @@
 
 .auth__altmsg {
   text-align: center;
-  padding-top: 20px;
   
   ._link {
     color: $blue;
+    font-size: 14px;
     @include clickbtn;
 
     &:hover {
       text-decoration: underline;
     }
   }
+}
+
+.auth___text {
+  text-align: center;
+  padding-top: 20px;
 }
