@@ -1,44 +1,50 @@
 
 
-#transactions ul {
-  list-style: none;
-  padding: 0;
-}
+#transactions {
+  ul {
+    list-style: none;
+    padding: 0;
+  }
 
-#transactions ul > li {
-  padding: 15px 0;
-  border-bottom: 1px solid lightgrey;
-}
+  ul > li {
+    padding: 15px 0;
+    border-bottom: 1px solid lightgrey;
+  }
 
-#transactions li > * {
-  display: inline-block;
-  vertical-align: middle;
-}
+  li > * {
+    display: inline-block;
+    vertical-align: middle;
+  }
 
-#transactions .fa.fa-bitcoin {
-  font-size: 2em;
-  color: lightgrey;
-  text-shadow: 1px 1px 1px #333;
-  margin-right: 15px;
-}
+  .fa.fa-bitcoin {
+    font-size: 2em;
+    color: lightgrey;
+    text-shadow: 1px 1px 1px #333;
+    margin-right: 15px;
+  }
 
-#transactions .green {
-  color: limegreen;
-}
+  .green {
+    color: limegreen;
+  }
 
-#transactions .blue {
-  color: deepskyblue;
-}
+  .blue {
+    color: deepskyblue;
+  }
 
-#transactions .timestamp {
-  float: right;
-  color: gray;
-  font-size: small;
-  vertical-align: top;
-  padding-right: 20px;
-}
+  .timestamp {
+    float: right;
+    color: gray;
+    font-size: small;
+    vertical-align: top;
+    padding-right: 20px;
+  }
 
-#transactions .pending {
-  text-transform: uppercase;
-  color: gray;
+  .pending {
+    text-transform: uppercase;
+    color: gray;
+  }
+
+  .update__btn {
+    @extend .hivebtn;
+  }
 }

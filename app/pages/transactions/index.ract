@@ -1,3 +1,4 @@
+<div class='update__btn' on-click="sync">Update</div>
 <ul>
   {{#transactions}}
     <li>

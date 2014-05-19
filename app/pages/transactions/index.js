@@ -2,7 +2,7 @@
 
 var Ractive = require('hive-ractive')
 var emitter = require('hive-emitter')
-var wallet = require('hive-wallet')
+var sync = require('hive-wallet').sync
 var Big = require('big.js')
 
 module.exports = function(el){
@@ -50,6 +50,14 @@ module.exports = function(el){
   emitter.on('transactions-loaded', function(newTxs){
     Array.prototype.unshift.apply(transactions, newTxs)
     ractive.update('transactions')
+  })
+
+  ractive.on('sync', function(){
+    sync(function(err, txs){
+      if(err) return alert(err);
+
+      ractive.set('transactions', txs)
+    })
   })
 
   return ractive

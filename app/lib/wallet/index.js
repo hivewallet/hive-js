@@ -82,7 +82,7 @@ function setPin(pin, callback) {
     db.saveEncrypedSeed(wallet.id, encrypted, function(err, res){
       if(err) return callback(err);
 
-      sync(callback)
+      firstTimeSync(callback)
     })
   })
 }
@@ -106,7 +106,7 @@ function openWalletWithPin(pin, network, syncDone, transactionsLoaded) {
       initWallet({seed: AES.decrypt(encryptedSeed, token)}, network)
       wallet.token = token
       wallet.pin = pin
-      sync(syncDone, transactionsLoaded)
+      firstTimeSync(syncDone, transactionsLoaded)
     })
   })
 }
@@ -116,19 +116,43 @@ function initWallet(data, network) {
   mnemonic = data.mnemonic
   wallet = new Wallet(convert.hexToBytes(seed), network)
 
-  wallet.balance = 0
-  wallet.transactions = []
   wallet.getSeed = getSeed
   wallet.getMnemonic = getMnemonic
   wallet.sendTx = sendTx
   wallet.id = crypto.createHash('sha256').update(seed).digest('hex')
 }
 
-function sync(done, transactionsLoaded){
+function sync(done) {
+  api.listAddresses(wallet.addresses, defaultCallback, function(err, transactions){
+    if(err) return done(err)
+
+    setUnspentOutputs(function(err){
+      if(err) return done(err)
+
+      done(null, transactions)
+    })
+  })
+}
+
+function defaultCallback(err){ if(err) console.error(err) }
+
+function setUnspentOutputs(done){
+  if(wallet.addresses[0] === wallet.currentAddress) { // new wallet
+    return done();
+  }
+
+  var addresses = wallet.addresses.concat(wallet.changeAddresses)
+  api.getUnspent(addresses, function(err, unspent){
+    if(err) return done(err)
+
+    wallet.setUnspentOutputsAsync(unspent, done)
+  })
+}
+
+function firstTimeSync(done, transactionsLoaded){
   emitter.emit('wallet-opening', 'Synchronizing wallet balance and transaction history')
   wallet.synchronizing = true
 
-  var defaultCallback = function(err){ if(err) console.error(err) }
   done = done || defaultCallback
   transactionsLoaded = transactionsLoaded || defaultCallback
 
@@ -152,31 +176,16 @@ function sync(done, transactionsLoaded){
       wallet.synchronizing = false
 
       wallet.generateChangeAddress() // one and only change address
-      setUnspentOutputs()
+      setUnspentOutputs(done)
     } else {
-      sync(done, transactionsLoaded)
+      firstTimeSync(done, transactionsLoaded)
     }
   }
 
   function onTransactions(err, transactions){
     if(err) return transactionsLoaded(err)
 
-    // prepend transactions
-    Array.prototype.unshift.apply(wallet.transactions, transactions)
     return transactionsLoaded(null, transactions)
-  }
-
-  function setUnspentOutputs(){
-    if(wallet.addresses[0] === wallet.currentAddress) { // new wallet
-      return done();
-    }
-
-    var addresses = wallet.addresses.concat(wallet.changeAddresses)
-    api.getUnspent(addresses, function(err, unspent){
-      if(err) return done(err)
-
-      wallet.setUnspentOutputsAsync(unspent, done)
-    })
   }
 }
 
@@ -215,5 +224,6 @@ module.exports = {
   setPin: setPin,
   getWallet: getWallet,
   walletExists: walletExists,
-  reset: reset
+  reset: reset,
+  sync: sync
 }
