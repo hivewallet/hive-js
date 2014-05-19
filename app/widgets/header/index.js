@@ -22,6 +22,11 @@ module.exports = function(el){
     ractive.set('bitcoinBalance', wallet.getBalance())
   })
 
+  emitter.on('update-balance', function() {
+    var wallet = getWallet();
+    ractive.set('bitcoinBalance', wallet.getBalance())
+  })
+
   FastClick(ractive.nodes.menu_btn)
 
   ractive.on('toggle', function(event){

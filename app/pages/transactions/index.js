@@ -11,6 +11,7 @@ module.exports = function(el){
     el: el,
     template: require('./index.ract').template,
     data: {
+      updating_transactions: false,
       transactions: transactions,
       directionVerb: function(direction){
         return {
@@ -52,12 +53,18 @@ module.exports = function(el){
     ractive.update('transactions')
   })
 
-  ractive.on('sync', function(){
-    sync(function(err, txs){
-      if(err) return alert(err);
+  ractive.on('sync', function(event){
+    event.original.preventDefault();
+    if(!ractive.get('updating_transactions')) {
+      ractive.set('updating_transactions', true) 
+      sync(function(err, txs){
+        if(err) return alert(err);
 
-      ractive.set('transactions', txs)
-    })
+        ractive.set('updating_transactions', false)
+        ractive.set('transactions', txs)
+        emitter.emit('update-balance')
+      })
+    }
   })
 
   return ractive

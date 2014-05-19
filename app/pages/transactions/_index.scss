@@ -46,5 +46,16 @@
 
   .update__btn {
     @extend .hivebtn;
+
+    &.is_updating {
+      color: darken(#b9b9bd, 20%);
+      background-color: #b9b9bd;
+      box-shadow: 0 3px 0 0 darken(#b9b9bd, 20%);
+
+      &:active {
+        box-shadow: 0 3px 0 0 darken(#b9b9bd, 20%);
+        transform: translate(0px, 0px);
+      }
+    }
   }
 }

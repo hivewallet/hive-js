@@ -1,4 +1,6 @@
-<div class='update__btn' on-click="sync">Update</div>
+
+<div class='update__btn {{#updating_transactions}}is_updating{{/updating_transactions}}' on-click="sync">Update</div>
+
 <ul>
   {{#transactions}}
     <li>
