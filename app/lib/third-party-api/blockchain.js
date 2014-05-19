@@ -117,7 +117,7 @@ function parseTransactions(apiTxs){
 
 function toTransaction(tx){
   var result = new Transaction(tx['hash'])
-  result.timestamp = tx['time']
+  result.timestamp = tx['time'] * 1000
   result.amount = tx['result']
   result.pending = false
   if(tx['result'] > 0) {

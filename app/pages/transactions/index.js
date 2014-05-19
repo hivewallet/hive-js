@@ -32,7 +32,7 @@ module.exports = function(el){
         }[direction]
       },
       formatTimestamp: function(timestamp){
-        var date = new Date((new Big(timestamp)) * 1000)
+        var date = new Date(timestamp)
         var options = {
           day: "numeric",
           month: "short",
