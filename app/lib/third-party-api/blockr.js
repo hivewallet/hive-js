@@ -109,16 +109,47 @@ function getTransactions(addresses, callback) {
     if(err) return callback(err)
 
     var txs = JSON.parse(resp.body).data
-    callback(null, parseTransactions(txs))
+    parseTransactions(txs, callback)
   })
 }
 
-function parseTransactions(apiTxs){
-  if(!apiTxs || !apiTxs.length) return []
+function parseTransactions(apiTxs, callback){
+  if(!apiTxs || !apiTxs.length) return callback(null, []);
 
-  return inlineAddress('txs', apiTxs).map(toTransaction).sort(function(tx1, tx2){
-    // most recent first
-    return tx1.timestamp > tx2.timestamp ? -1 : 1
+  var result = {}
+  apiTxs.forEach(function(address){
+    if(address.txs.length === 0) return;
+
+    address.txs.forEach(function(tx){
+      result[tx.tx] = tx
+    })
+  })
+
+  var txIds = Object.keys(result)
+  if(txIds.length === 0) return callback(null, []);
+
+  makeRequest('tx/info/' + txIds.join(','), function (err, resp, body) {
+    if(err) return callback(err)
+
+    var txs = JSON.parse(resp.body).data
+    if(!Array.isArray(txs)) {
+      txs = [txs]
+    }
+
+    txs.forEach(function(tx){
+      var firstOut = tx.vouts[0]
+      result[tx.tx].toAddress = firstOut.address
+    })
+
+    return callback(null, values(result).map(toTransaction).sort(function(tx1, tx2){
+      return tx1.timestamp > tx2.timestamp ? -1 : 1
+    }))
+  })
+}
+
+function values(obj){
+  return Object.keys(obj).map(function(key){
+    return obj[key]
   })
 }
 
@@ -131,7 +162,7 @@ function toTransaction(tx){
     result.direction = 'incoming'
   } else {
     result.direction = 'outgoing'
-    result.toAddress = tx['address']
+    result.toAddress = tx.toAddress
   }
 
   return result
