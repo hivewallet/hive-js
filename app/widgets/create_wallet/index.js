@@ -6,6 +6,7 @@ var emitter = require('hive-emitter')
 var $ = require('browserify-zepto')
 var fastclick = require('fastclick')
 var arrival = require('arrival')
+var hasher = require('hive-router').hasher
 
 module.exports = function (el){
   var ractive = new Ractive({
@@ -101,7 +102,7 @@ module.exports = function (el){
 
   ractive.on('set-pin', function(event) {
     event.original.preventDefault()
-    emitter.emit('set-pin')
+    Hive.setPin(ractive.get('pin'), onSyncDone)
   })
 
 
@@ -131,6 +132,18 @@ module.exports = function (el){
     $(ractive.findAll('.attach_fastclick')).each(function(){
       fastclick(this);
     });
+  }
+
+  function onSyncDone(err, transactions) {
+    ractive.set('opening', false)
+    if(err) {
+      if(err === 'user_deleted') return location.reload(false);
+      return alert("error synchronizing. " + err)
+    }
+
+    hasher.setHash('#home');
+    emitter.emit('wallet-ready')
+    emitter.emit('transactions-loaded', transactions)
   }
 
 

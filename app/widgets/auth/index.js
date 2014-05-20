@@ -71,12 +71,6 @@ function register(el){
     Hive.createWallet(null, ractive.getNetwork(), onWalletCreated)
   })
 
-  emitter.on('set-pin', function(){
-
-    Hive.setPin(ractive.get('pin'), ractive.onSyncDone)
-    ractive.set('progress', 'Saving pin...')
-  })
-
   ractive.on('set-pin', function(event){
     event.original.preventDefault()
     Hive.setPin(ractive.get('pin'), ractive.onSyncDone)
