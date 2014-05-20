@@ -75,8 +75,12 @@ function register(el){
 
     Hive.setPin(ractive.get('pin'), ractive.onSyncDone)
     ractive.set('progress', 'Saving pin...')
-    createEl.hide()
-    landingEl.addClass('current')
+  })
+
+  ractive.on('set-pin', function(event){
+    event.original.preventDefault()
+    Hive.setPin(ractive.get('pin'), ractive.onSyncDone)
+    ractive.set('progress', 'Saving pin...')
   })
 
   function getPassphrase(){
