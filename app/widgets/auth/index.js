@@ -139,9 +139,13 @@ function register(el){
 
 
 
-
-
-
+  function onWalletCreated() {
+    ractive.pauseLoading()
+    ractive.set('progress', 'Please set a pin for quick access')
+    ractive.set('enterPin', true)
+    ractive.nodes.setPin.focus()
+  }
+  
   ractive.on('open-wallet-with-passphrase', function(event){
     event.original.preventDefault()
     Hive.createWallet(getPassphrase(), ractive.getNetwork(), onWalletCreated)
