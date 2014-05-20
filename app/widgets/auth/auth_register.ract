@@ -1,102 +1,14 @@
 
 <div class="auth">
 
-  {{#createWallet}}
+  <div id="create_wallet"></div>
 
-    {{#create_intro}}
-
-      <div class="auth__header">
-        <img class="_img--large" src="/assets/img/pencil_temp.png" />
-        <h2 class="_subtitle">We're about to generate<br/> your very own passphrase</h2>
-        <p class="_text">This keeps your account secure, and lets<br/> you open your wallet on multiple devices.<br/> It's very important you write this down.</p>
-      </div>
-
-      <div class="auth__btngroup">
-
-        <a href="#" class="auth__btn" on-click="generate-phrase">Let's go</a>
-        
-        <div class="auth__altmsg">
-          <a on-click="temp-back" href="#" class="_link">Read more about passphrases</a>
-        </div>
-      
-      </div>
-
-    {{/create_intro}}
-
-    {{#create_read}}
-
-      <div class="auth__header">
-        <img class="_img--small" src="/assets/img/pencil_temp.png" />
-      </div>
-
-      <div class="auth__btngroup">
-
-        <div id="pass_words" class="auth__passviewer">
-          {{#passphrase_pending}}
-            <span class="_pending">Generating passphrase...</span>
-          {{/passphrase_pending}}
-
-          {{#passphrase_array:i}}
-            <span id="seed_word_{{i}}" class="_word">{{this}}</span>
-          {{/passphrase_array}}
-
-          <span style='width: {{ 100 * (current_word + 1) / passphrase_length }}%;' class="_progress"></span>
-        </div>
-
-        <a href="#" class="auth__btn attach_fastclick" on-click="next-word">{{pass_next_text}}</a>
-        
-        <div class="auth__altmsg">
-          <a href="#" class="_link attach_fastclick" on-click="prev-word">Go back, I missed one</a>
-        </div>
-      
-      </div>
-
-    {{/create_read}}
-
-    {{#create_confirm}}
-
-      <div class="auth__header">
-        <img class="_img--large" src="/assets/img/lock_temp.png" />
-        <h2 class="_subtitle">Review your passphrase:</h2>
-        <p class="_passphrase">{{passphrase}}</p>
-      </div>
-
-      <div class="auth__btngroup">
-
-        <a href="#" class="auth__btn" on-click="create-pin">I've got it</a>
-      
-      </div>
-
-    {{/create_confirm}}
-
-    {{#create_pin}}
-
-      <div class="auth__header">
-        <img class="_img--large" src="/assets/img/lock_temp.png" />
-        <h2 class="_subtitle">Save a PIN for quick access:</h2>
-      </div>
-
-      <div class="auth__btngroup">
-
-        <div class="auth__pin">
-          <input id="setPin" type="password" placeholder="6-digit pin" value="{{pin}}" on-enter='set-pin'/>
-        </div>
-
-        <div class="auth__btn--existing" on-click="set-pin">Set pin &amp; open wallet</div>
-      
-      </div>
-
-    {{/create_pin}}
-
-  {{/createWallet}}
-
-  {{^createWallet}}
+  <div id="landing_el" class="current">
 
     <div class="auth__header">
       <img class="_img" src="/assets/img/logo_temp.png" />
       <h2 class="_title">Hive</h2>
     </div>
-
 
     <div class="auth__btngroup">
 
@@ -106,7 +18,7 @@
 
           {{#newUser}}
           
-            <div on-click="prepare-seed" class="auth__btn">Create new wallet</div>
+            <div on-click="create-new-wallet" class="auth__btn">Create new wallet</div>
 
             <div class="auth__btn--existing" on-click="reveal-passphrase-input">Open existing wallet</div>
             
@@ -156,7 +68,7 @@
 
     </div>
 
-  {{/createWallet}}
+  </div>
 
 </div>
 

@@ -5,6 +5,14 @@
   }
 }
 
+#landing_el {
+  display: none;
+
+  &.current {
+    display: block;
+  }
+}
+
 .auth__modal {
   background-color: #e7e7e6;
   // display: flex;
