@@ -58,7 +58,8 @@
     "geomodel": "~0.1.2",
     "ractive": "~0.4.0",
     "es3ify": "~0.1.3",
-    "uniqueify": "~1.0.0"
+    "uniqueify": "~1.0.0",
+    "arrival": "~1.0.0"
   },
   "aperture": {
     "sources": [

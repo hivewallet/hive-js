@@ -7,6 +7,7 @@ var router = require('hive-router').router
 var hasher = require('hive-router').hasher
 var $ = require('browserify-zepto')
 var fastclick = require('fastclick')
+var arrival = require('arrival')
 
 var timerId = null
 
@@ -16,13 +17,16 @@ function register(el){
     data: {
       opening: false,
       newUser: true,
-      setPin: false,
-      setPassphrase: false,
+      enterPin: false,
+      createWallet: false,
       passphrase_array: [],
-      pass_intro: true,
-      pass_read: false,
-      pass_confirm: false,
-      passphrase_pending: true
+      create_intro: true,
+      create_read: false,
+      create_confirm: false,
+      create_pin: false,
+      passphrase_pending: true,
+      passphrase_animating: false,
+      pass_next_text: 'Next word'
     },
     template: require('./auth_register.ract').template
   })
@@ -31,28 +35,26 @@ function register(el){
 
   ractive.on('prepare-seed', function(event){
     event.original.preventDefault()
-    ractive.set('setPassphrase', true)
+    ractive.set('createWallet', true)
   })
 
   ractive.on('temp-back', function(event){
     event.original.preventDefault()
-    ractive.set('setPassphrase', false)
+    ractive.set('createWallet', false)
   })
 
   ractive.on('generate-phrase', function(event){
     event.original.preventDefault()
-    ractive.set('pass_intro', false)
-    ractive.set('pass_read', true)
-    // Hive.createWallet(null, ractive.getNetwork(), onSeedCreated)
-
-    onSeedCreated();
+    ractive.set('create_intro', false)
+    ractive.set('create_read', true)
+    Hive.createWallet(null, ractive.getNetwork(), onSeedCreated)
   })
 
   function onSeedCreated() {
-    //var wallet = Hive.getWallet()
-    //var string = wallet.getMnemonic()
-    var string = 'sausage rib various tip various tip acquire replace state length kind near'
+    var wallet = Hive.getWallet()
+    var string = wallet.getMnemonic()
     var array = string.split(' ')
+    ractive.set('passphrase', string)
     ractive.set('passphrase_length', array.length)
     ractive.set('current_word', 0)
     ractive.set('passphrase_pending', false)
@@ -64,47 +66,79 @@ function register(el){
     $(ractive.findAll('.attach_fastclick')).each(function(){
       fastclick(this);
     });
-
-    var width = 100 / array.length;
-    var element = ractive.nodes.progress_bar;
-
-    // ractive.animate(element, 'width', {})
   }
 
   ractive.on('next-word', function(event) {
-    event.original.preventDefault()
 
+    event.original.preventDefault()
     var old_word = ractive.get('current_word')
     var length = ractive.get('passphrase_array').length
+    var is_animating = ractive.get('passphrase_animating')
 
-    if(old_word === length - 1){ return; }
+    if(is_animating){ return; }
+    if(old_word === length - 1) {
+      ractive.set('create_read', false)
+      ractive.set('create_confirm', true)
+      return;
+    }
+    if(old_word === length - 2) {
+      ractive.set('pass_next_text', 'Review Passphrase')
+    }
+
+    ractive.set('passphrase_animating', true)
 
     var new_word = old_word + 1;
-
-    ractive.set('current_word', new_word)
-
     var old_element = $(ractive.nodes['seed_word_' + old_word])
     var new_element = $(ractive.nodes['seed_word_' + new_word])
+
+    ractive.set('current_word', new_word)
     old_element.addClass('left')
     new_element.addClass('middle')
+
+    // arrival(ractive.nodes.pass_words, animation_complete)
+    setTimeout(animation_complete, 400)
   })
 
   ractive.on('prev-word', function(event) {
-    event.original.preventDefault()
-    
-    var old_word = ractive.get('current_word')
 
-    if(old_word === 0){ return; }
+    event.original.preventDefault()
+    var old_word = ractive.get('current_word')
+    var length = ractive.get('passphrase_array').length
+    var is_animating = ractive.get('passphrase_animating')
+
+    if(old_word === 0 || is_animating){ return; }
+    if(old_word === length - 1) {
+      ractive.set('pass_next_text', 'Next word')
+    }
+
+    ractive.set('passphrase_animating', true)
 
     var new_word = old_word - 1;
-
-    ractive.set('current_word', new_word)
-
     var old_element = $(ractive.nodes['seed_word_' + old_word])
     var new_element = $(ractive.nodes['seed_word_' + new_word])
+
+    ractive.set('current_word', new_word)
     old_element.removeClass('middle')
     new_element.removeClass('left')
+
+    // arrival(ractive.nodes.pass_words, animation_complete)
+    setTimeout(animation_complete, 400)
   })
+
+  function animation_complete() {
+    ractive.set('passphrase_animating', false)
+  }
+
+  ractive.on('create-pin', function(event) {
+    event.original.preventDefault()
+    ractive.set('create_confirm', false)
+    ractive.set('create_pin', true)
+  })
+
+
+
+
+
 
 
 
