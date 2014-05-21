@@ -25,6 +25,7 @@ function register(el){
   })
 
   includeSharedBehaviors(ractive)
+  ractive.updateFastclick()
 
   var createEl = createView(ractive.nodes.create_wallet)
   var landingEl = $(ractive.nodes.landing_el)
@@ -35,14 +36,6 @@ function register(el){
     createEl.show()
   })
 
-  function onWalletCreated() {
-    ractive.pauseLoading()
-    ractive.set('opening', false)
-    ractive.set('progress', 'Please set a pin for quick access')
-    ractive.set('enterPin', true)
-    ractive.nodes.setPin.focus()
-  }
-  
   ractive.on('open-wallet-with-passphrase', function(event){
     event.original.preventDefault()
     Hive.createWallet(getPassphrase(), ractive.getNetwork(), onWalletCreated)
@@ -73,6 +66,14 @@ function register(el){
     ractive.set('progress', 'Saving pin...')
   })
 
+  function onWalletCreated() {
+    ractive.pauseLoading()
+    ractive.set('opening', false)
+    ractive.set('progress', 'Please set a pin for quick access')
+    ractive.set('enterPin', true)
+    ractive.nodes.setPin.focus()
+  }
+  
   function getPassphrase(){
     return ractive.get('passphrase').trim()
   }

@@ -16,9 +16,9 @@
 
         {{#newUser}}
         
-          <div on-click="create-new-wallet" class="auth__btn">Create new wallet</div>
+          <div class="auth__btn attach_fastclick" on-click="create-new-wallet">Create new wallet</div>
 
-          <div class="auth__btn--existing" on-click="reveal-passphrase-input">Open existing wallet</div>
+          <div class="auth__btn--existing attach_fastclick" on-click="reveal-passphrase-input">Open existing wallet</div>
           
           <div class="auth__altmsg">
             <a href="#" class="_link">Having trouble signing in?</a>
@@ -37,7 +37,7 @@
           </div>
 
           {{^opening}}
-            <a href="#" class="auth__btn--existing" on-click="open-wallet-with-passphrase">Open wallet</a>
+            <div class="auth__btn--existing attach_fastclick" on-click="open-wallet-with-passphrase">Open wallet</div>
 
             <div class="auth__altmsg">
               <span class="_link" on-click="hide-passphrase-input">Create new wallet instead</span>
@@ -57,7 +57,7 @@
           </div>
 
         {{^opening}}
-          <div class="auth__btn--existing" on-click="set-pin">Set pin &amp; open wallet</div>
+          <div class="auth__btn--existing attach_fastclick" on-click="set-pin">Set pin &amp; open wallet</div>
         {{/opening}}
 
       {{/enterPin}}

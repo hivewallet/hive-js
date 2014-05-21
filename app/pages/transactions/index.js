@@ -4,6 +4,8 @@ var Ractive = require('hive-ractive')
 var emitter = require('hive-emitter')
 var sync = require('hive-wallet').sync
 var Big = require('big.js')
+var $ = require('browserify-zepto')
+var fastclick = require('fastclick')
 
 module.exports = function(el){
   var transactions = []
@@ -47,6 +49,10 @@ module.exports = function(el){
       }
     }
   });
+
+  $(ractive.findAll('.attach_fastclick')).each(function(){
+    fastclick(this);
+  })
 
   emitter.on('transactions-loaded', function(newTxs){
     Array.prototype.unshift.apply(transactions, newTxs)

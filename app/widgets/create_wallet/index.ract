@@ -9,7 +9,7 @@
 
       <div class="auth__btngroup">
 
-        <a href="#" class="auth__btn" on-click="generate-phrase">Let's go</a>
+        <div class="auth__btn attach_fastclick" on-click="generate-phrase">Let's go</div>
         
         <div class="auth__altmsg">
           <a on-click="temp-back" href="#" class="_link">Read more about passphrases</a>
@@ -27,24 +27,27 @@
 
       <div class="auth__btngroup">
 
-        <div id="pass_words" class="auth__passviewer">
-          {{#passphrase_pending}}
-            <span class="_pending">Generating passphrase...</span>
-          {{/passphrase_pending}}
+        {{#passphrase_pending}}
+          <span class="_pending">{{progress}}</span>
+        {{/passphrase_pending}}
 
-          {{#passphrase_array:i}}
-            <span id="seed_word_{{i}}" class="_word">{{this}}</span>
-          {{/passphrase_array}}
+        {{^passphrase_pending}}
+          <div id="pass_words" class="auth__passviewer">
 
-          <span style='width: {{ 100 * (current_word + 1) / passphrase_length }}%;' class="_progress"></span>
-        </div>
+            {{#passphrase_array:i}}
+              <span id="seed_word_{{i}}" class="_word">{{this}}</span>
+            {{/passphrase_array}}
 
-        <a href="#" class="auth__btn attach_fastclick" on-click="next-word">{{pass_next_text}}</a>
+            <span style='width: {{ 100 * (current_word + 1) / passphrase_length }}%;' class="_progress"></span>
+          </div>
+
+          <div class="auth__btn attach_fastclick" on-click="next-word">{{pass_next_text}}</div>
         
-        <div class="auth__altmsg">
-          <a href="#" class="_link attach_fastclick" on-click="prev-word">Go back, I missed one</a>
-        </div>
-      
+          <div class="auth__altmsg">
+            <a href="#" class="_link attach_fastclick" on-click="prev-word">Go back, I missed one</a>
+          </div>
+        {{/passphrase_pending}}
+
       </div>
 
     {{/create_read}}
@@ -59,7 +62,7 @@
 
       <div class="auth__btngroup">
 
-        <a href="#" class="auth__btn" on-click="create-pin">I've got it</a>
+        <div class="auth__btn attach_fastclick" on-click="create-pin">I've got it</div>
       
       </div>
 
@@ -79,7 +82,7 @@
         </div>
 
         {{^opening}}
-          <div class="auth__btn--existing" on-click="set-pin">Set pin &amp; open wallet</div>
+          <div class="auth__btn--existing attach_fastclick" on-click="set-pin">Set pin &amp; open wallet</div>
         {{/opening}}
         
       </div>

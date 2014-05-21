@@ -4,7 +4,6 @@ var Ractive = require('hive-ractive')
 var Hive = require('hive-wallet')
 var emitter = require('hive-emitter')
 var $ = require('browserify-zepto')
-var fastclick = require('fastclick')
 var arrival = require('arrival')
 var hasher = require('hive-router').hasher
 
@@ -26,6 +25,8 @@ module.exports = function (el){
     template: require('./index.ract').template
   })
 
+  ractive.updateFastclick()
+
   ractive.on('temp-back', function(event){
     event.original.preventDefault()
     ractive.set('createWallet', false)
@@ -34,7 +35,9 @@ module.exports = function (el){
   ractive.on('generate-phrase', function(event){
     event.original.preventDefault()
     ractive.set('create_intro', false)
-    ractive.set('create_read', true)
+    ractive.set('create_read', true),
+    ractive.set('progress', 'Generating passphrase...')
+    loading()
     Hive.createWallet(null, getNetwork(), onSeedCreated)
   })
 
@@ -49,6 +52,7 @@ module.exports = function (el){
     if(old_word === length - 1) {
       ractive.set('create_read', false)
       ractive.set('create_confirm', true)
+      ractive.updateFastclick()
       return;
     }
     if(old_word === length - 2) {
@@ -104,6 +108,7 @@ module.exports = function (el){
     event.original.preventDefault()
     ractive.set('create_confirm', false)
     ractive.set('create_pin', true)
+    ractive.updateFastclick()
   })
 
   ractive.on('set-pin', function(event) {
@@ -137,6 +142,7 @@ module.exports = function (el){
   }
 
   function onSeedCreated() {
+
     var wallet = Hive.getWallet()
     var string = wallet.getMnemonic()
     var array = string.split(' ')
@@ -148,10 +154,8 @@ module.exports = function (el){
 
     var current_element = $(ractive.nodes['seed_word_' + 0])
     current_element.addClass('middle')
-
-    $(ractive.findAll('.attach_fastclick')).each(function(){
-      fastclick(this);
-    });
+    pauseLoading()
+    ractive.updateFastclick()
   }
 
   function onSyncDone(err, transactions) {
