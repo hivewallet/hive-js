@@ -19,15 +19,7 @@ function register(el){
       opening: false,
       newUser: true,
       enterPin: false,
-      createWallet: false,
-      passphrase_array: [],
-      create_intro: true,
-      create_read: false,
-      create_confirm: false,
-      create_pin: false,
-      passphrase_pending: true,
-      passphrase_animating: false,
-      pass_next_text: 'Next word'
+      createWallet: false
     },
     template: require('./auth_register.ract').template
   })
@@ -45,6 +37,7 @@ function register(el){
 
   function onWalletCreated() {
     ractive.pauseLoading()
+    ractive.set('opening', false)
     ractive.set('progress', 'Please set a pin for quick access')
     ractive.set('enterPin', true)
     ractive.nodes.setPin.focus()
@@ -53,6 +46,8 @@ function register(el){
   ractive.on('open-wallet-with-passphrase', function(event){
     event.original.preventDefault()
     Hive.createWallet(getPassphrase(), ractive.getNetwork(), onWalletCreated)
+    ractive.set('opening', true)
+    ractive.set('progress', 'Checking passphrase...')
   })
 
   ractive.on('reveal-passphrase-input', function(event){
@@ -74,6 +69,7 @@ function register(el){
   ractive.on('set-pin', function(event){
     event.original.preventDefault()
     Hive.setPin(ractive.get('pin'), ractive.onSyncDone)
+    ractive.set('opening', true)
     ractive.set('progress', 'Saving pin...')
   })
 

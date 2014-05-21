@@ -12,53 +12,53 @@
 
     <div class="auth__btngroup">
 
-      {{^enterPin}} 
-      
-        {{^opening}}
+      {{^enterPin}}
 
-          {{#newUser}}
+        {{#newUser}}
+        
+          <div on-click="create-new-wallet" class="auth__btn">Create new wallet</div>
+
+          <div class="auth__btn--existing" on-click="reveal-passphrase-input">Open existing wallet</div>
           
-            <div on-click="create-new-wallet" class="auth__btn">Create new wallet</div>
+          <div class="auth__altmsg">
+            <a href="#" class="_link">Having trouble signing in?</a>
+          </div>
+        
+        {{/newUser}}
 
-            <div class="auth__btn--existing" on-click="reveal-passphrase-input">Open existing wallet</div>
-            
-            <div class="auth__altmsg">
-              <a href="#" class="_link">Having trouble signing in?</a>
-            </div>
-          
-          {{/newUser}}
+        {{^newUser}}
 
-          {{^newUser}}
+          <div class="auth__passphrase">
 
-            <div class="auth__passphrase">
+            <label>Enter Passphrase:
+              <input id="passphraseField" type="text" placeholder="12-word passphrase" value="{{passphrase}}" on-enter="open-wallet-with-passphrase" />
+            </label>
 
-              <label>Enter Passphrase:
-                <input id="passphraseField" type="text" placeholder="12-word passphrase" value="{{passphrase}}" on-enter="open-wallet-with-passphrase" />
-              </label>
+          </div>
 
-            </div>
-              
-            <div class="auth__btn--existing" on-click="open-wallet-with-passphrase">Open wallet</div>
+          {{^opening}}
+            <a href="#" class="auth__btn--existing" on-click="open-wallet-with-passphrase">Open wallet</a>
 
             <div class="auth__altmsg">
               <span class="_link" on-click="hide-passphrase-input">Create new wallet instead</span>
             </div>
+          {{/opening}}
 
-          {{/newUser}}
-
-        {{/opening}}
+        {{/newUser}}
 
       {{/enterPin}}
 
       {{#enterPin}}
 
-        <div class="auth__pin">
-          <label>Set your pin:
-            <input id="setPin" type="password" placeholder="6-digit pin" value="{{pin}}" on-enter='set-pin'/>
-          </label>
-        </div>
+          <div class="auth__pin">
+            <label>Set your pin:
+              <input id="setPin" type="password" placeholder="6-digit pin" value="{{pin}}" on-enter='set-pin'/>
+            </label>
+          </div>
 
-        <div class="auth__btn--existing" on-click="set-pin">Set pin &amp; open wallet</div>
+        {{^opening}}
+          <div class="auth__btn--existing" on-click="set-pin">Set pin &amp; open wallet</div>
+        {{/opening}}
 
       {{/enterPin}}
 

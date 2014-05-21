@@ -78,8 +78,14 @@
           <input id="setPin" type="password" placeholder="6-digit pin" value="{{pin}}" on-enter='set-pin'/>
         </div>
 
-        <div class="auth__btn--existing" on-click="set-pin">Set pin &amp; open wallet</div>
-      
+        {{^opening}}
+          <div class="auth__btn--existing" on-click="set-pin">Set pin &amp; open wallet</div>
+        {{/opening}}
+        
       </div>
+
+      {{#opening}}
+        <p class="auth__progress">{{progress}}</p>
+      {{/opening}}
 
     {{/create_pin}}

@@ -8,6 +8,8 @@ var fastclick = require('fastclick')
 var arrival = require('arrival')
 var hasher = require('hive-router').hasher
 
+var timerId = null
+
 module.exports = function (el){
   var ractive = new Ractive({
     el: el,
@@ -93,6 +95,10 @@ module.exports = function (el){
     setTimeout(animation_complete, 400)
   })
 
+  emitter.on('wallet-opening', function(progress){
+    ractive.set('progress', progress)
+    loading()
+  })
 
   ractive.on('create-pin', function(event) {
     event.original.preventDefault()
@@ -103,6 +109,8 @@ module.exports = function (el){
   ractive.on('set-pin', function(event) {
     event.original.preventDefault()
     Hive.setPin(ractive.get('pin'), onSyncDone)
+    ractive.set('opening', true)
+    ractive.set('progress', 'Saving pin...')
   })
 
 
@@ -114,6 +122,18 @@ module.exports = function (el){
     if(location.search.indexOf('testnet=true') > 0) {
       return 'testnet'
     }
+  }
+
+  function loading() {
+    timerId = setInterval(function(){
+      var text = ractive.get('progress')
+      ractive.set('progress', text + '.')
+    }, 500)
+  }
+
+  function pauseLoading() {
+    clearInterval(timerId)
+    timerId = null
   }
 
   function onSeedCreated() {
