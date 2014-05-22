@@ -2,7 +2,6 @@
 
 var Ractive = require('hive-ractive')
 var emitter = require('hive-emitter')
-var FastClick = require('fastclick')
 var Big = require('big.js')
 var getWallet = require('hive-wallet').getWallet
 
@@ -17,6 +16,8 @@ module.exports = function(el){
     }
   })
 
+  ractive.updateFastclick()
+  
   emitter.on('wallet-ready', function(){
     var wallet = getWallet();
     ractive.set('bitcoinBalance', wallet.getBalance())
@@ -26,8 +27,6 @@ module.exports = function(el){
     var wallet = getWallet();
     ractive.set('bitcoinBalance', wallet.getBalance())
   })
-
-  FastClick(ractive.nodes.menu_btn)
 
   ractive.on('toggle', function(event){
     emitter.emit('toggle-menu', !ractive.get('menuOpen'))

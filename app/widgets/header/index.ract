@@ -1,4 +1,4 @@
-<div id="menu_btn" class="header__toggle ss-icon" on-click="toggle">
+<div id="menu_btn" class="header__toggle ss-icon attach_fastclick" on-click="toggle">
   {{#menuOpen}}
     left
   {{/menuOpen}}

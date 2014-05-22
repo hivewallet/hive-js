@@ -7,7 +7,6 @@ var createView = require('hive-create_wallet')
 var router = require('hive-router').router
 var hasher = require('hive-router').hasher
 var $ = require('browserify-zepto')
-var fastclick = require('fastclick')
 var arrival = require('arrival')
 
 var timerId = null
@@ -41,17 +40,20 @@ function register(el){
     Hive.createWallet(getPassphrase(), ractive.getNetwork(), onWalletCreated)
     ractive.set('opening', true)
     ractive.set('progress', 'Checking passphrase...')
+    ractive.updateFastclick()
   })
 
   ractive.on('reveal-passphrase-input', function(event){
     event.original.preventDefault()
     ractive.set('newUser', false);
     ractive.nodes.passphraseField.focus();
+    ractive.updateFastclick()
   })
 
   ractive.on('hide-passphrase-input', function(event){
     event.original.preventDefault()
     ractive.set('newUser', true);
+    ractive.updateFastclick()
   })
 
   ractive.on('create-wallet', function(event){

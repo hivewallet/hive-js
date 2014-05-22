@@ -1,17 +1,11 @@
 
 <div class="search">
 
-  {{^searching}}
-    <div class='search__btn' on-click="search-nearby">{{search_msg}}</div>
-  {{/searching}}
-
-  {{#searching}}
-    <div class='search__btn is_searching'>Searching...</div>
-  {{/searching}}
+  <div class='search__btn attach_fastclick {{#searching}}is_searching{{/searching}}' on-click="search-nearby">{{search_msg}}</div>
 
   <div class="search__list">
     {{#nearbys}}
-      <a href="#" class="search__item" on-click="select" 
+      <a href="#" class="search__item attach_fastclick" on-click="select" 
          data-wallet={{address}}
          data-name={{name}} 
          data-email={{email}}>

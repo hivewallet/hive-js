@@ -3,7 +3,7 @@
 
     <div class="send__content">
 
-      <a href="#" class="send__close" on-click="cancel">X</a>
+      <a href="#" class="send__close attach_fastclick" on-click="cancel">X</a>
 
       <h3 class="send__header">Send Bitcoin{{walletData.heading}}</h3>
 

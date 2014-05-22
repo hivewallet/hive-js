@@ -6,7 +6,6 @@ var getWallet = require('hive-wallet').getWallet
 var Big = require('big.js')
 var emitter = require('hive-emitter')
 var db = require('hive-db')
-var fastclick = require('fastclick')
 
 module.exports = function(el){
   var ractive = new Ractive({
@@ -15,10 +14,6 @@ module.exports = function(el){
     data: {
       exchangeRates: {}
     }
-  })
-
-  $(ractive.findAll('.attach_fastclick')).each(function(){
-    fastclick(this);
   })
 
   ractive.on('cancel', function(event){
@@ -38,6 +33,7 @@ module.exports = function(el){
       ractive.set('hide_address', true);
     }
     ractive.set('visible', true)
+    ractive.updateFastclick()
   })
 
   ractive.on('send', function(event){

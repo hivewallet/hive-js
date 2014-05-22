@@ -18,8 +18,12 @@ module.exports = function(el){
     }
   })
 
+  ractive.updateFastclick()
+
   ractive.on('search-nearby', function(){
-    ractive.set('searching', true);
+    if(ractive.get('searching')) { return; }
+    ractive.set('searching', true);    
+    ractive.set('search_msg', 'Searching...');
     geo.search(function(err, results){
       if(err) return alert(err);
 
@@ -29,6 +33,7 @@ module.exports = function(el){
         return record[0]
       })
       ractive.set('nearbys', nearbys)
+      ractive.updateFastclick()
     })
   })
 
