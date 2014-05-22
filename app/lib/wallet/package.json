@@ -10,7 +10,7 @@
     "bip39": "~1.0.4",
     "workerify": "git://github.com/weilu/workerify.git",
     "envify": "^1.2.1",
-    "pouchdb": "^2.1.2"
+    "pouchdb": "git://github.com/haustraliaer/pouchdb.git"
   },
   "browserify": {
     "transform": [ "workerify", "envify" ]
