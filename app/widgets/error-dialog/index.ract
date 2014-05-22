@@ -1,0 +1,13 @@
+{{#visible}}
+
+  <div id="container" class="error attach_fastclick" on-click="cancel" intro-outro="fadeNscale">
+
+    <div class="error__content">
+      <img class="error__icon" src="/assets/img/error_temp.png" />
+      <h2 class="error__heading">Warning</h2>
+      <p class="error__message">You stooged it</p>
+    </div>
+
+  </div>
+
+{{/visible}}

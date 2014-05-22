@@ -1,0 +1,51 @@
+
+
+.error {
+  opacity: 0;
+  
+  position: fixed;
+  top: 0;
+  left: 50%;
+  margin-left: -150px;
+  width: 300px;
+
+  cursor: pointer;
+
+  background-color: $background;
+  box-shadow: 0 2px 2px 1px rgba(000,000,000,0.2);
+
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+
+  transition: transform ease 0.3s;
+  transform: scale(80%);
+
+
+  &.is_open {
+    transform: scale(100%);
+  }
+}
+
+.error__content {
+  text-align: center;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  margin: 0 auto;
+}
+
+
+.error__heading {
+  color: #eebf31;
+  font-size: 24px;
+  font-weight: $bold;
+  padding-bottom: 10px;
+}
+
+.error__message {
+  color: #a8a7a9;
+  font-size: 18px;
+}
+
+

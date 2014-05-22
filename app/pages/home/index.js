@@ -13,8 +13,13 @@ module.exports = function(el){
   ractive.updateFastclick()
 
   ractive.on('send', function(event) {
-    event.original.preventDefault();
-    emitter.emit('open-send-dialog');
+    event.original.preventDefault()
+    emitter.emit('open-send-dialog')
+  })  
+
+  ractive.on('error', function(event) {
+    event.original.preventDefault()  
+    emitter.emit('open-error')
   })
 
   return ractive

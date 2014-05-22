@@ -41,3 +41,11 @@
     bottom: 0px;
   }
 }
+
+
+.hivebtn--red {
+  @extend .hivebtn;
+
+  background-color: #da553e;
+  box-shadow: 0 3px 0 0 darken(#da553e, 10%);
+}

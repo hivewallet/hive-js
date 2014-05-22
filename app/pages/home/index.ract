@@ -1,1 +1,6 @@
 <a href="#" class="hivebtn attach_fastclick" on-click="send">Send</a>
+
+<div style="padding: 30px;">
+  <a href="#" class="hivebtn--red attach_fastclick" on-click="error">Error</a>
+</div>
+

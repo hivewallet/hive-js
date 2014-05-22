@@ -12,6 +12,7 @@ var initSettings = require('hive-settings')
 var router = require('hive-router').router
 var emitter = require('hive-emitter')
 var sendDialog = require('hive-send-dialog')
+var errorDialog = require('hive-error-dialog')
 
 module.exports = function(el){
   var ractive = new Ractive({
@@ -29,6 +30,7 @@ module.exports = function(el){
   var contacts = initContacts(ractive.find("#contacts"))
   var search = initSearch(ractive.find("#search"))
   var settings = initSettings(ractive.find("#settings"))
+
 
   var currentPage = home
 
@@ -60,6 +62,7 @@ module.exports = function(el){
   }
 
   sendDialog(ractive.find("#send-dialog"))
+  errorDialog(ractive.find("#error-dialog"))
 
   emitter.on('open-send-dialog', function(){
     ractive.set('view_state', 'is_hidden');

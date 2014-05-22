@@ -1,6 +1,5 @@
 'use strict';
 
-var $ = require('browserify-zepto');
 var Ractive = require('hive-ractive')
 var getWallet = require('hive-wallet').getWallet
 var Big = require('big.js')
