@@ -2,12 +2,12 @@
 
 var Ractive = require('hive-ractive')
 var initHeader = require('hive-header')
-var menu = require('hive-menu')
+var initTabs = require('hive-tabs')
+var initSidebar = require('hive-sidebar')
 var initAuth = require('hive-auth')
-var initHome = require('hive-home')
-var initTransactions = require('hive-transactions')
-var initContacts = require('hive-contacts')
-var initSearch = require('hive-search')
+var initSend = require('hive-send')
+var initReceive = require('hive-receive')
+var initHistory = require('hive-history')
 var initSettings = require('hive-settings')
 var router = require('hive-router').router
 var emitter = require('hive-emitter')
@@ -22,37 +22,30 @@ module.exports = function(el){
 
   // widgets
   var header = initHeader(ractive.find("#header"))
-  menu(ractive.find("#menu"))
+  initTabs(ractive.find("#tabs"))
+  initSidebar(ractive.find("#sidebar"))
 
   // pages
-  var home = initHome(ractive.find("#home"))
-  var transactions = initTransactions(ractive.find("#transactions"))
-  var contacts = initContacts(ractive.find("#contacts"))
-  var search = initSearch(ractive.find("#search"))
-  var settings = initSettings(ractive.find("#settings"))
+  var send = initSend(ractive.find("#send"))
+  var receive = initReceive(ractive.find("#receive"))
+  var history = initHistory(ractive.find("#history"))
+  // var search = initSearch(ractive.find("#search"))
+  // var settings = initSettings(ractive.find("#settings"))
 
 
-  var currentPage = home
+  var currentPage = send
 
   // routes
-  router.addRoute('/home', function(){
-    showPage(home)
+  router.addRoute('/send', function(){
+    showPage(send)
   })
 
-  router.addRoute('/transactions', function(){
-    showPage(transactions)
+  router.addRoute('/receive', function(){
+    showPage(receive)
   })
 
-  router.addRoute('/contacts', function(){
-    showPage(contacts)
-  })
-
-  router.addRoute('/search', function(){
-    showPage(search)
-  })
-
-  router.addRoute('/settings', function(){
-    showPage(settings)
+  router.addRoute('/history', function(){
+    showPage(history)
   })
 
   function showPage(page){

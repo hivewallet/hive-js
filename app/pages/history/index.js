@@ -56,18 +56,8 @@ module.exports = function(el){
     ractive.update('transactions')
   })
 
-  ractive.on('sync', function(event){
-    event.original.preventDefault();
-    if(!ractive.get('updating_transactions')) {
-      ractive.set('updating_transactions', true) 
-      sync(function(err, txs){
-        if(err) return alert(err);
-
-        ractive.set('updating_transactions', false)
-        ractive.set('transactions', txs)
-        emitter.emit('update-balance')
-      })
-    }
+  emitter.on('update-transactions', function(newTxs) {
+    ractive.set('transactions', newTxs)
   })
 
   return ractive

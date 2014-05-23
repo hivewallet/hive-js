@@ -25,7 +25,7 @@ module.exports = function(el){
   ractive.updateFastclick()
 
   emitter.on('wallet-ready', function() {
-    highlightTab(ractive.nodes.home_tab);
+    highlightTab(ractive.nodes.send_tab);
   });
 
   emitter.on('toggle-menu', function(open) {
@@ -39,7 +39,6 @@ module.exports = function(el){
 
   ractive.on('select', function(event){
     event.original.preventDefault();
-    emitter.emit('toggle-menu', false);
     hasher.setHash(event.node.dataset.hash);
     highlightTab(event.node);
   })

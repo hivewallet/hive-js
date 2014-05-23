@@ -2,6 +2,8 @@
 #header {
   display: flex;
   justify-content: space-between;
+  padding-top: 10px;
+  padding-right: 10px;
 }
 
 .header__toggle {
@@ -21,4 +23,27 @@
   font-size: 32px;
   color: black;
   font-weight: $light;
+}
+
+.header__refresh {
+  @extend .hivebtn;
+  margin-top: 6px;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+
+  &.is_updating {
+    color: darken(#b9b9bd, 20%);
+    background-color: #b9b9bd;
+    box-shadow: 0 3px 0 0 darken(#b9b9bd, 20%);
+
+    &:hover {
+      color: darken(#b9b9bd, 20%);
+    }
+
+    &:active {
+      box-shadow: 0 3px 0 0 darken(#b9b9bd, 20%);
+      transform: translate(0px, 0px);
+    }
+  }
 }

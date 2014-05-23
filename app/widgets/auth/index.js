@@ -128,7 +128,7 @@ function includeSharedBehaviors(ractive) {
       return alert("error synchronizing. " + err)
     }
 
-    hasher.setHash('#home');
+    hasher.setHash('#send');
     emitter.emit('wallet-ready')
     emitter.emit('transactions-loaded', transactions)
   }

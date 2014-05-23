@@ -1,6 +1,4 @@
 
-<div class='attach_fastclick update__btn {{#updating_transactions}}is_updating{{/updating_transactions}}' on-click="sync">Update</div>
-
 <ul>
   {{#transactions}}
     <li>

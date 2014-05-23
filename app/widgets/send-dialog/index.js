@@ -5,6 +5,7 @@ var getWallet = require('hive-wallet').getWallet
 var Big = require('big.js')
 var emitter = require('hive-emitter')
 var db = require('hive-db')
+var $ = require('browserify-zepto')
 
 module.exports = function(el){
   var ractive = new Ractive({
@@ -15,11 +16,14 @@ module.exports = function(el){
     }
   })
 
+  var _html = $('html')
+
   ractive.on('cancel', function(event){
     event.original.preventDefault();
     ractive.set('visible', false)
     ractive.set('hide_address', false)
     emitter.emit('close-send-dialog')
+    _html.removeClass('remove_scroll')
   })
 
   emitter.on('open-send-dialog', function(data){
@@ -31,6 +35,7 @@ module.exports = function(el){
     if(ractive.get('walletData.hide_address')) {
       ractive.set('hide_address', true);
     }
+    _html.addClass('remove_scroll')
     ractive.set('visible', true)
     ractive.updateFastclick()
   })

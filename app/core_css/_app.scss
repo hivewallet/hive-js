@@ -9,10 +9,11 @@
   }
 }
 
-#menu {
+#sidebar {
   display: block;
   background-color: #3e3c43;
   min-height: 100%;
+  width: 100%;
   flex: 1; // take up full width
   margin-right: 20%;
 
@@ -49,7 +50,6 @@
 #main {
   overflow-x: hidden;
   position: relative;
-  padding: 10px;
   background-color: $background;
   flex: 1; // take up full width
 

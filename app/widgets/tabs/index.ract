@@ -1,0 +1,11 @@
+<div class="tabs">
+  <a id="send_tab" data-hash='#send' class="tab attach_fastclick" on-click="select">
+    <span class="tab__icon ss-icon">mail<span class="hide--portrait"> Send</span></span>
+  </a>
+  <a data-hash='#receive' class="tab attach_fastclick" on-click="select">
+    <span class="tab__icon ss-icon">dollarsign<span class="hide--portrait"> Receive</span></span>
+  </a>  
+  <a data-hash='#history' class="tab attach_fastclick" on-click="select">
+    <span class="tab__icon ss-icon">users<span class="hide--portrait"> History</span></span>
+  </a>
+</div>
