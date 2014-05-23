@@ -339,12 +339,12 @@ overflow: auto;   /* Scrollbar is displayed as it's needed */
 }
 
 caption {
-  border-bottom: 1px solid $silver;
+  border-bottom: 1px solid $grey--light;
   text-align: left;
 }
 
 tbody, tfoot {
-  border-top: 1px solid darken($light-silver, 10%);
+  border-top: 1px solid darken($grey, 10%);
 }
 
 th {

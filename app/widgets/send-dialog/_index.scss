@@ -81,12 +81,12 @@
   @extend .hivebtn;
   margin-left: 10px;
 
-  color: darken($silver, 20%);
-  background-color: $silver;
-  box-shadow: 0 3px 0 0 darken($silver, 20%);
+  color: darken($grey, 20%);
+  background-color: $grey;
+  box-shadow: 0 3px 0 0 darken($grey, 20%);
 
   &:hover {
-    color: darken($silver, 20%);
+    color: darken($grey, 20%);
   }
 }
 

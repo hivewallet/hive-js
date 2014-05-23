@@ -4,10 +4,13 @@
   {{/menuOpen}}
 
   {{^menuOpen}}
-    rows
+    settings
   {{/menuOpen}}
 </div>
 
-<div class="header__balance">{{satoshiToBTC(bitcoinBalance)}}</div>
+<div class="header__balance">
+  <span class="_amt">{{satoshiToBTC(bitcoinBalance)}}</span>
+  <span class="_currency">BTC</span>
+</div>
 
 <div class='header__refresh ss-icon {{#updating_transactions}}is_updating{{/updating_transactions}}' on-click="sync">sync</div>

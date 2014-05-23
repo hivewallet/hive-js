@@ -37,24 +37,34 @@ module.exports = function(el){
 
 
 function fadeNscaleTransition(t, params) {
-  var props, 
-      options;
 
-  // Process parameters (second argument provides defaults)
-  params = t.processParams( params, {
-    duration: 300,
-    opacity: t.isIntro ? 1.0 : 0
-  });
+  var targetStyle, props, collapsed, defaults;
 
-  props = {
-    opacity: params.opacity
-  }
-
-  options = {
-    duration: params.duration,
+  defaults = {
+    duration: 200,
     easing: 'linear'
+  };
+
+  props = [
+    'opacity',
+    'transform'
+  ];
+
+  collapsed = {
+    opacity: 0,
+    transform: 'scale(0.8)'
+  };
+
+  params = t.processParams( params, defaults );
+
+  if ( t.isIntro ) {
+    targetStyle = t.getStyle( props );
+    t.setStyle( collapsed );
+  } else {
+    // make style explicit, so we're not transitioning to 'auto'
+    t.setStyle( t.getStyle( props ) );
+    targetStyle = collapsed;
   }
 
-  // Then, we execute the transition itself
-  t.animateStyle(props, options, t.complete(true));
+  t.animateStyle( targetStyle, params ).then( t.complete );
 }

@@ -2,47 +2,36 @@
 #header {
   display: flex;
   justify-content: space-between;
-  padding-top: 10px;
-  padding-right: 10px;
-}
-
-.header__toggle {
-  @include clickbtn;
-  width: 40px;
   padding-top: 5px;
-  font-size: 24px;
-  color: black;
-  text-align: center;
-  margin-bottom: 10px;
-
+  background-color: $purple;
+  color: white;
+  padding-top: 12px;
+  padding-bottom: 12px;
 }
 
 .header__balance {
   font-size: 32px;
-  color: black;
   font-weight: $light;
 }
 
+.icon_atom {
+  @include clickbtn;
+  width: 40px;
+  padding-top: 12px;
+  font-size: 19px;
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+.header__toggle {
+  @extend .icon_atom;
+  margin-left: 10px; 
+}
+
 .header__refresh {
-  @extend .hivebtn;
-  margin-top: 6px;
-  width: 30px;
-  height: 30px;
-  padding: 0;
-  padding-top: 4px;
-
+  @extend .icon_atom;
+  margin-right: 10px; 
   &.is_updating {
-    color: darken(#b9b9bd, 20%);
-    background-color: #b9b9bd;
-    box-shadow: 0 3px 0 0 darken(#b9b9bd, 20%);
 
-    &:hover {
-      color: darken(#b9b9bd, 20%);
-    }
-
-    &:active {
-      box-shadow: 0 3px 0 0 darken(#b9b9bd, 20%);
-      transform: translate(0px, 0px);
-    }
   }
 }
