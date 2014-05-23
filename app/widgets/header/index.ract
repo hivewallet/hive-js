@@ -10,4 +10,4 @@
 
 <div class="header__balance">{{satoshiToBTC(bitcoinBalance)}}</div>
 
-<div class='header__refresh {{#updating_transactions}}is_updating{{/updating_transactions}}' on-click="sync"></div>
+<div class='header__refresh ss-icon {{#updating_transactions}}is_updating{{/updating_transactions}}' on-click="sync">sync</div>

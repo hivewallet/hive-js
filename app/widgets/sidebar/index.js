@@ -5,6 +5,7 @@ var Ractive = require('hive-ractive')
 var hasher = require('hive-router').hasher
 var router = require('hive-router').router
 var emitter = require('hive-emitter')
+var initSettings = require('hive-settings')
 
 module.exports = function(el){
   var ractive = new Ractive({
@@ -12,6 +13,8 @@ module.exports = function(el){
     template: require('./index.ract').template
   })
 
+  var settings = initSettings(ractive.find("#settings"))
+  
   ractive.updateFastclick()
 
   emitter.on('toggle-menu', function(open) {

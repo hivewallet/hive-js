@@ -3,12 +3,15 @@
 var $ = require('browserify-zepto')
 var Ractive = require('hive-ractive')
 var emitter = require('hive-emitter')
+var initSearch = require('hive-search')
 
 module.exports = function(el){
   var ractive = new Ractive({
     el: el,
     template: require('./index.ract').template
   })
+
+  var search = initSearch(ractive.find("#search"))
 
   ractive.updateFastclick()
 

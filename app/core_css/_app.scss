@@ -16,6 +16,9 @@
   width: 100%;
   flex: 1; // take up full width
   margin-right: 20%;
+  padding: 10px;
+
+  color: white;
 
   position: fixed;
   top: 0;
@@ -27,23 +30,9 @@
   transform: translateX(-100%);
   transition: transform .3s ease;
 
-  @include breakpoint(portrait) {
-    position: static;
-    margin-right: 0;
-    flex: none;
-    width: 80px;
-    transition: none;
-    transform: none;
-    overflow-y: auto;
-  }
-
-
   &.open {
     transform: translateX(0);
-
-    @include breakpoint(portrait) {
-      transform: none;
-    }
+    position: static;
   }
 }
 
@@ -56,10 +45,6 @@
   transition: transform .3s ease;
   transform: translateX(0);
 
-  @include breakpoint(portrait) {
-    transition: none;
-  }
-
   &.closed {
     position: fixed;
     top: 0;
@@ -68,12 +53,6 @@
     right: 0;
     transform: translateX(80%);
     overflow: hidden;
-
-    @include breakpoint(portrait) {
-      position: static;
-      transform: none;
-      overflow-y: auto;
-    }
   }
 
 
@@ -83,5 +62,10 @@
       display: block;
     }
   }
+}
+
+.content {
+  padding-left: 10px;
+  padding-right: 10px;
 }
 

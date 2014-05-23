@@ -8,7 +8,6 @@ var initAuth = require('hive-auth')
 var initSend = require('hive-send')
 var initReceive = require('hive-receive')
 var initHistory = require('hive-history')
-var initSettings = require('hive-settings')
 var router = require('hive-router').router
 var emitter = require('hive-emitter')
 var sendDialog = require('hive-send-dialog')
@@ -29,9 +28,6 @@ module.exports = function(el){
   var send = initSend(ractive.find("#send"))
   var receive = initReceive(ractive.find("#receive"))
   var history = initHistory(ractive.find("#history"))
-  // var search = initSearch(ractive.find("#search"))
-  // var settings = initSettings(ractive.find("#settings"))
-
 
   var currentPage = send
 

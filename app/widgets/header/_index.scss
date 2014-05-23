@@ -14,9 +14,7 @@
   color: black;
   text-align: center;
   margin-bottom: 10px;
-  @include breakpoint(portrait) {
-    display: none;
-  }
+
 }
 
 .header__balance {
@@ -31,6 +29,7 @@
   width: 30px;
   height: 30px;
   padding: 0;
+  padding-top: 4px;
 
   &.is_updating {
     color: darken(#b9b9bd, 20%);
