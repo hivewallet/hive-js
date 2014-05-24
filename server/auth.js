@@ -6,6 +6,20 @@ var crypto = require('crypto')
 
 var userPrefix = "org.couchdb.user:"
 
+function exist(name, callback) {
+  name = userPrefix + name
+  userDB.get(name, function (err, doc) {
+    if(err && err.error === 'not_found'){
+      callback(null, false)
+    } else if(err) {
+      console.error('error getting doc', err)
+      callback({error: 'fetching_doc_failed'})
+    } else {
+      callback(null, true)
+    }
+  })
+}
+
 function register(name, pin, callback){
   userDB.get(userPrefix + name, function (err, doc) {
     if(err && err.error === 'not_found'){
@@ -131,5 +145,6 @@ function deleteUser(user, callback) {
 
 module.exports = {
   register: register,
-  login: login
+  login: login,
+  exist: exist
 }
