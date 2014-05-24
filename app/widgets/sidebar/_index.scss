@@ -1,12 +1,10 @@
 #sidebar {
   display: block;
-  background-color: $purple;
   min-height: 100%;
   width: 100%;
   flex: 1; // take up full width
   margin-right: 15%;
-
-  color: white;
+  padding-bottom: 65px;
 
   position: fixed;
   top: 0;
@@ -15,23 +13,29 @@
   bottom: 0;
   overflow: hidden;
 
+  color: white;
+  background-color: $purple--light;
+
+
   transform: translateX(-100%);
   transition: transform .3s ease;
 
   &.open {
     transform: translateX(0);
-    position: static;
+    position: relative;
   }
 }
 
 
 .sidebar__header {
+  display: flex;
+  justify-content: space-between;
   padding-top: 15px;
   padding-left: 20px;
   padding-right: 20px;
   padding-bottom: 19px;
-  display: flex;
-  justify-content: space-between;
+
+  background-color: $purple;
 }
 
 .sidebar__logo {
@@ -42,5 +46,28 @@
 .sidebar__version {
   padding-top: 16px;
   font-size: 14px;
-  color: $purple--light;
+  opacity: 0.3;
+}
+
+.sidebar__logout {
+  @include clickbtn;
+  position: absolute;
+  display: flex;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: $purple;
+  padding: 20px;
+
+
+  ._icon {
+    font-size: 24px;
+    opacity: 0.1;
+    margin-top: 6px;
+  }
+
+  ._text {
+    margin-left: 10px;
+    padding-top: 11px;
+  }
 }

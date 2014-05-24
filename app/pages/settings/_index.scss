@@ -1,7 +1,30 @@
 
 
 #settings {
-  background-color: darken($purple--light, 5%);
-  padding-left: 20px;
-  padding-right: 20px;
+}
+
+.settings__toggle {
+  @include clickbtn;
+  display: flex;
+  padding: 20px;
+  padding-bottom: 16px;
+  background-color: $purple--light;
+  border-top: 1px solid darken($purple--light, 5%);
+
+  ._icon {
+    font-size: 20px;
+    opacity: 0.1;
+  }
+
+  ._title {
+    margin-left: 10px;
+    padding-top: 2px;
+  }
+
+  ._arrow {
+    flex-grow: 1;
+    padding-top: 4px;
+    text-align: right;
+    opacity: 0.1;
+  }
 }

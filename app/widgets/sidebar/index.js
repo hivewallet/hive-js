@@ -17,6 +17,11 @@ module.exports = function(el){
   
   ractive.updateFastclick()
 
+  ractive.on('logout', function(event){
+    event.original.preventDefault()
+    window.location.reload();
+  })
+
   emitter.on('toggle-menu', function(open) {
     var classes = ractive.el.classList
     if(open) {

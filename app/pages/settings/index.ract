@@ -1,71 +1,96 @@
 
-<img src="{{emailToAvatar(user.email)}}" />
 
-{{^editingName}}
-<div on-click='edit-name' class='panel'>
-  {{user.firstName}} {{user.lastName}}
-</div>
-{{/editingName}}
-
-{{#editingName}}
-  <div class="medium-6 small-12 columns">
-    <input type="text" value={{user.firstName}} />
-  </div>
-  <div class="medium-6 small-12 columns">
-    <input type="text" value={{user.lastName}} on-blur='edited-name'/>
-  </div>
-{{/editingName}}
-
-<div class='bitcoin'>
-  <select class='large-2 small-4 columns'>
-    <option>BTC</option>
-  </select>
-  <span class="amount large-10 small-8 columns">
-    {{satoshiToBTC(bitcoinBalance)}}
-  </span>
-  <hr/>
+<div class="settings__toggle">
+  <span class="_icon ss-icon">user</span>
+  <span class="_title">Your Details</span>
+  <span class="_arrow ss-icon">navigatedown</span>
 </div>
 
-<div class='fiat-currency'>
-  <select class='large-2 small-4 columns' value="{{selectedFiat}}">
-    {{#currencies}}
-      <option value="{{.}}">{{.}}</option>
-    {{/currencies}}
-  </select>
-  <span class="amount large-10 small-8 columns">
-    {{bitcoinToFiat(bitcoinBalance, exchangeRates[selectedFiat])}}
-  </span>
-</div>
+<div class="settings__toggle">
+  <span class="_icon ss-icon">dollarsign</span>
+  <span class="_title">Currencies</span>
+  <span class="_arrow ss-icon">navigatedown</span>
 </div>
 
-<div>
-  <hr/>
-  <h5>Bitcoin Address</h5>
-  <div class='panel'>
-    {{user.address}}
-  </div>
+<div class="settings__toggle">
+  <span class="_icon ss-icon">lock</span>
+  <span class="_title">Security</span>
+  <span class="_arrow ss-icon">navigatedown</span>
 </div>
 
-{{#user.mnemonic}}
-  <div>
-    <h5>Seed Phrase</h5>
-    <div class='panel'>
-      {{user.mnemonic}}
-    </div>
-  </div>
-{{/user.mnemonic}}
 
-<div>
-  <h5>Contact information</h5>
-  {{^editingEmail}}
-  <div on-click='edit-email' class='panel'>
-    {{user.email}}
-  </div>
-  {{/editingEmail}}
 
-  {{#editingEmail}}
+{{#revealed}}
+
+  <img src="{{emailToAvatar(user.email)}}" />
+
+  {{^editingName}}
+  <div on-click='edit-name' class='panel'>
+    {{user.firstName}} {{user.lastName}}
+  </div>
+  {{/editingName}}
+
+  {{#editingName}}
     <div class="medium-6 small-12 columns">
-      <input type="text" value={{user.email}} on-blur='edited-email'/>
+      <input type="text" value={{user.firstName}} />
     </div>
-  {{/editingEmail}}
-</div>
+    <div class="medium-6 small-12 columns">
+      <input type="text" value={{user.lastName}} on-blur='edited-name'/>
+    </div>
+  {{/editingName}}
+
+  <div class='bitcoin'>
+    <select class='large-2 small-4 columns'>
+      <option>BTC</option>
+    </select>
+    <span class="amount large-10 small-8 columns">
+      {{satoshiToBTC(bitcoinBalance)}}
+    </span>
+    <hr/>
+  </div>
+
+  <div class='fiat-currency'>
+    <select class='large-2 small-4 columns' value="{{selectedFiat}}">
+      {{#currencies}}
+        <option value="{{.}}">{{.}}</option>
+      {{/currencies}}
+    </select>
+    <span class="amount large-10 small-8 columns">
+      {{bitcoinToFiat(bitcoinBalance, exchangeRates[selectedFiat])}}
+    </span>
+  </div>
+  </div>
+
+  <div>
+    <hr/>
+    <h5>Bitcoin Address</h5>
+    <div class='panel'>
+      {{user.address}}
+    </div>
+  </div>
+
+  {{#user.mnemonic}}
+    <div>
+      <h5>Seed Phrase</h5>
+      <div class='panel'>
+        {{user.mnemonic}}
+      </div>
+    </div>
+  {{/user.mnemonic}}
+
+  <div>
+    <h5>Contact information</h5>
+    {{^editingEmail}}
+    <div on-click='edit-email' class='panel'>
+      {{user.email}}
+    </div>
+    {{/editingEmail}}
+
+    {{#editingEmail}}
+      <div class="medium-6 small-12 columns">
+        <input type="text" value={{user.email}} on-blur='edited-email'/>
+      </div>
+    {{/editingEmail}}
+  </div>
+
+{{/revealed}}
