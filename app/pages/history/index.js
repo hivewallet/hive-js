@@ -23,13 +23,13 @@ module.exports = function(el){
       directionClass: function(direction){
         return {
           incoming: 'green',
-          outgoing: 'blue'
+          outgoing: 'red'
         }[direction]
       },
       directionIcon: function(direction){
         return {
-          incoming: 'plus',
-          outgoing: 'minus'
+          incoming: '+',
+          outgoing: '-'
         }[direction]
       },
       formatTimestamp: function(timestamp){
@@ -44,10 +44,13 @@ module.exports = function(el){
       },
       satoshiToBTC: function(amount){
         var satoshi = new Big(Math.abs(amount))
-        return satoshi.times(0.00000001)
+        return satoshi.times(0.000001)
+      },
+      truncate: function(address){
+        return address.substr(0, 4);
       }
     }
-  });
+  }); 
 
   ractive.updateFastclick()
 
@@ -58,6 +61,7 @@ module.exports = function(el){
 
   emitter.on('update-transactions', function(newTxs) {
     ractive.set('transactions', newTxs)
+    console.log(newTxs)
   })
 
   return ractive

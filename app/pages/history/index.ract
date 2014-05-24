@@ -1,24 +1,28 @@
 
-<ul>
+<div class="transactions">
   {{#transactions}}
-    <li>
-      <i class="ss-icon">dollarsign</i>
-      <i class="ss-icon {{directionClass(direction)}}">{{directionIcon(direction)}}</i>
-      <div>
-        <span>{{directionVerb(direction)}}</span>
-        <b>{{satoshiToBTC(amount)}} BTC</b>
+    <div class="transactions__item">
 
-        {{#toAddress}}
-          <span>to</span>
-          <b>{{toAddress}}</b>
-        {{/toAddress}}
+      <div class="_avatar hexagon"></div>
+
+      <div class="_address">{{truncate(toAddress)}}... <span class="ss-icon _expandBtn">action</span></div>
+
+      <div class="_detail">
+        
+        <div class="_amount {{directionClass(direction)}}">{{directionIcon(direction)}}{{satoshiToBTC(amount)}}</div>
 
         {{#pending}}
-          <div class='pending'>pending</div>
+          <span class='_time'>sync<span class="ss-icon">action</span> confirming</span>
         {{/pending}}
+
+        {{^pending}}
+          <span class='_time'>{{formatTimestamp(timestamp)}}</span>
+        {{/pending}}
+
       </div>
 
-      <span class='timestamp'>{{formatTimestamp(timestamp)}}</span>
-    </li>
+
+      
+    </div>
   {{/transactions}}
-</ul>
+</div>   

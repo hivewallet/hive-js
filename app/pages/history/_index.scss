@@ -4,46 +4,63 @@
   padding-left: 10px;
   padding-right: 10px;
 
-  ul {
-    list-style: none;
-    padding: 0;
-  }
-
-  ul > li {
-    padding: 15px 0;
-    border-bottom: 1px solid lightgrey;
-  }
-
-  li > * {
-    display: inline-block;
-    vertical-align: middle;
-  }
-
-  .fa.fa-bitcoin {
-    font-size: 2em;
-    color: lightgrey;
-    text-shadow: 1px 1px 1px #333;
-    margin-right: 15px;
-  }
-
   .green {
-    color: limegreen;
+    color: $green;
   }
 
-  .blue {
-    color: deepskyblue;
+  .red {
+    color: $red;
+  }
+}
+
+.transactions {
+
+}
+
+.transactions__item {
+  display: flex;
+  flex-wrap: wrap;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid darken($grey--light, 10%);
+
+  ._avatar {
+
   }
 
-  .timestamp {
-    float: right;
-    color: gray;
-    font-size: small;
-    vertical-align: top;
-    padding-right: 20px;
+  ._address {
+    margin-left: 10px;
+    padding-top: 27px;
+    font-size: 23px;
+    font-weight: $light;
   }
 
-  .pending {
-    text-transform: uppercase;
-    color: gray;
+  ._expandBtn {
+    @include clickbtn;
+    font-size: 16px;
+    opacity: 0.4;
   }
+
+  ._detail {
+    text-align: right;
+    padding-top: 19px;
+    flex-grow: 1;
+  }
+  
+  ._amount {
+    font-size: 32px;
+    font-weight: $light;
+  }
+  
+  ._currency {
+    font-size: 14px;
+  }
+  
+  ._time {
+    display: block;
+    font-size: 14px;
+    margin-top: -5px;
+    color: $grey;
+  }
+  
 }

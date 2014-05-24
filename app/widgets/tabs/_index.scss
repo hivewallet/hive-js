@@ -28,7 +28,7 @@
 
   &:hover {
     .tab__icon, .tab__text {
-      opacity: 1.0;
+      opacity: 0.8;
     }
   }
 
@@ -39,8 +39,6 @@
     }
   }
 }
-
-
 
 #tabs .tabs .tab__icon {
   display: block;
