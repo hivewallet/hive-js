@@ -1,6 +1,6 @@
 <div id="menu_btn" class="header__toggle ss-icon attach_fastclick" on-click="toggle">
   {{#menuOpen}}
-    left
+    delete
   {{/menuOpen}}
 
   {{^menuOpen}}
