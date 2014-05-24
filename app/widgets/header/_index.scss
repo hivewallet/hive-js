@@ -10,8 +10,18 @@
 }
 
 .header__balance {
-  font-size: 32px;
   font-weight: $light;
+  display: flex;
+
+  ._amount {
+    font-size: 32px;
+    margin-left: 16px;
+  }
+  ._currency {
+    font-size: 14px;
+    padding-top: 6px;
+    margin-left: 3px;
+  }
 }
 
 .icon_atom {
@@ -28,10 +38,20 @@
   margin-left: 10px; 
 }
 
+@keyframes infinite-spinning {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .header__refresh {
   @extend .icon_atom;
-  margin-right: 10px; 
-  &.is_updating {
+  margin-right: 10px;
 
+  &.is_updating {
+    animation:  infinite-spinning 0.4s linear infinite;
   }
 }
