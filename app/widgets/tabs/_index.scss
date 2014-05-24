@@ -1,6 +1,7 @@
 
 #tabs {
   margin-bottom: 20px;
+  background-color: $purple--light;
 }
 
 #tabs .tabs {
@@ -11,12 +12,14 @@
   @include clickbtn;
   display: block;
   flex-grow: 1;
-  padding: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+  padding-bottom: 10px;
+  padding-top: 10px;
 
   text-align: center;
 
   color: white;
-  background-color: #323037;
 
   @include breakpoint(portrait) {
     text-align: center;
@@ -24,18 +27,33 @@
   }
 
   &:hover {
-    background-color: #222125;
+    .tab__icon, .tab__text {
+      opacity: 1.0;
+    }
+  }
+
+  &.active {
+      border-bottom: 4px solid $purple--highlight;
+    .tab__icon, .tab__text {
+      opacity: 1.0;
+    }
   }
 }
 
-#tabs .tabs .tab.active {
-  background-color: #222125;
-}
+
 
 #tabs .tabs .tab__icon {
-  display: inline-block;
-  margin-top: 10px;
-  margin-bottom: 6px;
+  display: block;
+  margin-top: 5px;
+  font-size: 20px;
+  opacity: 0.3;
+}
+
+.tab__text {
+  display: block;
+  font-weight: $light;
+  font-size: 14px;
+  opacity: 0.3;
 }
 
 

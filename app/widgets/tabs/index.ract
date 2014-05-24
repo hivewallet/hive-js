@@ -1,11 +1,14 @@
 <div class="tabs">
   <a id="send_tab" data-hash='#send' class="tab attach_fastclick" on-click="select">
     <span class="tab__icon ss-icon">send</span>
+    <span class="tab__text">Send</span>
   </a>
   <a data-hash='#receive' class="tab attach_fastclick" on-click="select">
     <span class="tab__icon ss-icon">inbox</span>
+    <span class="tab__text">Receive</span>
   </a>  
   <a data-hash='#history' class="tab attach_fastclick" on-click="select">
     <span class="tab__icon ss-icon">clock</span>
+    <span class="tab__text">History</span>
   </a>
 </div>
