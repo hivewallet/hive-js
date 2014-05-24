@@ -49,9 +49,17 @@
 
 .header__refresh {
   @extend .icon_atom;
-  margin-right: 10px;
+  padding-right: 10px;
+  margin-top: 2px;
+  ._icon {
+    @include icon(20px, 20px, block);
+    background-image: url('/assets/img/refresh.svg');
+    margin: 0 auto;
+  }
 
   &.is_updating {
-    animation:  infinite-spinning 0.4s linear infinite;
+    ._icon {
+      animation:  infinite-spinning 0.4s linear infinite;
+    }
   }
 }
