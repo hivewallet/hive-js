@@ -1,2 +1,14 @@
 
-<p>receive tab</p>
+
+<div style="padding: 20px;">
+  <a href="#" class="hivebtn attach_fastclick" on-click="send">Send</a>
+</div>
+
+<div style="padding: 20px;">
+  <a href="#" class="hivebtn--red attach_fastclick" on-click="error">Error</a>
+</div>
+
+<div style="padding: 20px;">
+  <div id="search"></div>
+</div>
+

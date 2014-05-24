@@ -49,7 +49,7 @@
 
 .header__refresh {
   @extend .icon_atom;
-  padding-right: 10px;
+  padding-right: 15px;
   margin-top: 2px;
   ._icon {
     @include icon(20px, 20px, block);

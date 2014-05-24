@@ -1,13 +1,22 @@
 
-<div style="padding: 20px;">
-  <a href="#" class="hivebtn attach_fastclick" on-click="send">Send</a>
-</div>
 
-<div style="padding: 20px;">
-  <a href="#" class="hivebtn--red attach_fastclick" on-click="error">Error</a>
-</div>
+  <div class="send__form">
+    <form>
 
-<div style="padding: 20px;">
-  <div id="search"></div>
-</div>
+      <label for="to">To:
+        <input id="to" type="text" value="{{to}}">
+      </label>
 
+      <label for="bitcoin">BTC:
+        <input id="bitcoin" type="number" value="{{value}}" on-keyup="bitcoin-to-fiat">
+      </label>
+
+      <label for="fiat">{{fiatCurrency}}:
+        <input id="fiat" type="number" value="{{fiatValue}}" on-keyup="fiat-to-bitcoin">
+      </label>
+    </form>
+  </div>
+
+  <div class="send__buttons">
+    <a href="#" on-click="send" class="send__btn attach_fastclick">Send</a>
+  </div>

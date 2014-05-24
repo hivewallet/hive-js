@@ -6,16 +6,15 @@
 
 #tabs .tabs {
   display: flex;
+  justify-content: space-around;
 }
 
 #tabs .tabs .tab {
   @include clickbtn;
   display: block;
-  flex-grow: 1;
-  margin-left: 10px;
-  margin-right: 10px;
   padding-bottom: 10px;
   padding-top: 10px;
+  width: 100px;
 
   text-align: center;
 
