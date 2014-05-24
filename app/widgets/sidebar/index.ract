@@ -1,2 +1,8 @@
 
+<div class="sidebar__header">
+
+  <div class="sidebar__logo"></div>
+  <span class="sidebar__version">v0.1.0</div>
+
+</div>
 <div id="settings"></div>

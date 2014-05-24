@@ -1,51 +1,44 @@
-<div class='row'>
-  <div class='medium-3 columns'>
-    <img src="{{emailToAvatar(user.email)}}" />
+
+<img src="{{emailToAvatar(user.email)}}" />
+
+{{^editingName}}
+<div on-click='edit-name' class='panel'>
+  {{user.firstName}} {{user.lastName}}
+</div>
+{{/editingName}}
+
+{{#editingName}}
+  <div class="medium-6 small-12 columns">
+    <input type="text" value={{user.firstName}} />
   </div>
-
-  <div class='medium-9 columns'>
-    <div class='name row'>
-      {{^editingName}}
-      <div on-click='edit-name' class='panel'>
-        {{user.firstName}} {{user.lastName}}
-      </div>
-      {{/editingName}}
-
-      {{#editingName}}
-        <div class="medium-6 small-12 columns">
-          <input type="text" value={{user.firstName}} />
-        </div>
-        <div class="medium-6 small-12 columns">
-          <input type="text" value={{user.lastName}} on-blur='edited-name'/>
-        </div>
-      {{/editingName}}
-      <hr/>
-    </div>
-
-    <div class='bitcoin row'>
-      <select class='large-2 small-4 columns'>
-        <option>BTC</option>
-      </select>
-      <span class="amount large-10 small-8 columns">
-        {{satoshiToBTC(bitcoinBalance)}}
-      </span>
-      <hr/>
-    </div>
-
-    <div class='fiat-currency row'>
-      <select class='large-2 small-4 columns' value="{{selectedFiat}}">
-        {{#currencies}}
-          <option value="{{.}}">{{.}}</option>
-        {{/currencies}}
-      </select>
-      <span class="amount large-10 small-8 columns">
-        {{bitcoinToFiat(bitcoinBalance, exchangeRates[selectedFiat])}}
-      </span>
-    </div>
+  <div class="medium-6 small-12 columns">
+    <input type="text" value={{user.lastName}} on-blur='edited-name'/>
   </div>
+{{/editingName}}
+
+<div class='bitcoin'>
+  <select class='large-2 small-4 columns'>
+    <option>BTC</option>
+  </select>
+  <span class="amount large-10 small-8 columns">
+    {{satoshiToBTC(bitcoinBalance)}}
+  </span>
+  <hr/>
 </div>
 
-<div class='row'>
+<div class='fiat-currency'>
+  <select class='large-2 small-4 columns' value="{{selectedFiat}}">
+    {{#currencies}}
+      <option value="{{.}}">{{.}}</option>
+    {{/currencies}}
+  </select>
+  <span class="amount large-10 small-8 columns">
+    {{bitcoinToFiat(bitcoinBalance, exchangeRates[selectedFiat])}}
+  </span>
+</div>
+</div>
+
+<div>
   <hr/>
   <h5>Bitcoin Address</h5>
   <div class='panel'>
@@ -54,7 +47,7 @@
 </div>
 
 {{#user.mnemonic}}
-  <div class='row'>
+  <div>
     <h5>Seed Phrase</h5>
     <div class='panel'>
       {{user.mnemonic}}
@@ -62,7 +55,7 @@
   </div>
 {{/user.mnemonic}}
 
-<div class='row'>
+<div>
   <h5>Contact information</h5>
   {{^editingEmail}}
   <div on-click='edit-email' class='panel'>

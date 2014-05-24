@@ -9,33 +9,6 @@
   }
 }
 
-#sidebar {
-  display: block;
-  background-color: #3e3c43;
-  min-height: 100%;
-  width: 100%;
-  flex: 1; // take up full width
-  margin-right: 20%;
-  padding: 10px;
-
-  color: white;
-
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  overflow: hidden;
-
-  transform: translateX(-100%);
-  transition: transform .3s ease;
-
-  &.open {
-    transform: translateX(0);
-    position: static;
-  }
-}
-
 #main {
   overflow-x: hidden;
   position: relative;
@@ -44,6 +17,7 @@
 
   transition: transform .3s ease;
   transform: translateX(0);
+  box-shadow: -5px 0px 15px 0px rgba(50,50,50,0.3);
 
   &.closed {
     position: fixed;
@@ -51,7 +25,7 @@
     bottom: 0;
     left: 0;
     right: 0;
-    transform: translateX(80%);
+    transform: translateX(85%);
     overflow: hidden;
   }
 

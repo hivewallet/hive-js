@@ -1,12 +1,7 @@
 
 
-#profile .amount {
-  margin-top: 10px;
-}
-
-#profile .panel {
-  background-color: white;
-  border: 1px solid lightgrey;
-  border-radius: 5px;
-  padding: 10px;
+#settings {
+  background-color: darken($purple--light, 5%);
+  padding-left: 20px;
+  padding-right: 20px;
 }

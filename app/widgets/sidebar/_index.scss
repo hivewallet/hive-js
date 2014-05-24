@@ -1,0 +1,46 @@
+#sidebar {
+  display: block;
+  background-color: $purple;
+  min-height: 100%;
+  width: 100%;
+  flex: 1; // take up full width
+  margin-right: 15%;
+
+  color: white;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+
+  transform: translateX(-100%);
+  transition: transform .3s ease;
+
+  &.open {
+    transform: translateX(0);
+    position: static;
+  }
+}
+
+
+.sidebar__header {
+  padding-top: 15px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 19px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.sidebar__logo {
+  @include icon(120px, 38px, block);
+  background-image: url('/assets/img/app_logo.svg');
+}
+
+.sidebar__version {
+  padding-top: 16px;
+  font-size: 14px;
+  color: $purple--light;
+}
