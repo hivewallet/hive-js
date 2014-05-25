@@ -45,6 +45,20 @@ module.exports = function (prependMiddleware){
     })
   })
 
+  app.get('/exist', function(req, res){
+    var name = req.body.wallet_id
+    if (!name) return res.send(400, 'Bad request');
+
+    auth.exist(name, function(err, userExist){
+      if(err) {
+        console.error('error', err)
+        return res.send(400, err)
+      }
+
+      res.send(200, userExist)
+    })
+  })
+
   app.post('/location', restrict, function(req, res) {
     var data = req.body
 

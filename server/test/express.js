@@ -13,6 +13,9 @@ var fakeAuth = {
   },
   login: function(name, pin, callback) {
     callback(null, token)
+  },
+  exist: function(name, callback){
+    callback(null, 'yay!')
   }
 }
 
@@ -91,6 +94,26 @@ describe('POST /login', function(){
         assert(res.headers['set-cookie'])
         done()
       })
+  })
+})
+
+describe('GET /exist', function(){
+  it('returns the result of auth.exist', function(done){
+    request(app)
+      .get('/exist')
+      .send({wallet_id: 'there?'})
+      .end(function(err, res){
+        assert.equal(res.status, 200)
+        assert.deepEqual(res.text, 'yay!')
+        done()
+      })
+  })
+
+  it('returns bad request when wallet id is missing', function(done){
+    request(app)
+      .get('/exist')
+      .expect(400)
+      .end(done)
   })
 })
 

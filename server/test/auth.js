@@ -4,7 +4,7 @@ var db = require('../db')
 var userDB = db('_users')
 
 describe('auth', function(){
-  describe('GET exist', function(){
+  describe('exist', function(){
     var name = "foobar"
     var nameInDB = "org.couchdb.user:" + name
     beforeEach(function(done){
