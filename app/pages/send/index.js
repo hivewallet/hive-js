@@ -15,11 +15,13 @@ module.exports = function(el){
     }
   })
 
-  db.get('systemInfo', function(err, info){
-    if(err) return console.error(err);
-    ractive.set('fiatCurrency', info.preferredCurrency)
+  emitter.on('wallet-ready', function(){
+    db.get('systemInfo', function(err, info){
+      if(err) return console.error(err);
+      ractive.set('fiatCurrency', info.preferredCurrency)
+    })  
   })
-
+  
   ractive.on('send', function(event){
     var to = ractive.get('to')
     var value = bitcoinToSatoshi(ractive.get('value'))
