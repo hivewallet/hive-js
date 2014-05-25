@@ -7,8 +7,7 @@ var crypto = require('crypto')
 var userPrefix = "org.couchdb.user:"
 
 function exist(name, callback) {
-  name = userPrefix + name
-  userDB.get(name, function (err, doc) {
+  userDB.get(userPrefix + name, function (err, doc) {
     if(err && err.error === 'not_found'){
       callback(null, false)
     } else if(err) {
@@ -21,8 +20,10 @@ function exist(name, callback) {
 }
 
 function register(name, pin, callback){
-  userDB.get(userPrefix + name, function (err, doc) {
-    if(err && err.error === 'not_found'){
+  exist(name, function(err, userExist){
+    if(err) return callback(err)
+
+    if(!userExist) {
       createUser(name, pin, function(err, token){
         if(err) return callback(err);
         createDatabase(name, function(err){
@@ -31,8 +32,6 @@ function register(name, pin, callback){
           callback(null, token)
         })
       })
-    } else if(err) {
-      callback(err)
     } else {
       login(name, pin, callback)
     }
