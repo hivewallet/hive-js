@@ -11,6 +11,20 @@ function login(wallet_id, pin, callback) {
   postCredentials('login', wallet_id, pin, callback)
 }
 
+function exist(wallet_id, callback) {
+  xhr({
+    uri: uriRoot + "/exist?wallet_id=" + wallet_id,
+    method: 'GET',
+    timeout: 10000,
+  }, function(err, resp, body){
+    if(resp.statusCode !== 200) {
+      console.error(body)
+      return callback(JSON.parse(body))
+    }
+    callback(null, body === 'true')
+  })
+}
+
 function postCredentials(endpoint, wallet_id, pin, callback) {
   xhr({
     uri: uriRoot + "/" +  endpoint,
@@ -29,5 +43,6 @@ function postCredentials(endpoint, wallet_id, pin, callback) {
 
 module.exports = {
   register: register,
-  login: login
+  login: login,
+  exist: exist
 }

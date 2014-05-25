@@ -68,7 +68,7 @@ function createWallet(passphrase, network, callback) {
   worker.addEventListener('message', function(e) {
     initWallet(e.data, network)
 
-    callback() //TODO: check remote db if new user or existing
+    auth.exist(wallet.id, callback)
   }, false)
 }
 

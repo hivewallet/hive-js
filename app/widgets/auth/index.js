@@ -68,14 +68,18 @@ function register(el){
     ractive.set('progress', 'Saving pin...')
   })
 
-  function onWalletCreated() {
+  function onWalletCreated(err, walletExist) {
     ractive.pauseLoading()
     ractive.set('opening', false)
-    ractive.set('progress', 'Please set a pin for quick access')
+
+    if(err) return alert(err);
+
+    var text = walletExist ? 'Enter your pin:' : 'Set a pin for quick access'
+    ractive.set('pinInstruction', text)
     ractive.set('enterPin', true)
     ractive.nodes.setPin.focus()
   }
-  
+
   function getPassphrase(){
     return ractive.get('passphrase').trim()
   }

@@ -46,7 +46,7 @@ module.exports = function (prependMiddleware){
   })
 
   app.get('/exist', function(req, res){
-    var name = req.body.wallet_id
+    var name = req.query.wallet_id
     if (!name) return res.send(400, 'Bad request');
 
     auth.exist(name, function(err, userExist){

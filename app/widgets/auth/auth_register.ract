@@ -51,13 +51,13 @@
       {{#enterPin}}
 
           <div class="auth__pin">
-            <label>Set your pin:
+            <label>{{pinInstruction}}
               <input id="setPin" type="password" placeholder="6-digit pin" value="{{pin}}" on-enter='set-pin'/>
             </label>
           </div>
 
         {{^opening}}
-          <div class="auth__btn--existing attach_fastclick" on-click="set-pin">Set pin &amp; open wallet</div>
+          <div class="auth__btn--existing attach_fastclick" on-click="set-pin">Open wallet</div>
         {{/opening}}
 
       {{/enterPin}}
