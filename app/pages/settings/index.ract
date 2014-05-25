@@ -1,34 +1,34 @@
 
 
-<div class="settings__toggle" on-click="open-user-settings">
+<div class="settings__toggle" on-click="toggle-user-settings">
   <span class="_icon ss-icon">user</span>
   <span class="_title">Your Details</span>
   <span class="_arrow ss-icon">navigatedown</span>
 </div>
 
-{{#user_settings}}
+{{#dropdowns.user_settings}}
   <div id="user_settings" class="settings__group"></div>
-{{/user_settings}}
+{{/dropdowns.user_settings}}
 
-<div class="settings__toggle" on-click="open-currency-settings">
+<div class="settings__toggle" on-click="toggle-currency-settings">
   <span class="_icon ss-icon">dollarsign</span>
   <span class="_title">Currencies</span>
   <span class="_arrow ss-icon">navigatedown</span>
 </div>
 
-{{#currency_settings}}
+{{#dropdowns.currency_settings}}
   <div id="currency_settings" class="settings__group"></div>
-{{/currency_settings}}
+{{/dropdowns.currency_settings}}
 
-<div class="settings__toggle" on-click="open-security-settings">
+<div class="settings__toggle" on-click="toggle-security-settings">
   <span class="_icon ss-icon">lock</span>
   <span class="_title">Security</span>
   <span class="_arrow ss-icon">navigatedown</span>
 </div>
 
-{{#security_settings}}
+{{#dropdowns.security_settings}}
   <div id="security_settings" class="settings__group"></div>
-{{/security_settings}}
+{{/dropdowns.security_settings}}
 
 
 {{#revealed}}

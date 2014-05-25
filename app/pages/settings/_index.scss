@@ -1,6 +1,7 @@
 
 
 #settings {
+  padding-bottom: 82px;
 }
 
 .settings__toggle {
@@ -27,4 +28,10 @@
     text-align: right;
     opacity: 0.1;
   }
+}
+
+
+.settings__group {
+  padding: 100px;
+  background-color: darken($purple--light, 5%);
 }
