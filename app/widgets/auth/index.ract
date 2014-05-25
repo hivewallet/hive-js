@@ -1,0 +1,19 @@
+<div class="auth">
+  <div id="landing_el" class="current">
+    <div class="auth__header">
+      {{>header}}
+    </div>
+
+    <div class="auth__btngroup">
+      {{>content}}
+      {{^opening}}
+        {{>actions}}
+      {{/opening}}
+    </div>
+
+    {{#opening}}
+      <span class="auth__pending">{{progress}}</span>
+    {{/opening}}
+  </div>
+</div>
+

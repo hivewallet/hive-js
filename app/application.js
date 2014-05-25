@@ -22,7 +22,8 @@ var authEl = document.getElementById("auth")
 var auth = null
 
 walletExists(function(exists){
-  auth = exists ? initAuth.login(authEl) : initAuth.register(authEl)
+  auth = initAuth()
+  // auth = exists ? initAuth.login(authEl) : initAuth.register(authEl)
   auth.show()
 })
 

@@ -1,0 +1,12 @@
+<div class="auth__pin">
+  <label>
+    {{#walletExist}}
+      Enter your pin:
+    {{/walletExist}}
+    {{^walletExist}}
+      Set a pin for quick access:
+    {{/walletExist}}
+    <input id="setPin" type="password" placeholder="6-digit pin" value="{{pin}}" on-enter='enter-pin'/>
+  </label>
+</div>
+
