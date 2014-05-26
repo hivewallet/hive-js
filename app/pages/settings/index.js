@@ -21,7 +21,6 @@ module.exports = function(el){
         email: '',
         mnemonic: ''
       },
-      dropdowns: {},
       editingName: false,
       editingEmail: false,
       currencies: currencies,
@@ -57,36 +56,25 @@ module.exports = function(el){
 
   ractive.observe('selectedFiat', setPreferredCurrency)
 
-  ractive.on('toggle-user-settings', function(event){
-    event.original.preventDefault()
-    if(ractive.get('dropdowns.user_settings')) {
-      ractive.set('dropdowns.user_settings', false);
+  function toggleDropdown(node){
+    var elem = ractive.nodes[node]
+    var dataString = node + ''
+    var state = ractive.get(dataString)
+    var classes = elem.classList
+
+    if(state) {
+      ractive.set(dataString, false)
+      classes.remove('open')
     } else {
-      ractive.set('dropdowns.user_settings', true);
+      ractive.set(dataString, true)
+      classes.add('open')
     }
+  }
+
+  ractive.on('toggle', function(event){
+    event.original.preventDefault();
+    toggleDropdown(event.node.dataset.target);
   })
-
-  ractive.on('toggle-currency-settings', function(event){
-    event.original.preventDefault()
-    if(ractive.get('dropdowns.currency_settings')) {
-      ractive.set('dropdowns.currency_settings', false);
-    } else {
-      ractive.set('dropdowns.currency_settings', true);
-    }
-  })
-
-  ractive.on('toggle-security-settings', function(event){
-    event.original.preventDefault()
-    if(ractive.get('dropdowns.security_settings')) {
-      ractive.set('dropdowns.security_settings', false);
-    } else {
-      ractive.set('dropdowns.security_settings', true);
-    }
-  })
-
-
-
-
 
   ractive.on('edit-name', function(){
     ractive.set('editingName', true)

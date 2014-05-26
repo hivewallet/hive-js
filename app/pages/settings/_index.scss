@@ -32,6 +32,11 @@
 
 
 .settings__group {
+  display: none;
   padding: 100px;
   background-color: darken($purple--light, 5%);
+
+  &.open {
+    display: block;
+  }
 }
