@@ -1,1 +1,4 @@
-module.exports = require('./choose/index')
+module.exports = {
+  choose: require('./choose/index'),
+  pin: require('./pin/index')
+}

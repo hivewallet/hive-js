@@ -18,12 +18,10 @@ var fastclick = require('fastclick')
 fastclick(document.getElementsByTagName("body")[0])
 
 var frame = initFrame(document.getElementById('app'))
-var authEl = document.getElementById("auth")
 var auth = null
 
 walletExists(function(exists){
-  auth = initAuth()
-  // auth = exists ? initAuth.login(authEl) : initAuth.register(authEl)
+  auth = exists ? initAuth.pin(true) : initAuth.choose()
   auth.show()
 })
 

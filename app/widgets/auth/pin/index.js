@@ -3,24 +3,44 @@
 var Ractive = require('../auth')
 var Hive = require('hive-wallet')
 
-module.exports = function(walletExist){
+module.exports = function(userExists){
   var ractive = new Ractive({
     partials: {
       content: require('./content.ract').template,
       actions: require('./actions.ract').template
     },
     data: {
-      walletExist: walletExist
+      userExists: userExists
     }
   })
 
   ractive.on('enter-pin', function(event){
-    Hive.setPin(getPin(), ractive.onSyncDone)
     ractive.set('opening', true)
+    if(userExists) {
+      return Hive.walletExists(function(walletExists){
+        if(walletExists) { return openWithPin() }
+        setPin()
+      })
+    }
+    setPin()
+  })
+
+  ractive.on('clear-credentials', function(event){
+    Hive.reset(function(err){
+      location.reload(false);
+    })
   })
 
   function getPin(){
     return ractive.get('pin')
+  }
+
+  function openWithPin(){
+    Hive.openWalletWithPin(getPin(), ractive.getNetwork(), ractive.onSyncDone)
+  }
+
+  function setPin(){
+    Hive.setPin(getPin(), ractive.onSyncDone)
   }
 
   ractive.nodes.setPin.focus()
