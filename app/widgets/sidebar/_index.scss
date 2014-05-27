@@ -1,9 +1,9 @@
+
 #sidebar {
   display: block;
   min-height: 100%;
   width: 100%;
   flex: 1; // take up full width
-  margin-right: 15%;
 
   position: fixed;
   top: 0;
@@ -25,13 +25,12 @@
   }
 }
 
-
 .sidebar__header {
   display: flex;
   justify-content: space-between;
   padding-top: 15px;
   padding-left: 20px;
-  padding-right: 20px;
+  padding-right: 15%;
   padding-bottom: 19px;
 
   background-color: $purple;
@@ -44,6 +43,7 @@
 
 .sidebar__version {
   padding-top: 16px;
+  padding-right: 20px;
   font-size: 14px;
   opacity: 0.3;
 }
@@ -57,6 +57,7 @@
   width: 100%;
   background-color: $purple;
   padding: 20px;
+  padding-right: 15%;
 
 
   ._icon {
