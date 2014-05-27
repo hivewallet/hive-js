@@ -35,7 +35,7 @@
 
 .header__toggle {
   @extend .icon_atom;
-  margin-left: 10px; 
+  margin-left: 10px;
 }
 
 @keyframes infinite-spinning {
@@ -59,7 +59,7 @@
 
   &.is_updating {
     ._icon {
-      animation:  infinite-spinning 0.4s linear infinite;
+      animation:  infinite-spinning 1s linear infinite;
     }
   }
 }
