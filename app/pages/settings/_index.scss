@@ -33,10 +33,47 @@
 
 .settings__group {
   display: none;
-  padding: 100px;
+  padding: 20px;
+  padding-bottom: 30px;
   background-color: darken($purple--light, 5%);
 
   &.open {
     display: block;
+  }
+}
+
+.settings__btn {
+  @extend .hivebtn;
+  margin-top: 20px;
+}
+
+.settings__input-group {
+
+  & + .settings__input-group {
+    padding-top: 10px;
+  }
+  
+  ._label {
+    @include noselect;
+    cursor: pointer;
+    display: block;
+  }
+
+  ._input {
+    background-color: darken($purple--light, 10%);
+    border: 1px solid $purple;
+    font-weight: $light;
+    font-family: 'jigsaw', sans-serif;
+    color: white;
+    margin-top: 5px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 10px;
+    border-radius: 3px;
+
+    &:active, &:focus {
+      outline: 0;
+      border: 1px solid $purple--highlight;
+    }
   }
 }
