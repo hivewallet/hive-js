@@ -13,6 +13,9 @@ var emitter = require('hive-emitter')
 var initFrame = require('hive-frame')
 var initAuth = require('hive-auth')
 var walletExists = require('hive-wallet').walletExists
+var fastclick = require('fastclick')
+
+fastclick(document.getElementsByTagName("body")[0])
 
 var frame = initFrame(document.getElementById('app'))
 var authEl = document.getElementById("auth")
