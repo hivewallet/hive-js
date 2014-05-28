@@ -66,6 +66,11 @@ function createWallet(passphrase, network, callback) {
   emitter.emit('wallet-opening', message)
   worker.postMessage({passphrase: passphrase})
   worker.addEventListener('message', function(e) {
+    var err = e.data.error
+    if(err) {
+      return callback(err)
+    }
+
     initWallet(e.data, network)
 
     auth.exist(wallet.id, callback)
