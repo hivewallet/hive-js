@@ -4,7 +4,7 @@ var Ractive = require('../auth')
 var passphrasePage = require('../passphrase')
 var createIntroPage = require('../create-intro')
 
-module.exports = function(){
+module.exports = function choose(){
   var ractive = new Ractive({
     partials: {
       header: require('./header.ract').template,
@@ -17,7 +17,7 @@ module.exports = function(){
   })
 
   ractive.on('reveal-passphrase-input', function(){
-    passphrasePage()
+    passphrasePage(choose)
   })
 
   return ractive

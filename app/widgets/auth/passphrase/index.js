@@ -2,10 +2,9 @@
 
 var Ractive = require('../auth')
 var Hive = require('hive-wallet')
-var choosePage = require('../choose')
 var pinPage = require('../pin')
 
-module.exports = function(){
+module.exports = function(prevPage){
   var ractive = new Ractive({
     partials: {
       content: require('./content.ract').template,
@@ -14,7 +13,7 @@ module.exports = function(){
   })
 
   ractive.on('hide-passphrase-input', function(event){
-    choosePage() //TODO: does not work
+    prevPage()
   })
 
   ractive.on('open-wallet-with-passphrase', function(event){
