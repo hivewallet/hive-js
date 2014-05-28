@@ -1,3 +1,7 @@
+{{#menuOpen}}
+  <div class="toggle_overlay" on-click="toggle"></div>
+{{/menuOpen}}
+
 <div id="menu_btn" class="header__toggle ss-icon attach_fastclick" on-click="toggle">
   {{#menuOpen}}
     delete

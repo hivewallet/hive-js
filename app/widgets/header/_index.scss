@@ -15,7 +15,6 @@
 
   ._amount {
     font-size: 32px;
-    margin-left: 16px;
   }
   ._currency {
     font-size: 14px;
@@ -38,6 +37,17 @@
   margin-left: 10px;
 }
 
+.toggle_overlay {
+  cursor: pointer;
+  position: absolute;
+  z-index: 9000;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+
 @keyframes infinite-spinning {
   from {
     transform: rotate(0deg);
@@ -49,7 +59,8 @@
 
 .header__refresh {
   @extend .icon_atom;
-  padding-right: 15px;
+  width: 50px;
+  padding-right: 10px;
   margin-top: 2px;
   ._icon {
     @include icon(20px, 20px, block);

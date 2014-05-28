@@ -3,7 +3,7 @@
   <div id="sidebar" class="animate_in">test</div>
 
   <div id="main" class="animate_in">
-    
+
     <div id="header"></div>
     <div id="tabs"></div>
 
