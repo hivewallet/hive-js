@@ -1,4 +1,4 @@
-<div class="auth__btn--existing attach_fastclick" on-click="open-wallet-with-passphrase">Open wallet</div>
+<div class="auth__btn--existing" on-click="open-wallet-with-passphrase">Open wallet</div>
 
 <div class="auth__altmsg">
   <span class="_link" on-click="hide-passphrase-input">Create new wallet instead</span>

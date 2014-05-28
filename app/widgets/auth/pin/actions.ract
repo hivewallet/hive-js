@@ -1,4 +1,4 @@
-<div class="auth__btn--existing attach_fastclick" on-click="enter-pin">Open wallet</div>
+<div class="auth__btn--existing" on-click="enter-pin">Open wallet</div>
 
 {{#userExists}}
   <div class="auth__altmsg">

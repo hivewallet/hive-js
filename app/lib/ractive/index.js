@@ -1,6 +1,5 @@
 'use strict';
 var Ractive = require('ractive/build/ractive.runtime')
-var fastclick = require('fastclick')
 
 // extracted from https://github.com/RactiveJS/Ractive-events-keys
 var makeKeyDefinition = function ( code ) {
@@ -48,12 +47,6 @@ Ractive.prototype.hide = function(){
 Ractive.prototype.show = function(){
   this.fire('before-show')
   this.el.classList.add('current')
-}
-
-Ractive.prototype.updateFastclick = function(){
-  this.findAll('.attach_fastclick').forEach(function(element){
-    fastclick(element)
-  })
 }
 
 module.exports = Ractive

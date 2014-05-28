@@ -9,7 +9,7 @@
 
       <div class="auth__btngroup">
 
-        <div class="auth__btn attach_fastclick" on-click="generate-phrase">Let's go</div>
+        <div class="auth__btn" on-click="generate-phrase">Let's go</div>
         
         <div class="auth__altmsg">
           <a on-click="temp-back" href="#" class="_link">Read more about passphrases</a>
@@ -41,10 +41,10 @@
             <span style='width: {{ 100 * (current_word + 1) / passphrase_length }}%;' class="_progress"></span>
           </div>
 
-          <div class="auth__btn attach_fastclick" on-click="next-word">{{pass_next_text}}</div>
+          <div class="auth__btn" on-click="next-word">{{pass_next_text}}</div>
         
           <div class="auth__altmsg">
-            <a href="#" class="_link attach_fastclick" on-click="prev-word">Go back, I missed one</a>
+            <a href="#" class="_link" on-click="prev-word">Go back, I missed one</a>
           </div>
         {{/passphrase_pending}}
 
@@ -62,7 +62,7 @@
 
       <div class="auth__btngroup">
 
-        <div class="auth__btn attach_fastclick" on-click="create-pin">I've got it</div>
+        <div class="auth__btn" on-click="create-pin">I've got it</div>
       
       </div>
 
@@ -82,7 +82,7 @@
         </div>
 
         {{^opening}}
-          <div class="auth__btn--existing attach_fastclick" on-click="set-pin">Set pin &amp; open wallet</div>
+          <div class="auth__btn--existing" on-click="set-pin">Set pin &amp; open wallet</div>
         {{/opening}}
         
       </div>

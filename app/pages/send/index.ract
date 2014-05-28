@@ -1,8 +1,6 @@
 
-
   <div class="send__form">
     <form>
-
 
       <div class="send__input-group">
         <label class="_label" for="to">Wallet address
