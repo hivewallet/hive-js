@@ -2,6 +2,7 @@
 
 var Ractive = require('../auth')
 var Hive = require('hive-wallet')
+var readPassphrasePage = require('../create-read/index')
 
 module.exports = function(){
   var ractive = new Ractive({
@@ -12,9 +13,12 @@ module.exports = function(){
   })
 
   ractive.on('generate-phrase', function(){
+    ractive.set('opening', true)
     ractive.set('progress', 'Generating passphrase...')
     ractive.loading()
-    Hive.createWallet(null, getNetwork(), onSeedCreated)
+    Hive.createWallet(null, this.getNetwork(), function(){
+      readPassphrasePage()
+    })
   })
 
   return ractive
