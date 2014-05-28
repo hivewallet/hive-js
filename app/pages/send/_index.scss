@@ -3,28 +3,25 @@
   padding-top: 5px;
 }
 
-.send__input-group { 
 
-  position: relative;
 
-  ._label {
+.send__address {
+
+  display: flex;
+
+  ._label {    
     @include noselect;
     cursor: pointer;
     display: block;
+    flex: 1;
+    margin-right: 10px;
   }
-
-  ._label--right {
-    @include noselect;
-    position: absolute;
-    z-index: 500;
-    cursor: pointer;
-    display: block;
-    text-align: right;
-    font-size: 20px;
-    font-weight: $light;
-    right: 6px;
-    top: 8px;
-    color: $grey;
+  ._btn {
+    @extend .hivebtn;
+    margin-top: 29px;
+    width: 42px;
+    height: 42px;
+    padding: 0;
   }
 
   ._input {
@@ -44,20 +41,56 @@
   }
 }
 
+.send__amount { 
 
-.send__amount {
+  position: relative;
+
+  ._label {
+    @include noselect;
+    cursor: pointer;
+    display: block;
+  }
+
+  ._currency {
+    @include noselect;
+    position: absolute;
+    z-index: 500;
+    cursor: pointer;
+    display: block;
+    text-align: right;
+    font-size: 20px;
+    font-weight: $light;
+    right: 6px;
+    top: 8px;
+    color: $grey;
+  }
+
+  ._input {
+    @extend .generic_box;
+    font-weight: $light;
+    font-family: 'jigsaw', sans-serif;
+    padding-left: 10px;
+    height: auto;    
+    margin: 0;
+    border-radius: 0;
+    border-top-right-radius: 2px;
+    border-top-left-radius: 2px;
+    position: relative;
+    z-index: 200;
+
+    &:active, &:focus {
+      outline: 0;
+      border: 1px solid $blue;
+    }
+  }
+}
+
+
+._input-group {
   position: relative;
   margin-top: 5px;
 
-  ._input {
-    margin: 0;
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius: 0;
-    position: relative;
-    z-index: 200;
-  }
-
-  & + .send__amount { 
+  & + ._input-group { 
     margin-top: 0;
     ._input {
       margin-top: -1px;
