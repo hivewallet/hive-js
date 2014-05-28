@@ -1,0 +1,5 @@
+<div class="auth__btn" on-click="generate-phrase">Let's go</div>
+
+<div class="auth__altmsg">
+  <a href="#" class="_link">Read more about passphrases</a>
+</div>

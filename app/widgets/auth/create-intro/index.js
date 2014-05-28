@@ -1,8 +1,7 @@
 'use strict';
 
 var Ractive = require('../auth')
-var passphrasePage = require('../passphrase/index')
-var createIntroPage = require('../create-intro/index')
+var Hive = require('hive-wallet')
 
 module.exports = function(){
   var ractive = new Ractive({
@@ -12,12 +11,10 @@ module.exports = function(){
     }
   })
 
-  ractive.on('create-new-wallet', function(){
-    createIntroPage()
-  })
-
-  ractive.on('reveal-passphrase-input', function(){
-    passphrasePage()
+  ractive.on('generate-phrase', function(){
+    ractive.set('progress', 'Generating passphrase...')
+    ractive.loading()
+    Hive.createWallet(null, getNetwork(), onSeedCreated)
   })
 
   return ractive
