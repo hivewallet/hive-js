@@ -2,8 +2,8 @@
 
 var Ractive = require('../auth')
 var Hive = require('hive-wallet')
-var choosePage = require('../choose/index')
-var pinPage = require('../pin/index')
+var choosePage = require('../choose')
+var pinPage = require('../pin')
 
 module.exports = function(){
   var ractive = new Ractive({

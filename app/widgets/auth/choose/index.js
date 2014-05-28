@@ -1,8 +1,8 @@
 'use strict';
 
 var Ractive = require('../auth')
-var passphrasePage = require('../passphrase/index')
-var createIntroPage = require('../create-intro/index')
+var passphrasePage = require('../passphrase')
+var createIntroPage = require('../create-intro')
 
 module.exports = function(){
   var ractive = new Ractive({

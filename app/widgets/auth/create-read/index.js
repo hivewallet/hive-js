@@ -3,7 +3,7 @@
 var Ractive = require('../auth')
 var Hive = require('hive-wallet')
 var $ = require('browserify-zepto')
-var confirmPassphrasePage = require('../create-confirm/index')
+var confirmPassphrasePage = require('../create-confirm')
 
 module.exports = function(){
   var words = Hive.getWallet().getMnemonic().split(' ')

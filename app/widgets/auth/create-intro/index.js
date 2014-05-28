@@ -2,7 +2,7 @@
 
 var Ractive = require('../auth')
 var Hive = require('hive-wallet')
-var readPassphrasePage = require('../create-read/index')
+var readPassphrasePage = require('../create-read')
 
 module.exports = function(){
   var ractive = new Ractive({
