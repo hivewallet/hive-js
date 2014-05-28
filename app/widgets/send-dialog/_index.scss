@@ -68,15 +68,6 @@
   border: 0 !important;
 }
 
-.send__buttons {
-  display: flex;
-}
-
-.send__btn {
-  @extend .hivebtn;
-  margin-right: 10px;
-}
-
 .cancel__btn {
   @extend .hivebtn;
   margin-left: 10px;

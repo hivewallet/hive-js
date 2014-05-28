@@ -3,20 +3,33 @@
   <div class="send__form">
     <form>
 
-      <label for="to">To:
-        <input id="to" type="text" value="{{to}}">
-      </label>
 
-      <label for="bitcoin">BTC:
-        <input id="bitcoin" type="number" value="{{value}}" on-keyup="bitcoin-to-fiat">
-      </label>
+      <div class="send__input-group">
+        <label class="_label" for="to">Wallet address
+          <input id="to" class="_input" type="text" value="{{to}}" />
+        </label>
+      </div>
 
-      <label for="fiat">{{fiatCurrency}}:
-        <input id="fiat" type="number" value="{{fiatValue}}" on-keyup="fiat-to-bitcoin">
-      </label>
+      <div class="send__input-group">
+
+        <label class="_label" for="bitcoin">Amount</label>
+
+          <div class="send__amount">
+            <span class="_label--right">BTC</span>
+            <input id="bitcoin" class="_input" type="number" min="0" value="{{value}}" on-keyup="bitcoin-to-fiat">
+          </div>
+
+          <div class="send__amount">
+            <span class="_label--right">{{fiatCurrency}}</span>
+            <input id="fiat" class="_input" type="number" min="0" value="{{fiatValue}}" on-keyup="fiat-to-bitcoin">
+          </div>
+
+
+      </div>
+
     </form>
   </div>
 
   <div class="send__buttons">
-    <a href="#" on-click="send" class="send__btn attach_fastclick">Send</a>
+    <a href="#" on-click="send" class="send__btn attach_fastclick">Confirm</a>
   </div>

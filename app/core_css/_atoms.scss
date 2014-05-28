@@ -10,7 +10,7 @@
   padding-right: 30px;
   padding-top: 15px;
   padding-bottom: 15px;
-  border-radius: 5px; 
+  border-radius: 2px; 
 
   color: white;
   text-align: center;
@@ -52,6 +52,12 @@
 
 
 
+.generic_box {
+  border: 1px solid $grey;
+  background-color: $grey--light;
+  border-radius: 3px;
+  padding: 10px 8px;
+}
 
 .hexagon {
   width: 55px;

@@ -44,6 +44,11 @@ input[type="search"]::-webkit-search-decoration {
   display: none;
 }
 
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
 
 // Use divs around fieldsets or spans inside legends for styling.
 

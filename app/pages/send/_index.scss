@@ -1,0 +1,81 @@
+#send {
+  padding: 20px;
+  padding-top: 5px;
+}
+
+.send__input-group { 
+
+  position: relative;
+
+  ._label {
+    @include noselect;
+    cursor: pointer;
+    display: block;
+  }
+
+  ._label--right {
+    @include noselect;
+    position: absolute;
+    z-index: 500;
+    cursor: pointer;
+    display: block;
+    text-align: right;
+    font-size: 20px;
+    font-weight: $light;
+    right: 6px;
+    top: 8px;
+    color: $grey;
+  }
+
+  ._input {
+    @extend .generic_box;
+    font-weight: $light;
+    font-family: 'jigsaw', sans-serif;
+    margin-top: 5px;
+    padding-left: 10px;
+    border-radius: 2px;
+
+    height: auto;
+
+    &:active, &:focus {
+      outline: 0;
+      border: 1px solid $blue;
+    }
+  }
+}
+
+
+.send__amount {
+  position: relative;
+  margin-top: 5px;
+
+  ._input {
+    margin: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    position: relative;
+    z-index: 200;
+  }
+
+  & + .send__amount { 
+    margin-top: 0;
+    ._input {
+      margin-top: -1px;
+      border-radius: 2px;
+      border-top-right-radius: 0;
+      border-top-left-radius: 0;
+      z-index: 100;
+      &:focus {      
+        z-index: 300;
+      }
+    }
+  }
+}
+
+.send__buttons {
+  margin-top: 20px;
+}
+
+.send__btn {
+  @extend .hivebtn;
+}
