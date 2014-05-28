@@ -22,8 +22,6 @@ module.exports = function(el){
     active = node
   }
 
-  ractive.updateFastclick()
-
   emitter.on('wallet-ready', function() {
     highlightTab(ractive.nodes.send_tab);
   });

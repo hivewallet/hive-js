@@ -18,8 +18,6 @@ module.exports = function(el){
     }
   })
 
-  ractive.updateFastclick()
-
   ractive.on('search-nearby', function(){
     if(ractive.get('searching')) { return; }
     ractive.set('searching', true);    
@@ -33,7 +31,6 @@ module.exports = function(el){
         return record[0]
       })
       ractive.set('nearbys', nearbys)
-      ractive.updateFastclick()
     })
   })
 

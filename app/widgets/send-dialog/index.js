@@ -37,7 +37,6 @@ module.exports = function(el){
     }
     _html.addClass('remove_scroll')
     ractive.set('visible', true)
-    ractive.updateFastclick()
   })
 
   ractive.on('send', function(event){

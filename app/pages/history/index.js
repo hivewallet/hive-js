@@ -52,8 +52,6 @@ module.exports = function(el){
     }
   }); 
 
-  ractive.updateFastclick()
-
   emitter.on('transactions-loaded', function(newTxs){
     Array.prototype.unshift.apply(transactions, newTxs)
     ractive.update('transactions')

@@ -15,8 +15,6 @@ module.exports = function(el){
 
   var settings = initSettings(ractive.find("#settings"))
   
-  ractive.updateFastclick()
-
   ractive.on('logout', function(event){
     event.original.preventDefault()
     window.location.reload();

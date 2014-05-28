@@ -17,8 +17,6 @@ module.exports = function(el){
     }
   })
 
-  ractive.updateFastclick()
-  
   emitter.on('wallet-ready', function(){
     var wallet = getWallet();
     ractive.set('bitcoinBalance', wallet.getBalance())

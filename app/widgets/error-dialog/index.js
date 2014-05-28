@@ -19,8 +19,6 @@ module.exports = function(el){
     }
   })
 
-  ractive.updateFastclick()
-
   ractive.on('cancel', function(event){
     event.original.preventDefault()
     ractive.set('visible', false)
@@ -29,7 +27,6 @@ module.exports = function(el){
 
   emitter.on('open-error', function(data){
     ractive.set('visible', true)
-    ractive.updateFastclick()
   })
 
   return ractive
