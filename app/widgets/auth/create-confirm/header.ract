@@ -1,0 +1,3 @@
+<img class="_img--large" src="/assets/img/lock_temp.png" />
+<h2 class="_subtitle">Review your passphrase:</h2>
+<p class="_passphrase">{{passphrase}}</p>

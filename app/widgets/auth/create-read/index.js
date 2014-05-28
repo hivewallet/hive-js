@@ -3,6 +3,7 @@
 var Ractive = require('../auth')
 var Hive = require('hive-wallet')
 var $ = require('browserify-zepto')
+var confirmPassphrasePage = require('../create-confirm/index')
 
 module.exports = function(){
   var words = Hive.getWallet().getMnemonic().split(' ')
@@ -30,9 +31,7 @@ module.exports = function(){
 
     if(is_animating){ return; }
     if(old_word === length - 1) {
-      // next page
-      // ractive.set('create_confirm', true)
-      return;
+      return confirmPassphrasePage();
     }
     if(old_word === length - 2) {
       ractive.set('pass_next_text', 'Review Passphrase')

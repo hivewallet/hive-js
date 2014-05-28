@@ -1,0 +1,1 @@
+<div class="auth__btn" on-click="create-pin">I've got it</div>
