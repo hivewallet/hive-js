@@ -30,6 +30,7 @@ module.exports = function(el){
   })
 
   ractive.on('toggle', function(event){
+    window.scrollTo(0, 0);
     emitter.emit('toggle-menu', !ractive.get('menuOpen'))
   })
 
