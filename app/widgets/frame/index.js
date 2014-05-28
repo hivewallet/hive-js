@@ -65,8 +65,10 @@ module.exports = function(el){
   emitter.on('toggle-menu', function(open) {
     var classes = ractive.find("#main").classList
     if(open) {
+      ractive.set('sidebar_open', true)
       classes.add('closed')
     } else {
+      ractive.set('sidebar_open', false)
       classes.remove('closed')
     }
 
