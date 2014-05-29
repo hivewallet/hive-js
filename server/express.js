@@ -4,6 +4,7 @@ var express = require('express')
 var path = require('path')
 var auth = require('./auth')
 var geo = require('./geo')
+var validatePin = require('hive-pin-validator')
 
 module.exports = function (prependMiddleware){
   var app = express()
@@ -88,7 +89,7 @@ module.exports = function (prependMiddleware){
   })
 
   function validateAuthParams(req, res, next) {
-    if (!req.body.wallet_id || !req.body.pin) {
+    if (!req.body.wallet_id || !validatePin(req.body.pin)) {
       return res.send(400, 'Bad request')
     }
     next()

@@ -38,7 +38,10 @@ var fakeGeo = {
     }
   }
 }
-var app = proxyquire('../express', { './auth': fakeAuth, './geo': fakeGeo })()
+var app = proxyquire('../express', {
+  './auth': fakeAuth,
+  './geo': fakeGeo
+})()
 
 describe('POST /register', function(){
 
@@ -49,7 +52,7 @@ describe('POST /register', function(){
   it('sets user session on auth.register success', function(done){
     request(app)
       .post('/register')
-      .send({wallet_id: 'valid', pin: 123})
+      .send({wallet_id: 'valid', pin: '1234'})
       .end(function(err, res){
         assert.equal(res.status, 200)
         assert.deepEqual(res.text, token)
@@ -61,7 +64,7 @@ describe('POST /register', function(){
   it('returns bad request when register returns error', function(done){
     request(app)
       .post('/register')
-      .send({wallet_id: 'invalid', pin: 123})
+      .send({wallet_id: 'invalid', pin: '1234'})
       .expect(400)
       .end(done)
   })
@@ -69,7 +72,7 @@ describe('POST /register', function(){
   it('returns bad request when wallet id is missing', function(done){
     request(app)
       .post('/register')
-      .send({pin: 123})
+      .send({pin: '1234'})
       .expect(400)
       .end(done)
   })
@@ -81,13 +84,21 @@ describe('POST /register', function(){
       .expect(400)
       .end(done)
   })
+
+  it('returns bad request when pin is invalid', function(done){
+    request(app)
+      .post('/register')
+      .send({wallet_id: 'valid', pin: 'www'})
+      .expect(400)
+      .end(done)
+  })
 })
 
 describe('POST /login', function(){
   it('sets user session on successful login', function(done){
     request(app)
       .post('/login')
-      .send({wallet_id: 'valid', pin: 123})
+      .send({wallet_id: 'valid', pin: '1234'})
       .end(function(err, res){
         assert.equal(res.status, 200)
         assert.deepEqual(res.text, token)
@@ -120,7 +131,7 @@ describe('POST /location', function(){
   function postWithCookie(endpoint, data, callback){
     request(app)
       .post('/login')
-      .send({wallet_id: 'valid', pin: 123})
+      .send({wallet_id: 'valid', pin: '1234'})
       .end(function(err, res){
         request(app)
           .post(endpoint)
@@ -169,7 +180,7 @@ describe('DELETE /location', function(){
   function deleteWithCookie(endpoint, data, callback){
     request(app)
       .post('/login')
-      .send({wallet_id: 'valid', pin: 123})
+      .send({wallet_id: 'valid', pin: '1234'})
       .end(function(err, res){
         request(app)
           .delete(endpoint)
