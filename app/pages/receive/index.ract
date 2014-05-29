@@ -15,5 +15,5 @@
 
 
 {{#qrVisible}}
-  <div id="qrcontainer"></div>
+  <div id="qrcontainer" on-click="hide-qr"></div>
 {{/qrVisible}}

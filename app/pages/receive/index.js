@@ -28,6 +28,10 @@ module.exports = function(el){
     container.appendChild(qr)
   })
 
+  ractive.on('hide-qr', function(){
+    ractive.set('qrVisible', false)
+  })
+
   function getAddress(){
     return Hive.getWallet().currentAddress
   }
