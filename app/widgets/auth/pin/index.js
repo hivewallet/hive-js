@@ -37,7 +37,7 @@ module.exports = function(userExists){
   })
 
   function getPin(){
-    return ractive.get('pin')
+    return ractive.get('pin').toString()
   }
 
   function openWithPin(){
