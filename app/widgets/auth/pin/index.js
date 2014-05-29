@@ -2,6 +2,7 @@
 
 var Ractive = require('../auth')
 var Hive = require('hive-wallet')
+var validatePin = require('hive-pin-validator')
 
 module.exports = function(userExists){
   var ractive = new Ractive({
@@ -15,6 +16,10 @@ module.exports = function(userExists){
   })
 
   ractive.on('enter-pin', function(event){
+    if(!validatePin(getPin())){
+      return alert('Pin must be a 4-digit number')
+    }
+
     ractive.set('opening', true)
     if(userExists) {
       return Hive.walletExists(function(walletExists){
