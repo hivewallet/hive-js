@@ -57,12 +57,12 @@ module.exports = function(el){
 
   emitter.on('open-overlay', function(){
     ractive.set('view_state', 'is_hidden')
-    _html.addClass('remove_scroll')
+    _html.addClass('prevent_scroll')
   })
 
   emitter.on('close-overlay', function(){
     ractive.set('view_state', '')
-    _html.removeClass('remove_scroll')
+    _html.removeClass('prevent_scroll')
   })
 
   emitter.on('open-modal', function(){

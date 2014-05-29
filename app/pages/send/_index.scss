@@ -9,7 +9,7 @@
 
   display: flex;
 
-  ._label {    
+  ._label {
     @include noselect;
     cursor: pointer;
     display: block;
@@ -19,9 +19,12 @@
   ._btn {
     @extend .hivebtn;
     margin-top: 29px;
-    width: 42px;
-    height: 42px;
     padding: 0;
+
+    background-image: url('../img/pin_temp.png');
+    @include icon(42px, 42px, block);
+    background-size: 30px 30px;
+    background-repeat: no-repeat;
   }
 
   ._input {
@@ -41,7 +44,7 @@
   }
 }
 
-.send__amount { 
+.send__amount {
 
   position: relative;
 
@@ -70,7 +73,7 @@
     font-weight: $light;
     font-family: 'jigsaw', sans-serif;
     padding-left: 10px;
-    height: auto;    
+    height: auto;
     margin: 0;
     border-radius: 0;
     border-top-right-radius: 2px;
@@ -90,7 +93,7 @@
   position: relative;
   margin-top: 5px;
 
-  & + ._input-group { 
+  & + ._input-group {
     margin-top: 0;
     ._input {
       margin-top: -1px;
@@ -98,7 +101,7 @@
       border-top-right-radius: 0;
       border-top-left-radius: 0;
       z-index: 100;
-      &:focus {      
+      &:focus {
         z-index: 300;
       }
     }

@@ -27,7 +27,7 @@ var makeKeyDefinition = function ( code ) {
   };
 };
 
-var events = Ractive.events;
+var events = Ractive.events
 
 events.enter = makeKeyDefinition(13);
 events.tab = makeKeyDefinition(9);

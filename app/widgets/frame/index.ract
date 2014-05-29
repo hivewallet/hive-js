@@ -16,5 +16,5 @@
 </div>
 
 <!-- overlays -->
-<div id="geo-dialog"></div>
-<div id="error-dialog"></div>
+<div id="geo-overlay"></div>
+<div id="error-modal"></div>
