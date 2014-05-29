@@ -100,8 +100,7 @@ describe('POST /login', function(){
 describe('GET /exist', function(){
   it('returns the result of auth.exist', function(done){
     request(app)
-      .get('/exist')
-      .send({wallet_id: 'there?'})
+      .get('/exist?wallet_id=there')
       .end(function(err, res){
         assert.equal(res.status, 200)
         assert.deepEqual(res.text, 'yay!')
