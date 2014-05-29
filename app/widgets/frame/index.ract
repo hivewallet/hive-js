@@ -1,4 +1,4 @@
-<div class="frame {{view_state}}">  
+<div class="frame {{view_state}}">
 
   <div id="sidebar" class="animate_in">test</div>
 
@@ -16,5 +16,5 @@
 </div>
 
 <!-- overlays -->
-<div id="send-dialog"></div>
+<div id="geo-dialog"></div>
 <div id="error-dialog"></div>

@@ -1,0 +1,16 @@
+
+.overlay--geo {
+  @extend .overlay;
+  background-color: $blue;
+}
+
+.overlay__close--geo {
+  color: white;
+}
+
+.geo__content {
+  padding: 20px;
+  padding-top: 60px;
+  max-width: 400px;
+  margin: 0 auto;
+}

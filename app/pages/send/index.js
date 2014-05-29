@@ -19,9 +19,9 @@ module.exports = function(el){
     db.get('systemInfo', function(err, info){
       if(err) return console.error(err);
       ractive.set('fiatCurrency', info.preferredCurrency)
-    })  
+    })
   })
-  
+
   ractive.on('send', function(event){
     var to = ractive.get('to')
     var value = bitcoinToSatoshi(ractive.get('value'))
@@ -30,10 +30,6 @@ module.exports = function(el){
 
     wallet.createTxAsync(to, value, function(err, tx){
       if(err) return alert(err)
-
-      ractive.set('visible', false)
-      emitter.emit('close-send-dialog')
-      ractive.set('hide_address', false)
       wallet.sendTx(tx, onTxSent)
     })
   })

@@ -10,8 +10,11 @@ var initReceive = require('hive-receive')
 var initHistory = require('hive-history')
 var router = require('hive-router').router
 var emitter = require('hive-emitter')
-var sendDialog = require('hive-send-dialog')
-var errorDialog = require('hive-error-dialog')
+var geoOverlay = require('hive-geo-overlay')
+var errorModal = require('hive-error-modal')
+var $ = require('browserify-zepto')
+
+var _html = $('html')
 
 module.exports = function(el){
   var ractive = new Ractive({
@@ -20,14 +23,16 @@ module.exports = function(el){
   })
 
   // widgets
-  var header = initHeader(ractive.find("#header"))
-  initTabs(ractive.find("#tabs"))
-  initSidebar(ractive.find("#sidebar"))
+  var header = initHeader(ractive.nodes['header'])
+  var tabs = initTabs(ractive.nodes['tabs'])
+  var sidebar = initSidebar(ractive.nodes['sidebar'])
+  var geoOverlay = initGeoOverlay(ractive.nodes['geo-overlay'])
+  var errorModal = initErrorModal(ractive.nodes['error-modal'])
 
-  // pages
-  var send = initSend(ractive.find("#send"))
-  var receive = initReceive(ractive.find("#receive"))
-  var history = initHistory(ractive.find("#history"))
+  // tabs
+  var send = initSend(ractive.nodes['send'])
+  var receive = initReceive(ractive.nodes['receive'])
+  var history = initHistory(ractive.nodes['history'])
 
   var currentPage = send
 
@@ -50,15 +55,14 @@ module.exports = function(el){
     currentPage = page
   }
 
-  sendDialog(ractive.find("#send-dialog"))
-  errorDialog(ractive.find("#error-dialog"))
-
-  emitter.on('open-send-dialog', function(){
-    ractive.set('view_state', 'is_hidden');
+  emitter.on('open-overlay', function(){
+    ractive.set('view_state', 'is_hidden')
+    _html.addClass('remove_scroll')
   })
 
-  emitter.on('close-send-dialog', function(){
-    ractive.set('view_state', '');
+  emitter.on('close-overlay', function(){
+    ractive.set('view_state', '')
+    _html.removeClass('remove_scroll')
   })
 
   // menu toggle

@@ -1,0 +1,13 @@
+{{#visible}}
+  <div class="overlay--geo">
+
+    <div class="geo__content">
+
+      <div class="overlay__close--geo ss-icon" on-click="close">delete</div>
+
+
+
+    </div>
+
+  </div>
+{{/visible}}
