@@ -39,23 +39,23 @@ module.exports = function(el){
     }
   })
 
+  var xhr_timeout, oval_interval, cancelled;
+
   ractive.on('search-nearby', function(){
 
     ractive.set('searching', true)
-    var oval_interval = function(){
-        ractive.set('oval_visible', false)
-        ractive.set('oval_visible', true)
-    }
-    // lol... hacky animation loop
+
     setTimeout(function() {
-      ractive.set('oval_visible', true)
-      oval_interval = setInterval(oval_interval, 1000)
-    }, 1000)
+      oval_interval = setInterval(function(){
+        ractive.set('oval_visible', true)
+        ractive.set('oval_visible', false)
+      }, 900)
+    }, 200)
 
     geo.search(function(err, results){
       if(err) return alert(err)
 
-      setTimeout(function(){
+      xhr_timeout = setTimeout(function(){
         clearInterval(oval_interval)
         ractive.set('oval_visible', false)
         ractive.set('searching', false)
@@ -64,15 +64,19 @@ module.exports = function(el){
           return record[0]
         })
         ractive.set('nearbys', nearbys)
-      }, 3000)
+      }, 2000)
     })
   })
 
   ractive.on('close-geo', function(event){
-    geo.remove()
+    clearTimeout(xhr_timeout)
+    clearInterval(oval_interval)
+    ractive.set('oval_visible', false)
+    ractive.set('searching', false)
     ractive.set('visible', false)
     ractive.set('results', false)
     emitter.emit('close-overlay')
+    geo.remove()
   })
 
 

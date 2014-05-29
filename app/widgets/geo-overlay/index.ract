@@ -8,7 +8,7 @@
       {{#searching}}
         <div id="searching_container" class="geo__searching" outro="fade">
           {{#oval_visible}}
-            <span id="pulsing_oval" class="_oval" intro-outro="pulse"></span>
+            <span id="pulsing_oval" class="_oval" outro="pulse"></span>
           {{/oval_visible}}
           <p class="_text" intro="fade">Searching your area for <br/>other Hive Web users</p>
           <div class="geo__pindrop" intro="dropdown">

@@ -64,7 +64,7 @@ module.exports = {
     var targetStyle, props, collapsed, defaults;
 
     defaults = {
-      duration: 600,
+      duration: 900,
       easing: 'ease'
     };
 

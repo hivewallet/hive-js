@@ -33,9 +33,10 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    margin-left: -50px;
+    margin-left: -49px;
     margin-top: -50px;
     z-index: 100;
+    transform: scale(0.1);
   }
 }
 
