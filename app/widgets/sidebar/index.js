@@ -1,6 +1,6 @@
 'use strict';
 
-var $ = require('browserify-zepto');
+var $ = require('browserify-zepto')
 var Ractive = require('hive-ractive')
 var hasher = require('hive-router').hasher
 var router = require('hive-router').router
@@ -14,10 +14,10 @@ module.exports = function(el){
   })
 
   var settings = initSettings(ractive.find("#settings"))
-  
+
   ractive.on('logout', function(event){
     event.original.preventDefault()
-    window.location.reload();
+    window.location.reload()
   })
 
   emitter.on('toggle-menu', function(open) {

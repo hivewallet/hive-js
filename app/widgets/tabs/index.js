@@ -1,6 +1,6 @@
 'use strict';
 
-var $ = require('browserify-zepto');
+var $ = require('browserify-zepto')
 var Ractive = require('hive-ractive')
 var hasher = require('hive-router').hasher
 var router = require('hive-router').router

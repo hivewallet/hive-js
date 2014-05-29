@@ -1,19 +1,18 @@
 
-{{^qrVisible}}
-  <h3 class="_title">Your wallet address</h3>
-  <div class="address__box">
-    <span class="_address">{{address}}</span>
-    <span class="_btn" on-click="show-qr"></span>
-  </div>
+<h3 class="_title">Your wallet address</h3>
+<div class="address__box">
+  <span class="_address">{{address}}</span>
+  <span class="_btn" on-click="show-qr"></span>
+</div>
 
-  <h3 class="_title">Location services</h3>
-  <div class="geo__box">
-    <span class="_btn">Turn waggle on</span>
-    <p class="_text">Waggle lets other Hive users nearby discover your wallet address by comparing your location.</p>
-  </div>
-{{/qrVisible}}
-
+<h3 class="_title">Location services</h3>
+<div class="geo__box">
+  <span class="_btn">Turn waggle on</span>
+  <p class="_text">Waggle lets other Hive users nearby discover your wallet address by comparing your location.</p>
+</div>
 
 {{#qrVisible}}
-  <div id="qrcontainer" on-click="hide-qr"></div>
+  <div class="modal__container" intro-outro="fade">
+    <div id="qrcontainer" on-click="hide-qr"></div>
+  </div>
 {{/qrVisible}}

@@ -4,7 +4,6 @@ var Ractive = require('hive-ractive')
 var emitter = require('hive-emitter')
 var $ = require('browserify-zepto')
 
-
 Ractive.transitions.fadeNscale = fadeNscaleTransition
 
 module.exports = function(el){
@@ -32,7 +31,6 @@ module.exports = function(el){
   return ractive
 }
 
-
 function fadeNscaleTransition(t, params) {
 
   var targetStyle, props, collapsed, defaults;
@@ -52,16 +50,16 @@ function fadeNscaleTransition(t, params) {
     transform: 'scale(0.8)'
   };
 
-  params = t.processParams( params, defaults );
+  params = t.processParams(params, defaults)
 
-  if ( t.isIntro ) {
-    targetStyle = t.getStyle( props );
-    t.setStyle( collapsed );
+  if (t.isIntro) {
+    targetStyle = t.getStyle(props)
+    t.setStyle(collapsed)
   } else {
     // make style explicit, so we're not transitioning to 'auto'
-    t.setStyle( t.getStyle( props ) );
-    targetStyle = collapsed;
+    t.setStyle(t.getStyle(props))
+    targetStyle = collapsed
   }
 
-  t.animateStyle( targetStyle, params ).then( t.complete );
+  t.animateStyle(targetStyle, params).then(t.complete)
 }
