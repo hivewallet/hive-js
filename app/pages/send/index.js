@@ -22,6 +22,14 @@ module.exports = function(el){
     })
   })
 
+  emitter.on('prefill-wallet', function(address) {
+    ractive.set('to', address)
+  })
+
+  ractive.on('open-geo', function(){
+    emitter.emit('open-overlay', 'geo')
+  })
+
   ractive.on('send', function(event){
     var to = ractive.get('to')
     var value = bitcoinToSatoshi(ractive.get('value'))

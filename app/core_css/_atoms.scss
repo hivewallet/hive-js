@@ -89,6 +89,12 @@
   border-top: 16px solid $purple;
 }
 
+.oval {
+  width: 100px;
+  height: 50px;
+  background: darken($blue, 10%);
+  border-radius: 50px / 25px;
+}
 
 .overlay {
   position: fixed;
@@ -106,11 +112,14 @@
 
 
 .overlay__close {
+  @include clickbtn;
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 16px;
+  right: 12px;
   width: 34px;
   height: 34px;
   text-align: center;
   padding-top: 5px;
+  font-size: 22px;
+  z-index: 9000;
 }

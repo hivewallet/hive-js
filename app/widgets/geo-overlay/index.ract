@@ -1,11 +1,35 @@
 {{#visible}}
-  <div class="overlay--geo">
+  <div class="overlay--geo" intro-outro="fade">
 
     <div class="geo__content">
 
-      <div class="overlay__close--geo ss-icon" on-click="close">delete</div>
+      <div class="overlay__close--geo ss-icon" on-click="close-geo">delete</div>
 
+      {{#searching}}
+        <div id="searching_container" class="geo__searching" outro="fade">
+          {{#oval_visible}}
+            <span id="pulsing_oval" class="_oval" intro-outro="pulse"></span>
+          {{/oval_visible}}
+          <p class="_text" intro="fade">Searching your area for <br/>other Hive Web users</p>
+          <div class="geo__pindrop" intro="dropdown">
+            <span class="_pin"></span>
+          </div>
+        </div>
+      {{/searching}}
 
+      {{#results}}
+        <div class="search__list">
+          {{#nearbys}}
+            <a href="#" class="search__item" on-click="select"
+               data-wallet={{address}}
+               data-name={{name}}
+               data-email={{email}}>
+                <img class="_avatar" src="{{emailToAvatar(email)}}" />
+                <h3 class="_name">{{name}}</span>
+            </a>
+          {{/nearbys}}
+        </div>
+      {{/results}}
 
     </div>
 

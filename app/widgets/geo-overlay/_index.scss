@@ -1,16 +1,59 @@
 
 .overlay--geo {
   @extend .overlay;
+  overflow-y: auto;
   background-color: $blue;
 }
 
 .overlay__close--geo {
+  @extend .overlay__close;
   color: white;
 }
 
 .geo__content {
   padding: 20px;
   padding-top: 60px;
-  max-width: 400px;
-  margin: 0 auto;
+}
+
+
+.geo__searching {
+  ._text {
+    font-size: 14px;
+    text-align: center;
+    color: white;
+    position: absolute;
+    top: 55%;
+    left: 0;
+    right: 0;
+
+    z-index: 300;
+  }
+  ._oval {
+    @extend .oval;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -50px;
+    margin-top: -50px;
+    z-index: 100;
+  }
+}
+
+.geo__pindrop {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  ._pin {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -90px;
+    margin-left: -35px;
+    background-image: url('../img/pin_temp.png');
+    @include icon(70px, 70px, block);
+    z-index: 200;
+  }
 }
