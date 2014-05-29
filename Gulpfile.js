@@ -90,7 +90,7 @@ gulp.task('watch', function() {
 
 // $ gulp build ---------------------------------- //
 
-gulp.task('build', ['html', 'scripts', 'styles', 'assets']);
+gulp.task('build', ['html', 'scripts', 'styles', 'assets', 'tests']);
 
 // $ gulp ---------------------------------- //
 
