@@ -36,14 +36,20 @@ function set(key, value, callback){
 function get(key, callback) {
   if(id == null) return;
 
+  if(key instanceof Function){
+    callback = key
+    key = null
+  }
+
   db.get(id, function(err, doc){
+    if(err) return callback(err)
+
     var data = JSON.parse(decrypt(doc.data, sercret))
     var value = data[key]
-    if(key instanceof Function){
+    if(!key){
       value = data
-      callback = key
     }
-    callback(err, value)
+    callback(null, value)
   })
 }
 
