@@ -21,6 +21,9 @@ module.exports = function(userExists){
     }
 
     ractive.set('opening', true)
+    ractive.set('progress', 'Verifying pin')
+    ractive.loading()
+
     if(userExists) {
       return Hive.walletExists(function(walletExists){
         if(walletExists) { return openWithPin() }
