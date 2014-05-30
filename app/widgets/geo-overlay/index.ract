@@ -22,7 +22,7 @@
         {{#results}}
           <div class="geo__results" intro-outro="fade">
             {{#nearbys}}
-              <div class="_item" on-click="select"
+              <div class="_item" intro-outro="fade" on-click="select"
                  data-wallet={{address}}
                  data-name={{name}}
                  data-email={{email}}>

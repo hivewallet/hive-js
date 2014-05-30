@@ -46,7 +46,7 @@ module.exports = function(el){
     ractive.fire('search-nearby')
   })
 
-  var xhr_timeout, poll_interval, oval_interval, cancelled;
+  var xhr_timeout, oval_interval, cancelled;
 
   ractive.on('search-nearby', function(){
 
@@ -63,7 +63,6 @@ module.exports = function(el){
       xhr_timeout = setTimeout(function(){
         clearInterval(oval_interval)
         ractive.set('oval_visible', false)
-        ractive.set('searching', false)
         console.log(results)
         if(results.length >= 1){
           ractive.set('results', true)
@@ -71,31 +70,15 @@ module.exports = function(el){
             return record[0]
           })
           ractive.set('nearbys', nearbys)
-
-          poll_interval = setInterval(function(){
-            console.log('polling location data')
-            geo.search(function(err, results){
-              if(err) return alert(err)
-              if(results.length >= 1){
-                ractive.set('results', true)
-                nearbys = results.map(function(record){
-                  return record[0]
-                })
-                ractive.set('nearbys', nearbys)
-              } else {
-                ractive.set('results', false)
-                clearInterval(poll_interval)
-              }
-            })
-          }, 5000)
         }
+
+        ractive.set('searching', false)
       }, 1500)
     })
   })
 
   ractive.on('close-geo', function(event){
     clearTimeout(xhr_timeout)
-    clearInterval(poll_interval)
     clearInterval(oval_interval)
     ractive.set('nearbys', [])
     ractive.set('oval_visible', false)

@@ -59,6 +59,34 @@
   }
 }
 
+.geo__results {
+
+
+  ._item {
+    display: flex;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+
+    &:first-child {
+      padding-top: 0;
+    }
+  }
+
+  ._avatar {
+    width: 70px;
+    height: 70px;
+    -webkit-mask-image: url(../img/hex.png);
+  }
+
+  ._name {
+    color: white;
+    font-size: 24px;
+    padding-top: 18px;
+    margin-left: 10px;
+  }
+}
+
 
 .geo__noresults {
 

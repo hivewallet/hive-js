@@ -8,6 +8,7 @@
 .send__address {
 
   display: flex;
+  margin-bottom: 20px;
 
   ._label {
     @include noselect;
