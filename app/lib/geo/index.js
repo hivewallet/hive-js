@@ -43,11 +43,12 @@ function search(callback){
   })
 }
 
-function remove(){
+function remove(sync){
   xhr({
     uri: uriRoot + "/location",
     headers: { "Content-Type": "application/json" },
     method: 'DELETE',
+    sync: sync,
     body: JSON.stringify({id: userInfo.id})
   }, function(err, resp, body){
     if(resp.statusCode !== 200) {

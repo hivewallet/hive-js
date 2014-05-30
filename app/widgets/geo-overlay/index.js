@@ -90,7 +90,7 @@ module.exports = function(el){
 
 
   window.onbeforeunload = function() {
-    geo.remove()
+    geo.remove(true)
   }
 
   return ractive
