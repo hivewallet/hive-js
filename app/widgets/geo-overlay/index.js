@@ -34,16 +34,21 @@ module.exports = function(el){
 
   emitter.on('open-overlay', function(dialog){
     if(dialog === 'geo') {
+      ractive.set('searching', true)
       ractive.set('visible', true)
       ractive.fire('search-nearby')
     }
   })
 
-  var xhr_timeout, oval_interval, cancelled;
+  ractive.on('search-again',function(event) {
+    event.original.preventDefault()
+    ractive.set('searching', true)
+    ractive.fire('search-nearby')
+  })
+
+  var xhr_timeout, poll_interval, oval_interval, cancelled;
 
   ractive.on('search-nearby', function(){
-
-    ractive.set('searching', true)
 
     setTimeout(function() {
       oval_interval = setInterval(function(){
@@ -59,22 +64,43 @@ module.exports = function(el){
         clearInterval(oval_interval)
         ractive.set('oval_visible', false)
         ractive.set('searching', false)
-        ractive.set('results', true)
-        nearbys = results.map(function(record){
-          return record[0]
-        })
-        ractive.set('nearbys', nearbys)
-      }, 2000)
+        console.log(results)
+        if(results.length >= 1){
+          ractive.set('results', true)
+          nearbys = results.map(function(record){
+            return record[0]
+          })
+          ractive.set('nearbys', nearbys)
+
+          poll_interval = setInterval(function(){
+            console.log('polling location data')
+            geo.search(function(err, results){
+              if(err) return alert(err)
+              if(results.length >= 1){
+                ractive.set('results', true)
+                nearbys = results.map(function(record){
+                  return record[0]
+                })
+                ractive.set('nearbys', nearbys)
+              } else {
+                ractive.set('results', false)
+                clearInterval(poll_interval)
+              }
+            })
+          }, 5000)
+        }
+      }, 1500)
     })
   })
 
   ractive.on('close-geo', function(event){
     clearTimeout(xhr_timeout)
+    clearInterval(poll_interval)
     clearInterval(oval_interval)
+    ractive.set('nearbys', [])
     ractive.set('oval_visible', false)
     ractive.set('searching', false)
     ractive.set('visible', false)
-    ractive.set('results', false)
     emitter.emit('close-overlay')
     geo.remove()
   })

@@ -17,21 +17,34 @@
         </div>
       {{/searching}}
 
-      {{#results}}
-        <div class="search__list">
-          {{#nearbys}}
-            <a href="#" class="search__item" on-click="select"
-               data-wallet={{address}}
-               data-name={{name}}
-               data-email={{email}}>
-                <img class="_avatar" src="{{emailToAvatar(email)}}" />
-                <h3 class="_name">{{name}}</span>
-            </a>
-          {{/nearbys}}
-        </div>
-      {{/results}}
+      {{^searching}}
 
+        {{#results}}
+          <div class="geo__results" intro-outro="fade">
+            {{#nearbys}}
+              <div class="_item" on-click="select"
+                 data-wallet={{address}}
+                 data-name={{name}}
+                 data-email={{email}}>
+                  <img class="_avatar" src="{{emailToAvatar(email)}}" />
+                  <h3 class="_name">{{name}}</span>
+              </div>
+            {{/nearbys}}
+          </div>
+        {{/results}}
+
+        {{^results}}
+
+          <div class="geo__noresults" intro-outro="fade">
+
+            <p class="_message">No Hive users found nearby</p>
+            <div class="_btn" on-click="search-again">Search Again</div>
+
+          </div>
+
+        {{/results}}
+
+      {{/searching}}
     </div>
-
   </div>
 {{/visible}}

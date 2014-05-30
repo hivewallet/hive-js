@@ -53,6 +53,8 @@ function remove(sync){
   }, function(err, resp, body){
     if(resp.statusCode !== 200) {
       console.error(body)
+    } else {
+      console.log('location data removed')
     }
   })
 }

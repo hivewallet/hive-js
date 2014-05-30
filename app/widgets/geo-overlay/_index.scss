@@ -58,3 +58,25 @@
     z-index: 200;
   }
 }
+
+
+.geo__noresults {
+
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  margin-left: -100px;
+  width: 200px;
+  z-index: 500;
+
+  ._message {
+    font-size: 14px;
+    text-align: center;
+    color: white;
+    padding-bottom: 10px;
+  }
+
+  ._btn {
+    @extend .hivebtn--yellow;
+  }
+}
