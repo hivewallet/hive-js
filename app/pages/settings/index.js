@@ -106,7 +106,9 @@ module.exports = function(el){
 
   function setPreferredCurrency(currency){
     db.set('systemInfo', {preferredCurrency: currency}, function(err, response){
-      if(err) return console.error(response)
+      if(err) return console.error(response);
+
+      emitter.emit('preferred-currency-changed', currency)
     })
   }
 

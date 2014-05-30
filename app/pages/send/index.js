@@ -26,6 +26,11 @@ module.exports = function(el){
     ractive.set('to', address)
   })
 
+  emitter.on('preferred-currency-changed', function(currency){
+    ractive.set('fiatCurrency', currency)
+    ractive.fire('bitcoin-to-fiat')
+  })
+
   ractive.on('open-geo', function(){
     var data = {
       dialog: 'geo',
@@ -34,7 +39,7 @@ module.exports = function(el){
     emitter.emit('open-overlay', data)
   })
 
-  ractive.on('send', function(event){
+  ractive.on('send', function(){
     var to = ractive.get('to')
     var value = bitcoinToSatoshi(ractive.get('value'))
 
@@ -46,9 +51,9 @@ module.exports = function(el){
     })
   })
 
-  ractive.on('fiat-to-bitcoin', function(event){
-    var fiat = event.node.value
-    if(fiat === '') return;
+  ractive.on('fiat-to-bitcoin', function(){
+    var fiat = ractive.nodes.fiat.value
+    if(fiat == undefined || fiat === '') return;
 
     var exchangeRate = ractive.get('exchangeRates')[ractive.get('fiatCurrency')]
     var bitcoin = new Big(fiat).div(exchangeRate).toFixed(8)
@@ -56,9 +61,9 @@ module.exports = function(el){
     ractive.set('value', bitcoin)
   })
 
-  ractive.on('bitcoin-to-fiat', function(event){
-    var bitcoin = event.node.value
-    if(bitcoin === '') return;
+  ractive.on('bitcoin-to-fiat', function(){
+    var bitcoin = ractive.nodes.bitcoin.value
+    if(bitcoin == undefined || bitcoin === '') return;
 
     var exchangeRate = ractive.get('exchangeRates')[ractive.get('fiatCurrency')]
     var fiat = new Big(bitcoin).times(exchangeRate).toFixed(2)
