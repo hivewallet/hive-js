@@ -24,7 +24,6 @@ module.exports = function(el){
       editingName: false,
       editingEmail: false,
       currencies: currencies,
-      bitcoinBalance: 'unknown',
       exchangeRates: {},
       satoshiToBTC: satoshiToBTC,
       bitcoinToFiat: bitcoinToFiat,
@@ -112,11 +111,15 @@ module.exports = function(el){
   }
 
   function satoshiToBTC(amount){
+    if(amount == undefined) return;
+
     var satoshi = new Big(amount)
     return satoshi.times(0.00000001)
   }
 
   function bitcoinToFiat(amount, exchangeRate){
+    if(amount == undefined) return;
+
     var btc = satoshiToBTC(amount)
     return btc.times(exchangeRate).toFixed(2)
   }

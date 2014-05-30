@@ -35,7 +35,7 @@ function updateExchangeRates(){
   var ticker = new Ticker()
 
   ticker.getExchangeRates(function(err, rates){
-    emitter.emit('ticker', rates)
+    if(rates) emitter.emit('ticker', rates)
     window.setTimeout(updateExchangeRates, tickerUpdateInterval)
   })
 }

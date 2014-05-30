@@ -11,7 +11,6 @@ module.exports = function(el){
     el: el,
     template: require('./index.ract').template,
     data: {
-      bitcoinBalance: 'unknown',
       satoshiToBTC: satoshiToBTC,
       menuOpen: false
     }
@@ -37,6 +36,8 @@ module.exports = function(el){
   }
 
   function satoshiToBTC(amount){
+    if(amount == undefined) return;
+
     var satoshi = new Big(amount)
     return satoshi.times(0.00000001)
   }
