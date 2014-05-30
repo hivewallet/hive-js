@@ -25,6 +25,13 @@ module.exports = function(el){
     ractive.set('address', getAddress())
   })
 
+  ractive.on('open-geo', function(){
+    var data = {
+      dialog: 'geo'
+    }
+    emitter.emit('open-overlay', data)
+  })
+
   ractive.on('show-qr', function(){
     ractive.set('qrVisible', true)
     emitter.emit('open-modal')

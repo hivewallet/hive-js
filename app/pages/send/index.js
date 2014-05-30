@@ -27,7 +27,11 @@ module.exports = function(el){
   })
 
   ractive.on('open-geo', function(){
-    emitter.emit('open-overlay', 'geo')
+    var data = {
+      dialog: 'geo',
+      context: 'send'
+    }
+    emitter.emit('open-overlay', data)
   })
 
   ractive.on('send', function(event){

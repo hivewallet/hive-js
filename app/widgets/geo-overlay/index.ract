@@ -10,7 +10,7 @@
           {{#oval_visible}}
             <span id="pulsing_oval" class="_oval" outro="pulse"></span>
           {{/oval_visible}}
-          <p class="_text" intro="fade">Searching your area for <br/>other Hive Web users</p>
+          <p class="_text" intro="fade">{{search_message}}</p>
           <div class="geo__pindrop" intro="dropdown">
             <span class="_pin"></span>
           </div>

@@ -15,6 +15,7 @@ Ractive.transitions.pulse = transitions.pulse;
 
 module.exports = function(el){
   var nearbys = []
+  var xhr_timeout, oval_interval;
   var ractive = new Ractive({
     el: el,
     template: require('./index.ract').template,
@@ -27,16 +28,23 @@ module.exports = function(el){
       },
       nearbys: nearbys,
       searching: true,
-      search_msg: 'Search Nearby',
       emailToAvatar: emailToAvatar
     }
   })
 
-  emitter.on('open-overlay', function(dialog){
-    if(dialog === 'geo') {
+  emitter.on('open-overlay', function(data){
+    if(data.dialog === 'geo') {
       ractive.set('searching', true)
       ractive.set('visible', true)
-      ractive.fire('search-nearby')
+
+      if(data.context === 'send') {
+        ractive.set('search_message', 'Searching your area for other Hive Web users')
+        ractive.fire('search-nearby')
+      } else {
+        ractive.set('search_message', 'Broadcasting your location to Hive users nearby')
+        animateOval()
+        lookupGeo('receive')
+      }
     }
   })
 
@@ -56,19 +64,12 @@ module.exports = function(el){
   ractive.on('refresh-list', function(event) {
     event.original.preventDefault()
     ractive.set('updating_nearbys', true)
-    lookupGeo(false)
+    lookupGeo(undefined)
   })
 
-  var xhr_timeout, oval_interval, cancelled;
-
   ractive.on('search-nearby', function(){
-    setTimeout(function() {
-      oval_interval = setInterval(function(){
-        ractive.set('oval_visible', true)
-        ractive.set('oval_visible', false)
-      }, 900)
-    }, 200)
-    lookupGeo(true)
+    animateOval()
+    lookupGeo('new')
   })
 
   ractive.on('close-geo', function(){
@@ -76,8 +77,8 @@ module.exports = function(el){
     clearInterval(oval_interval)
     ractive.set('nearbys', [])
     ractive.set('oval_visible', false)
-    ractive.set('searching', false)
     ractive.set('visible', false)
+    ractive.set('searching', false)
     ractive.set('results', false)
     emitter.emit('close-overlay')
     geo.remove()
@@ -87,11 +88,12 @@ module.exports = function(el){
     geo.remove(true)
   }
 
-  function lookupGeo(newSearch) {
+  function lookupGeo(context) {
     geo.search(function(err, results){
       if(err) return alert(err)
       // TODO: handle error in modal
-      if(newSearch) {
+      if(context === 'receive') { return }
+      if(context === 'new') {
         // set a brief timeout so it "feels" like we're searching
         xhr_timeout = setTimeout(function(){
           clearInterval(oval_interval)
@@ -119,6 +121,15 @@ module.exports = function(el){
       return record[0]
     })
     ractive.set('nearbys', nearbys)
+  }
+
+  function animateOval() {
+    setTimeout(function() {
+      oval_interval = setInterval(function(){
+        ractive.set('oval_visible', true)
+        ractive.set('oval_visible', false)
+      }, 900)
+    }, 200)
   }
 
   return ractive
