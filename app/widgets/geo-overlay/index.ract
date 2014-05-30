@@ -20,7 +20,13 @@
       {{^searching}}
 
         {{#results}}
+
           <div class="geo__results" intro-outro="fade">
+
+            <div class='header__refresh {{#updating_nearbys}}is_updating{{/updating_nearbys}}' on-click="refresh-list">
+              <span class="_icon"></span>
+            </div>
+
             {{#nearbys}}
               <div class="_item" intro-outro="fade" on-click="select"
                  data-wallet={{address}}

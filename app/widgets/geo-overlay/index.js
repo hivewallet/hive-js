@@ -46,6 +46,27 @@ module.exports = function(el){
     ractive.fire('search-nearby')
   })
 
+  ractive.on('refresh-list', function(event) {
+    event.original.preventDefault()
+    ractive.set('updating_nearbys', true)
+
+    geo.search(function(err, results){
+      if(err) return alert(err)
+
+      if(results.length >= 1){
+        nearbys = results.map(function(record){
+          return record[0]
+        })
+        ractive.set('nearbys', nearbys)
+      } else {
+        ractive.set('nearbys', [])
+        ractive.set('results', false)
+      }
+
+      ractive.set('updating_nearbys', false)
+    })
+  })
+
   var xhr_timeout, oval_interval, cancelled;
 
   ractive.on('search-nearby', function(){
@@ -84,10 +105,10 @@ module.exports = function(el){
     ractive.set('oval_visible', false)
     ractive.set('searching', false)
     ractive.set('visible', false)
+    ractive.set('results', false)
     emitter.emit('close-overlay')
     geo.remove()
   })
-
 
   ractive.on('select', function(event){
     // get user data and send to send...
@@ -96,7 +117,6 @@ module.exports = function(el){
     emitter.emit('prefill-wallet', address)
     ractive.fire('close-geo')
   })
-
 
   window.onbeforeunload = function() {
     geo.remove(true)
