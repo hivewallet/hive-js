@@ -40,6 +40,13 @@ module.exports = function(el){
     }
   })
 
+  ractive.on('select', function(event){
+    event.original.preventDefault()
+    var address = event.node.getAttribute( 'data-wallet' )
+    emitter.emit('prefill-wallet', address)
+    ractive.fire('close-geo')
+  })
+
   ractive.on('search-again',function(event) {
     event.original.preventDefault()
     ractive.set('searching', true)
@@ -49,56 +56,22 @@ module.exports = function(el){
   ractive.on('refresh-list', function(event) {
     event.original.preventDefault()
     ractive.set('updating_nearbys', true)
-
-    geo.search(function(err, results){
-      if(err) return alert(err)
-
-      if(results.length >= 1){
-        nearbys = results.map(function(record){
-          return record[0]
-        })
-        ractive.set('nearbys', nearbys)
-      } else {
-        ractive.set('nearbys', [])
-        ractive.set('results', false)
-      }
-
-      ractive.set('updating_nearbys', false)
-    })
+    lookupGeo(false)
   })
 
   var xhr_timeout, oval_interval, cancelled;
 
   ractive.on('search-nearby', function(){
-
     setTimeout(function() {
       oval_interval = setInterval(function(){
         ractive.set('oval_visible', true)
         ractive.set('oval_visible', false)
       }, 900)
     }, 200)
-
-    geo.search(function(err, results){
-      if(err) return alert(err)
-
-      xhr_timeout = setTimeout(function(){
-        clearInterval(oval_interval)
-        ractive.set('oval_visible', false)
-        console.log(results)
-        if(results.length >= 1){
-          ractive.set('results', true)
-          nearbys = results.map(function(record){
-            return record[0]
-          })
-          ractive.set('nearbys', nearbys)
-        }
-
-        ractive.set('searching', false)
-      }, 1500)
-    })
+    lookupGeo(true)
   })
 
-  ractive.on('close-geo', function(event){
+  ractive.on('close-geo', function(){
     clearTimeout(xhr_timeout)
     clearInterval(oval_interval)
     ractive.set('nearbys', [])
@@ -110,16 +83,42 @@ module.exports = function(el){
     geo.remove()
   })
 
-  ractive.on('select', function(event){
-    // get user data and send to send...
-    event.original.preventDefault()
-    var address = event.node.getAttribute( 'data-wallet' )
-    emitter.emit('prefill-wallet', address)
-    ractive.fire('close-geo')
-  })
-
   window.onbeforeunload = function() {
     geo.remove(true)
+  }
+
+  function lookupGeo(newSearch) {
+    geo.search(function(err, results){
+      if(err) return alert(err)
+      // TODO: handle error in modal
+      if(newSearch) {
+        // set a brief timeout so it "feels" like we're searching
+        xhr_timeout = setTimeout(function(){
+          clearInterval(oval_interval)
+          ractive.set('oval_visible', false)
+          if(results.length >= 1){
+            ractive.set('results', true)
+            setNearbys(results)
+          }
+          ractive.set('searching', false)
+        }, 1500)
+      } else {
+        if(results.length >= 1){
+          setNearbys(results)
+        } else {
+          ractive.set('nearbys', [])
+          ractive.set('results', false)
+        }
+        ractive.set('updating_nearbys', false)
+      }
+    })
+  }
+
+  function setNearbys(results) {
+    nearbys = results.map(function(record){
+      return record[0]
+    })
+    ractive.set('nearbys', nearbys)
   }
 
   return ractive
