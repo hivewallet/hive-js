@@ -6,7 +6,6 @@
   "author": "",
   "license": "GPL-3.0",
   "dependencies": {
-    "xhr": "^1.4.1",
     "bip39": "~1.1.0",
     "workerify": "git://github.com/weilu/workerify.git",
     "envify": "^1.2.1",

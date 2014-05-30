@@ -1,6 +1,6 @@
 'use strict';
 
-var xhr = require('xhr')
+var xhr = require('hive-xhr')
 var uriRoot = window.location.origin
 
 function register(wallet_id, pin, callback) {
@@ -14,8 +14,7 @@ function login(wallet_id, pin, callback) {
 function exist(wallet_id, callback) {
   xhr({
     uri: uriRoot + "/exist?wallet_id=" + wallet_id,
-    method: 'GET',
-    timeout: 10000,
+    method: 'GET'
   }, function(err, resp, body){
     if(resp.statusCode !== 200) {
       console.error(body)
@@ -30,7 +29,6 @@ function postCredentials(endpoint, wallet_id, pin, callback) {
     uri: uriRoot + "/" +  endpoint,
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
     method: 'POST',
-    timeout: 10000,
     body: "wallet_id=" + wallet_id + "&pin=" + pin
   }, function(err, resp, body){
     if(resp.statusCode !== 200) {

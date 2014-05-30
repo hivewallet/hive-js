@@ -1,6 +1,6 @@
 'use strict';
 
-var xhr = require('xhr')
+var xhr = require('hive-xhr')
 var Address = require('./address')
 var Transaction = require('./transaction')
 var Script = require('bitcoinjs-lib').Script
@@ -60,7 +60,6 @@ function sendTx(txHex, callback){
   var uri = Blockchain.apiRoot + "pushtx?" + Blockchain.corsParam
   xhr({
     uri: uri,
-    timeout: 10000,
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
     method: 'POST',
     body: "tx=" + txHex
@@ -137,7 +136,6 @@ function makeRequest(endpoint, params, callback){
 
   xhr({
     uri: uri,
-    timeout: 10000,
     headers: { "Content-Type": "application/json" }
   }, callback)
 }

@@ -1,6 +1,6 @@
 'use strict';
 
-var xhr = require('xhr')
+var xhr = require('hive-xhr')
 var emitter = require('hive-emitter')
 var db = require('hive-db')
 var getWallet = require('hive-wallet').getWallet
@@ -32,7 +32,6 @@ function search(callback){
       uri: uriRoot + "/location",
       headers: { "Content-Type": "application/json" },
       method: 'POST',
-      timeout: 10000,
       body: JSON.stringify(userInfo)
     }, function(err, resp, body){
       if(resp.statusCode !== 200) {
@@ -47,9 +46,8 @@ function search(callback){
 function remove(){
   xhr({
     uri: uriRoot + "/location",
-      headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": "application/json" },
     method: 'DELETE',
-    timeout: 10000,
     body: JSON.stringify({id: userInfo.id})
   }, function(err, resp, body){
     if(resp.statusCode !== 200) {

@@ -1,6 +1,6 @@
 'use strict';
 
-var xhr = require('xhr')
+var xhr = require('hive-xhr')
 var Address = require('./address')
 var Transaction = require('./transaction')
 var Script = require('bitcoinjs-lib').Script
@@ -177,8 +177,7 @@ function makeRequest(endpoint, params, callback){
   }
 
   xhr({
-    uri: uri,
-    timeout: 10000
+    uri: uri
   }, callback)
 }
 
