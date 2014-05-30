@@ -11,10 +11,6 @@ Work in progress
     cd hive-js
     npm install
 
-### Install Gulp globally
-
-    npm install -g gulp
-
 ### Setup CouchDB
 
     brew install couchdb
@@ -50,7 +46,7 @@ Click on the bottom link "fix this" to create an admin user, say:
 
 ### Profit
 
-    DB_HOST=127.0.0.1 DB_PORT=5984 DB_USER=admin DB_PASSWORD=password COOKIE_SALT=secret gulp
+    DB_HOST=127.0.0.1 DB_PORT=5984 DB_USER=admin DB_PASSWORD=password COOKIE_SALT=secret npm start
     open http://localhost:8080
 
 ## Contributing
