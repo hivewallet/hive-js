@@ -6,7 +6,7 @@
     {{^userExists}}
       Set a pin for quick access:
     {{/userExists}}
-    <input id="setPin" type="password" placeholder="4-digit pin" value="{{pin}}" on-enter='enter-pin'/>
+    <input id="setPin" type="password" placeholder="4-digit pin" value="{{pin}}" on-enter='enter-pin' autofocus/>
   </label>
 </div>
 

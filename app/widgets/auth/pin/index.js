@@ -48,7 +48,6 @@ module.exports = function(userExists){
     Hive.setPin(getPin(), ractive.onSyncDone)
   }
 
-  ractive.nodes.setPin.focus()
   return ractive
 }
 
