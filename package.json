@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "gulp",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "npm run test-server; npm run test-client",
+    "test-client": "karma start --single-run",
+    "test-server": "mocha server/test",
     "postinstall": "aperture open; gulp build"
   },
   "author": "",

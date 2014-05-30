@@ -53,3 +53,23 @@ Click on the bottom link "fix this" to create an admin user, say:
     DB_HOST=127.0.0.1 DB_PORT=5984 DB_USER=admin DB_PASSWORD=password COOKIE_SALT=secret gulp
     open http://localhost:8080
 
+## Contributing
+
+### Instructions
+
+1. Fork the repo
+2. Push changes to your fork
+3. Create a pull request
+
+
+### Running the test suite
+
+    # run both server and client tests
+    DB_HOST=127.0.0.1 DB_PORT=5984 DB_USER=admin DB_PASSWORD=password COOKIE_SALT=secret npm test
+
+    # just server
+    DB_HOST=127.0.0.1 DB_PORT=5984 DB_USER=admin DB_PASSWORD=password COOKIE_SALT=secret npm run test-server
+
+    # just client
+    npm run test-client
+
