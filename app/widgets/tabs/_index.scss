@@ -6,7 +6,7 @@
 
 #tabs .tabs {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 
 #tabs .tabs .tab {
@@ -14,7 +14,7 @@
   display: block;
   padding-bottom: 10px;
   padding-top: 10px;
-  width: 100px;
+  width: 100%;
 
   text-align: center;
 
