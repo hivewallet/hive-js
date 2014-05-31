@@ -12,7 +12,7 @@ module.exports = function(prevPage){
     }
   })
 
-  ractive.on('hide-passphrase-input', function(event){
+  ractive.on('back', function(event){
     prevPage()
   })
 

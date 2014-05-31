@@ -13,7 +13,7 @@ module.exports = function choose(){
   })
 
   ractive.on('create-new-wallet', function(){
-    createIntroPage()
+    createIntroPage(choose)
   })
 
   ractive.on('reveal-passphrase-input', function(){

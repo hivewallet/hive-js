@@ -4,12 +4,16 @@ var Ractive = require('../auth')
 var Hive = require('hive-wallet')
 var readPassphrasePage = require('../create-read')
 
-module.exports = function(){
+module.exports = function(prevPage){
   var ractive = new Ractive({
     partials: {
       header: require('./header.ract').template,
       actions: require('./actions.ract').template
     }
+  })
+
+  ractive.on('back', function(event){
+    prevPage()
   })
 
   ractive.on('generate-phrase', function(){
