@@ -50,6 +50,34 @@ function login(name, pin, callback) {
   })
 }
 
+function disablePin(name, pin, callback){
+  var error = {error: 'disable_pin_failed'}
+
+  name = userPrefix + name
+  userDB.get(name, function (err, user) {
+    if(err){
+      console.error('error getting user on disable pin', err)
+      return callback(error)
+    }
+
+    verifyPin(user, name, pin, function(err, token){
+      if(err) return callback(error)
+
+      var hashAndSalt = generatePasswordHash(token)
+      var credentials = {
+        password_sha: hashAndSalt[0],
+        salt: hashAndSalt[1]
+      }
+
+      userDB.merge(user._id, credentials, function(err, res){
+        if(err) return callback(error);
+
+        callback()
+      })
+    })
+  })
+}
+
 function createUser(name, pin, callback){
   var token = generateToken()
   var password = token + pin
@@ -106,6 +134,7 @@ function generatePasswordHash(password){
 }
 
 function verifyPin(user, name, pin, callback) {
+  pin = pin || ''
   var password = user.token + pin
   var hash = crypto.createHash('sha1')
   var sha = hash.update(password + user.salt).digest('hex')
@@ -145,5 +174,6 @@ function deleteUser(user, callback) {
 module.exports = {
   register: register,
   login: login,
-  exist: exist
+  exist: exist,
+  disablePin: disablePin
 }
