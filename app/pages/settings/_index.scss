@@ -11,7 +11,7 @@
   padding: 20px;
   padding-bottom: 16px;
   background-color: $purple--light;
-  border-top: 1px solid darken($purple--light, 5%);
+  border-bottom: 1px solid darken($purple--light, 5%);
 
   ._icon {
     font-size: 20px;
@@ -53,7 +53,7 @@
   & + .settings__input-group {
     padding-top: 10px;
   }
-  
+
   ._label {
     @include noselect;
     cursor: pointer;
