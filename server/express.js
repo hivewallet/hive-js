@@ -16,7 +16,7 @@ module.exports = function (prependMiddleware){
   app.use(express.session())
   app.use(express.static(path.join(__dirname, '..', 'build')))
 
-  app.post('/register', validateAuthParams, function(req, res) {
+  app.post('/register', validateAuthParams(false), function(req, res) {
     var name = req.body.wallet_id
     auth.register(name, req.body.pin, function(err, token){
       if(err) {
@@ -31,7 +31,7 @@ module.exports = function (prependMiddleware){
     })
   })
 
-  app.post('/login', validateAuthParams, function(req, res) {
+  app.post('/login', validateAuthParams(true), function(req, res) {
     var name = req.body.wallet_id
     auth.login(name, req.body.pin, function(err, token){
       if(err) {
@@ -88,11 +88,15 @@ module.exports = function (prependMiddleware){
     res.send(500, 'Oops! something went wrong.');
   })
 
-  function validateAuthParams(req, res, next) {
-    if (!req.body.wallet_id || !validatePin(req.body.pin)) {
-      return res.send(400, 'Bad request')
+
+  function validateAuthParams(allowMissingPin) {
+    return function (req, res, next) {
+      if (!req.body.wallet_id || !validatePin(req.body.pin, allowMissingPin)) {
+        return res.send(400, 'Bad request')
+      }
+
+      next()
     }
-    next()
   }
 
   function restrict(req, res, next) {
