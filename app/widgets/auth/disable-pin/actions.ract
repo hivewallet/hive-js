@@ -1,0 +1,5 @@
+<div class="auth__btn--existing" on-click="disable-pin">Disable pin</div>
+
+<div class="auth__altmsg">
+  <span class="_link" on-click="back">Cancel</span>
+</div>

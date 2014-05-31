@@ -16,7 +16,7 @@ module.exports = function(userExists){
   })
 
   ractive.on('enter-pin', function(event){
-    if(!validatePin(getPin())){
+    if(!validatePin(getPin(), userExists)){
       return alert('Pin must be a 4-digit number')
     }
 
@@ -40,7 +40,8 @@ module.exports = function(userExists){
   })
 
   function getPin(){
-    return ractive.get('pin').toString()
+    var pin = ractive.get('pin')
+    return pin ? pin.toString() : ''
   }
 
   function openWithPin(){

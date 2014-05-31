@@ -61,7 +61,8 @@
 </div>
 
 <div id="security_settings" class="settings__group">
-  
+  <div class="settings__btn" on-click="disable-pin">Disable pin</div>
+
   <img src="{{emailToAvatar(user.email)}}" />
 
   {{^editingName}}

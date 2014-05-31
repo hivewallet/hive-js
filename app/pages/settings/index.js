@@ -104,6 +104,11 @@ module.exports = function(el){
     })
   })
 
+  ractive.on('disable-pin', function(){
+    //FIXME: move this into modal
+    emitter.emit('open-disable-pin')
+  })
+
   function setPreferredCurrency(currency){
     db.set('systemInfo', {preferredCurrency: currency}, function(err, response){
       if(err) return console.error(response);

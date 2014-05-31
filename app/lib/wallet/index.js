@@ -93,6 +93,15 @@ function setPin(pin, callback) {
   })
 }
 
+function disablePin(pin, callback) {
+  auth.disablePin(wallet.id, pin, function(err){
+    if(err) return callback(err);
+
+    wallet.pin = ''
+    callback()
+  })
+}
+
 function openWalletWithPin(pin, network, syncDone) {
   db.getCredentials(function(err, credentials){
     if(err) return syncDone(err);
@@ -249,6 +258,7 @@ module.exports = {
   openWalletWithPin: openWalletWithPin,
   createWallet: createWallet,
   setPin: setPin,
+  disablePin: disablePin,
   getWallet: getWallet,
   walletExists: walletExists,
   reset: reset,

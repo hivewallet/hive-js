@@ -24,6 +24,21 @@ function exist(wallet_id, callback) {
   })
 }
 
+function disablePin(wallet_id, pin, callback) {
+  xhr({
+    uri: uriRoot + "/pin",
+    headers: { "Content-Type": "application/json" },
+    method: 'DELETE',
+    body: JSON.stringify({id: wallet_id, pin: pin})
+  }, function(err, resp, body){
+    if(resp.statusCode !== 200) {
+      console.error(body)
+      return callback(JSON.parse(body))
+    }
+    callback()
+  })
+}
+
 function postCredentials(endpoint, wallet_id, pin, callback) {
   xhr({
     uri: uriRoot + "/" +  endpoint,
@@ -42,5 +57,6 @@ function postCredentials(endpoint, wallet_id, pin, callback) {
 module.exports = {
   register: register,
   login: login,
-  exist: exist
+  exist: exist,
+  disablePin: disablePin
 }

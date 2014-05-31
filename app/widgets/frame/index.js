@@ -6,7 +6,6 @@ var emitter = require('hive-emitter')
 var initHeader = require('hive-header')
 var initTabs = require('hive-tabs')
 var initSidebar = require('hive-sidebar')
-var initAuth = require('hive-auth')
 var initSend = require('hive-send')
 var initReceive = require('hive-receive')
 var initHistory = require('hive-history')
@@ -72,7 +71,6 @@ module.exports = function(el){
   emitter.on('close-modal', function(){
     _html.removeClass('prevent_scroll')
   })
-
 
   // menu toggle
   emitter.on('toggle-menu', function(open) {
