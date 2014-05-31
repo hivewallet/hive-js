@@ -34,7 +34,7 @@ var Auth = Ractive.extend({
     }
 
     function getNetwork() {
-      if(location.search.indexOf('testnet=true') > 0) {
+      if(location.search.indexOf('network=testnet') > 0) {
         return 'testnet'
       }
     }
