@@ -58,6 +58,22 @@ function getUnspent(addresses, callback){
   })
 }
 
+function sendTx(txHex, callback) {
+  var uri = apiRoot + "tx/push"
+  xhr({
+    uri: uri,
+    method: 'POST',
+    body: JSON.stringify({hex: txHex})
+  }, function(err, resp, body){
+    if(resp.statusCode !== 200) {
+      console.error(body)
+      return callback(err)
+    }
+    console.log(body)
+    callback(null)
+  })
+}
+
 function parseUnspentOutputs(apiUtxo) {
   if(!apiUtxo || !apiUtxo.length) return [];
 
@@ -183,6 +199,6 @@ function makeRequest(endpoint, params, callback){
 
 Blockr.prototype.listAddresses = listAddresses
 Blockr.prototype.getUnspent = getUnspent
-Blockr.prototype.sendTx = Blockchain.prototype.sendTx //for now
+Blockr.prototype.sendTx = sendTx
 Blockr.prototype.getTransactions = getTransactions
 module.exports = Blockr
