@@ -16,6 +16,13 @@ var fakeAuth = {
   },
   exist: function(name, callback){
     callback(null, 'yay!')
+  },
+  disablePin: function(name, pin, callback) {
+    if(pin === '1234') {
+      callback(null)
+    } else {
+      callback(new Error('disable pin failed'))
+    }
   }
 }
 
@@ -127,6 +134,43 @@ describe('GET /exist', function(){
   })
 })
 
+describe('DELETE /pin', function(){
+  it('returns ok on auth.disablePin success', function(done){
+    var data = { id: "valid", pin: '1234' }
+    deleteWithCookie('/pin', data, function(err, res){
+      assert.equal(res.status, 200)
+      done()
+    })
+  })
+
+  it('returns 400 on auth.disablePin failure', function(done){
+    var data = { id: "valid", pin: '1337' }
+    deleteWithCookie('/pin', data, function(err, res){
+      assert.equal(res.status, 400)
+      done()
+    })
+  })
+
+  it('returns unauthorized if session cookie is not found', function(done){
+    var data = { id: "valid", pin: '1234' }
+
+    request(app)
+      .delete('/pin')
+      .send(data)
+      .expect(401)
+      .end(done)
+  })
+
+  it('returns unauthorized if session cookie does not match the specified id', function(done){
+    var data = { id: "doesnotmatch", pin: '1234' }
+
+    deleteWithCookie('/pin', data, function(err, res){
+      assert.equal(res.status, 401)
+      done()
+    })
+  })
+})
+
 describe('POST /location', function(){
   function postWithCookie(endpoint, data, callback){
     request(app)
@@ -177,19 +221,6 @@ describe('POST /location', function(){
 })
 
 describe('DELETE /location', function(){
-  function deleteWithCookie(endpoint, data, callback){
-    request(app)
-      .post('/login')
-      .send({wallet_id: 'valid', pin: '1234'})
-      .end(function(err, res){
-        request(app)
-          .delete(endpoint)
-          .set('cookie', res.headers['set-cookie'])
-          .send(data)
-          .end(callback)
-      })
-  }
-
   it('returns ok on geo.remove success', function(done){
     var data = { id: "valid" }
     deleteWithCookie('/location', data, function(err, res){
@@ -217,3 +248,17 @@ describe('DELETE /location', function(){
     })
   })
 })
+
+function deleteWithCookie(endpoint, data, callback){
+  request(app)
+    .post('/login')
+    .send({wallet_id: 'valid', pin: '1234'})
+    .end(function(err, res){
+      request(app)
+        .delete(endpoint)
+        .set('cookie', res.headers['set-cookie'])
+        .send(data)
+        .end(callback)
+    })
+}
+

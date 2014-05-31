@@ -60,6 +60,16 @@ module.exports = function (prependMiddleware){
     })
   })
 
+  app.delete('/pin', restrict, function(req, res) {
+    var id = req.body.id
+    var pin = req.body.pin
+
+    auth.disablePin(id, pin, function(err){
+      if(err) return res.send(400, err)
+      res.send(200)
+    })
+  })
+
   app.post('/location', restrict, function(req, res) {
     var data = req.body
 
