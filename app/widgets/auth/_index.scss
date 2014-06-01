@@ -14,7 +14,7 @@
 }
 
 .auth__modal {
-  background-color: #e7e7e6;
+  background-color: #464368;
   // display: flex;
   // flex-flow: row nowrap;
   // align-content: center;
@@ -23,7 +23,7 @@
   min-width: 100%;
   min-height: 100%;
   padding-top: 20px;
-  padding-bottom: 20px; 
+  padding-bottom: 20px;
 }
 
 .auth {
@@ -37,7 +37,7 @@
 .auth__info {
   @include clickbtn;
   position: absolute;
-  top: 15px; 
+  top: 15px;
   right: 15px;
   font-size: 20px;
   color: #949494;
@@ -72,9 +72,9 @@
 
   ._title {
     font-size: 42px;
-    line-height: 1.4; 
+    line-height: 1.4;
     font-weight: $bold;
-    color: $dark-blue;
+    color: white;
   }
 
   ._subtitle {
@@ -107,6 +107,10 @@
 .auth__btngroup {
   margin: 0 auto;
   padding: 10px;
+  background-color: #343157;
+  border: 1px solid;
+  border-radius: 4px;
+  box-shadow: inset 0px 1px 3px 0px rgba(0,0,0,0.25);
 }
 
 .auth__btn {
@@ -134,6 +138,7 @@
 
 .auth__pin {
   padding-bottom: 20px;
+  color: white;
   label {
     @include clickbtn;
   }
@@ -167,7 +172,7 @@
     &.middle {
       transform: translateX(0);
     }
-    
+
     &.left {
       transform: translateX(-100%);
     }
@@ -193,7 +198,7 @@
 
 .auth__altmsg {
   text-align: center;
-  
+
   ._link {
     color: $blue;
     font-size: 14px;
