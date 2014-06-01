@@ -45,7 +45,7 @@
 
 .auth__header {
   text-align: center;
-  padding-bottom: 10px;
+  padding-bottom: 20px;
 
   ._img {
     width: 80px;
@@ -108,6 +108,7 @@
   margin: 0 auto;
   margin-left: 20px;
   margin-right: 20px;
+  margin-bottom: 20px;
   padding: 10px;
   background-color: #343157;
   border: 1px solid;
@@ -124,8 +125,8 @@
   @extend .hivebtn;
 
   color: white;
-  background-color: #619ee7;
-  box-shadow: 0 3px 0 0 darken(#619ee7, 20%);
+  background-color: #5B5582;
+  box-shadow: 0 3px 0 0 darken(#5B5582, 20%);
   margin-bottom: 5px;
 }
 

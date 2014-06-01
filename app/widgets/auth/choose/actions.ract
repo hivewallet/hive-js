@@ -1,6 +1,2 @@
 <div class="auth__btn" on-click="create-new-wallet">Create new wallet</div>
 <div class="auth__btn--existing" on-click="reveal-passphrase-input">Open existing wallet</div>
-
-<div class="auth__altmsg">
-  <a href="#" class="_link">Having trouble signing in?</a>
-</div>
