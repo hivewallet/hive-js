@@ -48,8 +48,8 @@
   padding-bottom: 10px;
 
   ._img {
-    width: 100px;
-    height: 97px;
+    width: 80px;
+    height: 140px;
     margin: 0 auto;
     display: block;
   }
@@ -106,6 +106,8 @@
 
 .auth__btngroup {
   margin: 0 auto;
+  margin-left: 20px;
+  margin-right: 20px;
   padding: 10px;
   background-color: #343157;
   border: 1px solid;
@@ -200,7 +202,7 @@
   text-align: center;
 
   ._link {
-    color: $blue;
+    color: white;
     font-size: 14px;
     @include clickbtn;
 
