@@ -65,10 +65,12 @@ module.exports = function(el){
   })
 
   emitter.on('open-modal', function(){
+    ractive.set('view_state', 'is_hidden')
     _html.addClass('prevent_scroll')
   })
 
   emitter.on('close-modal', function(){
+    ractive.set('view_state', '')
     _html.removeClass('prevent_scroll')
   })
 

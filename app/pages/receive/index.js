@@ -27,14 +27,18 @@ module.exports = function(el){
 
   ractive.on('open-geo', function(){
     var data = {
-      dialog: 'geo'
+      overlay: 'geo'
     }
     emitter.emit('open-overlay', data)
   })
 
   ractive.on('show-qr', function(){
+    var data = {
+      overlay: 'qr'
+    }
+
     ractive.set('qrVisible', true)
-    emitter.emit('open-modal')
+    emitter.emit('open-overlay', data)
 
     var qr = qrcode('bitcoin:' + getAddress())
     var container = ractive.find('#qrcontainer')
@@ -49,8 +53,7 @@ module.exports = function(el){
     var container = ractive.find('#qrcontainer')
     container.classList.remove('is_visible')
     ractive.set('qrVisible', false)
-    emitter.emit('close-modal')
-
+    emitter.emit('close-overlay')
   })
 
   function getAddress(){

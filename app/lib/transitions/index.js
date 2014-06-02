@@ -100,6 +100,38 @@ module.exports = {
     }
 
     t.animateStyle(targetStyle, params).then(t.complete)
+  },
+  fadeNscaleTransition: function(t, params) {
+
+    var targetStyle, props, collapsed, defaults;
+
+    defaults = {
+      duration: 200,
+      easing: 'linear'
+    };
+
+    props = [
+      'opacity',
+      'transform'
+    ];
+
+    collapsed = {
+      opacity: 0,
+      transform: 'scale(0.8)'
+    };
+
+    params = t.processParams(params, defaults)
+
+    if (t.isIntro) {
+      targetStyle = t.getStyle(props)
+      t.setStyle(collapsed)
+    } else {
+      // make style explicit, so we're not transitioning to 'auto'
+      t.setStyle(t.getStyle(props))
+      targetStyle = collapsed
+    }
+
+    t.animateStyle(targetStyle, params).then(t.complete)
   }
 }
 

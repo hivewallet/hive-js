@@ -5,6 +5,32 @@
   padding-right: 15%;
 }
 
+.settings__avatar {
+  @include icon(120px, 120px, block);
+  -webkit-mask-image: url(../img/hex_large.png);
+  margin: 0 auto;
+  padding-bottom: 20px;
+}
+
+.settings__name {
+  text-align: center;
+  font-size: 24px;
+}
+
+.settings__editBtn {
+  display: block;
+  cursor: pointer;
+  text-align: center;
+  padding-top: 10px;
+  color: white;
+  opacity: 0.4;
+
+  &:hover {
+    text-decoration: underline;
+
+  }
+}
+
 .settings__toggle {
   @include clickbtn;
   display: flex;

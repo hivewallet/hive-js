@@ -109,9 +109,9 @@ function initializeRecord(){
   var defaultValue = {
     systemInfo: { preferredCurrency: 'USD' },
     userInfo: {
-      firstName: 'Firstname',
-      lastName: 'Lastname',
-      email: 'alice@example.com'
+      firstName: '',
+      lastName: '',
+      email: ''
     }
   }
 

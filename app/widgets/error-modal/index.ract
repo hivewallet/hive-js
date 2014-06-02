@@ -1,11 +1,11 @@
 {{#visible}}
 
-  <div id="container" class="error" on-click="cancel" intro-outro="fadeNscale">
+  <div id="container" class="error" intro-outro="fadeNscale" on-click="cancel">
 
     <div class="error__content">
-      <img class="error__icon" src="/assets/img/error_temp.png" />
-      <h2 class="error__heading">Warning</h2>
-      <p class="error__message">You stooged it</p>
+      <img class="error__icon" src="/assets/img/{{icon}}.png" />
+      <h2 class="error__heading">{{title}}</h2>
+      <p class="error__message">{{message}}</p>
     </div>
 
   </div>

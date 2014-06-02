@@ -6,25 +6,34 @@
   <span class="_arrow ss-icon">navigatedown</span>
 </div>
 
-<div id="user_settings" class="settings__group">
+<div id="user_settings" class="settings__group open">
 
-  {{#user.email}}
-    <img src="{{emailToAvatar(user.email)}}" />
-  {{/user.email}}
+  {{#user_preview}}
+    <div>
+      <div class="settings__avatar" style="background-image: url('{{emailToAvatar(user.email)}}')"></div>
+      <h3 class="settings__name">{{user.name}}</h3>
+      <span class="settings__editBtn" on-click="edit-details">Change your details</span>
+    </div>
+  {{/user_preview}}
 
-  <div class="settings__input-group">
-    <label class="_label">Your name
-      <input type="text" value="{{user.name}}" class="_input" />
-    </label>
-  </div>
+  {{^user_preview}}
+    <div>
+      <div class="settings__input-group">
+        <label class="_label">Your name
+          <input type="text" value="{{user.name}}" class="_input" />
+        </label>
+      </div>
 
-  <div class="settings__input-group">
-    <label class="_label">Gravatar Email
-      <input value="{{user.email}}" type="text" class="_input" />
-    </label>
-  </div>
+      <div class="settings__input-group">
+        <label class="_label">Gravatar Email
+          <input value="{{user.email}}" type="text" class="_input" />
+        </label>
+      </div>
 
-  <div class="settings__btn" on-click="submit-name">Submit</div>
+      <div class="settings__btn" on-click="submit-details">Submit</div>
+    </div>
+  {{/user_preview}}
+
 </div>
 
 <div class="settings__toggle" on-click="toggle" data-target="currency_settings">

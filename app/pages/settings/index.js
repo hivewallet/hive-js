@@ -8,6 +8,9 @@ var Big = require('big.js')
 var currencies = require('hive-ticker-api').currencies
 var db = require('hive-db')
 var crypto = require('crypto')
+var transitions = require('hive-transitions')
+
+Ractive.transitions.fadeNscale = transitions.fadeNscaleTransition
 
 module.exports = function(el){
   var ractive = new Ractive({
@@ -20,13 +23,17 @@ module.exports = function(el){
         address: '',
         mnemonic: ''
       },
+      transitions: {
+        fadeNscale: transitions.fadeNscaleTransition
+      },
       editingName: false,
       editingEmail: false,
       currencies: currencies,
       exchangeRates: {},
       satoshiToBTC: satoshiToBTC,
       bitcoinToFiat: bitcoinToFiat,
-      emailToAvatar: emailToAvatar
+      emailToAvatar: emailToAvatar,
+      user_settings: true
     }
   })
 
@@ -44,6 +51,9 @@ module.exports = function(el){
       ractive.set('selectedFiat', doc.systemInfo.preferredCurrency)
       ractive.set('user.name', doc.userInfo.firstName)
       ractive.set('user.email', doc.userInfo.email)
+      if(ractive.get('user.name')) {
+        ractive.set('user_preview', true);
+      }
     })
   })
 
@@ -58,18 +68,32 @@ module.exports = function(el){
     toggleDropdown(event.node.dataset.target);
   })
 
-  ractive.on('submit-name', function(event){
-    event.original.preventDefault();
+  ractive.on('edit-details', function(){
+    ractive.set('user_preview', false)
+  })
 
+  ractive.on('submit-details', function(){
     var details = {
       firstName: ractive.get('user.name'),
       email: ractive.get('user.email')
     }
 
     db.set('userInfo', details, function(err, response){
-      if(err) return console.error(response)
+      if(err) return handleUserError(response)
+
+      ractive.set('user_preview', true)
     })
   })
+
+  function handleUserError(response) {
+    var data = {
+      icon: "error_temp",
+      title: "Uh Oh!",
+      message: "Could not save your details"
+    }
+    emitter.emit('open-error', data)
+    console.error(response)
+  }
 
   ractive.on('disable-pin', function(){
     //FIXME: move this into modal

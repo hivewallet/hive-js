@@ -33,7 +33,7 @@ module.exports = function(el){
   })
 
   emitter.on('open-overlay', function(data){
-    if(data.dialog === 'geo') {
+    if(data.overlay === 'geo') {
       ractive.set('searching', true)
       ractive.set('visible', true)
 
