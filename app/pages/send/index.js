@@ -91,5 +91,19 @@ module.exports = function(el){
     return true;
   }
 
+  function onTxSent(err, tx, txHex){
+    if(err) return alert("error sending transaction. " + err);
+
+    db.append('pendingTxs', txHex, function(err){
+      if(err) {
+        console.error("failed to writing pending transaction to db" + err);
+      }
+
+      // update balance & tx history
+      emitter.emit('wallet-ready')
+      emitter.emit('transactions-loaded', [tx])
+    })
+  }
+
   return ractive
 }

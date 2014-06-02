@@ -17,12 +17,29 @@ function userID(){
   return id
 }
 
-function set(key, value, callback){
-  if(id == null) return;
+function set(key, value, callback) {
+  updateDoc(callback, function(data){
+    if(data[key] && value != undefined) {
+      $.extend(true, data[key], value)
+    } else {
+      data[key] = value
+    }
+  })
+}
+
+function append(key, value, callback) {
+  updateDoc(callback, function(data){
+    data[key] = data[key] || []
+    data[key].push(value)
+  })
+}
+
+function updateDoc(callback, processData) {
+  if(id == null) return callback(new Error('wallet not ready'));
 
   db.get(id, function(err, doc){
     var data = JSON.parse(decrypt(doc.data, sercret))
-    $.extend(true, data[key], value)
+    processData(data)
 
     doc.data = encrypt(JSON.stringify(data), sercret)
     db.put(doc, callback)
@@ -138,6 +155,7 @@ function setupPulling(options){
 
 module.exports = {
   userID: userID,
+  get: get,
   set: set,
-  get: get
+  append: append
 }

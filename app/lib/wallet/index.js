@@ -35,7 +35,7 @@ function sendTx(tx, callback) {
       wallet.currentAddress = nextReceiveAddress()
     }
 
-    callback(null, txToHiveTx(tx))
+    callback(null, txToHiveTx(tx), txHex)
   })
 }
 
