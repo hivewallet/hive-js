@@ -30,13 +30,19 @@ function sendTx(tx, callback) {
   api.sendTx(txHex, function(err, hiveTx){
     if(err) { return callback(err) }
 
-    wallet.processTx(tx)
-    if(currentAddressUsed()){
-      wallet.currentAddress = nextReceiveAddress()
-    }
-
-    callback(null, hiveTxs)
+    processTx(tx)
+    db.addPendingTx(txHex, function(err){
+      if(err) { console.log("failed to save pending transaction to local db") }
+      callback(null, txToHiveTx(tx))
+    })
   })
+}
+
+function processTx(tx) {
+  wallet.processTx(tx)
+  if(currentAddressUsed()){ // in case one sends to him/her self
+    wallet.currentAddress = nextReceiveAddress()
+  }
 }
 
 function currentAddressUsed(){
