@@ -45,6 +45,41 @@ function processTx(tx) {
   }
 }
 
+function processLocalPendingTxs(callback) {
+  db.getPendingTxs(function(err, txs){
+    if(err) return callback(err);
+
+    var pendingTxs = []
+    var hiveTxs = []
+    txs.forEach(function(txHex){
+      var tx = Transaction.deserialize(txHex)
+      hiveTxs.push(txToHiveTx(tx))
+
+      tx.ins.forEach(function(txIn, i){
+        var op = txIn.outpoint
+        var o = wallet.outputs[op.hash+':'+op.index]
+
+        if(o) { // not yet spent for real
+          pendingTxs.push(tx)
+        }
+      })
+    })
+
+    pendingTxs = uniqueify(pendingTxs)
+    pendingTxs.forEach(processTx)
+
+    // one or more pending txs are confirmed
+    if(pendingTxs.length !== txs.length) {
+      db.setPendingTxs(pendingTxs, function(err){
+        if(err) return callback(err);
+        callback(null, hiveTxs)
+      })
+    }
+
+    callback(null, hiveTxs)
+  })
+}
+
 function currentAddressUsed(){
   var usedAddresses = []
   for (var key in wallet.outputs){
@@ -153,8 +188,11 @@ function sync(done) {
   })
 
   setUnspentOutputs(function(err){
-    if(err) return done(err)
-    maybeDone()
+    if(err) return done(err);
+    processLocalPendingTxs(function(err, transactions){
+      if(err) return done(err);
+      maybeDone(transactions)
+    })
   })
 
   fetchChangeAddressSentTransactions(function(err, transactions){
