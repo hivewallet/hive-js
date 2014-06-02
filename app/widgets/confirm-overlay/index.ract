@@ -1,8 +1,63 @@
 
 {{#visible}}
-  <div class="overlay--confirm" intro-outro="fade" on-click="cancel">
+  <div class="overlay--confirm" intro-outro="fade">
+    <div class="confirm__content {{#success}}_success{{/success}} {{#error}}_error{{/error}}">
 
-    <div class="confirm__content"></div>
+    {{#confirmation}}
 
+      <h3 class="confirm__header">Confirm transaction</h3>
+
+      <div class="confirm__transaction">
+
+        <div class="_amount">
+          <span class="_value">{{amount}}</span>
+          <span class="_currency">BTC</span>
+        </div>
+
+        <span class="_fee">+0.0001 BTC transaction fee</span>
+        <span class="_icon ss-icon">down</span>
+        <span class="_address">{{address}}</span>
+
+      </div>
+
+      <div class="confirm__inputs">
+        <div class="_cancel" on-click="test-error">Cancel</div>
+        <div class="_send" on-click="send">Send</div>
+      </div>
+
+    {{/confirmation}}
+
+
+    {{#success}}
+
+      <div class="confirm__responseIcon--success">
+        <span class="ss-icon">tick</span>
+      </div>
+
+      <h3 class="confirm__responseTitle">Transaction Successful</h3>
+
+      <p class="confirm__responseMsg">Your transaction will appear in your history tab shortly.</p>
+      <div class="confirm__inputs">
+        <div class="_cancel" on-click="clear">Close</div>
+      </div>
+    {{/success}}
+
+
+    {{#error}}
+
+      <div class="confirm__responseIcon--error">
+        <span class="ss-icon">delete</span>
+      </div>
+
+      <h3 class="confirm__responseTitle">Transaction Failed</h3>
+
+      <p class="confirm__responseMsg">Please make sure you are connected to the internet.</p>
+
+      <div class="confirm__inputs">
+        <div class="_cancel" on-click="cancel">Close</div>
+      </div>
+    {{/error}}
+
+    </div>
   </div>
 {{/visible}}

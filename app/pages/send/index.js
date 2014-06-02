@@ -1,7 +1,6 @@
 'use strict';
 
 var Ractive = require('hive-ractive')
-var getWallet = require('hive-wallet').getWallet
 var Big = require('big.js')
 var emitter = require('hive-emitter')
 var db = require('hive-db')
@@ -20,6 +19,12 @@ module.exports = function(el){
       if(err) return console.error(err);
       ractive.set('fiatCurrency', info.preferredCurrency)
     })
+  })
+
+  emitter.on('clear-send-form', function(){
+    ractive.set('to', '')
+    ractive.set('value', '')
+    ractive.set('fiatValue', '')
   })
 
   emitter.on('prefill-wallet', function(address) {
@@ -41,21 +46,11 @@ module.exports = function(el){
 
   ractive.on('open-send', function(){
     var data = {
-      overlay: 'confirm'
+      overlay: 'confirm',
+      address: ractive.get('to'),
+      amount: ractive.get('value')
     }
     emitter.emit('open-overlay', data)
-  })
-
-  ractive.on('send', function(){
-    var to = ractive.get('to')
-    var value = bitcoinToSatoshi(ractive.get('value'))
-
-    var wallet = getWallet()
-
-    wallet.createTxAsync(to, value, function(err, tx){
-      if(err) return alert(err)
-      wallet.sendTx(tx, onTxSent)
-    })
   })
 
   ractive.on('fiat-to-bitcoin', function(){
@@ -81,20 +76,6 @@ module.exports = function(el){
   emitter.on('ticker', function(rates){
     ractive.set('exchangeRates', rates)
   })
-
-  function bitcoinToSatoshi(amount){
-    var btc = new Big(amount)
-    return parseInt(btc.times(100000000).toFixed(0))
-  }
-
-  function onTxSent(err, transaction){
-    if(err) return alert("error sending transaction. " + err)
-
-    // update balance & tx history
-    emitter.emit('wallet-ready')
-    emitter.emit('transactions-loaded', [transaction])
-  }
-
 
   return ractive
 }
