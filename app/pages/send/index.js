@@ -39,6 +39,13 @@ module.exports = function(el){
     emitter.emit('open-overlay', data)
   })
 
+  ractive.on('open-send', function(){
+    var data = {
+      overlay: 'confirm'
+    }
+    emitter.emit('open-overlay', data)
+  })
+
   ractive.on('send', function(){
     var to = ractive.get('to')
     var value = bitcoinToSatoshi(ractive.get('value'))

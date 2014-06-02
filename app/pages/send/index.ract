@@ -30,5 +30,5 @@
   </div>
 
   <div class="send__buttons">
-    <div on-click="send" class="send__btn attach_fastclick">Confirm</div>
+    <div on-click="open-send" class="send__btn attach_fastclick">Confirm</div>
   </div>

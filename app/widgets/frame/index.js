@@ -10,6 +10,7 @@ var initSend = require('hive-send')
 var initReceive = require('hive-receive')
 var initHistory = require('hive-history')
 var initGeoOverlay = require('hive-geo-overlay')
+var initConfirmOverlay = require('hive-confirm-overlay')
 var initErrorModal = require('hive-error-modal')
 var $ = require('browserify-zepto')
 
@@ -26,6 +27,7 @@ module.exports = function(el){
   var tabs = initTabs(ractive.nodes['tabs'])
   var sidebar = initSidebar(ractive.nodes['sidebar'])
   var geoOverlay = initGeoOverlay(ractive.nodes['geo-overlay'])
+  var confirmOverlay = initConfirmOverlay(ractive.nodes['confirm-overlay'])
   var errorModal = initErrorModal(ractive.nodes['error-modal'])
 
   // tabs
@@ -60,16 +62,6 @@ module.exports = function(el){
   })
 
   emitter.on('close-overlay', function(){
-    ractive.set('view_state', '')
-    _html.removeClass('prevent_scroll')
-  })
-
-  emitter.on('open-modal', function(){
-    ractive.set('view_state', 'is_hidden')
-    _html.addClass('prevent_scroll')
-  })
-
-  emitter.on('close-modal', function(){
     ractive.set('view_state', '')
     _html.removeClass('prevent_scroll')
   })

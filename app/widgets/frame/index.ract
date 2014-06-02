@@ -17,4 +17,5 @@
 
 <!-- overlays -->
 <div id="geo-overlay"></div>
+<div id="confirm-overlay"></div>
 <div id="error-modal"></div>

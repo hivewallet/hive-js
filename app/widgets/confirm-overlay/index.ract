@@ -1,0 +1,8 @@
+
+{{#visible}}
+  <div class="overlay--confirm" intro-outro="fade" on-click="cancel">
+
+    <div class="confirm__content"></div>
+
+  </div>
+{{/visible}}
