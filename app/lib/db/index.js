@@ -27,13 +27,6 @@ function set(key, value, callback) {
   })
 }
 
-function append(key, value, callback) {
-  updateDoc(callback, function(data){
-    data[key] = data[key] || []
-    data[key].push(value)
-  })
-}
-
 function updateDoc(callback, processData) {
   if(id == null) return callback(new Error('wallet not ready'));
 
@@ -51,7 +44,7 @@ function updateDoc(callback, processData) {
 }
 
 function get(key, callback) {
-  if(id == null) return;
+  if(id == null) return callback(new Error('wallet not ready'));
 
   if(key instanceof Function){
     callback = key
@@ -156,6 +149,6 @@ function setupPulling(options){
 module.exports = {
   userID: userID,
   get: get,
-  set: set,
-  append: append
+  set: set
 }
+

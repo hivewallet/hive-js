@@ -69,6 +69,7 @@ function sendTx(txHex, callback) {
       console.error(body)
       return callback(err)
     }
+
     console.log(body)
     callback(null)
   })
