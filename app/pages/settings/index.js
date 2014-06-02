@@ -42,7 +42,7 @@ module.exports = function(el){
       if(err) return console.error(err);
 
       ractive.set('selectedFiat', doc.systemInfo.preferredCurrency)
-      ractive.set('user.name', doc.userInfo.name)
+      ractive.set('user.name', doc.userInfo.firstName)
       ractive.set('user.email', doc.userInfo.email)
     })
   })
@@ -62,7 +62,7 @@ module.exports = function(el){
     event.original.preventDefault();
 
     var details = {
-      name: ractive.get('user.name'),
+      firstName: ractive.get('user.name'),
       email: ractive.get('user.email')
     }
 
