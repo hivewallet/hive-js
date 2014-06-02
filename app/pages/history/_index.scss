@@ -14,7 +14,10 @@
 }
 
 .transactions {
-
+ ._title {
+  padding-top: 5px;
+  padding-bottom: 5px;
+ }
 }
 
 .transactions__item {
@@ -22,11 +25,7 @@
   flex-wrap: wrap;
   padding-top: 10px;
   padding-bottom: 10px;
-  border-bottom: 1px solid darken($grey--light, 10%);
-
-  &:first-child {
-    padding-top: 0;
-  }
+  border-top: 1px solid darken($grey--light, 10%);
 
   ._avatar {
 
@@ -50,21 +49,21 @@
     padding-top: 19px;
     flex-grow: 1;
   }
-  
+
   ._amount {
     font-size: 32px;
     font-weight: $light;
   }
-  
+
   ._currency {
     font-size: 14px;
   }
-  
+
   ._time {
     display: block;
     font-size: 14px;
     margin-top: -5px;
     color: $grey;
   }
-  
+
 }

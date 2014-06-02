@@ -1,5 +1,7 @@
 
 <div class="transactions">
+
+  <h3 class="_title">Your transaction history</h3>
   {{#transactions}}
     <div class="transactions__item">
 
@@ -8,7 +10,7 @@
       <div class="_address">{{truncate(toAddress)}}... <span class="ss-icon _expandBtn">action</span></div>
 
       <div class="_detail">
-        
+
         <div class="_amount {{directionClass(direction)}}">{{directionIcon(direction)}}{{satoshiToBTC(amount)}}</div>
 
         {{#pending}}
@@ -22,7 +24,7 @@
       </div>
 
 
-      
+
     </div>
   {{/transactions}}
-</div>   
+</div>
