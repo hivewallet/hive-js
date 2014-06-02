@@ -15,10 +15,9 @@ module.exports = function(el){
     template: require('./index.ract').template,
     data: {
       user: {
-        firstName: '',
-        lastName: '',
-        address: '',
+        name: '',
         email: '',
+        address: '',
         mnemonic: ''
       },
       editingName: false,
@@ -43,8 +42,7 @@ module.exports = function(el){
       if(err) return console.error(err);
 
       ractive.set('selectedFiat', doc.systemInfo.preferredCurrency)
-      ractive.set('user.firstName', doc.userInfo.firstName)
-      ractive.set('user.lastName', doc.userInfo.lastName)
+      ractive.set('user.name', doc.userInfo.name)
       ractive.set('user.email', doc.userInfo.email)
     })
   })
@@ -54,6 +52,29 @@ module.exports = function(el){
   })
 
   ractive.observe('selectedFiat', setPreferredCurrency)
+
+  ractive.on('toggle', function(event){
+    event.original.preventDefault();
+    toggleDropdown(event.node.dataset.target);
+  })
+
+  ractive.on('submit-name', function(event){
+    event.original.preventDefault();
+
+    var details = {
+      name: ractive.get('user.name'),
+      email: ractive.get('user.email')
+    }
+
+    db.set('userInfo', details, function(err, response){
+      if(err) return console.error(response)
+    })
+  })
+
+  ractive.on('disable-pin', function(){
+    //FIXME: move this into modal
+    emitter.emit('open-disable-pin')
+  })
 
   function toggleDropdown(node){
     var elem = ractive.nodes[node]
@@ -69,45 +90,6 @@ module.exports = function(el){
       classes.add('open')
     }
   }
-
-  ractive.on('toggle', function(event){
-    event.original.preventDefault();
-    toggleDropdown(event.node.dataset.target);
-  })
-
-  ractive.on('edit-name', function(){
-    ractive.set('editingName', true)
-  })
-
-  ractive.on('edited-name', function(){
-    ractive.set('editingName', false)
-
-    var name = {
-      firstName: ractive.get('user.firstName'),
-      lastName: ractive.get('user.lastName')
-    }
-    db.set('userInfo', name, function(err, response){
-      if(err) return console.error(response)
-    })
-  })
-
-  ractive.on('edit-email', function(){
-    ractive.set('editingEmail', true)
-  })
-
-  ractive.on('edited-email', function(){
-    ractive.set('editingEmail', false)
-
-    var email = { email: ractive.get('user.email') }
-    db.set('userInfo', email, function(err, response){
-      if(err) return console.error(response)
-    })
-  })
-
-  ractive.on('disable-pin', function(){
-    //FIXME: move this into modal
-    emitter.emit('open-disable-pin')
-  })
 
   function setPreferredCurrency(currency){
     db.set('systemInfo', {preferredCurrency: currency}, function(err, response){

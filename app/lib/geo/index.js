@@ -11,10 +11,7 @@ emitter.on('db-ready', function(){
   db.get(function(err, doc){
     if(err) return console.error(err);
 
-    userInfo.name = [
-      doc.userInfo.firstName,
-      doc.userInfo.lastName
-    ].join(' ')
+    userInfo.name = doc.userInfo.name
     userInfo.email = doc.userInfo.email
     userInfo.id = db.userID()
     userInfo.address = getWallet().currentAddress
