@@ -59,7 +59,6 @@ module.exports = function(el){
 
   emitter.on('update-transactions', function(newTxs) {
     ractive.set('transactions', newTxs)
-    console.log(newTxs)
   })
 
   return ractive

@@ -17,4 +17,6 @@
   <span class="_currency">BTC</span>
 </div>
 
-<div class='header__refresh {{#updating_transactions}}is_updating{{/updating_transactions}}' on-click="sync"><span class="_icon"></span></div>
+<div class='header__refresh {{#updating_transactions}}is_updating{{/updating_transactions}}' on-click="sync">
+  <span class="_icon"></span>
+</div>
