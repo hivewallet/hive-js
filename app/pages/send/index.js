@@ -91,5 +91,13 @@ module.exports = function(el){
     return true;
   }
 
+  function onTxSent(err, tx){
+    if(err) return alert("error sending transaction. " + err);
+
+    // update balance & tx history
+    emitter.emit('wallet-ready')
+    emitter.emit('transactions-loaded', [tx])
+  }
+
   return ractive
 }

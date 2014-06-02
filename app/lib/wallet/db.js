@@ -35,8 +35,55 @@ function deleteCredentials(doc, callback) {
   })
 }
 
+function getPendingTxs(callback){
+  db.get('pendingTxs', function(err, doc){
+    if(err) {
+      if(err.status === 404) {
+        return callback(null, [])
+      }
+      return callback(err);
+    }
+
+    callback(null, doc.txs)
+  })
+}
+
+function setPendingTxs(txs, callback) {
+  savePendingTx(txs, function(doc){
+    doc.txs = txs
+  }, callback)
+}
+
+function addPendingTx(tx, callback) {
+  savePendingTx(tx, function(doc){
+    doc.txs.push(tx)
+  }, callback)
+}
+
+function savePendingTx(tx, processDoc, callback) {
+  db.get('pendingTxs', function(err, doc){
+    if(err) {
+      if(err.status === 404) {
+        return db.put({
+          _id: 'pendingTxs',
+          txs: [].concat(tx)
+        }, callback)
+      }
+
+      return callback(err)
+    }
+
+    processDoc(doc)
+    db.put(doc, callback)
+  })
+}
+
+
 module.exports = {
   saveEncrypedSeed: saveEncrypedSeed,
   getCredentials: getCredentials,
-  deleteCredentials: deleteCredentials
+  deleteCredentials: deleteCredentials,
+  getPendingTxs: getPendingTxs,
+  setPendingTxs: setPendingTxs,
+  addPendingTx: addPendingTx
 }

@@ -30,12 +30,53 @@ function sendTx(tx, callback) {
   api.sendTx(txHex, function(err, hiveTx){
     if(err) { return callback(err) }
 
-    wallet.processTx(tx)
-    if(currentAddressUsed()){
-      wallet.currentAddress = nextReceiveAddress()
+    processTx(tx)
+    db.addPendingTx(txHex, function(err){
+      if(err) { console.log("failed to save pending transaction to local db") }
+      callback(null, txToHiveTx(tx))
+    })
+  })
+}
+
+function processTx(tx) {
+  wallet.processTx(tx)
+  if(currentAddressUsed()){ // in case one sends to him/her self
+    wallet.currentAddress = nextReceiveAddress()
+  }
+}
+
+function processLocalPendingTxs(callback) {
+  db.getPendingTxs(function(err, txs){
+    if(err) return callback(err);
+
+    var pendingTxs = []
+    var hiveTxs = []
+    txs.forEach(function(txHex){
+      var tx = Transaction.deserialize(txHex)
+      hiveTxs.push(txToHiveTx(tx))
+
+      tx.ins.forEach(function(txIn, i){
+        var op = txIn.outpoint
+        var o = wallet.outputs[op.hash+':'+op.index]
+
+        if(o) { // not yet spent for real
+          pendingTxs.push(tx)
+        }
+      })
+    })
+
+    pendingTxs = uniqueify(pendingTxs)
+    pendingTxs.forEach(processTx)
+
+    // one or more pending txs are confirmed
+    if(pendingTxs.length !== txs.length) {
+      db.setPendingTxs(pendingTxs, function(err){
+        if(err) return callback(err);
+        callback(null, hiveTxs)
+      })
     }
 
-    callback(null, txToHiveTx(tx))
+    callback(null, hiveTxs)
   })
 }
 
@@ -147,8 +188,11 @@ function sync(done) {
   })
 
   setUnspentOutputs(function(err){
-    if(err) return done(err)
-    maybeDone()
+    if(err) return done(err);
+    processLocalPendingTxs(function(err, transactions){
+      if(err) return done(err);
+      maybeDone(transactions)
+    })
   })
 
   fetchChangeAddressSentTransactions(function(err, transactions){
