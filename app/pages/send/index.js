@@ -4,6 +4,7 @@ var Ractive = require('hive-ractive')
 var Big = require('big.js')
 var emitter = require('hive-emitter')
 var db = require('hive-db')
+var getWallet = require('hive-wallet').getWallet
 
 module.exports = function(el){
   var ractive = new Ractive({
@@ -76,6 +77,19 @@ module.exports = function(el){
   emitter.on('ticker', function(rates){
     ractive.set('exchangeRates', rates)
   })
+
+  function validateSend() {
+    var amount = ractive.get('value')
+    var address = ractive.get('to')
+    var wallet = getWallet()
+    var balance = wallet.getBalance()
+
+    if(amount > balance + 0.0001) return false;
+    if(address === '') return false;
+    if(amount === '') return false;
+
+    return true;
+  }
 
   return ractive
 }
