@@ -46,6 +46,10 @@ module.exports = function(el){
   })
 
   ractive.on('open-send', function(){
+
+    var validated = validateSend()
+    if(!validated) return;
+
     var data = {
       overlay: 'confirm',
       address: ractive.get('to'),
@@ -82,11 +86,14 @@ module.exports = function(el){
     var amount = ractive.get('value')
     var address = ractive.get('to')
     var wallet = getWallet()
-    var balance = wallet.getBalance()
+    var balance = wallet.getBalance() - bitcoinToSatoshi(0.0001)
 
-    if(amount > balance + 0.0001) return false;
-    if(address === '') return false;
-    if(amount === '') return false;
+    if(amount === undefined) return false;
+
+    amount = bitcoinToSatoshi(amount)
+
+    if(amount > balance) return false;
+    if(address === '' || address === undefined) return false;
 
     return true;
   }
@@ -97,6 +104,11 @@ module.exports = function(el){
     // update balance & tx history
     emitter.emit('wallet-ready')
     emitter.emit('transactions-loaded', [tx])
+  }
+
+  function bitcoinToSatoshi(amount){
+    var btc = new Big(amount)
+    return parseInt(btc.times(100000000).toFixed(0))
   }
 
   return ractive
