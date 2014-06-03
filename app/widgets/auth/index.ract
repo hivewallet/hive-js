@@ -11,10 +11,6 @@
       {{/opening}}
     </div>
 
-    <div class="auth__altmsg">
-      <a href="#" class="_link">Having trouble signing in?</a>
-    </div>
-
     {{#userExists}}
       <div class="auth__altmsg">
         <span class="_link" on-click="clear-credentials">Open a different wallet</span>

@@ -46,6 +46,7 @@
 .auth__header {
   text-align: center;
   padding-bottom: 20px;
+  color: white;
 
   ._img {
     width: 80px;
@@ -136,6 +137,7 @@
   padding-bottom: 20px;
   label {
     @include clickbtn;
+    color: white;
   }
 }
 
