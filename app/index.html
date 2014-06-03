@@ -14,6 +14,10 @@
   <div id="app"></div>
 
   <div id="auth" class="auth__modal"></div>
+  <script>
+    //monkey patch URL for safari 6
+    URL = window.URL || window.webkitURL
+  </script>
   <script src='assets/js/application.js'></script>
 </body>
 </html>
