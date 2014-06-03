@@ -64,9 +64,12 @@ gulp.task('tests', function(){
 });
 
 function bundle(bundler, outFilename){
-  return bundler
-    .transform('ractify')
-    .bundle()
+  bundler = bundler.transform('ractify')
+  if(process.env.NODE_ENV === "production") {
+    bundler = bundler.transform({global: true}, 'uglifyify')
+  }
+
+  return bundler.bundle()
     .on('error', function (err) {
       console.error('Browserify Error')
       console.error(err.message);
