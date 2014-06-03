@@ -14,6 +14,7 @@ module.exports = function (prependMiddleware){
   app.use(express.bodyParser())
   app.use(express.cookieParser(process.env.COOKIE_SALT))
   app.use(express.session())
+  app.use(express.compress())
   app.use(express.static(path.join(__dirname, '..', 'build')))
 
   app.post('/register', validateAuthParams(false), function(req, res) {
