@@ -74,7 +74,5 @@ module.exports = function(el){
     ractive.set('error', true)
   }
 
-  ractive.on('test-error', handleTransactionError)
-
   return ractive
 }

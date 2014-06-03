@@ -21,7 +21,7 @@
       </div>
 
       <div class="confirm__inputs">
-        <div class="_cancel" on-click="test-error">Cancel</div>
+        <div class="_cancel" on-click="cancel">Cancel</div>
         <div class="_send" on-click="send">Send</div>
       </div>
 
