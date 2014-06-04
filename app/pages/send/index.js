@@ -88,12 +88,43 @@ module.exports = function(el){
     var wallet = getWallet()
     var balance = wallet.getBalance() - bitcoinToSatoshi(0.0001)
 
-    if(amount === undefined) return false;
+    if(address === '' || address === undefined) {
+
+      var data = {
+        icon: 'error_temp',
+        title: 'Whoops!',
+        message: "Please enter an address to send to."
+      }
+      emitter.emit('open-error', data)
+
+      return false
+    }
+
+    if(amount === undefined) {
+
+      var data = {
+        icon: 'error_temp',
+        title: 'Whoops!',
+        message: 'Please enter an amount to send.'
+      }
+      emitter.emit('open-error', data)
+
+      return false
+    }
 
     amount = bitcoinToSatoshi(amount)
 
-    if(amount > balance) return false;
-    if(address === '' || address === undefined) return false;
+    if(amount > balance) {
+
+      var data = {
+        icon: 'error_temp',
+        title: 'Uh oh!',
+        message: "You don't have enough funds in your wallet."
+      }
+      emitter.emit('open-error', data)
+
+      return false
+    }
 
     return true;
   }
