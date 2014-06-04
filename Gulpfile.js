@@ -39,7 +39,11 @@ gulp.task('scripts', function(){
   var bundler = browserify('./app/application.js')
   bundle(bundler, './application.js')
     .pipe(gulp.dest('./build/assets/js/'))
-    .pipe(refresh(lrserver));
+
+  var polyfillBundler = browserify('./app/polyfill.js')
+  bundle(polyfillBundler, './polyfill.js')
+    .pipe(gulp.dest('./build/assets/js/'))
+    .pipe(refresh(lrserver))
 });
 
 gulp.task('html', function(){
