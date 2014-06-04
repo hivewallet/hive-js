@@ -1,13 +1,13 @@
 <div class="tabs">
-  <a id="send_tab" data-hash='#send' class="tab" on-click="select">
+  <a id="send_tab" data-tab='send' class="tab" on-click="select">
     <span class="tab__icon ss-icon">send</span>
     <span class="tab__text">Send</span>
   </a>
-  <a data-hash='#receive' class="tab" on-click="select">
+  <a data-tab='receive' class="tab" on-click="select">
     <span class="tab__icon ss-icon">inbox</span>
     <span class="tab__text">Receive</span>
-  </a>  
-  <a data-hash='#history' class="tab" on-click="select">
+  </a>
+  <a data-tab='history' class="tab" on-click="select">
     <span class="tab__icon ss-icon">clock</span>
     <span class="tab__text">History</span>
   </a>

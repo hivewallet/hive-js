@@ -1,7 +1,6 @@
 'use strict';
 
 var Ractive = require('hive-ractive')
-var router = require('hive-router').router
 var emitter = require('hive-emitter')
 var initHeader = require('hive-header')
 var initTabs = require('hive-tabs')
@@ -31,23 +30,17 @@ module.exports = function(el){
   var errorModal = initErrorModal(ractive.nodes['error-modal'])
 
   // tabs
-  var send = initSend(ractive.nodes['send'])
-  var receive = initReceive(ractive.nodes['receive'])
-  var history = initHistory(ractive.nodes['history'])
+  var tabs = {
+    send: initSend(ractive.nodes['send']),
+    receive: initReceive(ractive.nodes['receive']),
+    history: initHistory(ractive.nodes['history'])
+  }
 
-  var currentPage = send
+  var currentPage = tabs.send
+  showPage(tabs.send)
 
-  // routes
-  router.addRoute('/send', function(){
-    showPage(send)
-  })
-
-  router.addRoute('/receive', function(){
-    showPage(receive)
-  })
-
-  router.addRoute('/history', function(){
-    showPage(history)
+  emitter.on('change-tab', function(tab) {
+    showPage(tabs[tab])
   })
 
   function showPage(page){

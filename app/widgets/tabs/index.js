@@ -2,8 +2,6 @@
 
 var $ = require('browserify-zepto')
 var Ractive = require('hive-ractive')
-var hasher = require('hive-router').hasher
-var router = require('hive-router').router
 var emitter = require('hive-emitter')
 
 module.exports = function(el){
@@ -17,7 +15,6 @@ module.exports = function(el){
     if(node !== active && active && $(active).hasClass('active')) {
       $(active).removeClass('active')
     }
-
     $(node).addClass('active')
     active = node
   }
@@ -37,12 +34,8 @@ module.exports = function(el){
 
   ractive.on('select', function(event){
     event.original.preventDefault();
-    hasher.setHash(event.node.dataset.hash);
+    emitter.emit('change-tab', event.node.dataset.tab)
     highlightTab(event.node);
-  })
-
-  hasher.changed.add(function(newHash, oldHash){
-    highlightTab(ractive.find("[data-hash='" + newHash + "']"))
   })
 
   return ractive

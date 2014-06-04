@@ -54,8 +54,6 @@
     "vinyl-source-stream": "^0.1.1",
     "glob": "^3.2.9",
     "cradle": "~0.6.7",
-    "crossroads": "^0.12.0",
-    "hasher": "^1.2.0",
     "fastclick": "~1.0.1",
     "geomodel": "~0.1.2",
     "ractive": "~0.4.0",

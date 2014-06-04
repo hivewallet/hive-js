@@ -1,13 +1,5 @@
 'use strict';
 
-// remove hash to avoid router bugs
-if (location.hash) {
-  var loc = window.location
-  if ("pushState" in history) {
-      history.pushState("", document.title, loc.pathname + loc.search)
-  }
-}
-
 var Ticker = require('hive-ticker-api').BitcoinAverage
 var emitter = require('hive-emitter')
 var initFrame = require('hive-frame')

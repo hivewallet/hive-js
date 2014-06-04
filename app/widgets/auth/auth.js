@@ -3,7 +3,6 @@
 var Ractive = require('hive-ractive')
 var Hive = require('hive-wallet')
 var emitter = require('hive-emitter')
-var hasher = require('hive-router').hasher
 
 var Auth = Ractive.extend({
   el: document.getElementById("auth"),
@@ -28,7 +27,6 @@ var Auth = Ractive.extend({
         return alert("error synchronizing. " + err)
       }
 
-      hasher.setHash('#send');
       emitter.emit('wallet-ready')
       emitter.emit('transactions-loaded', transactions)
     }
