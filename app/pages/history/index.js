@@ -2,9 +2,7 @@
 
 var Ractive = require('hive-ractive')
 var emitter = require('hive-emitter')
-var sync = require('hive-wallet').sync
 var Big = require('big.js')
-var $ = require('browserify-zepto')
 
 module.exports = function(el){
   var transactions = []

@@ -1,6 +1,5 @@
 'use strict';
 
-var $ = require('browserify-zepto')
 var Ractive = require('hive-ractive')
 var emitter = require('hive-emitter')
 var initSettings = require('hive-settings')

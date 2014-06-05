@@ -3,7 +3,6 @@
 var Ractive = require('hive-ractive')
 var emitter = require('hive-emitter')
 var transitions = require('hive-transitions')
-var $ = require('browserify-zepto')
 
 Ractive.transitions.fadeNscale = transitions.fadeNscaleTransition
 
