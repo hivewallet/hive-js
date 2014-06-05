@@ -10,6 +10,7 @@ var initReceive = require('hive-receive')
 var initHistory = require('hive-history')
 var initGeoOverlay = require('hive-geo-overlay')
 var initConfirmOverlay = require('hive-confirm-overlay')
+var initCurrencyOverlay = require('hive-currency-overlay')
 var $ = require('browserify-zepto')
 
 var _html = $('html')
@@ -26,6 +27,7 @@ module.exports = function(el){
   var sidebar = initSidebar(ractive.nodes['sidebar'])
   var geoOverlay = initGeoOverlay(ractive.nodes['geo-overlay'])
   var confirmOverlay = initConfirmOverlay(ractive.nodes['confirm-overlay'])
+  var currencyOverlay = initCurrencyOverlay(ractive.nodes['currency-overlay'])
 
   // tabs
   var tabs = {

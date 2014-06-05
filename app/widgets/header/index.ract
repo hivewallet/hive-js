@@ -1,22 +1,27 @@
-{{#menuOpen}}
-  <div class="toggle_overlay" on-click="toggle"></div>
-{{/menuOpen}}
+<div class="header">
 
-<div id="menu_btn" class="header__toggle ss-icon" on-click="toggle">
   {{#menuOpen}}
-    delete
+    <div class="toggle_overlay" on-click="toggle"></div>
   {{/menuOpen}}
 
-  {{^menuOpen}}
-    settings
-  {{/menuOpen}}
+  <div id="menu_btn" class="header__toggle ss-icon" on-click="toggle">
+    {{#menuOpen}}
+      delete
+    {{/menuOpen}}
+
+    {{^menuOpen}}
+      settings
+    {{/menuOpen}}
+  </div>
+
+  <div class="header__balance" on-click="toggle-currencies">
+    <span class="_amount">{{satoshiToBTC(bitcoinBalance)}}</span>
+    <span class="_currency">BTC</span>
+  </div>
+
+  <div class='header__refresh {{#updating_transactions}}is_updating{{/updating_transactions}}' on-click="sync">
+    <span class="_icon"></span>
+  </div>
+
 </div>
 
-<div class="header__balance">
-  <span class="_amount">{{satoshiToBTC(bitcoinBalance)}}</span>
-  <span class="_currency">BTC</span>
-</div>
-
-<div class='header__refresh {{#updating_transactions}}is_updating{{/updating_transactions}}' on-click="sync">
-  <span class="_icon"></span>
-</div>
