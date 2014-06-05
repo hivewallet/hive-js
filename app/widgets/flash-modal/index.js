@@ -49,6 +49,16 @@ module.exports = function(el){
     })
   }
 
+  document.addEventListener('keydown', function(event){
+    if(ractive.get('visible') && enterOrEscape(event.keyCode)){
+      ractive.fire('cancel')
+    }
+  })
+
+  function enterOrEscape(keycode) {
+    return (keycode === 13 || keycode === 27)
+  }
+
   return ractive
 }
 
