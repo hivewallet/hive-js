@@ -83,7 +83,14 @@ module.exports = function(el){
 
   function lookupGeo(context) {
     geo.search(function(err, results){
-      if(err) return emitter.emit('open-error', err)
+      if(err) {
+        return emitter.emit('open-error', {
+          message: err.message,
+          onDismiss: function(){
+            ractive.fire('close-geo')
+          }
+        })
+      }
 
       if(context === 'new') {
         // set a brief timeout so it "feels" like we're searching
