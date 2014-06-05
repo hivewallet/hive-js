@@ -33,7 +33,7 @@
                  data-name={{name}}
                  data-email={{email}}>
                   <img class="_avatar" src="{{emailToAvatar(email)}}" />
-                  <h3 class="_name">{{name}}</span>
+                  <h3 class="_name">{{name}}</h3>
               </div>
             {{/nearbys}}
           </div>

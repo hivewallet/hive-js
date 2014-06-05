@@ -1,0 +1,22 @@
+
+.overlay--currency {
+  @extend .overlay;
+  overflow-y: auto;
+  background-color: rgba(0,0,0,0.6x);
+}
+
+.currency__content {
+  margin-top: 30px;
+  margin-right: 10px;
+  margin-left: 10px;
+  background-color: white;
+}
+
+.currency_list {
+  // position: absolute;
+  // z-index: 100;
+  // bottom: -100%;
+  // left: 10px;
+  // right: 10px;
+  // background-color: white;
+}
