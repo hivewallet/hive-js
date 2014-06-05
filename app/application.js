@@ -4,11 +4,13 @@ var Ticker = require('hive-ticker-api').BitcoinAverage
 var emitter = require('hive-emitter')
 var initFrame = require('hive-frame')
 var initAuth = require('hive-auth')
+var initErrorModal = require('hive-error-modal')
 var walletExists = require('hive-wallet').walletExists
 var fastclick = require('fastclick')
 
 fastclick(document.getElementsByTagName("body")[0])
 
+var errorModal = initErrorModal(document.getElementById('error-modal'))
 var frame = initFrame(document.getElementById('app'))
 var auth = null
 
