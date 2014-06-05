@@ -34,10 +34,17 @@
 
 
 .flash__heading {
-  color: #eebf31;
   font-size: 24px;
   font-weight: $bold;
   padding-bottom: 10px;
+
+  &.error {
+    color: #eebf31;
+  }
+
+  &.info {
+    color: #14a5f0;
+  }
 }
 
 .flash__message {

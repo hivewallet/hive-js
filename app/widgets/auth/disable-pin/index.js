@@ -20,8 +20,12 @@ module.exports = function(){
         return emitter.emit('open-error', { message: message })
       }
 
-      alert('Pin disabled. About to reload wallet.')
-      window.location.reload()
+      emitter.emit('open-info', {
+        message: 'Pin disabled. About to reload wallet.',
+        onDismiss: function(){
+          window.location.reload()
+        }
+      })
     })
   })
 

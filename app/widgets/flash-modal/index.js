@@ -20,14 +20,34 @@ module.exports = function(el){
 
   ractive.on('cancel', function(){
     ractive.set('visible', false)
+    var onDismiss = ractive.get('onDismiss')
+    if(onDismiss) onDismiss()
   })
 
-  emitter.on('open-error', function(data){
-    ractive.set('icon', data.icon || 'error_temp')
-    ractive.set('title', data.title || 'Whoops!')
-    ractive.set('message', data.message)
-    ractive.set('visible', true)
-  })
+  var defaults = {
+    error: {
+      icon: 'error_temp',
+      title: 'Whoops!'
+    },
+    info: {
+      icon: 'info_temp',
+      title: 'Just saying...'
+    }
+  }
+
+  attachHandlerFor('error')
+  attachHandlerFor('info')
+
+  function attachHandlerFor(type) {
+    emitter.on('open-' + type, function(data){
+      ractive.set('icon', data.icon || defaults[type].icon)
+      ractive.set('title', data.title || defaults[type].title)
+      ractive.set('message', data.message)
+      ractive.set('onDismiss', data.onDismiss)
+      ractive.set('visible', true)
+      ractive.set('type', type)
+    })
+  }
 
   return ractive
 }
