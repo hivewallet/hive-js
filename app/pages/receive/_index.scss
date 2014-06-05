@@ -61,6 +61,16 @@
           color: darken($green, 20%);
         }
       }
+
+      &.is_connecting {
+        background-color: $grey;
+        box-shadow: 0 3px 0 0 darken($grey, 10%);
+        color: darken($grey, 20%);
+
+        &:hover {
+          color: darken($grey, 20%);
+        }
+      }
     }
 
     ._text {

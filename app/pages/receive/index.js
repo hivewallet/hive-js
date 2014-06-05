@@ -17,6 +17,7 @@ module.exports = function(el){
       address: '',
       qrVisible: false,
       btn_message: 'Turn waggle on',
+      connecting: false,
       broadcasting: false,
       transitions: {
         fade: transitions.fade
@@ -29,15 +30,19 @@ module.exports = function(el){
   })
 
   ractive.on('toggle-broadcast', function(){
+    if(ractive.get('connecting')) return;
     if(ractive.get('broadcasting')) {
       ractive.set('broadcasting', false)
       ractive.set('btn_message', 'Turn waggle on')
       geo.remove(true)
     } else {
-      ractive.set('broadcasting', true)
-      ractive.set('btn_message', 'Waggle is broadcasting')
+      ractive.set('connecting', true)
+      ractive.set('btn_message', 'Connecting to waggle')
       geo.search(function(err, results){
-        if(err) return alert(err)
+        if(err) return handleWaggleError(err)
+        ractive.set('connecting', false)
+        ractive.set('broadcasting', true)
+        ractive.set('btn_message', 'Waggle is broadcasting')
       })
     }
   })
@@ -68,6 +73,21 @@ module.exports = function(el){
 
   function getAddress(){
     return Hive.getWallet().currentAddress
+  }
+
+  function handleWaggleError(err) {
+    console.log(err)
+
+    var data = {
+      icon: 'error_temp',
+      title: 'Uh Oh...',
+      message: "We couldn't connect you to waggle, please check your internet connection."
+    }
+
+    emitter.emit('open-error', data)
+    ractive.set('connecting', false)
+    ractive.set('broadcasting', false)
+    ractive.set('btn_message', 'Turn waggle on')
   }
 
   return ractive
