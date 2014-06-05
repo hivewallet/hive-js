@@ -42,7 +42,6 @@ module.exports = function(el){
     return satoshi.times(0.00000001)
   }
 
-
   ractive.on('sync', function(event){
     event.original.preventDefault();
     if(!ractive.get('updating_transactions')) {
@@ -55,6 +54,13 @@ module.exports = function(el){
         emitter.emit('update-transactions', txs)
       })
     }
+  })
+
+  ractive.on('toggle-currencies', function(){
+    var data = {
+      overlay: 'currency'
+    }
+    emitter.emit('open-overlay', data)
   })
 
   ractive.toggleIcon = toggleIcon
