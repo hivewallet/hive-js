@@ -23,7 +23,7 @@ module.exports = function(el){
     ractive.set('searching', true);    
     ractive.set('search_msg', 'Searching...');
     geo.search(function(err, results){
-      if(err) return alert(err);
+      if(err) return emitter.emit('open-error', err)
 
       ractive.set('searching', false);
       ractive.set('search_msg', 'Search Again');

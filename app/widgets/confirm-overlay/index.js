@@ -49,7 +49,7 @@ module.exports = function(el){
     var wallet = getWallet()
 
     wallet.createTxAsync(to, value, function(err, tx){
-      if(err) return alert(err)
+      if(err) return emitter.emit('open-error', err)
       wallet.sendTx(tx, onTxSent)
     })
   })

@@ -1,6 +1,7 @@
 'use strict'
 
 var xhr = require('xhr')
+var emitter = require('hive-emitter')
 
 function makeRequest(params, callback){
   if(params && !params.timeout) {
@@ -9,7 +10,8 @@ function makeRequest(params, callback){
 
   xhr(params, function(err){
     if(err && err.message === 'Internal XMLHttpRequest Error') {
-      return alert("Request timeout. Please check your internet connection.")
+      emitter.emit('open-error', { message: "Request timeout. Please check your internet connection." })
+      return;
     }
     callback.apply(null, arguments)
   })

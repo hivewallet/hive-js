@@ -24,7 +24,8 @@ var Auth = Ractive.extend({
       self.set('opening', false)
       if(err) {
         if(err === 'user_deleted') return location.reload(false);
-        return alert("error synchronizing. " + err)
+        emitter.emit('open-error', { message: "error synchronizing. " + err })
+        return;
       }
 
       emitter.emit('wallet-ready')

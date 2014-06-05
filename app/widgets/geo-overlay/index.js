@@ -83,8 +83,8 @@ module.exports = function(el){
 
   function lookupGeo(context) {
     geo.search(function(err, results){
-      if(err) return alert(err)
-      // TODO: handle error in modal
+      if(err) return emitter.emit('open-error', err)
+
       if(context === 'new') {
         // set a brief timeout so it "feels" like we're searching
         xhr_timeout = setTimeout(function(){

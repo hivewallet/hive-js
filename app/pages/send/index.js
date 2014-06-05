@@ -125,7 +125,10 @@ module.exports = function(el){
   }
 
   function onTxSent(err, tx){
-    if(err) return alert("error sending transaction. " + err);
+    if(err) {
+      emitter.emit('open-error', { message: "error sending transaction. " + err })
+      return;
+    }
 
     // update balance & tx history
     emitter.emit('wallet-ready')

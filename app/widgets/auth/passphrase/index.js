@@ -1,7 +1,8 @@
 'use strict';
 
-var Ractive = require('../auth')
 var Hive = require('hive-wallet')
+var emitter = require('hive-emitter')
+var Ractive = require('../auth')
 var pinPage = require('../pin')
 
 module.exports = function(prevPage){
@@ -30,7 +31,9 @@ module.exports = function(prevPage){
     ractive.pauseLoading()
     ractive.set('opening', false)
 
-    if(err) return alert(err);
+    if(err) {
+      return emitter.emit('open-error', { message: err })
+    }
 
     pinPage(walletExist)
   }

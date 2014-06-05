@@ -15,7 +15,10 @@ module.exports = function(){
 
   ractive.on('disable-pin', function(){
     Hive.disablePin(ractive.get('pin'), function(err){
-      if(err) return alert('Failed to disable pin');
+      if(err) {
+        var message = 'Failed to disable pin. Please make sure you enter the correct pin'
+        return emitter.emit('open-error', { message: message })
+      }
 
       alert('Pin disabled. About to reload wallet.')
       window.location.reload()
