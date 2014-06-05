@@ -7,7 +7,7 @@
 
 <h3 class="_title">Location services</h3>
 <div class="geo__box">
-  <span class="_btn" on-click="open-geo">Turn waggle on</span>
+  <span class="_btn {{#broadcasting}}is_broadcasting{{/broadcasting}}" on-click="toggle-broadcast">{{btn_message}}</span>
   <p class="_text">Waggle lets other Hive users nearby discover your wallet address by comparing your location.</p>
 </div>
 

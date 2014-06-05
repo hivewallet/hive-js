@@ -36,15 +36,8 @@ module.exports = function(el){
     if(data.overlay === 'geo') {
       ractive.set('searching', true)
       ractive.set('visible', true)
-
-      if(data.context === 'send') {
-        ractive.set('search_message', 'Searching your area for other Hive Web users')
-        ractive.fire('search-nearby')
-      } else {
-        ractive.set('search_message', 'Broadcasting your location to Hive users nearby')
-        animateOval()
-        lookupGeo('receive')
-      }
+      ractive.set('search_message', 'Searching your area for other Hive Web users')
+      ractive.fire('search-nearby')
     }
   })
 
@@ -92,7 +85,6 @@ module.exports = function(el){
     geo.search(function(err, results){
       if(err) return alert(err)
       // TODO: handle error in modal
-      if(context === 'receive') { return }
       if(context === 'new') {
         // set a brief timeout so it "feels" like we're searching
         xhr_timeout = setTimeout(function(){
