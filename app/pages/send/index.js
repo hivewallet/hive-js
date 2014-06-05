@@ -91,8 +91,6 @@ module.exports = function(el){
     if(address === '' || address === undefined) {
 
       var data = {
-        icon: 'error_temp',
-        title: 'Whoops!',
         message: "Please enter an address to send to."
       }
       emitter.emit('open-error', data)
@@ -103,8 +101,6 @@ module.exports = function(el){
     if(amount === undefined) {
 
       var data = {
-        icon: 'error_temp',
-        title: 'Whoops!',
         message: 'Please enter an amount to send.'
       }
       emitter.emit('open-error', data)
@@ -117,7 +113,6 @@ module.exports = function(el){
     if(amount > balance) {
 
       var data = {
-        icon: 'error_temp',
         title: 'Uh oh!',
         message: "You don't have enough funds in your wallet."
       }

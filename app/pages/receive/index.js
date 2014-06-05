@@ -79,7 +79,6 @@ module.exports = function(el){
     console.log(err)
 
     var data = {
-      icon: 'error_temp',
       title: 'Uh Oh...',
       message: "We couldn't connect you to waggle, please check your internet connection."
     }

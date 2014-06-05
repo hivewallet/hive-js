@@ -87,7 +87,6 @@ module.exports = function(el){
 
   function handleUserError(response) {
     var data = {
-      icon: "error_temp",
       title: "Uh Oh!",
       message: "Could not save your details"
     }

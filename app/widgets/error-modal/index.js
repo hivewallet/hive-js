@@ -24,8 +24,8 @@ module.exports = function(el){
   })
 
   emitter.on('open-error', function(data){
-    ractive.set('icon', data.icon)
-    ractive.set('title', data.title)
+    ractive.set('icon', data.icon || 'error_temp')
+    ractive.set('title', data.title || 'Whoops!')
     ractive.set('message', data.message)
     ractive.set('visible', true)
   })
