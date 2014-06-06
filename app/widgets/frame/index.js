@@ -19,7 +19,7 @@ module.exports = function(el){
   // widgets
   var header = initHeader(ractive.nodes['header'])
   var tabs = initTabs(ractive.nodes['tabs'])
-  var sidebar = initSidebar(ractive.nodes['sidebar'])s
+  var sidebar = initSidebar(ractive.nodes['sidebar'])
 
   // tabs
   var tabs = {
