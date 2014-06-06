@@ -8,12 +8,7 @@ var initSidebar = require('hive-sidebar')
 var initSend = require('hive-send')
 var initReceive = require('hive-receive')
 var initHistory = require('hive-history')
-var initGeoOverlay = require('hive-geo-overlay')
-var initConfirmOverlay = require('hive-confirm-overlay')
-var initCurrencyOverlay = require('hive-currency-overlay')
-var $ = require('browserify-zepto')
 
-var _html = $('html')
 
 module.exports = function(el){
   var ractive = new Ractive({
@@ -25,9 +20,6 @@ module.exports = function(el){
   var header = initHeader(ractive.nodes['header'])
   var tabs = initTabs(ractive.nodes['tabs'])
   var sidebar = initSidebar(ractive.nodes['sidebar'])
-  var geoOverlay = initGeoOverlay(ractive.nodes['geo-overlay'])
-  var confirmOverlay = initConfirmOverlay(ractive.nodes['confirm-overlay'])
-  var currencyOverlay = initCurrencyOverlay(ractive.nodes['currency-overlay'])
 
   // tabs
   var tabs = {
@@ -48,16 +40,6 @@ module.exports = function(el){
     page.show()
     currentPage = page
   }
-
-  emitter.on('open-overlay', function(){
-    ractive.set('view_state', 'is_hidden')
-    _html.addClass('prevent_scroll')
-  })
-
-  emitter.on('close-overlay', function(){
-    ractive.set('view_state', '')
-    _html.removeClass('prevent_scroll')
-  })
 
   // menu toggle
   emitter.on('toggle-menu', function(open) {

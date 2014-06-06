@@ -8,8 +8,10 @@
   min-height: 100%;
   overflow: hidden;
   position: relative;
+}
 
-  &.is_hidden {
+.is_hidden {
+  .frame {
     position: fixed;
     top:0;
     bottom:0;

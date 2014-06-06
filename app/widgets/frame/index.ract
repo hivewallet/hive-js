@@ -1,4 +1,4 @@
-<div class="frame {{view_state}}">
+<div class="frame">
 
   <div id="sidebar" class="animate_in">test</div>
 
@@ -14,8 +14,3 @@
   </div>
 
 </div>
-
-<!-- overlays -->
-<div id="geo-overlay"></div>
-<div id="confirm-overlay"></div>
-<div id="currency-overlay"></div>
