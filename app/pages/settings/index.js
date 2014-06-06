@@ -4,10 +4,7 @@ var Ractive = require('hive-ractive')
 var getWallet = require('hive-wallet').getWallet
 var emitter = require('hive-emitter')
 var emailToAvatar = require('hive-gravatar').emailToAvatar
-var Big = require('big.js')
-var currencies = require('hive-ticker-api').currencies
 var db = require('hive-db')
-var crypto = require('crypto')
 var transitions = require('hive-transitions')
 
 Ractive.transitions.fadeNscale = transitions.fadeNscaleTransition
@@ -26,10 +23,6 @@ module.exports = function(el){
       },
       editingName: false,
       editingEmail: false,
-      currencies: currencies,
-      exchangeRates: {},
-      satoshiToBTC: satoshiToBTC,
-      bitcoinToFiat: bitcoinToFiat,
       emailToAvatar: emailToAvatar,
       user_settings: true
     }
@@ -44,7 +37,6 @@ module.exports = function(el){
     db.get(function(err, doc){
       if(err) return console.error(err);
 
-      ractive.set('selectedFiat', doc.systemInfo.preferredCurrency)
       ractive.set('user.name', doc.userInfo.firstName)
       ractive.set('user.email', doc.userInfo.email)
       if(ractive.get('user.name')) {
@@ -56,8 +48,6 @@ module.exports = function(el){
   emitter.on('ticker', function(rates){
     ractive.set('exchangeRates', rates)
   })
-
-  ractive.observe('selectedFiat', setPreferredCurrency)
 
   ractive.on('toggle', function(event){
     event.original.preventDefault();
@@ -108,30 +98,6 @@ module.exports = function(el){
       ractive.set(dataString, true)
       classes.add('open')
     }
-  }
-
-  function setPreferredCurrency(currency, old){
-    if(old == undefined) return; //when loading wallet
-
-    db.set('systemInfo', {preferredCurrency: currency}, function(err, response){
-      if(err) return console.error(response);
-
-      emitter.emit('preferred-currency-changed', currency)
-    })
-  }
-
-  function satoshiToBTC(amount){
-    if(amount == undefined) return;
-
-    var satoshi = new Big(amount)
-    return satoshi.times(0.00000001)
-  }
-
-  function bitcoinToFiat(amount, exchangeRate){
-    if(amount == undefined) return;
-
-    var btc = satoshiToBTC(amount)
-    return btc.times(exchangeRate).toFixed(2)
   }
 
   return ractive
