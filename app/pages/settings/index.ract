@@ -26,7 +26,7 @@
 
       <div class="settings__input-group">
         <label class="_label">Gravatar Email
-          <input value="{{user.email}}" type="text" class="_input" />
+          <input value="{{user.email}}" type="text" class="_input" on-enter="submit-details"/>
         </label>
       </div>
 

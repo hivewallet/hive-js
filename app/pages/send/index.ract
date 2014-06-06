@@ -15,12 +15,12 @@
 
           <div class="_input-group">
             <span class="_currency">BTC</span>
-            <input id="bitcoin" class="_input" type="number" min="0" value="{{value}}" on-keyup="bitcoin-to-fiat">
+            <input id="bitcoin" class="_input" type="number" min="0" value="{{value}}" on-keyup="bitcoin-to-fiat" on-enter="open-send">
           </div>
 
           <div class="_input-group">
             <span class="_currency">{{fiatCurrency}}</span>
-            <input id="fiat" class="_input" type="number" min="0" value="{{fiatValue}}" on-keyup="fiat-to-bitcoin">
+            <input id="fiat" class="_input" type="number" min="0" value="{{fiatValue}}" on-keyup="fiat-to-bitcoin" on-enter="open-send">
           </div>
 
 
