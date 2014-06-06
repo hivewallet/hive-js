@@ -7,14 +7,10 @@
 
       <div id="currency_list">
 
-        {{#currencies}}
-          {{#currency_list}}
-            <div class="currency__item">
-              <span>{{amount}}</span>
-              <span>{{currency}}</span>
-            </div>
-          {{/currency_list}}
-        {{/currencies}}
+        <div class="currency__item">
+          <span>{{fiatValue}}</span>
+          <span>{{fiatCurrency}}</span>
+        </div>
 
       </div>
 

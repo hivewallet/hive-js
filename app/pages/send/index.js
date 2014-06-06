@@ -5,21 +5,16 @@ var Big = require('big.js')
 var emitter = require('hive-emitter')
 var db = require('hive-db')
 var getWallet = require('hive-wallet').getWallet
+var currencies = require('hive-ticker-api').currencies
 
 module.exports = function(el){
   var ractive = new Ractive({
     el: el,
     template: require('./index.ract').template,
     data: {
+      currencies: currencies,
       exchangeRates: {}
     }
-  })
-
-  emitter.on('wallet-ready', function(){
-    db.get('systemInfo', function(err, info){
-      if(err) return console.error(err);
-      ractive.set('fiatCurrency', info.preferredCurrency)
-    })
   })
 
   emitter.on('clear-send-form', function(){
@@ -30,11 +25,6 @@ module.exports = function(el){
 
   emitter.on('prefill-wallet', function(address) {
     ractive.set('to', address)
-  })
-
-  emitter.on('preferred-currency-changed', function(currency){
-    ractive.set('fiatCurrency', currency)
-    ractive.fire('bitcoin-to-fiat')
   })
 
   ractive.on('open-geo', function(){
@@ -58,6 +48,22 @@ module.exports = function(el){
     emitter.emit('open-overlay', data)
   })
 
+
+
+  emitter.on('db-ready', function(){
+    db.get(function(err, doc){
+      if(err) return console.error(err);
+
+      ractive.set('selectedFiat', doc.systemInfo.preferredCurrency)
+    })
+  })
+
+  emitter.on('ticker', function(rates){
+    ractive.set('exchangeRates', rates)
+  })
+
+  ractive.observe('selectedFiat', setPreferredCurrency)
+
   ractive.on('fiat-to-bitcoin', function(){
     var fiat = ractive.nodes.fiat.value
     if(fiat == undefined || fiat === '') return;
@@ -76,10 +82,6 @@ module.exports = function(el){
     var fiat = new Big(bitcoin).times(exchangeRate).toFixed(2)
 
     ractive.set('fiatValue', fiat)
-  })
-
-  emitter.on('ticker', function(rates){
-    ractive.set('exchangeRates', rates)
   })
 
   function validateSend() {
@@ -138,6 +140,14 @@ module.exports = function(el){
   function bitcoinToSatoshi(amount){
     var btc = new Big(amount)
     return parseInt(btc.times(100000000).toFixed(0))
+  }
+
+  function setPreferredCurrency(currency){
+    db.set('systemInfo', {preferredCurrency: currency}, function(err, response){
+      if(err) return console.error(response);
+
+      emitter.emit('preferred-currency-changed', currency)
+    })
   }
 
   return ractive
