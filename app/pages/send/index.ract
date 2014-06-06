@@ -19,8 +19,14 @@
           </div>
 
           <div class="_input-group">
-            <span class="_currency">{{fiatCurrency}}</span>
-            <input id="fiat" class="_input" type="number" min="0" value="{{fiatValue}}" on-keyup="fiat-to-bitcoin" on-enter="open-send">
+            <span class="_currency">
+              <select class='large-2 small-4 columns' value="{{selectedFiat}}">
+                {{#currencies}}
+                  <option value="{{.}}">{{.}}</option>
+                {{/currencies}}
+              </select>
+            </span>
+            <input id="fiat" class="_input" type="number" min="0" value="{{fiatValue}}" on-keyup="fiat-to-bitcoin">
           </div>
 
 
