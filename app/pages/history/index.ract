@@ -1,7 +1,9 @@
 
 <div class="transactions">
-  {{#transactions}}
+  {{#transactions.length}}
     <h3 class="_title">Your transaction history</h3>
+  {{/transactions.length}}
+  {{#transactions}}
     <div class="transactions__item">
 
       <div class="_avatar hexagon"></div>
