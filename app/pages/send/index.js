@@ -68,7 +68,7 @@ module.exports = function(el){
     var fiat = ractive.nodes.fiat.value
     if(fiat == undefined || fiat === '') return;
 
-    var exchangeRate = ractive.get('exchangeRates')[ractive.get('fiatCurrency')]
+    var exchangeRate = ractive.get('exchangeRates')[ractive.get('selectedFiat')]
     var bitcoin = new Big(fiat).div(exchangeRate).toFixed(8)
 
     ractive.set('value', bitcoin)
@@ -78,7 +78,7 @@ module.exports = function(el){
     var bitcoin = ractive.nodes.bitcoin.value
     if(bitcoin == undefined || bitcoin === '') return;
 
-    var exchangeRate = ractive.get('exchangeRates')[ractive.get('fiatCurrency')]
+    var exchangeRate = ractive.get('exchangeRates')[ractive.get('selectedFiat')]
     var fiat = new Big(bitcoin).times(exchangeRate).toFixed(2)
 
     ractive.set('fiatValue', fiat)
@@ -147,6 +147,7 @@ module.exports = function(el){
       if(err) return console.error(response);
 
       emitter.emit('preferred-currency-changed', currency)
+      ractive.fire('bitcoin-to-fiat')
     })
   }
 
