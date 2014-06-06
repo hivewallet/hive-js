@@ -11,6 +11,7 @@ module.exports = function (prependMiddleware){
   if(prependMiddleware) {
     app.use(prependMiddleware)
   }
+  app.use(requireHTTPS)
   app.use(express.bodyParser())
   app.use(express.cookieParser(process.env.COOKIE_SALT))
   app.use(express.session())
@@ -126,6 +127,13 @@ module.exports = function (prependMiddleware){
     })
   }
 
+  function requireHTTPS(req, res, next) {
+    var herokuForwardedFromHTTPS = req.headers['x-forwarded-proto'] === 'https'
+    if (!herokuForwardedFromHTTPS && process.env.NODE_ENV === 'production') {
+      return res.redirect('https://' + req.get('host') + req.url)
+    }
+    next()
+  }
   return app
 }
 
