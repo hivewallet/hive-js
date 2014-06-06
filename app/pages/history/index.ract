@@ -27,4 +27,7 @@
 
     </div>
   {{/transactions}}
+  {{^transactions}}
+    You haven't made any transactions yet
+  {{/transactions}}
 </div>
