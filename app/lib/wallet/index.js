@@ -20,10 +20,8 @@ Transaction.feePerKb = 10000
 var api = new API()
 var wallet = null
 var seed = null
-var mnemonic = null
 
 function getSeed() { return seed }
-function getMnemonic() { return mnemonic }
 
 function sendTx(tx, callback) {
   var txHex = convert.bytesToHex(tx.serialize())
@@ -112,9 +110,13 @@ function createWallet(passphrase, network, callback) {
       return callback(err)
     }
 
-    initWallet(e.data, network)
+    var mnemonic = initWallet(e.data, network)
+    auth.exist(wallet.id, function(err){
+      if(err) return callback(err);
 
-    auth.exist(wallet.id, callback)
+      callback(null, mnemonic)
+      mnemonic = null
+    })
   }, false)
 }
 
@@ -169,13 +171,13 @@ function openWalletWithPin(pin, network, syncDone) {
 
 function initWallet(data, network) {
   seed = data.seed
-  mnemonic = data.mnemonic
   wallet = new Wallet(convert.hexToBytes(seed), network)
 
   wallet.getSeed = getSeed
-  wallet.getMnemonic = getMnemonic
   wallet.sendTx = sendTx
   wallet.id = crypto.createHash('sha256').update(seed).digest('hex')
+
+  return data.mnemonic
 }
 
 function sync(done) {

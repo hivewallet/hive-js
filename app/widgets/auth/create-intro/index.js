@@ -3,6 +3,7 @@
 var Ractive = require('../auth')
 var Hive = require('hive-wallet')
 var confirmPassphrasePage = require('../create-confirm')
+var emitter = require('hive-emitter')
 
 module.exports = function(prevPage){
   var ractive = new Ractive({
@@ -20,8 +21,9 @@ module.exports = function(prevPage){
     ractive.set('opening', true)
     ractive.set('progress', 'Generating passphrase...')
     ractive.loading()
-    Hive.createWallet(null, this.getNetwork(), function(){
-      confirmPassphrasePage()
+    Hive.createWallet(null, this.getNetwork(), function(err, mnemonic){
+      if(err) return emitter.emit('open-error', err);
+      confirmPassphrasePage(mnemonic)
     })
   })
 
