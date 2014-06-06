@@ -19,9 +19,7 @@ module.exports = function(el){
     data: {
       user: {
         name: '',
-        email: '',
-        address: '',
-        mnemonic: ''
+        email: ''
       },
       transitions: {
         fadeNscale: transitions.fadeNscaleTransition
@@ -39,8 +37,6 @@ module.exports = function(el){
 
   emitter.on('wallet-ready', function(){
     var wallet = getWallet()
-    ractive.set('user.address', wallet.currentAddress)
-    ractive.set('user.mnemonic', wallet.getMnemonic())
     ractive.set('bitcoinBalance', wallet.getBalance())
   })
 

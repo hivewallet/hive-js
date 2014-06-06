@@ -75,21 +75,4 @@
 
 <div id="security_settings" class="settings__group">
   <div class="settings__btn" style="margin-bottom: 20px;" on-click="disable-pin">Disable pin</div>
-
-  <div>
-    <h5>Bitcoin Address</h5>
-    <div class='panel'>
-      {{user.address}}
-    </div>
-  </div>
-
-  {{#user.mnemonic}}
-    <div>
-      <h5>Seed Phrase</h5>
-      <div class='panel'>
-        {{user.mnemonic}}
-      </div>
-    </div>
-  {{/user.mnemonic}}
-
 </div>
