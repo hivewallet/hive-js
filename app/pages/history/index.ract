@@ -26,7 +26,7 @@
   {{^transactions}}
     <div class="transactions__message">
       <div class="_icon ss-icon">help</div>
-      <div class="_message">You haven't made any transactions yet</div>
+      <div class="_message">You don't have any transactions yet</div>
     </div>
   {{/transactions}}
 </div>
