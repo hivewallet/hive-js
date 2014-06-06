@@ -67,3 +67,19 @@
   }
 
 }
+
+.transactions__message {
+  padding: 40px;
+  color: $grey;
+  text-align: center;
+
+  ._icon {
+    font-size: 32px;
+  }
+
+  ._message {
+    font-size: 24px;
+    line-height: 1.2;
+  }
+
+}

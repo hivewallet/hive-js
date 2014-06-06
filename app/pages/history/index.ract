@@ -1,8 +1,7 @@
 
 <div class="transactions">
-
-  <h3 class="_title">Your transaction history</h3>
   {{#transactions}}
+    <h3 class="_title">Your transaction history</h3>
     <div class="transactions__item">
 
       <div class="_avatar hexagon"></div>
@@ -22,12 +21,12 @@
         {{/pending}}
 
       </div>
-
-
-
     </div>
   {{/transactions}}
   {{^transactions}}
-    You haven't made any transactions yet
+    <div class="transactions__message">
+      <div class="_icon ss-icon">help</div>
+      <div class="_message">You haven't made any transactions yet</div>
+    </div>
   {{/transactions}}
 </div>
