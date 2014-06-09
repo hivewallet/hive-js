@@ -112,11 +112,19 @@
 
   background-color: $background;
 
-  z-index: 1000;
-
   overflow: hidden;
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
+}
+
+// hacky fix for overlay ordering...
+
+.z-1000 {
+  z-index: 1000;
+}
+
+.z-9000 {
+  z-index: 9000;
 }
 
 
