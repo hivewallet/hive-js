@@ -1,7 +1,8 @@
 #auth {
   display: none;
   &.current {
-    display: block;
+    display: flex;
+    align-items: center;
   }
 }
 

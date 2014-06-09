@@ -8,7 +8,8 @@ module.exports = function(mnemonic){
   var ractive = new Ractive({
     partials: {
       header: require('./header.ract').template,
-      actions: require('./actions.ract').template
+      actions: require('./actions.ract').template,
+      footer: require('./footer.ract').template
     },
     data: {
       passphrase: mnemonic

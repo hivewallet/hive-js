@@ -8,7 +8,8 @@ var Auth = Ractive.extend({
   el: document.getElementById("auth"),
   template: require('./index.ract').template,
   partials: {
-    header: require('./choose/header.ract').template
+    header: require('./choose/header.ract').template,
+    footer: require('./footer.ract').template
   },
   init: function(){
     var timerId = null

@@ -9,7 +9,8 @@ module.exports = function(userExists){
   var ractive = new Ractive({
     partials: {
       content: require('./content.ract').template,
-      actions: require('./actions.ract').template
+      actions: require('./actions.ract').template,
+      footer: require('./footer.ract').template
     },
     data: {
       userExists: userExists
