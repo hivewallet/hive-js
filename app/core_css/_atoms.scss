@@ -112,6 +112,8 @@
 
   background-color: $background;
 
+  z-index: 1000;
+
   overflow: hidden;
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
