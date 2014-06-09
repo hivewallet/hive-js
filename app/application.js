@@ -1,11 +1,5 @@
 'use strict';
 
-// var testStorage = require('hive-custom-modernizr')
-require('browsernizr/test/storage/localstorage')
-var Modernizr = require('browsernizr')
-
-console.log(Modernizr.localstorage)
-
 var Ticker = require('hive-ticker-api').BitcoinAverage
 var emitter = require('hive-emitter')
 var initFrame = require('hive-frame')
@@ -19,6 +13,15 @@ fastclick(document.getElementsByTagName("body")[0])
 initFlashModal(document.getElementById('flash-modal'))
 var frame = initFrame(document.getElementById('app'))
 var auth = null
+
+// test for localStorage & private browser mode
+require('browsernizr/test/storage/localstorage')
+var Modernizr = require('browsernizr')
+if(!Modernizr.localstorage) {
+  emitter.emit('open-error', {
+    message: 'Your browser does not support localStorage, try switching to public mode'
+  })
+}
 
 walletExists(function(exists){
   auth = exists ? initAuth.pin(true) : initAuth.choose()
