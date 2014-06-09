@@ -19,7 +19,9 @@ module.exports = function(el){
       transitions: {
         fade: transitions.fade
       },
-      exchangeRates: {}
+      exchangeRates: {},
+      satoshiToBTC: satoshiToBTC,
+      bitcoinToFiat: bitcoinToFiat
     }
   })
 
@@ -33,8 +35,7 @@ module.exports = function(el){
   emitter.on('open-overlay', function(data){
     if(data.overlay === 'currency') {
       ractive.set('visible', true)
-      ractive.set('balance', data.balance)
-      ractive.fire('bitcoin-to-fiat')
+      ractive.set('bitcoinBalance', data.balance)
     }
   })
 
@@ -51,15 +52,19 @@ module.exports = function(el){
     ractive.set('exchangeRates', rates)
   })
 
-  ractive.on('bitcoin-to-fiat', function(){
-    var bitcoin = ractive.get('balance')
-    if(bitcoin == undefined || bitcoin === '') return;
+  function satoshiToBTC(amount){
+    if(amount == undefined) return;
 
-    var exchangeRate = ractive.get('exchangeRates')[ractive.get('fiatCurrency')]
-    var fiat = new Big(bitcoin).times(exchangeRate).toFixed(2)
+    var satoshi = new Big(amount)
+    return satoshi.times(0.00000001)
+  }
 
-    ractive.set('fiatValue', fiat)
-  })
+  function bitcoinToFiat(amount, exchangeRate){
+    if(amount == undefined) return;
+
+    var btc = satoshiToBTC(amount)
+    return btc.times(exchangeRate).toFixed(2)
+  }
 
   return ractive
 }
