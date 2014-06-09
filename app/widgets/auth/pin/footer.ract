@@ -1,0 +1,9 @@
+{{^userExists}}
+  <span class="_link" on-click="back">Review passphrase again</span>
+{{/userExists}}
+
+{{#userExists}}
+  <div class="auth__altmsg">
+    <span class="_link" on-click="clear-credentials">Open a different wallet</span>
+  </div>
+{{/userExists}}

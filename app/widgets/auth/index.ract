@@ -15,12 +15,6 @@
       {{>footer}}
     </div>
 
-    {{#userExists}}
-      <div class="auth__altmsg">
-        <span class="_link" on-click="clear-credentials">Open a different wallet</span>
-      </div>
-    {{/userExists}}
-
     {{#opening}}
       <span class="auth__pending">{{progress}}</span>
     {{/opening}}
