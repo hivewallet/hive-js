@@ -1,5 +1,11 @@
 'use strict';
 
+// var testStorage = require('hive-custom-modernizr')
+require('browsernizr/test/storage/localstorage')
+var Modernizr = require('browsernizr')
+
+console.log(Modernizr.localstorage)
+
 var Ticker = require('hive-ticker-api').BitcoinAverage
 var emitter = require('hive-emitter')
 var initFrame = require('hive-frame')
