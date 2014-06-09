@@ -63,13 +63,13 @@ function get(key, callback) {
   })
 }
 
-emitter.on('wallet-init', function(seed){
-  sercret = seed
+emitter.on('wallet-init', function(data){
+  sercret = data.seed
+  id = data.id
 })
 
 emitter.on('wallet-ready', function(){
   var wallet = getWallet()
-  id = wallet.id
   remote = getRemote(wallet)
 
   db.get(id, function(err, doc){
@@ -93,13 +93,13 @@ function getRemote(wallet){
   var scheme = (process.env.NODE_ENV === "production") ? "https" : "http"
   var url = [
     scheme, "://",
-    wallet.id, ":", wallet.token, wallet.pin,
+    id, ":", wallet.token, wallet.pin,
     "@", process.env.DB_HOST
   ]
   if(process.env.NODE_ENV !== "production"){
     url = url.concat([":", process.env.DB_PORT])
   }
-  url = url.concat(["/hive", wallet.id]).join('')
+  url = url.concat(["/hive", id]).join('')
   return new PouchDB(url)
 }
 

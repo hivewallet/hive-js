@@ -20,6 +20,7 @@ Transaction.feePerKb = 10000
 var api = new API()
 var wallet = null
 var seed = null
+var id = null
 
 function sendTx(tx, callback) {
   var txHex = convert.bytesToHex(tx.serialize())
@@ -109,7 +110,7 @@ function createWallet(passphrase, network, callback) {
     }
 
     var mnemonic = initWallet(e.data, network)
-    auth.exist(wallet.id, function(err){
+    auth.exist(id, function(err){
       if(err) return callback(err);
 
       callback(null, mnemonic)
@@ -120,13 +121,13 @@ function createWallet(passphrase, network, callback) {
 
 function setPin(pin, callback) {
   //TODO: captcha
-  auth.register(wallet.id, pin, function(err, token){
+  auth.register(id, pin, function(err, token){
     if(err) return callback(err.error);
 
     wallet.token = token
     wallet.pin = pin
     var encrypted = AES.encrypt(seed, token)
-    db.saveEncrypedSeed(wallet.id, encrypted, function(err, res){
+    db.saveEncrypedSeed(id, encrypted, function(err, res){
       if(err) return callback(err);
 
       firstTimeSync(callback)
@@ -135,7 +136,7 @@ function setPin(pin, callback) {
 }
 
 function disablePin(pin, callback) {
-  auth.disablePin(wallet.id, pin, function(err){
+  auth.disablePin(id, pin, function(err){
     if(err) return callback(err);
 
     wallet.pin = ''
@@ -169,12 +170,12 @@ function openWalletWithPin(pin, network, syncDone) {
 
 function initWallet(data, network) {
   seed = data.seed
+  id = crypto.createHash('sha256').update(seed).digest('hex')
+  emitter.emit('wallet-init', {seed: seed, id: id})
+
   wallet = new Wallet(convert.hexToBytes(seed), network)
-
   wallet.sendTx = sendTx
-  wallet.id = crypto.createHash('sha256').update(seed).digest('hex')
 
-  emitter.emit('wallet-init', seed)
   return data.mnemonic
 }
 
