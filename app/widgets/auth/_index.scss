@@ -220,3 +220,20 @@
   text-align: center;
   padding-top: 20px;
 }
+
+// footer -------------------------------------------- //
+
+.auth__footer {
+  color: white;
+  text-align: center;
+
+  ._link {
+    color: white;
+    font-size: 14px;
+    @include clickbtn;
+
+    &:active {
+      text-decoration: underline;
+    }
+  }
+}

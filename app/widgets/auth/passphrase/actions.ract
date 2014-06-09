@@ -1,5 +1,1 @@
 <div class="auth__btn--existing" on-click="open-wallet-with-passphrase">Open wallet</div>
-
-<div class="auth__altmsg">
-  <span class="_link" on-click="back">Create new wallet instead</span>
-</div>

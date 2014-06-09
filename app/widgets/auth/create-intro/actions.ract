@@ -1,5 +1,1 @@
 <div class="auth__btn" on-click="generate-phrase">Let's go</div>
-
-<div class="auth__altmsg">
-  <span class="_link" on-click="back">Open existing wallet instead</span>
-</div>
