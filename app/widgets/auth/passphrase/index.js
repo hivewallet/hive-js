@@ -5,7 +5,7 @@ var emitter = require('hive-emitter')
 var Ractive = require('../auth')
 var pinPage = require('../pin')
 
-module.exports = function(prevPage){
+function enterPassphrase(prevPage){
   var ractive = new Ractive({
     partials: {
       content: require('./content.ract').template,
@@ -36,9 +36,10 @@ module.exports = function(prevPage){
       return emitter.emit('open-error', { message: err })
     }
 
-    pinPage(data.walletExist)
+    pinPage(enterPassphrase, data)
   }
 
   return ractive
 }
 
+module.exports = enterPassphrase

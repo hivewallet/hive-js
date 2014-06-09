@@ -5,7 +5,10 @@ var Hive = require('hive-wallet')
 var validatePin = require('hive-pin-validator')
 var emitter = require('hive-emitter')
 
-module.exports = function(userExists){
+module.exports = function(prevPage, data){
+  data = data || {}
+  var userExists = data.userExists
+
   var ractive = new Ractive({
     partials: {
       content: require('./content.ract').template,
@@ -39,6 +42,10 @@ module.exports = function(userExists){
     Hive.reset(function(err){
       location.reload(false);
     })
+  })
+
+  ractive.on('back', function(){
+    if(prevPage) prevPage(data)
   })
 
   function getPin(){

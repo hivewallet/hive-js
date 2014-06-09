@@ -24,7 +24,7 @@ module.exports = function(prevPage){
     ractive.loading()
     Hive.createWallet(null, this.getNetwork(), function(err, data){
       if(err) return emitter.emit('open-error', err);
-      confirmPassphrasePage(data.mnemonic)
+      confirmPassphrasePage(data)
     })
   })
 

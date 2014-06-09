@@ -15,7 +15,7 @@ var frame = initFrame(document.getElementById('app'))
 var auth = null
 
 walletExists(function(exists){
-  auth = exists ? initAuth.pin(true) : initAuth.choose()
+  auth = exists ? initAuth.pin(null, { userExists: true }) : initAuth.choose()
   auth.show()
 })
 
