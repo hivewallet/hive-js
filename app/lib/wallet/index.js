@@ -124,8 +124,8 @@ function setPin(pin, callback) {
   auth.register(id, pin, function(err, token){
     if(err) return callback(err.error);
 
-    wallet.token = token
-    wallet.pin = pin
+    emitter.emit('wallet-auth', {token: token, pin: pin})
+
     var encrypted = AES.encrypt(seed, token)
     db.saveEncrypedSeed(id, encrypted, function(err, res){
       if(err) return callback(err);
@@ -136,12 +136,7 @@ function setPin(pin, callback) {
 }
 
 function disablePin(pin, callback) {
-  auth.disablePin(id, pin, function(err){
-    if(err) return callback(err);
-
-    wallet.pin = ''
-    callback()
-  })
+  auth.disablePin(id, pin, callback)
 }
 
 function openWalletWithPin(pin, network, syncDone) {
@@ -161,8 +156,8 @@ function openWalletWithPin(pin, network, syncDone) {
       }
 
       initWallet({seed: AES.decrypt(encryptedSeed, token)}, network)
-      wallet.token = token
-      wallet.pin = pin
+      emitter.emit('wallet-auth', {token: token, pin: pin})
+
       firstTimeSync(syncDone)
     })
   })

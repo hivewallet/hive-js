@@ -2,7 +2,6 @@
 
 var emitter = require('hive-emitter')
 var PouchDB = require('pouchdb')
-var getWallet = require('hive-wallet').getWallet
 var $ = require('browserify-zepto')
 var AES = require('hive-aes')
 var encrypt = AES.encrypt
@@ -68,9 +67,8 @@ emitter.on('wallet-init', function(data){
   id = data.id
 })
 
-emitter.on('wallet-ready', function(){
-  var wallet = getWallet()
-  remote = getRemote(wallet)
+emitter.on('wallet-auth', function(data){
+  remote = getRemote(data)
 
   db.get(id, function(err, doc){
     if(err) {
@@ -89,11 +87,11 @@ emitter.on('wallet-ready', function(){
   })
 })
 
-function getRemote(wallet){
+function getRemote(data){
   var scheme = (process.env.NODE_ENV === "production") ? "https" : "http"
   var url = [
     scheme, "://",
-    id, ":", wallet.token, wallet.pin,
+    id, ":", data.token, data.pin,
     "@", process.env.DB_HOST
   ]
   if(process.env.NODE_ENV !== "production"){
