@@ -14,6 +14,15 @@ initFlashModal(document.getElementById('flash-modal'))
 var frame = initFrame(document.getElementById('app'))
 var auth = null
 
+// test for localStorage & private browser mode
+require('browsernizr/test/storage/localstorage')
+var Modernizr = require('browsernizr')
+if(!Modernizr.localstorage) {
+  emitter.emit('open-error', {
+    message: 'Your browser does not support localStorage, try switching to public mode'
+  })
+}
+
 walletExists(function(exists){
   auth = exists ? initAuth.pin(null, { userExists: true }) : initAuth.choose()
   auth.show()
