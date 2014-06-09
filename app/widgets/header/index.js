@@ -58,7 +58,8 @@ module.exports = function(el){
 
   ractive.on('toggle-currencies', function(){
     var data = {
-      overlay: 'currency'
+      overlay: 'currency',
+      balance: ractive.get('bitcoinBalance')
     }
     emitter.emit('open-overlay', data)
   })

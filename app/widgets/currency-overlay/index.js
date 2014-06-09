@@ -33,6 +33,8 @@ module.exports = function(el){
   emitter.on('open-overlay', function(data){
     if(data.overlay === 'currency') {
       ractive.set('visible', true)
+      ractive.set('balance', data.balance)
+      ractive.fire('bitcoin-to-fiat')
     }
   })
 
@@ -43,7 +45,6 @@ module.exports = function(el){
 
   emitter.on('preferred-currency-changed', function(currency){
     ractive.set('fiatCurrency', currency)
-    // ractive.fire('bitcoin-to-fiat')
   })
 
   emitter.on('ticker', function(rates){
@@ -51,7 +52,7 @@ module.exports = function(el){
   })
 
   ractive.on('bitcoin-to-fiat', function(){
-    var bitcoin = ractive.nodes.bitcoin.value
+    var bitcoin = ractive.get('balance')
     if(bitcoin == undefined || bitcoin === '') return;
 
     var exchangeRate = ractive.get('exchangeRates')[ractive.get('fiatCurrency')]
