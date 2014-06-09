@@ -119,12 +119,16 @@
 
 .auth__btn {
   @extend .hivebtn;
-  margin-bottom: 20px;
+  margin-bottom: 5px;
+}
+
+.auth__btn--choose {
+  @extend .hivebtn;
+  margin-bottom: 15px;
 }
 
 .auth__btn--existing {
   @extend .hivebtn;
-
   color: white;
   background-color: #5B5582;
   box-shadow: 0 3px 0 0 darken(#5B5582, 20%);
@@ -223,6 +227,7 @@
 // footer -------------------------------------------- //
 
 .auth__footer {
+  padding-bottom: 40px;
   color: white;
   text-align: center;
 
