@@ -110,10 +110,10 @@ function createWallet(passphrase, network, callback) {
     }
 
     var mnemonic = initWallet(e.data, network)
-    auth.exist(id, function(err){
+    auth.exist(id, function(err, walletExist){
       if(err) return callback(err);
 
-      callback(null, mnemonic)
+      callback(null, {walletExist: walletExist, mnemonic: mnemonic})
       mnemonic = null
     })
   }, false)

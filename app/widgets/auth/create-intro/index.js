@@ -22,9 +22,9 @@ module.exports = function(prevPage){
     ractive.set('opening', true)
     ractive.set('progress', 'Generating passphrase...')
     ractive.loading()
-    Hive.createWallet(null, this.getNetwork(), function(err, mnemonic){
+    Hive.createWallet(null, this.getNetwork(), function(err, data){
       if(err) return emitter.emit('open-error', err);
-      confirmPassphrasePage(mnemonic)
+      confirmPassphrasePage(data.mnemonic)
     })
   })
 

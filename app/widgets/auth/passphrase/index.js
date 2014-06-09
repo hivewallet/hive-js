@@ -28,7 +28,7 @@ module.exports = function(prevPage){
     return ractive.get('passphrase').trim()
   }
 
-  function onWalletCreated(err, walletExist) {
+  function onWalletCreated(err, data) {
     ractive.pauseLoading()
     ractive.set('opening', false)
 
@@ -36,7 +36,7 @@ module.exports = function(prevPage){
       return emitter.emit('open-error', { message: err })
     }
 
-    pinPage(walletExist)
+    pinPage(data.walletExist)
   }
 
   return ractive
