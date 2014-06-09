@@ -21,8 +21,6 @@ var api = new API()
 var wallet = null
 var seed = null
 
-function getSeed() { return seed }
-
 function sendTx(tx, callback) {
   var txHex = convert.bytesToHex(tx.serialize())
   api.sendTx(txHex, function(err, hiveTx){
@@ -173,10 +171,10 @@ function initWallet(data, network) {
   seed = data.seed
   wallet = new Wallet(convert.hexToBytes(seed), network)
 
-  wallet.getSeed = getSeed
   wallet.sendTx = sendTx
   wallet.id = crypto.createHash('sha256').update(seed).digest('hex')
 
+  emitter.emit('wallet-init', seed)
   return data.mnemonic
 }
 

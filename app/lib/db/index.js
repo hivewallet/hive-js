@@ -63,10 +63,13 @@ function get(key, callback) {
   })
 }
 
+emitter.on('wallet-init', function(seed){
+  sercret = seed
+})
+
 emitter.on('wallet-ready', function(){
   var wallet = getWallet()
   id = wallet.id
-  sercret = wallet.getSeed()
   remote = getRemote(wallet)
 
   db.get(id, function(err, doc){
