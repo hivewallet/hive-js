@@ -8,8 +8,8 @@
       <div id="currency_list">
 
         <div class="currency__item">
-          <span>{{bitcoinToFiat(bitcoinBalance, exchangeRates[fiatCurrency])}}</span>
-          <span>{{fiatCurrency}}</span>
+          <span class="_value">{{bitcoinToFiat(bitcoinBalance, exchangeRates[fiatCurrency])}}</span>
+          <span class="_currency">{{fiatCurrency}}</span>
         </div>
 
       </div>
