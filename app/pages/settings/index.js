@@ -6,6 +6,7 @@ var emitter = require('hive-emitter')
 var emailToAvatar = require('hive-gravatar').emailToAvatar
 var db = require('hive-db')
 var transitions = require('hive-transitions')
+var openDisablePinModal = require('hive-disable-pin-modal')
 var showError = require('hive-flash-modal').showError
 
 Ractive.transitions.fadeNscale = transitions.fadeNscaleTransition
@@ -82,8 +83,7 @@ module.exports = function(el){
   }
 
   ractive.on('disable-pin', function(){
-    //FIXME: move this into modal
-    emitter.emit('open-disable-pin')
+    openDisablePinModal()
   })
 
   function toggleDropdown(node){

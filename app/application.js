@@ -53,17 +53,6 @@ emitter.on('wallet-ready', function(){
   frame.show()
 })
 
-emitter.on('open-disable-pin', function(){
-  initAuth.disablePin()
-  frame.hide()
-  auth.show()
-})
-
-emitter.on('close-disable-pin', function(){
-  auth.hide()
-  frame.show()
-})
-
 function updateExchangeRates(){
   var tickerUpdateInterval = 1000 * 60 * 2
   var ticker = new Ticker()

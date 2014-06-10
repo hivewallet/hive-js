@@ -1,5 +1,4 @@
 module.exports = {
   choose: require('./choose'),
-  pin: require('./pin'),
-  disablePin: require('./disable-pin')
+  pin: require('./pin')
 }

@@ -14,7 +14,7 @@ var defaults = {
   }
 }
 
-function getModal(type, data){
+function openModal(type, data){
   data = data || {}
   data.icon = data.icon || defaults[type].icon
   data.title = data.title || defaults[type].title
@@ -31,11 +31,11 @@ function getModal(type, data){
 }
 
 function showError(data) {
-  return getModal('error', data)
+  return openModal('error', data)
 }
 
 function showInfo(data) {
-  return getModal('info', data)
+  return openModal('info', data)
 }
 
 module.exports = {
