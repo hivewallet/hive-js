@@ -8,6 +8,7 @@ var getWallet = require('hive-wallet').getWallet
 var currencies = require('hive-ticker-api').currencies
 var btcToSatoshi = require('hive-convert').btcToSatoshi
 var showError = require('hive-flash-modal').showError
+var showConfirmation = require('hive-confirm-overlay')
 
 module.exports = function(el){
   var ractive = new Ractive({
@@ -42,12 +43,10 @@ module.exports = function(el){
     var validated = validateSend()
     if(!validated) return;
 
-    var data = {
-      overlay: 'confirm',
-      address: ractive.get('to'),
+    showConfirmation({
+      to: ractive.get('to'),
       amount: ractive.get('value')
-    }
-    emitter.emit('open-overlay', data)
+    })
   })
 
 

@@ -8,7 +8,6 @@ var initFrame = require('hive-frame')
 var initAuth = require('hive-auth')
 var showError = require('hive-flash-modal').showError
 var initGeoOverlay = require('hive-geo-overlay')
-var initConfirmOverlay = require('hive-confirm-overlay')
 var initCurrencyOverlay = require('hive-currency-overlay')
 var $ = require('browserify-zepto')
 
@@ -24,7 +23,6 @@ var _app = $(appEl)
 fastclick(document.body)
 
 initGeoOverlay(document.getElementById('geo-overlay'))
-initConfirmOverlay(document.getElementById('confirm-overlay'))
 initCurrencyOverlay(document.getElementById('currency-overlay'))
 
 if(!Modernizr.localstorage) {
