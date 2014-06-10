@@ -1,3 +1,5 @@
+'use strict'
+
 function btcToSatoshi(btc) {
   if(btc == undefined || btc === '') return;
   return btc * 100000000

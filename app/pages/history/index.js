@@ -2,7 +2,7 @@
 
 var Ractive = require('hive-ractive')
 var emitter = require('hive-emitter')
-var Big = require('big.js')
+var satoshiToBtc = require('hive-convert').satoshiToBtc
 
 module.exports = function(el){
   var transactions = []
@@ -40,15 +40,12 @@ module.exports = function(el){
         }
         return date.toLocaleTimeString(navigator.language, options)
       },
-      satoshiToBTC: function(amount){
-        var satoshi = new Big(Math.abs(amount))
-        return parseFloat(satoshi.times(0.00000001).toFixed(6));
-      },
+      satoshiToBtc: satoshiToBtc,
       truncate: function(address){
-        return address.substr(0, 4);
+        return address.substr(0, 4)
       }
     }
-  }); 
+  })
 
   emitter.on('transactions-loaded', function(newTxs){
     Array.prototype.unshift.apply(transactions, newTxs)

@@ -5,6 +5,7 @@ var transitions = require('hive-transitions')
 var emitter = require('hive-emitter')
 var Big = require('big.js')
 var getWallet = require('hive-wallet').getWallet
+var btcToSatoshi = require('hive-convert').btcToSatoshi
 
 Ractive.transitions.fade = transitions.fade;
 
@@ -45,7 +46,7 @@ module.exports = function(el){
 
   ractive.on('send', function(){
     var to = ractive.get('address')
-    var value = bitcoinToSatoshi(ractive.get('amount'))
+    var value = btcToSatoshi(ractive.get('amount'))
     var wallet = getWallet()
 
     wallet.createTxAsync(to, value, function(err, tx){
@@ -53,11 +54,6 @@ module.exports = function(el){
       wallet.sendTx(tx, onTxSent)
     })
   })
-
-  function bitcoinToSatoshi(amount){
-    var btc = new Big(amount)
-    return parseInt(btc.times(100000000).toFixed(0))
-  }
 
   function onTxSent(err, transaction){
     if(err) return handleTransactionError()

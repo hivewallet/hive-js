@@ -2,16 +2,16 @@
 
 var Ractive = require('hive-ractive')
 var emitter = require('hive-emitter')
-var Big = require('big.js')
 var sync = require('hive-wallet').sync
 var getWallet = require('hive-wallet').getWallet
+var satoshiToBtc = require('hive-convert').satoshiToBtc
 
 module.exports = function(el){
   var ractive = new Ractive({
     el: el,
     template: require('./index.ract').template,
     data: {
-      satoshiToBTC: satoshiToBTC,
+      satoshiToBtc: satoshiToBtc,
       menuOpen: false
     }
   })
@@ -33,13 +33,6 @@ module.exports = function(el){
 
   function toggleIcon(open){
     ractive.set('menuOpen', open)
-  }
-
-  function satoshiToBTC(amount){
-    if(amount == undefined) return;
-
-    var satoshi = new Big(amount)
-    return satoshi.times(0.00000001)
   }
 
   ractive.on('sync', function(event){

@@ -6,6 +6,7 @@ var emitter = require('hive-emitter')
 var db = require('hive-db')
 var getWallet = require('hive-wallet').getWallet
 var currencies = require('hive-ticker-api').currencies
+var btcToSatoshi = require('hive-convert').btcToSatoshi
 
 module.exports = function(el){
   var ractive = new Ractive({
@@ -88,7 +89,7 @@ module.exports = function(el){
     var amount = ractive.get('value')
     var address = ractive.get('to')
     var wallet = getWallet()
-    var balance = wallet.getBalance() - bitcoinToSatoshi(0.0001)
+    var balance = wallet.getBalance() - btcToSatoshi(0.0001)
 
     if(address === '' || address === undefined) {
 
@@ -110,7 +111,7 @@ module.exports = function(el){
       return false
     }
 
-    amount = bitcoinToSatoshi(amount)
+    amount = btcToSatoshi(amount)
 
     if(amount > balance) {
 
@@ -135,11 +136,6 @@ module.exports = function(el){
     // update balance & tx history
     emitter.emit('wallet-ready')
     emitter.emit('transactions-loaded', [tx])
-  }
-
-  function bitcoinToSatoshi(amount){
-    var btc = new Big(amount)
-    return parseInt(btc.times(100000000).toFixed(0))
   }
 
   function setPreferredCurrency(currency){

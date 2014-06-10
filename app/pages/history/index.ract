@@ -12,7 +12,7 @@
 
       <div class="_detail">
 
-        <div class="_amount {{directionClass(direction)}}">{{directionIcon(direction)}}{{satoshiToBTC(amount)}}</div>
+        <div class="_amount {{directionClass(direction)}}">{{directionIcon(direction)}}{{satoshiToBtc(amount)}}</div>
 
         {{#pending}}
           <span class='_time'>sync<span class="ss-icon">action</span> confirming</span>

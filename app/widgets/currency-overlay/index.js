@@ -4,8 +4,8 @@ var Ractive = require('hive-ractive')
 var getWallet = require('hive-wallet').getWallet
 var transitions = require('hive-transitions')
 var emitter = require('hive-emitter')
-var Big = require('big.js')
 var db = require('hive-db')
+var satoshiToBtc = require('hive-convert').satoshiToBtc
 
 Ractive.transitions.fade = transitions.fade;
 
@@ -20,7 +20,7 @@ module.exports = function(el){
         fade: transitions.fade
       },
       exchangeRates: {},
-      satoshiToBTC: satoshiToBTC,
+      satoshiToBtc: satoshiToBtc,
       bitcoinToFiat: bitcoinToFiat
     }
   })
@@ -52,18 +52,11 @@ module.exports = function(el){
     ractive.set('exchangeRates', rates)
   })
 
-  function satoshiToBTC(amount){
-    if(amount == undefined) return;
-
-    var satoshi = new Big(amount)
-    return satoshi.times(0.00000001)
-  }
-
   function bitcoinToFiat(amount, exchangeRate){
     if(amount == undefined) return;
 
-    var btc = satoshiToBTC(amount)
-    return btc.times(exchangeRate).toFixed(2)
+    var btc = satoshiToBtc(amount)
+    return (btc * exchangeRate).toFixed(2)
   }
 
   return ractive
