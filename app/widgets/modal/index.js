@@ -20,27 +20,27 @@ var Modal = Ractive.extend({
 
     self.on('cancel', function(event){
       if(event.original.srcElement.classList.contains('_cancel')){
-        var onDismiss = self.get('onDismiss')
-        if(onDismiss) onDismiss()
-
-        this.teardown()
+        dismissModal()
       }
     })
 
     document.addEventListener('keydown', keydownHandler)
 
     self.on('teardown', function () {
-      window.removeEventListener('resize', keydownHandler)
+      window.removeEventListener('keydown', keydownHandler)
     }, false)
 
-    function keydownHandler(event) {
-      if(enterOrEscape(event.keyCode)){
-        self.fire('cancel')
-      }
+    function dismissModal(){
+      var onDismiss = self.get('onDismiss')
+      if(onDismiss) onDismiss();
+
+      self.teardown()
     }
 
-    function enterOrEscape(keycode) {
-      return (keycode === 13 || keycode === 27)
+    function keydownHandler(event) {
+      if(event.keyCode === 27){ //esc
+        dismissModal()
+      }
     }
   }
 })
