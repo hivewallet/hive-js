@@ -1,0 +1,9 @@
+{{#visible}}
+
+<div class="overlay--flash" on-click="cancel" intro-outro="fade">
+  <div id="container" class="flash" intro-outro="fadeNscale">
+    {{>content}}
+  </div>
+</div>
+
+{{/visible}}

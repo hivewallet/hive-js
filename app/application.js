@@ -23,7 +23,7 @@ var _app = $(appEl)
 
 fastclick(document.body)
 
-initFlashModal(document.getElementById('flash-modal'))
+initFlashModal()
 initGeoOverlay(document.getElementById('geo-overlay'))
 initConfirmOverlay(document.getElementById('confirm-overlay'))
 initCurrencyOverlay(document.getElementById('currency-overlay'))

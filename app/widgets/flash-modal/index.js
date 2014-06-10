@@ -1,29 +1,13 @@
 'use strict';
 
-var Ractive = require('hive-ractive')
+var Ractive = require('hive-modal')
 var emitter = require('hive-emitter')
-var transitions = require('hive-transitions')
 
-Ractive.transitions.fadeNscale = transitions.fadeNscaleTransition
-Ractive.transitions.fade = transitions.fade
-
-module.exports = function(el){
+module.exports = function(){
   var ractive = new Ractive({
-    el: el,
-    template: require('./index.ract').template,
-    data: {
-      visible: false,
-      transitions: {
-        fadeNscale: transitions.fadeNscaleTransition,
-        fade: transitions.fade
-      }
+    partials: {
+      content: require('./content.ract').template,
     }
-  })
-
-  ractive.on('cancel', function(){
-    ractive.set('visible', false)
-    var onDismiss = ractive.get('onDismiss')
-    if(onDismiss) onDismiss()
   })
 
   var defaults = {
@@ -42,23 +26,18 @@ module.exports = function(el){
 
   function attachHandlerFor(type) {
     emitter.on('open-' + type, function(data){
-      ractive.set('icon', data.icon || defaults[type].icon)
-      ractive.set('title', data.title || defaults[type].title)
-      ractive.set('message', data.message)
-      ractive.set('onDismiss', data.onDismiss)
-      ractive.set('visible', true)
-      ractive.set('type', type)
+      var config = {
+        onOpen: function(){
+          ractive.set('icon', data.icon || defaults[type].icon)
+          ractive.set('title', data.title || defaults[type].title)
+          ractive.set('message', data.message)
+          ractive.set('type', type)
+        },
+        onDismiss: data.onDismiss
+      }
+
+      emitter.emit('open-modal', config)
     })
-  }
-
-  document.addEventListener('keydown', function(event){
-    if(ractive.get('visible') && enterOrEscape(event.keyCode)){
-      ractive.fire('cancel')
-    }
-  })
-
-  function enterOrEscape(keycode) {
-    return (keycode === 13 || keycode === 27)
   }
 
   return ractive
