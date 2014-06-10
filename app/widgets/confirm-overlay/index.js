@@ -6,6 +6,7 @@ var emitter = require('hive-emitter')
 var Big = require('big.js')
 var getWallet = require('hive-wallet').getWallet
 var btcToSatoshi = require('hive-convert').btcToSatoshi
+var showError = require('hive-flash-modal').showError
 
 Ractive.transitions.fade = transitions.fade;
 
@@ -50,7 +51,7 @@ module.exports = function(el){
     var wallet = getWallet()
 
     wallet.createTxAsync(to, value, function(err, tx){
-      if(err) return emitter.emit('open-error', err)
+      if(err) return showError(err)
       wallet.sendTx(tx, onTxSent)
     })
   })

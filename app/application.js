@@ -6,7 +6,7 @@ var walletExists = require('hive-wallet').walletExists
 var fastclick = require('fastclick')
 var initFrame = require('hive-frame')
 var initAuth = require('hive-auth')
-var initFlashModal = require('hive-flash-modal')
+var showError = require('hive-flash-modal').showError
 var initGeoOverlay = require('hive-geo-overlay')
 var initConfirmOverlay = require('hive-confirm-overlay')
 var initCurrencyOverlay = require('hive-currency-overlay')
@@ -23,13 +23,12 @@ var _app = $(appEl)
 
 fastclick(document.body)
 
-initFlashModal()
 initGeoOverlay(document.getElementById('geo-overlay'))
 initConfirmOverlay(document.getElementById('confirm-overlay'))
 initCurrencyOverlay(document.getElementById('currency-overlay'))
 
 if(!Modernizr.localstorage) {
-  emitter.emit('open-error', {
+  showError({
     message: 'Your browser does not support localStorage, try switching to public mode'
   })
 }

@@ -3,43 +3,42 @@
 var Ractive = require('hive-modal')
 var emitter = require('hive-emitter')
 
-module.exports = function(){
+var defaults = {
+  error: {
+    icon: 'error_temp',
+    title: 'Whoops!'
+  },
+  info: {
+    icon: 'info_temp',
+    title: 'Just saying...'
+  }
+}
+
+function getModal(type, data){
+  data = data || {}
+  data.icon = data.icon || defaults[type].icon
+  data.title = data.title || defaults[type].title
+  data.type = type
+
   var ractive = new Ractive({
     partials: {
       content: require('./content.ract').template,
-    }
-  })
-
-  var defaults = {
-    error: {
-      icon: 'error_temp',
-      title: 'Whoops!'
     },
-    info: {
-      icon: 'info_temp',
-      title: 'Just saying...'
-    }
-  }
-
-  attachHandlerFor('error')
-  attachHandlerFor('info')
-
-  function attachHandlerFor(type) {
-    emitter.on('open-' + type, function(data){
-      var config = {
-        onOpen: function(){
-          ractive.set('icon', data.icon || defaults[type].icon)
-          ractive.set('title', data.title || defaults[type].title)
-          ractive.set('message', data.message)
-          ractive.set('type', type)
-        },
-        onDismiss: data.onDismiss
-      }
-
-      emitter.emit('open-modal', config)
-    })
-  }
+    data: data
+  })
 
   return ractive
 }
 
+function showError(data) {
+  return getModal('error', data)
+}
+
+function showInfo(data) {
+  return getModal('info', data)
+}
+
+module.exports = {
+  showError: showError,
+  showInfo: showInfo
+}

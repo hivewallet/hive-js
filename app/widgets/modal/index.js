@@ -1,7 +1,6 @@
 'use strict';
 
 var Ractive = require('hive-ractive')
-var emitter = require('hive-emitter')
 var transitions = require('hive-transitions')
 
 var Modal = Ractive.extend({
@@ -11,7 +10,6 @@ var Modal = Ractive.extend({
     content: require('./content.ract').template,
   },
   data: {
-    visible: false,
     transitions: {
       fadeNscale: transitions.fadeNscaleTransition,
       fade: transitions.fade
@@ -21,25 +19,23 @@ var Modal = Ractive.extend({
     var self = this
 
     self.on('cancel', function(){
-      self.set('visible', false)
       var onDismiss = self.get('onDismiss')
       if(onDismiss) onDismiss()
+
+      this.teardown()
     })
 
-    emitter.on('open-modal' , function(data){
-      if(data.onOpen) {
-        data.onOpen()
-      }
+    document.addEventListener('keydown', keydownHandler)
 
-      self.set('onDismiss', data.onDismiss)
-      self.set('visible', true)
-    })
+    self.on('teardown', function () {
+      window.removeEventListener('resize', keydownHandler)
+    }, false)
 
-    document.addEventListener('keydown', function(event){
-      if(self.get('visible') && enterOrEscape(event.keyCode)){
+    function keydownHandler(event) {
+      if(enterOrEscape(event.keyCode)){
         self.fire('cancel')
       }
-    })
+    }
 
     function enterOrEscape(keycode) {
       return (keycode === 13 || keycode === 27)

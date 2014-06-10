@@ -6,6 +6,7 @@ var emitter = require('hive-emitter')
 var emailToAvatar = require('hive-gravatar').emailToAvatar
 var db = require('hive-db')
 var transitions = require('hive-transitions')
+var showError = require('hive-flash-modal').showError
 
 Ractive.transitions.fadeNscale = transitions.fadeNscaleTransition
 
@@ -76,7 +77,7 @@ module.exports = function(el){
       title: "Uh Oh!",
       message: "Could not save your details"
     }
-    emitter.emit('open-error', data)
+    showError(data)
     console.error(response)
   }
 
