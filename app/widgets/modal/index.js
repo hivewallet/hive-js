@@ -18,11 +18,13 @@ var Modal = Ractive.extend({
   init: function(){
     var self = this
 
-    self.on('cancel', function(){
-      var onDismiss = self.get('onDismiss')
-      if(onDismiss) onDismiss()
+    self.on('cancel', function(event){
+      if(event.original.srcElement.classList.contains('_cancel')){
+        var onDismiss = self.get('onDismiss')
+        if(onDismiss) onDismiss()
 
-      this.teardown()
+        this.teardown()
+      }
     })
 
     document.addEventListener('keydown', keydownHandler)
