@@ -13,7 +13,6 @@
   "author": "",
   "license": "GPL-3.0",
   "devDependencies": {
-    "gulp-embedlr": "~0.5.2",
     "gulp-livereload": "2.1.0",
     "connect-livereload": "0.4.0",
     "tiny-lr": "0.0.7",
