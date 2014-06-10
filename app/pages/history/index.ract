@@ -6,10 +6,6 @@
   {{#transactions}}
     <div class="transactions__item">
 
-      <div class="_avatar hexagon"></div>
-
-      <div class="_address">{{truncate(toAddress)}} <span class="ss-icon _expandBtn">action</span></div>
-
       <div class="_detail">
 
         <div class="_amount {{directionClass(direction)}}">{{directionIcon(direction)}}{{satoshiToBtc(amount)}}</div>
@@ -23,6 +19,11 @@
         {{/pending}}
 
       </div>
+
+      <div class="_avatar hexagon"></div>
+
+      <div class="_address">{{toAddress || 'Received'}}</div>
+
     </div>
   {{/transactions}}
   {{^transactions}}

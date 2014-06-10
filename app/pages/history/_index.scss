@@ -21,22 +21,24 @@
 }
 
 .transactions__item {
-  display: flex;
-  flex-wrap: wrap;
+  @include clear;
   padding-top: 10px;
   padding-bottom: 10px;
   border-top: 1px solid darken($grey--light, 10%);
 
   ._avatar {
-
+    width: 55px;
+    float: left;
+    margin-right: 10px;
   }
 
   ._address {
+    @include ellipsis();
+    @include media-obj;
     margin-left: 10px;
     padding-top: 27px;
     font-size: 23px;
     font-weight: $light;
-    @include ellipsis();
   }
 
   ._expandBtn {
@@ -46,9 +48,10 @@
   }
 
   ._detail {
+    float: right;
     text-align: right;
     padding-top: 19px;
-    flex-grow: 1;
+    margin-left: 10px;
   }
 
   ._amount {
