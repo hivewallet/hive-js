@@ -5,6 +5,7 @@ var emitter = require('hive-emitter')
 var transitions = require('hive-transitions')
 
 Ractive.transitions.fadeNscale = transitions.fadeNscaleTransition
+Ractive.transitions.fade = transitions.fade
 
 module.exports = function(el){
   var ractive = new Ractive({
@@ -13,7 +14,8 @@ module.exports = function(el){
     data: {
       visible: false,
       transitions: {
-        fadeNscale: transitions.fadeNscaleTransition
+        fadeNscale: transitions.fadeNscaleTransition,
+        fade: transitions.fade
       }
     }
   })

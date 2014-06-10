@@ -35,12 +35,10 @@
 @import "widgets/flash-modal/_index";
 @import "widgets/geo-overlay/_index";
 @import "widgets/confirm-overlay/_index";
+@import "widgets/currency-overlay/_index";
 
 // pages
 @import "pages/send/_index";
 @import "pages/receive/_index";
 @import "pages/history/_index";
 @import "pages/settings/_index";
-
-// "nar cbf m8..."
-@import "_shamefile";

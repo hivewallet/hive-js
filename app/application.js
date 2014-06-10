@@ -2,17 +2,28 @@
 
 var Ticker = require('hive-ticker-api').BitcoinAverage
 var emitter = require('hive-emitter')
+var walletExists = require('hive-wallet').walletExists
+var fastclick = require('fastclick')
 var initFrame = require('hive-frame')
 var initAuth = require('hive-auth')
 var initFlashModal = require('hive-flash-modal')
-var walletExists = require('hive-wallet').walletExists
-var fastclick = require('fastclick')
+var initGeoOverlay = require('hive-geo-overlay')
+var initConfirmOverlay = require('hive-confirm-overlay')
+var initCurrencyOverlay = require('hive-currency-overlay')
+var $ = require('browserify-zepto')
+
+var appEl = document.getElementById('app')
+var frame = initFrame(appEl)
+var auth = null
+var _html = $('html')
+var _app = $(appEl)
 
 fastclick(document.getElementsByTagName("body")[0])
 
 initFlashModal(document.getElementById('flash-modal'))
-var frame = initFrame(document.getElementById('app'))
-var auth = null
+initGeoOverlay(document.getElementById('geo-overlay'))
+initConfirmOverlay(document.getElementById('confirm-overlay'))
+initCurrencyOverlay(document.getElementById('currency-overlay'))
 
 // test for localStorage & private browser mode
 require('browsernizr/test/storage/localstorage')
@@ -26,6 +37,16 @@ if(!Modernizr.localstorage) {
 walletExists(function(exists){
   auth = exists ? initAuth.pin(null, { userExists: true }) : initAuth.choose()
   auth.show()
+})
+
+emitter.on('open-overlay', function(){
+  _app.addClass('is_hidden')
+  _html.addClass('prevent_scroll')
+})
+
+emitter.on('close-overlay', function(){
+  _app.removeClass('is_hidden')
+  _html.removeClass('prevent_scroll')
 })
 
 emitter.on('wallet-ready', function(){

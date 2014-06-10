@@ -1,6 +1,8 @@
 {{#visible}}
 
-  <div id="container" class="flash" intro-outro="fadeNscale" on-click="cancel">
+<div class="overlay--flash" on-click="cancel" intro-outro="fade">
+
+  <div id="container" class="flash" intro-outro="fadeNscale">
 
     <div class="flash__content">
       <img class="flash__icon" src="/assets/img/{{icon}}.png" />
@@ -9,5 +11,7 @@
     </div>
 
   </div>
+
+</div>
 
 {{/visible}}

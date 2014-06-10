@@ -1,5 +1,9 @@
 
 #header {
+  position: relative;
+}
+
+.header {
   display: flex;
   justify-content: space-between;
   padding-top: 5px;
@@ -10,6 +14,7 @@
 }
 
 .header__balance {
+  @include clickbtn;
   font-weight: $light;
   display: flex;
 
@@ -18,7 +23,7 @@
   }
   ._currency {
     font-size: 14px;
-    padding-top: 6px;
+    padding-top: 7px;
     margin-left: 3px;
   }
 }

@@ -1,6 +1,7 @@
 
 .overlay--flash {
   @extend .overlay;
+  @include clickbtn;
   overflow-y: auto;
   background-color: rgba(0, 0, 0, 0.3);
 }
@@ -12,8 +13,6 @@
   left: 50%;
   margin-left: -150px;
   width: 300px;
-
-  cursor: pointer;
 
   background-color: $background;
   box-shadow: 0 2px 2px 1px rgba(000,000,000,0.2);
