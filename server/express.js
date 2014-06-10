@@ -8,9 +8,9 @@ var validatePin = require('hive-pin-validator')
 
 module.exports = function (prependMiddleware){
   var app = express()
-  if(prependMiddleware) {
-    app.use(prependMiddleware)
-  }
+  // if(prependMiddleware) {
+  //   app.use(prependMiddleware)
+  // }
   app.use(requireHTTPS)
   app.use(express.bodyParser())
   app.use(express.cookieParser(process.env.COOKIE_SALT))
