@@ -21,6 +21,7 @@
 }
 
 .transactions__item {
+  @include clickbtn;
   @include clear;
   padding-top: 10px;
   padding-bottom: 10px;
