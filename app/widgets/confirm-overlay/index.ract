@@ -1,6 +1,6 @@
 
 {{#visible}}
-  <div class="overlay--confirm" intro-outro="fade">
+  <div class="overlay--confirm" intro-outro="fade" on-click="cancel">
     <div class="confirm__content {{#success}}_success{{/success}} {{#error}}_error{{/error}}">
 
     {{#confirmation}}
