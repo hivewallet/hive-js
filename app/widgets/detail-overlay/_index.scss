@@ -1,5 +1,11 @@
 
 .overlay--detail {
   @extend .overlay;
-  overflow-y: hidden;
+}
+
+
+.detail__content {
+  background-color: white;
+  margin: 10px;
+  padding:20px;
 }

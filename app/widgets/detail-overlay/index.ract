@@ -1,8 +1,8 @@
 
 {{#visible}}
-  <div class="overlay" intro-outro="fade" on-click="cancel">
+  <div class="overlay--detail" intro-outro="fade" on-click="cancel">
 
-    <div class="confirm__content">
+    <div class="detail__content">
 
     some detail about the transaction...
 
