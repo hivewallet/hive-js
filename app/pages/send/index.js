@@ -138,7 +138,9 @@ module.exports = function(el){
     emitter.emit('transactions-loaded', [tx])
   }
 
-  function setPreferredCurrency(currency){
+  function setPreferredCurrency(currency, old){
+    if(old == undefined) return; //when loading wallet
+
     db.set('systemInfo', {preferredCurrency: currency}, function(err, response){
       if(err) return console.error(response);
 
