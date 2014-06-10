@@ -15,13 +15,6 @@ var $ = require('browserify-zepto')
 require('browsernizr/test/storage/localstorage')
 var Modernizr = require('browsernizr')
 
-// test for localStorage & private browser mode
-if(!Modernizr.localstorage) {
-  emitter.emit('open-error', {
-    message: 'Your browser does not support localStorage, try switching to public mode'
-  })
-}
-
 var appEl = document.getElementById('app')
 var frame = initFrame(appEl)
 var auth = null
@@ -35,6 +28,11 @@ initGeoOverlay(document.getElementById('geo-overlay'))
 initConfirmOverlay(document.getElementById('confirm-overlay'))
 initCurrencyOverlay(document.getElementById('currency-overlay'))
 
+if(!Modernizr.localstorage) {
+  emitter.emit('open-error', {
+    message: 'Your browser does not support localStorage, try switching to public mode'
+  })
+}
 
 walletExists(function(exists){
   auth = exists ? initAuth.pin(null, { userExists: true }) : initAuth.choose()
