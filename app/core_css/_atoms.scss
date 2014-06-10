@@ -104,16 +104,18 @@
 }
 
 .overlay {
+  @include clickbtn;
+
   position: fixed;
   top: 0;
   bottom: 0;
   right: 0;
   left: 0;
 
-  background-color: $background;
+  background-color: rgba(0,0,0,0.3);
 
-  overflow: hidden;
-  overflow-y: scroll;
+  overflow-x: hidden;
+  overflow-y: auto;
   -webkit-overflow-scrolling: touch;
 }
 

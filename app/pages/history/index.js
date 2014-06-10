@@ -50,5 +50,12 @@ module.exports = function(el){
     ractive.set('transactions', newTxs)
   })
 
+  ractive.on('show-detail', function() {
+    emitter.emit('open-overlay', {
+      overlay: 'detail'
+    })
+    console.log('click')
+  })
+
   return ractive
 }

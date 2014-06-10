@@ -82,18 +82,18 @@ function bundle(bundler, outFilename){
 
 gulp.task('watch', function() {
 
+  gulp.watch(['app/**/test/*.js', '!app/**/node_modules/**/*'], ['tests']);
   gulp.watch(['app/**/*.scss'], ['styles']);
-  gulp.watch(['app/**/*.js', 'app/**/*.ract', '!app/**/node_modules/**/*'], ['scripts', 'tests']);
+  gulp.watch(['app/**/*.js', 'app/**/*.ract', '!app/**/node_modules/**/*'], ['tests', 'scripts']);
   gulp.watch('app/assets/**/*', ['assets']);
   gulp.watch('app/index.html', ['html']);
-  gulp.watch(['app/**/test/*.js', '!app/**/node_modules/**/*'], ['tests']);
 
 });
 
 // $ gulp build ---------------------------------- //
 
-gulp.task('build', ['html', 'scripts', 'styles', 'assets', 'tests']);
+gulp.task('build', ['tests', 'html', 'scripts', 'styles', 'assets']);
 
 // $ gulp ---------------------------------- //
 
-gulp.task('default', ['scripts', 'styles', 'html', 'assets', 'tests', 'serve', 'watch']);
+gulp.task('default', ['tests', 'scripts', 'styles', 'html', 'assets', 'serve', 'watch']);

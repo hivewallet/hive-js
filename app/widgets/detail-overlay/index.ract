@@ -1,0 +1,12 @@
+
+{{#visible}}
+  <div class="overlay" intro-outro="fade" on-click="cancel">
+
+    <div class="confirm__content">
+
+    some detail about the transaction...
+
+    </div>
+
+  </div>
+{{/visible}}
