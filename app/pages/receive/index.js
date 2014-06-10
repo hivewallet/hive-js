@@ -37,10 +37,10 @@ module.exports = function(el){
     if(ractive.get('broadcasting')) {
       waggleOff()
     } else {
-      showSetDetails({ onComplete: function(err){
+      showSetDetails(function(err){
         if(err) return showError({message: 'Failed to save your details'})
         waggleOn()
-      } })
+      })
     }
   })
 

@@ -7,40 +7,52 @@ var getWallet = require('hive-wallet').getWallet
 var uriRoot = window.location.origin
 var userInfo = {}
 
-emitter.on('db-ready', function(){
+function fetchUserInfo(callback){
   db.get(function(err, doc){
-    if(err) return console.error(err);
+    if(err) return callback(err);
 
+    userInfo = {}
     userInfo.name = doc.userInfo.firstName
     userInfo.email = doc.userInfo.email
     userInfo.id = db.userID()
     userInfo.address = getWallet().currentAddress
+
+    callback()
   })
-})
+}
 
 function search(callback){
   getLocation(function(err, lat, lon){
     if(err) return callback(err);
 
-    userInfo.lat = lat
-    userInfo.lon = lon
-
-    xhr({
-      uri: uriRoot + "/location",
-      headers: { "Content-Type": "application/json" },
-      method: 'POST',
-      body: JSON.stringify(userInfo)
-    }, function(err, resp, body){
-      if(resp.statusCode !== 200) {
-        console.error(body)
-        return callback(body)
+    fetchUserInfo(function(err){
+      if(err) {
+        console.error(err)
+        //proceed with an earlier version of userInfo
       }
-      callback(null, JSON.parse(body))
+
+      userInfo.lat = lat
+      userInfo.lon = lon
+
+      xhr({
+        uri: uriRoot + "/location",
+        headers: { "Content-Type": "application/json" },
+        method: 'POST',
+        body: JSON.stringify(userInfo)
+      }, function(err, resp, body){
+        if(resp.statusCode !== 200) {
+          console.error(body)
+          return callback(body)
+        }
+        callback(null, JSON.parse(body))
+      })
     })
   })
 }
 
 function remove(sync){
+  if(!userInfo.id) return;
+
   xhr({
     uri: uriRoot + "/location",
     headers: { "Content-Type": "application/json" },
