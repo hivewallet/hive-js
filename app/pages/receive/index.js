@@ -7,6 +7,7 @@ var Hive = require('hive-wallet')
 var transitions = require('hive-transitions')
 var geo = require('hive-geo')
 var showError = require('hive-flash-modal').showError
+var showSetDetails = require('hive-set-details-modal')
 
 Ractive.transitions.fade = transitions.fade;
 
@@ -32,21 +33,33 @@ module.exports = function(el){
 
   ractive.on('toggle-broadcast', function(){
     if(ractive.get('connecting')) return;
+
     if(ractive.get('broadcasting')) {
-      ractive.set('broadcasting', false)
-      ractive.set('btn_message', 'Turn waggle on')
-      geo.remove(true)
+      waggleOff()
     } else {
-      ractive.set('connecting', true)
-      ractive.set('btn_message', 'Connecting to waggle')
-      geo.search(function(err, results){
-        if(err) return handleWaggleError(err)
-        ractive.set('connecting', false)
-        ractive.set('broadcasting', true)
-        ractive.set('btn_message', 'Waggle is broadcasting')
-      })
+      showSetDetails({ onComplete: function(err){
+        if(err) return showError({message: 'Failed to save your details'})
+        waggleOn()
+      } })
     }
   })
+
+  function waggleOff(){
+    ractive.set('broadcasting', false)
+    ractive.set('btn_message', 'Turn waggle on')
+    geo.remove(true)
+  }
+
+  function waggleOn(){
+    ractive.set('connecting', true)
+    ractive.set('btn_message', 'Connecting to waggle')
+    geo.search(function(err, results){
+      if(err) return handleWaggleError(err)
+      ractive.set('connecting', false)
+      ractive.set('broadcasting', true)
+      ractive.set('btn_message', 'Waggle is broadcasting')
+    })
+  }
 
   ractive.on('show-qr', function(){
     var data = {

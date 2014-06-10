@@ -19,7 +19,7 @@ var Modal = Ractive.extend({
     var self = this
 
     self.on('cancel', function(event){
-      if(event.original.srcElement.classList.contains('_cancel')){
+      if(!event || event.original.srcElement.classList.contains('_cancel')){
         dismissModal()
       }
     })

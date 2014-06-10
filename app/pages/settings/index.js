@@ -79,7 +79,6 @@ module.exports = function(el){
       message: "Could not save your details"
     }
     showError(data)
-    console.error(response)
   }
 
   ractive.on('disable-pin', function(){
