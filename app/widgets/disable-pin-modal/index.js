@@ -7,7 +7,7 @@ var disablePin = require('hive-wallet').disablePin
 
 function openModal(){
   var ractive = new Ractive({
-    el: document.getElementById('confirm-overlay'),
+    el: document.getElementById('general-purpose-overlay'),
     partials: {
       content: require('./content.ract').template,
     }
