@@ -2,6 +2,7 @@
 
 var Ractive = require('hive-modal')
 var db = require('hive-db')
+var showError = require('hive-flash-modal').showError
 
 function fetchDetails(callback){
   db.get(function(err, doc){
@@ -29,10 +30,13 @@ function openModal(data){
   })
 
   ractive.on('submit-details', function(){
-    //TODO: validate name is not empty
     var details = {
       firstName: ractive.get('name'),
       email: ractive.get('email')
+    }
+
+    if(!details.firstName || details.firstName.trim() === '') {
+      return showError({message: "Without a name, the payer wouldn't be able to identify you on waggle."})
     }
 
     db.set('userInfo', details, function(err, resp){
