@@ -3,6 +3,7 @@
 var Ractive = require('hive-ractive')
 var Hive = require('hive-wallet')
 var emitter = require('hive-emitter')
+var showError = require('hive-flash-modal').showError
 
 var Auth = Ractive.extend({
   el: document.getElementById("auth"),
@@ -25,8 +26,7 @@ var Auth = Ractive.extend({
       self.set('opening', false)
       if(err) {
         if(err === 'user_deleted') return location.reload(false);
-        emitter.emit('open-error', { message: err })
-        return;
+        return showError({ message: err })
       }
 
       emitter.emit('wallet-ready')

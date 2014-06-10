@@ -8,6 +8,7 @@ var emitter = require('hive-emitter')
 var geo = require('hive-geo')
 var Big = require('big.js')
 var db = require('hive-db')
+var showError = require('hive-flash-modal').showError
 
 Ractive.transitions.fade = transitions.fade;
 Ractive.transitions.dropdown = transitions.dropdown;
@@ -84,7 +85,7 @@ module.exports = function(el){
   function lookupGeo(context) {
     geo.search(function(err, results){
       if(err) {
-        return emitter.emit('open-error', {
+        return showError({
           message: err.message,
           onDismiss: function(){
             ractive.fire('close-geo')

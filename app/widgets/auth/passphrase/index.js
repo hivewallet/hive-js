@@ -1,9 +1,9 @@
 'use strict';
 
 var Hive = require('hive-wallet')
-var emitter = require('hive-emitter')
 var Ractive = require('../auth')
 var pinPage = require('../pin')
+var showError = require('hive-flash-modal').showError
 
 function enterPassphrase(prevPage){
   var ractive = new Ractive({
@@ -33,7 +33,7 @@ function enterPassphrase(prevPage){
     ractive.set('opening', false)
 
     if(err) {
-      return emitter.emit('open-error', { message: err })
+      return showError({ message: err })
     }
 
     pinPage(enterPassphrase, data)

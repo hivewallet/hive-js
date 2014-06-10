@@ -1,42 +1,18 @@
 'use strict';
 
-var Ractive = require('hive-ractive')
-var transitions = require('hive-transitions')
+var Ractive = require('hive-modal')
 var emitter = require('hive-emitter')
-var Big = require('big.js')
 var getWallet = require('hive-wallet').getWallet
 var btcToSatoshi = require('hive-convert').btcToSatoshi
 
-Ractive.transitions.fade = transitions.fade;
+function open(data){
 
-module.exports = function(el){
-  var nearbys = []
-  var xhr_timeout, oval_interval;
+  data.confirmation = true
+
   var ractive = new Ractive({
-    el: el,
+    el: document.getElementById('general-purpose-overlay'),
     template: require('./index.ract').template,
-    data: {
-      transitions: {
-        fade: transitions.fade
-      },
-      confirmation: true
-    }
-  })
-
-  emitter.on('open-overlay', function(data){
-    if(data.overlay === 'confirm') {
-      ractive.set('visible', true)
-      ractive.set('amount', data.amount)
-      ractive.set('address', data.address)
-    }
-  })
-
-  ractive.on('cancel', function(){
-    ractive.set('visible', false)
-    ractive.set('confirmation', true)
-    ractive.set('success', false)
-    ractive.set('error', false)
-    emitter.emit('close-overlay')
+    data: data
   })
 
   ractive.on('clear', function() {
@@ -45,12 +21,12 @@ module.exports = function(el){
   })
 
   ractive.on('send', function(){
-    var to = ractive.get('address')
+    var to = ractive.get('to')
     var value = btcToSatoshi(ractive.get('amount'))
     var wallet = getWallet()
 
     wallet.createTxAsync(to, value, function(err, tx){
-      if(err) return emitter.emit('open-error', err)
+      if(err) return handleTransactionError()
       wallet.sendTx(tx, onTxSent)
     })
   })
@@ -60,6 +36,7 @@ module.exports = function(el){
 
     ractive.set('confirmation', false)
     ractive.set('success', true)
+
     // update balance & tx history
     emitter.emit('wallet-ready')
     emitter.emit('transactions-loaded', [transaction])
@@ -72,3 +49,5 @@ module.exports = function(el){
 
   return ractive
 }
+
+module.exports = open

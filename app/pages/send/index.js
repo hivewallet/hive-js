@@ -7,6 +7,8 @@ var db = require('hive-db')
 var getWallet = require('hive-wallet').getWallet
 var currencies = require('hive-ticker-api').currencies
 var btcToSatoshi = require('hive-convert').btcToSatoshi
+var showError = require('hive-flash-modal').showError
+var showConfirmation = require('hive-confirm-overlay')
 
 module.exports = function(el){
   var ractive = new Ractive({
@@ -41,12 +43,10 @@ module.exports = function(el){
     var validated = validateSend()
     if(!validated) return;
 
-    var data = {
-      overlay: 'confirm',
-      address: ractive.get('to'),
+    showConfirmation({
+      to: ractive.get('to'),
       amount: ractive.get('value')
-    }
-    emitter.emit('open-overlay', data)
+    })
   })
 
 
@@ -96,7 +96,7 @@ module.exports = function(el){
       var data = {
         message: "Please enter an address to send to."
       }
-      emitter.emit('open-error', data)
+      showError(data)
 
       return false
     }
@@ -106,7 +106,7 @@ module.exports = function(el){
       var data = {
         message: 'Please enter an amount to send.'
       }
-      emitter.emit('open-error', data)
+      showError(data)
 
       return false
     }
@@ -119,7 +119,7 @@ module.exports = function(el){
         title: 'Uh oh!',
         message: "You don't have enough funds in your wallet."
       }
-      emitter.emit('open-error', data)
+      showError(data)
 
       return false
     }
@@ -129,8 +129,7 @@ module.exports = function(el){
 
   function onTxSent(err, tx){
     if(err) {
-      emitter.emit('open-error', { message: "error sending transaction. " + err })
-      return;
+      return showError({ message: "error sending transaction. " + err })
     }
 
     // update balance & tx history

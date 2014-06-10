@@ -6,6 +6,7 @@ var qrcode = require('hive-qrcode')
 var Hive = require('hive-wallet')
 var transitions = require('hive-transitions')
 var geo = require('hive-geo')
+var showError = require('hive-flash-modal').showError
 
 Ractive.transitions.fade = transitions.fade;
 
@@ -83,7 +84,7 @@ module.exports = function(el){
       message: "We couldn't connect you to waggle, please check your internet connection."
     }
 
-    emitter.emit('open-error', data)
+    showError(data)
     ractive.set('connecting', false)
     ractive.set('broadcasting', false)
     ractive.set('btn_message', 'Turn waggle on')

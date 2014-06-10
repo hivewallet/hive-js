@@ -1,0 +1,11 @@
+<div class="disable-pin__container">
+  <div class="disable-pin__pin">
+    <label>
+        Enter your pin:
+      <input id="setPin" type="password" placeholder="4-digit pin" value="{{pin}}" on-enter='disable-pin' autofocus/>
+    </label>
+  </div>
+
+  <div class="auth__btn--existing" on-click="disable-pin">Disable pin</div>
+</div>
+

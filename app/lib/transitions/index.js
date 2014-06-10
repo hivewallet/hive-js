@@ -131,7 +131,7 @@ module.exports = {
       targetStyle = collapsed
     }
 
-    t.animateStyle(targetStyle, params).then(t.complete)
+    t.animateStyle(targetStyle, params).then(function(){ t.complete(true) })
   }
 }
 

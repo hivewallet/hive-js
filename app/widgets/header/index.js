@@ -5,6 +5,7 @@ var emitter = require('hive-emitter')
 var sync = require('hive-wallet').sync
 var getWallet = require('hive-wallet').getWallet
 var satoshiToBtc = require('hive-convert').satoshiToBtc
+var showError = require('hive-flash-modal').showError
 
 module.exports = function(el){
   var ractive = new Ractive({
@@ -40,7 +41,7 @@ module.exports = function(el){
     if(!ractive.get('updating_transactions')) {
       ractive.set('updating_transactions', true)
       sync(function(err, txs){
-        if(err) return emitter.emit('open-error', err)
+        if(err) return showError(err)
 
         ractive.set('updating_transactions', false)
         emitter.emit('update-balance')

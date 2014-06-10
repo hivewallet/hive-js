@@ -1,7 +1,7 @@
 'use strict'
 
 var xhr = require('xhr')
-var emitter = require('hive-emitter')
+var showError = require('hive-flash-modal').showError
 
 function makeRequest(params, callback){
   if(params && !params.timeout) {
@@ -10,8 +10,7 @@ function makeRequest(params, callback){
 
   xhr(params, function(err){
     if(err && err.message === 'Internal XMLHttpRequest Error') {
-      emitter.emit('open-error', { message: "Request timeout. Please check your internet connection." })
-      return;
+      return showError({ message: "Request timeout. Please check your internet connection." })
     }
     callback.apply(null, arguments)
   })

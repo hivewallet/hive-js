@@ -1,66 +1,44 @@
 'use strict';
 
-var Ractive = require('hive-ractive')
+var Ractive = require('hive-modal')
 var emitter = require('hive-emitter')
-var transitions = require('hive-transitions')
 
-Ractive.transitions.fadeNscale = transitions.fadeNscaleTransition
-Ractive.transitions.fade = transitions.fade
+var defaults = {
+  error: {
+    icon: 'error_temp',
+    title: 'Whoops!'
+  },
+  info: {
+    icon: 'info_temp',
+    title: 'Just saying...'
+  }
+}
 
-module.exports = function(el){
+function openModal(type, data){
+  data = data || {}
+  data.icon = data.icon || defaults[type].icon
+  data.title = data.title || defaults[type].title
+  data.type = type
+
   var ractive = new Ractive({
-    el: el,
-    template: require('./index.ract').template,
-    data: {
-      visible: false,
-      transitions: {
-        fadeNscale: transitions.fadeNscaleTransition,
-        fade: transitions.fade
-      }
-    }
-  })
-
-  ractive.on('cancel', function(){
-    ractive.set('visible', false)
-    var onDismiss = ractive.get('onDismiss')
-    if(onDismiss) onDismiss()
-  })
-
-  var defaults = {
-    error: {
-      icon: 'error_temp',
-      title: 'Whoops!'
+    partials: {
+      content: require('./content.ract').template,
     },
-    info: {
-      icon: 'info_temp',
-      title: 'Just saying...'
-    }
-  }
-
-  attachHandlerFor('error')
-  attachHandlerFor('info')
-
-  function attachHandlerFor(type) {
-    emitter.on('open-' + type, function(data){
-      ractive.set('icon', data.icon || defaults[type].icon)
-      ractive.set('title', data.title || defaults[type].title)
-      ractive.set('message', data.message)
-      ractive.set('onDismiss', data.onDismiss)
-      ractive.set('visible', true)
-      ractive.set('type', type)
-    })
-  }
-
-  document.addEventListener('keydown', function(event){
-    if(ractive.get('visible') && enterOrEscape(event.keyCode)){
-      ractive.fire('cancel')
-    }
+    data: data
   })
-
-  function enterOrEscape(keycode) {
-    return (keycode === 13 || keycode === 27)
-  }
 
   return ractive
 }
 
+function showError(data) {
+  return openModal('error', data)
+}
+
+function showInfo(data) {
+  return openModal('info', data)
+}
+
+module.exports = {
+  showError: showError,
+  showInfo: showInfo
+}
