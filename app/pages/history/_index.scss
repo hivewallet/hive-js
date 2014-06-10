@@ -36,6 +36,7 @@
     padding-top: 27px;
     font-size: 23px;
     font-weight: $light;
+    @include ellipsis();
   }
 
   ._expandBtn {
