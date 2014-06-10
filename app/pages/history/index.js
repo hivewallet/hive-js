@@ -12,12 +12,6 @@ module.exports = function(el){
     data: {
       updating_transactions: false,
       transactions: transactions,
-      directionVerb: function(direction){
-        return {
-          incoming: 'Received',
-          outgoing: 'Sent'
-        }[direction]
-      },
       directionClass: function(direction){
         return {
           incoming: 'green',
@@ -27,7 +21,7 @@ module.exports = function(el){
       directionIcon: function(direction){
         return {
           incoming: '+',
-          outgoing: '-'
+          outgoing: ''
         }[direction]
       },
       formatTimestamp: function(timestamp){
