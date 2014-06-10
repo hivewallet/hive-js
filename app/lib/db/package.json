@@ -6,7 +6,7 @@
   "author": "",
   "license": "GPL-3.0",
   "dependencies": {
-    "pouchdb": "git://github.com/haustraliaer/pouchdb.git"
+    "pouchdb": "2.2.3"
   },
   "browserify": {
     "transform": [ "envify" ]
