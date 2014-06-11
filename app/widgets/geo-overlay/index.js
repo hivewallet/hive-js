@@ -5,7 +5,6 @@ var getWallet = require('hive-wallet').getWallet
 var emailToAvatar = require('hive-gravatar').emailToAvatar
 var emitter = require('hive-emitter')
 var geo = require('hive-geo')
-var Big = require('big.js')
 var db = require('hive-db')
 var showError = require('hive-flash-modal').showError
 
