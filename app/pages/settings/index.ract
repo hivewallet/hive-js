@@ -9,7 +9,7 @@
 <div id="user_settings" class="settings__group open">
 
   {{#user_preview}}
-    <div>
+    <div id="details-preview">
       <div class="settings__avatar" style="background-image: url('{{emailToAvatar(user.email)}}')"></div>
       <h3 class="settings__name">{{user.name}}</h3>
       <span class="settings__editBtn" on-click="edit-details">Change your details</span>
@@ -17,7 +17,7 @@
   {{/user_preview}}
 
   {{^user_preview}}
-    <div>
+    <div id="details-edit">
       <div class="settings__input-group">
         <label class="_label">Your name
           <input type="text" value="{{user.name}}" class="_input" />

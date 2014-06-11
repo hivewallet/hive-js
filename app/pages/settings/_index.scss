@@ -5,6 +5,12 @@
   padding-right: 15%;
 }
 
+
+#details-preview, #details-edit {
+  opacity: 0;
+  transform: scale(0.2);
+}
+
 .settings__avatar {
   @include icon(120px, 120px, block);
   -webkit-mask-image: url(../img/hex_large.png);
