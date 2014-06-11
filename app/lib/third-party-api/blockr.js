@@ -5,7 +5,7 @@ var Address = require('./address')
 var Transaction = require('./transaction')
 var Script = require('bitcoinjs-lib').Script
 var Blockchain = require('./blockchain')
-var Big = require('big.js')
+var btcToSatoshi = require('hive-convert').btcToSatoshi
 
 var apiRoot = null;
 
@@ -105,10 +105,6 @@ function toUnspentOutput(out) {
   }
 
   return result
-}
-
-function btcToSatoshi(btc) {
-  return parseInt((new Big(btc)).times(100000000))
 }
 
 function toAddress(address){
