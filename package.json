@@ -32,6 +32,7 @@
     "gulp-sketch": "0.0.2"
   },
   "dependencies": {
+    "velocity": "git://github.com/haustraliaer/velocity.git",
     "aperture": "^1.0.0",
     "arrival": "~1.0.0",
     "big.js": "^2.5.0",

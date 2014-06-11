@@ -8,6 +8,7 @@ var db = require('hive-db')
 var transitions = require('hive-transitions')
 var openDisablePinModal = require('hive-disable-pin-modal')
 var showError = require('hive-flash-modal').showError
+var Velocity = require('velocity-animate')
 
 Ractive.transitions.fadeNscale = transitions.fadeNscaleTransition
 
@@ -26,9 +27,21 @@ module.exports = function(el){
       editingName: false,
       editingEmail: false,
       emailToAvatar: emailToAvatar,
-      user_settings: true
+      user_settings: true,
     }
   })
+
+  var $previewEl = ractive.nodes['details-preview']
+  var $editEl = ractive.nodes['details-edit']
+
+  var propsAnimateIn = {
+    scale: [ 0.8, "spring" ],
+    opacity: 1.0
+  }
+  var propsAnimateOut = {
+    scale: 0.2,
+    opacity: 0
+  }
 
   emitter.on('wallet-ready', function(){
     var wallet = getWallet()
@@ -43,6 +56,14 @@ module.exports = function(el){
       ractive.set('user.email', doc.userInfo.email)
       if(ractive.get('user.name')) {
         ractive.set('user_preview', true);
+        $previewEl = ractive.nodes['details-preview']
+        animateDetails($previewEl, propsAnimateIn, function(){
+          ractive.set('animating', false)
+        })
+      } else {
+        animateDetails($editEl, propsAnimateIn, function(){
+          ractive.set('animating', false)
+        })
       }
     })
   })
@@ -57,10 +78,19 @@ module.exports = function(el){
   })
 
   ractive.on('edit-details', function(){
-    ractive.set('user_preview', false)
+    if(ractive.get('animating')) return;
+    animateDetails($previewEl, propsAnimateOut, function(){
+      ractive.set('animating', false)
+      ractive.set('user_preview', false)
+      $editEl = ractive.nodes['details-edit']
+      animateDetails($editEl, propsAnimateIn, function(){
+        ractive.set('animating', false)
+      })
+    })
   })
 
   ractive.on('submit-details', function(){
+    if(ractive.get('animating')) return;
     var details = {
       firstName: ractive.get('user.name'),
       email: ractive.get('user.email')
@@ -69,9 +99,21 @@ module.exports = function(el){
     db.set('userInfo', details, function(err, response){
       if(err) return handleUserError(response)
 
-      ractive.set('user_preview', true)
+      animateDetails($editEl, propsAnimateOut, function(){
+        ractive.set('animating', false)
+        ractive.set('user_preview', true)
+        $previewEl = ractive.nodes['details-preview']
+        animateDetails($previewEl, propsAnimateIn, function(){
+          ractive.set('animating', false)
+        })
+      })
     })
   })
+
+  function animateDetails(el, props, callback) {
+    ractive.set('animating', true)
+    Velocity.animate(el, props, 300, "ease", callback)
+  }
 
   function handleUserError(response) {
     var data = {
