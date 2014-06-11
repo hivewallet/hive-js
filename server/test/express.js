@@ -31,7 +31,7 @@ var user2 = {id: "bar", name: "Wendell", email: "wendell@example.com"}
 var geoRes = [[user1, 50], [user2, 123]]
 var fakeGeo = {
   save: function(lat, lon, userInfo, callback){
-    if(userInfo.name !== 'Fail Me') {
+    if(userInfo.id && userInfo.name !== 'Fail Me') {
       callback(null, geoRes)
     } else {
       callback(new Error('save error'), null)
@@ -172,51 +172,36 @@ describe('DELETE /pin', function(){
 })
 
 describe('POST /location', function(){
-  function postWithCookie(endpoint, data, callback){
+  function post(endpoint, data, callback){
     request(app)
-      .post('/login')
-      .send({wallet_id: 'valid', pin: '1234'})
-      .end(function(err, res){
-        request(app)
-          .post(endpoint)
-          .set('cookie', res.headers['set-cookie'])
-          .send(data)
-          .end(callback)
-      })
+      .post(endpoint)
+      .set('cookie', null)
+      .send(data)
+      .end(callback)
   }
 
   it('returns ok on geo.save success', function(done){
     var data = {
       lat: 123.4,
       lon: 45.6,
-      id: "valid",
       name: "Wei Lu",
       email: "wei@example.com"
     }
-    postWithCookie('/location', data, function(err, res){
+    post('/location', data, function(err, res){
       assert.equal(res.status, 200)
       assert.deepEqual(JSON.parse(res.text), geoRes)
+      assert(res.headers['set-cookie'])
       done()
     })
   })
 
   it('returns vad request on geo.save error', function(done){
-    var data = { id: "valid", name: 'Fail Me' }
+    var data = { name: 'Fail Me' }
 
-    postWithCookie('/location', data, function(err, res){
+    post('/location', data, function(err, res){
       assert.equal(res.status, 400)
       done()
     })
-  })
-
-  it('returns unauthorized if session cookie is not found', function(done){
-    var data = { id: "valid" }
-
-    request(app)
-      .post('/location')
-      .send(data)
-      .expect(401)
-      .end(done)
   })
 })
 

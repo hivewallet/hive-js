@@ -72,7 +72,7 @@ module.exports = function (prependMiddleware){
     })
   })
 
-  app.post('/location', restrict, function(req, res) {
+  app.post('/location', function(req, res) {
     var data = req.body
 
     var lat = data.lat
@@ -80,6 +80,7 @@ module.exports = function (prependMiddleware){
     delete data.lat
     delete data.lon
 
+    data.id = req.sessionID
     geo.save(lat, lon, data, function(err, found) {
       if(err) return res.json(400, err)
       res.json(200, found)
