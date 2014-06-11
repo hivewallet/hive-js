@@ -14,7 +14,6 @@ function fetchUserInfo(callback){
     userInfo = {}
     userInfo.name = doc.userInfo.firstName
     userInfo.email = doc.userInfo.email
-    userInfo.id = db.userID()
     userInfo.address = getWallet().currentAddress
 
     callback()
@@ -51,14 +50,11 @@ function search(callback){
 }
 
 function remove(sync){
-  if(!userInfo.id) return;
-
   xhr({
     uri: uriRoot + "/location",
     headers: { "Content-Type": "application/json" },
     method: 'DELETE',
-    sync: sync,
-    body: JSON.stringify({id: userInfo.id})
+    sync: sync
   }, function(err, resp, body){
     if(resp.statusCode !== 200) {
       console.error(body)
