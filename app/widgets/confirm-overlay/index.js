@@ -24,11 +24,14 @@ function open(data){
     var to = ractive.get('to')
     var value = btcToSatoshi(ractive.get('amount'))
     var wallet = getWallet()
+    var tx = null
 
-    wallet.createTxAsync(to, value, function(err, tx){
-      if(err) return handleTransactionError()
-      wallet.sendTx(tx, onTxSent)
-    })
+    try {
+      tx = wallet.createTx(to, value)
+    } catch(err) {
+      return handleTransactionError()
+    }
+    wallet.sendTx(tx, onTxSent)
   })
 
   function onTxSent(err, transaction){

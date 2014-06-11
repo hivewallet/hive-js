@@ -12,7 +12,6 @@ var API = ThirdParty.Blockr
 var txToHiveTx = ThirdParty.txToHiveTx
 var uniqueify = require('uniqueify')
 
-var convert = Bitcoin.convert
 var Transaction = Bitcoin.Transaction
 var Wallet = Bitcoin.Wallet
 Transaction.feePerKb = 10000
@@ -23,7 +22,7 @@ var seed = null
 var id = null
 
 function sendTx(tx, callback) {
-  var txHex = convert.bytesToHex(tx.serialize())
+  var txHex = tx.toHex()
   api.sendTx(txHex, function(err, hiveTx){
     if(err) { return callback(err) }
 
@@ -168,7 +167,7 @@ function initWallet(data, network) {
   id = crypto.createHash('sha256').update(seed).digest('hex')
   emitter.emit('wallet-init', {seed: seed, id: id})
 
-  wallet = new Wallet(convert.hexToBytes(seed), network)
+  wallet = new Wallet(new Buffer(seed, 'hex'), network)
   wallet.sendTx = sendTx
 
   return data.mnemonic
@@ -229,9 +228,15 @@ function setUnspentOutputs(done){
 
   var addresses = wallet.addresses.concat(wallet.changeAddresses)
   api.getUnspent(addresses, function(err, unspent){
-    if(err) return done(err)
+    if(err) return done(err);
 
-    wallet.setUnspentOutputsAsync(unspent, done)
+    try {
+      wallet.setUnspentOutputs(unspent)
+    } catch(err) {
+      return done(err)
+    }
+
+    done()
   })
 }
 
