@@ -29,7 +29,7 @@ gulp.task('serve', function() {
 
 gulp.task('styles', function(){
   gulp.src('./app/application.scss')
-    .pipe(sass({sourceComments: 'map'})) // {sourceComments: 'map'} doesn't work in windows :/
+    .pipe(sass())
     .pipe(prefix())
     .pipe(gulp.dest('./build/assets/css/'))
     .pipe(refresh(lrserver));
