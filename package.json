@@ -28,7 +28,8 @@
     "sinon": "^1.9.1",
     "karma-sinon": "^1.0.3",
     "supertest": "~0.12.1",
-    "proxyquire": "~0.6.0"
+    "proxyquire": "~0.6.0",
+    "gulp-sketch": "0.0.2"
   },
   "dependencies": {
     "aperture": "^1.0.0",

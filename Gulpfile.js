@@ -10,6 +10,7 @@ var refresh = require('gulp-livereload')
 var livereload = require('connect-livereload')
 var lrserver = require('tiny-lr')()
 var buildServer = require('./server/express')
+var sketch = require('gulp-sketch');
 
 // server --------------------------------- //
 
@@ -90,7 +91,17 @@ gulp.task('watch', function() {
 
 });
 
-// $ gulp build ---------------------------------- //
+// $ gulp sketch  ------------------------- //
+
+gulp.task('sketch', function() {
+  gulp.src('./app/assets-master.sketch')
+    .pipe(sketch({
+      export: 'artboards'
+    }))
+    .pipe(gulp.dest('./app/assets/img/'));
+});
+
+// $ gulp build --------------------------- //
 
 gulp.task('build', ['html', 'scripts', 'styles', 'assets', 'tests']);
 
