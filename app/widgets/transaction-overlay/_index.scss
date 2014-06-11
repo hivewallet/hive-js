@@ -1,10 +1,10 @@
 
-.overlay--detail {
+.overlay--transaction {
   @extend .overlay;
 }
 
 
-.detail__content {
+.transaction__content {
   background-color: white;
   margin: 10px;
   padding:20px;

@@ -20,7 +20,7 @@ module.exports = function(el){
   })
 
   emitter.on('open-overlay', function(data){
-    if(data.overlay === 'detail') {
+    if(data.overlay === 'transaction') {
       ractive.set('visible', true)
       ractive.set('amount', data.amount)
       ractive.set('address', data.address)

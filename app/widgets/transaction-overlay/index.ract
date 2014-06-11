@@ -1,0 +1,12 @@
+
+{{#visible}}
+  <div class="overlay--transaction" intro-outro="fade" on-click="cancel">
+
+    <div class="transaction__content">
+
+    some detail about the transaction...
+
+    </div>
+
+  </div>
+{{/visible}}

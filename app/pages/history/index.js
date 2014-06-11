@@ -52,7 +52,7 @@ module.exports = function(el){
 
   ractive.on('show-detail', function() {
     emitter.emit('open-overlay', {
-      overlay: 'detail'
+      overlay: 'transaction'
     })
     console.log('click')
   })
