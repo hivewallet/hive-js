@@ -245,7 +245,15 @@ function firstTimeSync(done){
 
   done = done || defaultCallback
 
-  var addresses = generateAddresses(5)
+  findUnusedAddress(wallet.generateAddress, function(unusedAddress){
+    wallet.currentAddress = unusedAddress
+    wallet.generateChangeAddress() // one and only change address
+    sync(done)
+  })
+}
+
+function findUnusedAddress(addressGenFn, done){
+  var addresses = generateAddresses(5, addressGenFn)
   api.listAddresses(addresses, onAddresses)
 
   function onAddresses(err, addresses) {
@@ -261,19 +269,17 @@ function firstTimeSync(done){
     }
 
     if(unusedAddress) {
-      wallet.currentAddress = unusedAddress
-      wallet.generateChangeAddress() // one and only change address
-      sync(done)
+      done(unusedAddress)
     } else {
-      firstTimeSync(done)
+      findUnusedAddress(addressGenFn, done)
     }
   }
 }
 
-function generateAddresses(n) {
+function generateAddresses(n, gen) {
   var addresses = []
   for(var i = 0; i < n; i++){
-    addresses.push(wallet.generateAddress())
+    addresses.push(gen.call(wallet))
   }
   return addresses
 }
