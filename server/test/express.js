@@ -38,7 +38,7 @@ var fakeGeo = {
     }
   },
   remove: function(id, callback) {
-    if(id === 'valid') {
+    if(id) {
       callback(null)
     } else {
       callback(new Error('remove error'), null)
@@ -169,6 +169,19 @@ describe('DELETE /pin', function(){
       done()
     })
   })
+
+  function deleteWithCookie(endpoint, data, callback){
+    request(app)
+      .post('/login')
+      .send({wallet_id: 'valid', pin: '1234'})
+      .end(function(err, res){
+        request(app)
+          .delete(endpoint)
+          .set('cookie', res.headers['set-cookie'])
+          .send(data)
+          .end(callback)
+      })
+  }
 })
 
 describe('POST /location', function(){
@@ -207,43 +220,29 @@ describe('POST /location', function(){
 
 describe('DELETE /location', function(){
   it('returns ok on geo.remove success', function(done){
-    var data = { id: "valid" }
-    deleteWithCookie('/location', data, function(err, res){
+    deleteWithCookie('/location', function(err, res){
       assert.equal(res.status, 200)
       done()
     })
   })
 
-  it('returns unauthorized if session cookie is not found', function(done){
-    var data = { id: "valid" }
-
+  function deleteWithCookie(endpoint, callback){
+    var data = {
+      lat: 123.4,
+      lon: 45.6,
+      name: "Wei Lu",
+      email: "wei@example.com"
+    }
     request(app)
-      .delete('/location')
+      .post('/location')
       .send(data)
-      .expect(401)
-      .end(done)
-  })
-
-  it('returns unauthorized if session cookie does not match the specified id', function(done){
-    var data = { id: "doesnotmatch" }
-
-    deleteWithCookie('/location', data, function(err, res){
-      assert.equal(res.status, 401)
-      done()
-    })
-  })
+      .end(function(err, res){
+        request(app)
+          .delete(endpoint)
+          .set('cookie', res.headers['set-cookie'])
+          .end(callback)
+      })
+  }
 })
 
-function deleteWithCookie(endpoint, data, callback){
-  request(app)
-    .post('/login')
-    .send({wallet_id: 'valid', pin: '1234'})
-    .end(function(err, res){
-      request(app)
-        .delete(endpoint)
-        .set('cookie', res.headers['set-cookie'])
-        .send(data)
-        .end(callback)
-    })
-}
 

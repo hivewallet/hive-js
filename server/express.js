@@ -87,10 +87,8 @@ module.exports = function (prependMiddleware){
     })
   })
 
-  app.delete('/location', restrict, function(req, res) {
-    var id = req.body.id
-
-    geo.remove(id, function(err, found) {
+  app.delete('/location', function(req, res) {
+    geo.remove(req.sessionID, function(err, found) {
       if(err) return res.json(400, err)
       res.json(200, found)
     })
