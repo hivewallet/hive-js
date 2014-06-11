@@ -37,8 +37,7 @@
 }
 
 .sidebar__logo {
-  @include icon(120px, 38px, block);
-  background-image: url('/assets/img/app_logo.svg');
+  @include icon(125px, 47px, block, '/assets/img/logo.svg');
 }
 
 .sidebar__version {
