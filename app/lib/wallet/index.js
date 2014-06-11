@@ -245,11 +245,21 @@ function firstTimeSync(done){
 
   done = done || defaultCallback
 
+  var taskCount = 2
+
   findUnusedAddress(wallet.generateAddress, function(unusedAddress){
     wallet.currentAddress = unusedAddress
-    wallet.generateChangeAddress() // one and only change address
-    sync(done)
+    maybeDone()
   })
+
+  findUnusedAddress(wallet.generateChangeAddress, function(unusedAddress){
+    wallet.changeAddresses.splice(wallet.changeAddresses.indexOf(unusedAddress) + 1)
+    maybeDone()
+  })
+
+  function maybeDone(){
+    if(--taskCount === 0) return sync(done)
+  }
 }
 
 function findUnusedAddress(addressGenFn, done){
