@@ -54,6 +54,11 @@ gulp.task('assets', function(){
     .pipe(refresh(lrserver));
 });
 
+gulp.task('cordova', function() {
+  gulp.src('./build/**/*')
+    .pipe(gulp.dest('./cordova/www/'))
+});
+
 gulp.task('tests', function(){
   var bundler = browserify()
   glob.sync("./app/@(widgets|lib)/*/test/*").forEach(function(file){
