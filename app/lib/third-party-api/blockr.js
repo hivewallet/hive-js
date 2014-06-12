@@ -9,12 +9,13 @@ var btcToSatoshi = require('hive-convert').btcToSatoshi
 
 var apiRoot = null;
 
-function Blockr(testnet){
-  if(testnet) {
-    apiRoot = "https://tbtc.blockr.io/api/v1/"
-  } else {
-    apiRoot = "https://btc.blockr.io/api/v1/"
-  }
+var networks = {
+  testnet: "https://tbtc.blockr.io/api/v1/",
+  bitcoin: "https://btc.blockr.io/api/v1/"
+}
+
+function Blockr(network){
+  apiRoot = networks[network] || networks.bitcoin
 }
 
 function listAddresses(addresses, onAddresses){
