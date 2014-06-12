@@ -35,9 +35,14 @@ function sendTx(tx, callback) {
 }
 
 function processTx(tx) {
+
   wallet.processTx(tx)
-  if(currentAddressUsed()){ // in case one sends to him/her self
+
+  if(addressUsed(wallet.currentAddress)){ // in case one sends to him/her self
     wallet.currentAddress = nextReceiveAddress()
+  }
+  if(addressUsed(wallet.changeAddresses[wallet.changeAddresses.length  - 1])){
+    wallet.generateChangeAddress()
   }
 }
 
@@ -76,11 +81,11 @@ function processLocalPendingTxs(callback) {
   })
 }
 
-function currentAddressUsed(){
+function addressUsed(address){
   var usedAddresses = []
   for (var key in wallet.outputs){
     var output = wallet.outputs[key]
-    if(output.address === wallet.currentAddress) {
+    if(output.address === address) {
       return true
     }
   }
