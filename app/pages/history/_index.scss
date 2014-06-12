@@ -1,8 +1,8 @@
 
 
 #history {
-  padding-left: 10px;
-  padding-right: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
 
   .green {
     color: $green;
@@ -37,7 +37,7 @@
     @include media-obj;
     margin-left: 10px;
     padding-top: 27px;
-    font-size: 23px;
+    font-size: 21px;
     font-weight: $light;
   }
 
@@ -50,12 +50,12 @@
   ._detail {
     float: right;
     text-align: right;
-    padding-top: 19px;
+    padding-top: 24px;
     margin-left: 10px;
   }
 
   ._amount {
-    font-size: 32px;
+    font-size: 24px;
     font-weight: $light;
   }
 

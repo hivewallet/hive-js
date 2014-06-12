@@ -34,10 +34,11 @@ module.exports = function(el){
         }
         return date.toLocaleTimeString(navigator.language, options)
       },
-      satoshiToBtc: satoshiToBtc,
-      truncate: function(address){
-        return address.substr(0, 4)
-      }
+      truncate: function(amount) {
+        console.log(amount)
+        return amount.toFixed(5)
+      },
+      satoshiToBtc: satoshiToBtc
     }
   })
 
