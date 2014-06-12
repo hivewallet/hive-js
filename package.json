@@ -28,8 +28,7 @@
     "sinon": "^1.9.1",
     "karma-sinon": "^1.0.3",
     "supertest": "~0.12.1",
-    "proxyquire": "~0.6.0",
-    "gulp-sketch": "0.0.2"
+    "proxyquire": "~0.6.0"
   },
   "dependencies": {
     "aperture": "^1.0.0",
@@ -61,7 +60,8 @@
     "st": "^0.3.1",
     "uglifyify": "~2.4.0",
     "uniqueify": "~1.0.0",
-    "vinyl-source-stream": "^0.1.1"
+    "vinyl-source-stream": "^0.1.1",
+    "gulp-sketch": "0.0.2"
   },
   "aperture": {
     "sources": [
