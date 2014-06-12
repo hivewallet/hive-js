@@ -5,4 +5,7 @@
     <author href="http://github.com/hivewallet/hive-js">Hive</author>
     <content src="index.html" />
     <access origin="*" />
+
+    <preference name="StatusBarOverlaysWebView" value="false" />
+    <preference name="StatusBarBackgroundColor" value="#000000" />
 </widget>
