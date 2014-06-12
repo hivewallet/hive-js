@@ -16,7 +16,7 @@ var Transaction = Bitcoin.Transaction
 var Wallet = Bitcoin.Wallet
 Transaction.feePerKb = 10000
 
-var api = new API()
+var api = null
 var wallet = null
 var seed = null
 var id = null
@@ -53,7 +53,7 @@ function processLocalPendingTxs(callback) {
     var pendingTxs = []
     var hiveTxs = []
     txs.forEach(function(txHex){
-      var tx = Transaction.deserialize(txHex)
+      var tx = Transaction.fromHex(txHex)
       hiveTxs.push(txToHiveTx(tx))
 
       tx.ins.forEach(function(txIn, i){
@@ -172,7 +172,9 @@ function initWallet(data, network) {
   id = crypto.createHash('sha256').update(seed).digest('hex')
   emitter.emit('wallet-init', {seed: seed, id: id})
 
-  wallet = new Wallet(new Buffer(seed, 'hex'), network)
+  wallet = new Wallet(new Buffer(seed, 'hex'), Bitcoin.networks[network])
+  api = new API(network)
+
   wallet.sendTx = sendTx
 
   return data.mnemonic

@@ -1,6 +1,7 @@
 var Blockchain = require('./blockchain')
 var Blockr = require('./blockr')
 var Transaction = require('./transaction')
+var Bitcoin = require('bitcoinjs-lib')
 
 function txToHiveTx(tx) {
   var result = new Transaction(tx.getHash())
@@ -8,7 +9,7 @@ function txToHiveTx(tx) {
   result.timestamp = (new Date()).getTime()
   result.amount = -out.value
   result.direction = 'outgoing'
-  result.toAddress = out.address.toString()
+  result.toAddress = Bitcoin.Address.fromScriptPubKey(out.script).toString()
   result.pending = true
 
   return result
