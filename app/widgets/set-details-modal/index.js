@@ -23,7 +23,6 @@ function fetchDetails(callback){
 
 function openModal(data){
   var ractive = new Ractive({
-    el: document.getElementById('general-purpose-overlay'),
     partials: {
       content: require('./content.ract').template
     }

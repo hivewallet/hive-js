@@ -21,6 +21,7 @@ function openModal(type, data){
   data.type = type
 
   var ractive = new Ractive({
+    el: document.getElementById('flash-modal'),
     partials: {
       content: require('./content.ract').template,
     },
