@@ -6,11 +6,8 @@ var auth = require('./auth')
 var geo = require('./geo')
 var validatePin = require('hive-pin-validator')
 
-module.exports = function (prependMiddleware){
+module.exports = function (){
   var app = express()
-  // if(prependMiddleware) {
-  //   app.use(prependMiddleware)
-  // }
   app.use(requireHTTPS)
   app.use(express.bodyParser())
   app.use(express.cookieParser(process.env.COOKIE_SALT))
