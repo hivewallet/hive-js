@@ -63,13 +63,15 @@
 
 
 .settings__group {
-  display: none;
-  padding: 20px;
-  padding-bottom: 30px;
-  background-color: darken($purple--light, 5%);
+  overflow: hidden;
+  transition: height 0.2s ease;
 
-  &.open {
-    display: block;
+  ._content {
+    padding: 20px;
+    padding-bottom: 30px;
+    background-color: darken($purple--light, 5%);
+    display: none;
+    transform: translateY(-100%);
   }
 }
 

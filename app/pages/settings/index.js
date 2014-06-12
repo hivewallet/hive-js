@@ -128,18 +128,42 @@ module.exports = function(el){
   })
 
   function toggleDropdown(node){
-    var elem = ractive.nodes[node]
+    var el = ractive.nodes[node]
     var dataString = node + ''
     var state = ractive.get(dataString)
-    var classes = elem.classList
+    var classes = el.classList
 
     if(state) {
       ractive.set(dataString, false)
-      classes.remove('open')
+      hideDropdown(el)
     } else {
       ractive.set(dataString, true)
-      classes.add('open')
+      showDropdown(el)
     }
+  }
+
+  showDropdown(ractive.nodes['user_settings'])
+  hideDropdown(ractive.nodes['security_settings'])
+
+  function showDropdown(el, callback){
+    animateDropdown(el, {translateY: 0}, 'block', callback)
+  }
+
+  function hideDropdown(el, callback){
+    animateDropdown(el, {translateY: "-100%"}, 'none', callback)
+  }
+
+  function animateDropdown(el, props, display, callback) {
+    ractive.set('animating', true)
+    Velocity.animate(el, props, {
+      easing: "ease",
+      duration: 300,
+      complete: function(){
+        ractive.set('animating', false)
+        if(callback) callback()
+      },
+      display: display
+    })
   }
 
   return ractive
