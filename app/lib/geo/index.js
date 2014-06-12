@@ -4,7 +4,7 @@ var xhr = require('hive-xhr')
 var emitter = require('hive-emitter')
 var db = require('hive-db')
 var getWallet = require('hive-wallet').getWallet
-var uriRoot = window.location.origin
+var uriRoot = require('hive-origin')()
 var userInfo = {}
 
 function fetchUserInfo(callback){
