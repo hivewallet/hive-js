@@ -5,12 +5,10 @@ var getWallet = require('hive-wallet').getWallet
 var emitter = require('hive-emitter')
 var emailToAvatar = require('hive-gravatar').emailToAvatar
 var db = require('hive-db')
-var transitions = require('hive-transitions')
 var openDisablePinModal = require('hive-disable-pin-modal')
 var showError = require('hive-flash-modal').showError
 var Velocity = require('velocity-animate')
-
-Ractive.transitions.fadeNscale = transitions.fadeNscaleTransition
+var $ = require('browserify-zepto')
 
 module.exports = function(el){
   var ractive = new Ractive({
@@ -21,13 +19,11 @@ module.exports = function(el){
         name: '',
         email: ''
       },
-      transitions: {
-        fadeNscale: transitions.fadeNscaleTransition
-      },
       editingName: false,
       editingEmail: false,
       emailToAvatar: emailToAvatar,
-      user_settings: true,
+      animating: false,
+      user_settings: true
     }
   })
 
@@ -35,7 +31,7 @@ module.exports = function(el){
   var $editEl = ractive.nodes['details-edit']
 
   var propsAnimateIn = {
-    scale: [ 0.8, "spring" ],
+    scale: [1.0, 'spring'],
     opacity: 1.0
   }
   var propsAnimateOut = {
@@ -54,16 +50,14 @@ module.exports = function(el){
 
       ractive.set('user.name', doc.userInfo.firstName)
       ractive.set('user.email', doc.userInfo.email)
+      var hiddenState = {
+          display: 'none',
+          opacity: 0
+        }
       if(ractive.get('user.name')) {
-        ractive.set('user_preview', true);
-        $previewEl = ractive.nodes['details-preview']
-        animateDetails($previewEl, propsAnimateIn, function(){
-          ractive.set('animating', false)
-        })
+        hideDetails($editEl)
       } else {
-        animateDetails($editEl, propsAnimateIn, function(){
-          ractive.set('animating', false)
-        })
+        hideDetails($previewEl)
       }
     })
   })
@@ -79,13 +73,8 @@ module.exports = function(el){
 
   ractive.on('edit-details', function(){
     if(ractive.get('animating')) return;
-    animateDetails($previewEl, propsAnimateOut, function(){
-      ractive.set('animating', false)
-      ractive.set('user_preview', false)
-      $editEl = ractive.nodes['details-edit']
-      animateDetails($editEl, propsAnimateIn, function(){
-        ractive.set('animating', false)
-      })
+    hideDetails($previewEl, function(){
+      showDetails($editEl)
     })
   })
 
@@ -99,20 +88,31 @@ module.exports = function(el){
     db.set('userInfo', details, function(err, response){
       if(err) return handleUserError(response)
 
-      animateDetails($editEl, propsAnimateOut, function(){
-        ractive.set('animating', false)
-        ractive.set('user_preview', true)
-        $previewEl = ractive.nodes['details-preview']
-        animateDetails($previewEl, propsAnimateIn, function(){
-          ractive.set('animating', false)
-        })
+      hideDetails($editEl, function(){
+        showDetails($previewEl)
       })
     })
   })
 
-  function animateDetails(el, props, callback) {
+  function showDetails(el, callback){
+    animateDetails(el, propsAnimateIn, 'block', callback)
+  }
+
+  function hideDetails(el, callback){
+    animateDetails(el, propsAnimateOut, 'none', callback)
+  }
+
+  function animateDetails(el, props, display, callback) {
     ractive.set('animating', true)
-    Velocity.animate(el, props, 300, "ease", callback)
+    Velocity.animate(el, props, {
+      easing: "ease",
+      duration: 300,
+      complete: function(){
+        ractive.set('animating', false)
+        if(callback) callback()
+      },
+      display: display
+    })
   }
 
   function handleUserError(response) {

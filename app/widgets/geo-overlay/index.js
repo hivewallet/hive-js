@@ -3,16 +3,11 @@
 var Ractive = require('hive-ractive')
 var getWallet = require('hive-wallet').getWallet
 var emailToAvatar = require('hive-gravatar').emailToAvatar
-var transitions = require('hive-transitions')
 var emitter = require('hive-emitter')
 var geo = require('hive-geo')
 var Big = require('big.js')
 var db = require('hive-db')
 var showError = require('hive-flash-modal').showError
-
-Ractive.transitions.fade = transitions.fade;
-Ractive.transitions.dropdown = transitions.dropdown;
-Ractive.transitions.pulse = transitions.pulse;
 
 module.exports = function(el){
   var nearbys = []
@@ -22,11 +17,6 @@ module.exports = function(el){
     template: require('./index.ract').template,
     data: {
       exchangeRates: {},
-      transitions: {
-        fade: transitions.fade,
-        dropdown: transitions.dropdown,
-        pulse: transitions.pulse
-      },
       nearbys: nearbys,
       searching: true,
       emailToAvatar: emailToAvatar

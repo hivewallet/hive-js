@@ -2,12 +2,9 @@
 
 var Ractive = require('hive-ractive')
 var getWallet = require('hive-wallet').getWallet
-var transitions = require('hive-transitions')
 var emitter = require('hive-emitter')
 var db = require('hive-db')
 var satoshiToBtc = require('hive-convert').satoshiToBtc
-
-Ractive.transitions.fade = transitions.fade;
 
 module.exports = function(el){
   var nearbys = []
@@ -16,9 +13,6 @@ module.exports = function(el){
     el: el,
     template: require('./index.ract').template,
     data: {
-      transitions: {
-        fade: transitions.fade
-      },
       exchangeRates: {},
       satoshiToBtc: satoshiToBtc,
       bitcoinToFiat: bitcoinToFiat
