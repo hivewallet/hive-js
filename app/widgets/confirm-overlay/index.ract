@@ -1,4 +1,4 @@
-<div class="overlay--confirm _cancel" intro-outro="fade" on-click="cancel">
+<div class="overlay--confirm _cancel" on-click="cancel">
   <div class="confirm__content {{#success}}_success{{/success}} {{#error}}_error{{/error}}">
 
   {{#confirmation}}

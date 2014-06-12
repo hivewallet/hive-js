@@ -1,7 +1,7 @@
 
 {{#visible}}
 
-  <div class="overlay--currency" intro-outro="fade" on-click="cancel">
+  <div class="overlay--currency" on-click="cancel">
 
     <div class="currency__content">
 

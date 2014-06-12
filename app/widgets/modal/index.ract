@@ -1,5 +1,5 @@
-<div class="overlay--flash _cancel" on-click="cancel" intro-outro="fade">
-  <div class="flash" intro-outro="fadeNscale">
+<div class="overlay--flash _cancel" on-click="cancel">
+  <div class="flash">
     {{>content}}
   </div>
 </div>
