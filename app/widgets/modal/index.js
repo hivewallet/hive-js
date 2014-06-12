@@ -1,19 +1,12 @@
 'use strict';
 
 var Ractive = require('hive-ractive')
-var transitions = require('hive-transitions')
 
 var Modal = Ractive.extend({
   el: document.getElementById('flash-modal'),
   template: require('./index.ract').template,
   partials: {
     content: require('./content.ract').template,
-  },
-  data: {
-    transitions: {
-      fadeNscale: transitions.fadeNscaleTransition,
-      fade: transitions.fade
-    }
   },
   init: function(){
     var self = this

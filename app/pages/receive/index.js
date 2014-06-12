@@ -4,12 +4,9 @@ var Ractive = require('hive-ractive')
 var emitter = require('hive-emitter')
 var qrcode = require('hive-qrcode')
 var Hive = require('hive-wallet')
-var transitions = require('hive-transitions')
 var geo = require('hive-geo')
 var showError = require('hive-flash-modal').showError
 var showSetDetails = require('hive-set-details-modal')
-
-Ractive.transitions.fade = transitions.fade;
 
 module.exports = function(el){
   var ractive = new Ractive({
@@ -20,10 +17,7 @@ module.exports = function(el){
       qrVisible: false,
       btn_message: 'Turn waggle on',
       connecting: false,
-      broadcasting: false,
-      transitions: {
-        fade: transitions.fade
-      }
+      broadcasting: false
     }
   })
 
