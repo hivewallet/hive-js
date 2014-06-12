@@ -3,7 +3,7 @@
 var Ractive = require('hive-ractive')
 
 var Modal = Ractive.extend({
-  el: document.getElementById('flash-modal'),
+  el: document.getElementById('general-purpose-overlay'),
   template: require('./index.ract').template,
   partials: {
     content: require('./content.ract').template,

@@ -10,7 +10,6 @@ function open(data){
   data.confirmation = true
 
   var ractive = new Ractive({
-    el: document.getElementById('general-purpose-overlay'),
     template: require('./index.ract').template,
     data: data
   })
