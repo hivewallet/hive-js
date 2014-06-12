@@ -11,6 +11,7 @@ var livereload = require('connect-livereload')
 var lrserver = require('tiny-lr')()
 var buildServer = require('./server/express')
 var sketch = require('gulp-sketch');
+var replace = require('gulp-replace');
 
 // server --------------------------------- //
 
@@ -55,7 +56,14 @@ gulp.task('assets', function(){
 });
 
 gulp.task('cordova', function() {
-  gulp.src('./build/**/*')
+  gulp.src('./build/assets/**/*')
+    .pipe(gulp.dest('./cordova/www/assets/'))
+
+  var headTag = '</head>';
+  var cordovaScriptTag = '  <script src="cordova.js"></script>';
+
+  gulp.src('./build/index.html')
+    .pipe(replace(headTag, [cordovaScriptTag, headTag].join('\n')))
     .pipe(gulp.dest('./cordova/www/'))
 });
 
