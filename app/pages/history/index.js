@@ -35,7 +35,6 @@ module.exports = function(el){
         return date.toLocaleTimeString(navigator.language, options)
       },
       truncate: function(amount) {
-        console.log(amount)
         return amount.toFixed(5)
       },
       satoshiToBtc: satoshiToBtc
