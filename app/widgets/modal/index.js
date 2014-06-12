@@ -18,6 +18,12 @@ var Modal = Ractive.extend({
   init: function(){
     var self = this
 
+    var htmlEl = document.getElementsByTagName('html')[0]
+    var appEl = document.getElementById('app')
+
+    appEl.classList.add('is_hidden')
+    htmlEl.classList.add('prevent_scroll')
+
     self.on('cancel', function(event){
       if(!event || event.original.srcElement.classList.contains('_cancel')){
         dismissModal()
@@ -34,6 +40,8 @@ var Modal = Ractive.extend({
       var onDismiss = self.get('onDismiss')
       if(onDismiss) onDismiss();
 
+      appEl.classList.remove('is_hidden')
+      htmlEl.classList.remove('prevent_scroll')
       self.teardown()
     }
 
