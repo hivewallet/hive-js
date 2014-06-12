@@ -6,8 +6,8 @@
   <span class="_arrow ss-icon">navigatedown</span>
 </div>
 
-<div class="settings__group">
-  <div id="user_settings" class="_content">
+<div id="user_settings" class="settings__group open">
+  <div class="_content">
 
     <div id="details-preview">
       <div class="settings__avatar" style="background-image: url('{{emailToAvatar(user.email)}}')"></div>
@@ -40,8 +40,8 @@
   <span class="_arrow ss-icon">navigatedown</span>
 </div>
 
-<div class="settings__group">
-  <div id="security_settings" class="_content">
+<div id="security_settings" class="settings__group">
+  <div class="_content">
     <div class="settings__btn" style="margin-bottom: 20px;" on-click="disable-pin">Disable pin</div>
   </div>
 </div>

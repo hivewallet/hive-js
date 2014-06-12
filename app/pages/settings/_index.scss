@@ -5,10 +5,6 @@
   padding-right: 15%;
 }
 
-#user_settings {
-  min-height: 280px;
-}
-
 .settings__avatar {
   @include icon(120px, 120px, block);
   -webkit-mask-image: url(../img/hex_large.png);
@@ -61,17 +57,24 @@
   }
 }
 
+#user_settings {
+  ._content {
+    min-height: 280px;
+  }
+}
+
 
 .settings__group {
   overflow: hidden;
-  transition: height 0.2s ease;
+
+  &.open {
+
+  }
 
   ._content {
     padding: 20px;
     padding-bottom: 30px;
     background-color: darken($purple--light, 5%);
-    display: none;
-    transform: translateY(-100%);
   }
 }
 
