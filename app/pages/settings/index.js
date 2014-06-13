@@ -68,7 +68,9 @@ module.exports = function(el){
 
   ractive.on('toggle', function(event){
     event.original.preventDefault();
-    toggleDropdown(event.node.dataset.target);
+    var arrow = event.node.lastChild.childNodes[0]
+    var target = event.node.dataset.target
+    toggleDropdown(target, arrow);
   })
 
   ractive.on('edit-details', function(){
@@ -127,34 +129,45 @@ module.exports = function(el){
     openDisablePinModal()
   })
 
-  function toggleDropdown(node){
+  function toggleDropdown(node, icon){
 
     if(ractive.get('animating')) return;
     var elem = ractive.nodes[node]
     var dataString = node + ''
     var state = ractive.get(dataString)
-    var classes = elem.classList
 
     if(state) {
       ractive.set(dataString, false)
-      classes.remove('open')
-      hideDropdown(elem)
+      hideDropdown(elem, icon)
     } else {
       ractive.set(dataString, true)
-      classes.add('open')
-      showDropdown(elem)
+      showDropdown(elem, icon)
     }
   }
 
-  showDropdown(ractive.nodes['user_settings'])
-  hideDropdown(ractive.nodes['security_settings'])
+  var initialUserEl = ractive.nodes['user_settings']
+  var initialSecurityEl = ractive.nodes['security_settings']
+  var userIcon = ractive.nodes['user_arrow']
+  var securityIcon = ractive.nodes['security_arrow']
 
-  function showDropdown(el, callback){
+  showDropdown(initialUserEl, userIcon)
+  hideDropdown(initialSecurityEl, securityIcon)
+
+  function showDropdown(el, icon, callback){
+    spin(icon, {rotateZ: '180deg'})
     animateDropdown(el, {maxHeight: '500px'}, {translateY: 0}, 'block', callback)
   }
 
-  function hideDropdown(el, callback){
+  function hideDropdown(el, icon, callback){
+    spin(icon, {rotateZ: '0deg'})
     animateDropdown(el, {maxHeight: '0px'}, {translateY: '-100%'}, 'none', callback)
+  }
+
+  function spin(el, props) {
+    Velocity.animate(el, props, {
+      easing: "ease",
+      duration: 300
+    })
   }
 
   function animateDropdown(el, props, childProps, display, callback) {

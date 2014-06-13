@@ -41,19 +41,24 @@
 
   ._icon {
     font-size: 20px;
+    padding-top: 5px;
     opacity: 0.1;
   }
 
   ._title {
     margin-left: 10px;
-    padding-top: 2px;
+    padding-top: 6px;
   }
 
-  ._arrow {
+  ._state {
     flex-grow: 1;
-    padding-top: 4px;
-    text-align: right;
-    opacity: 0.1;
+    @include clear;
+
+    ._icon {
+      @include icon(35px, 35px, block, '/assets/img/caret.svg');
+      opacity: 0.1;
+      float: right;
+    }
   }
 }
 
@@ -71,9 +76,6 @@
 .settings__group {
   overflow: hidden;
   background-color: darken($purple--light, 5%);
-  &.open {
-
-  }
 
   ._content {
     padding-top: 20px;
