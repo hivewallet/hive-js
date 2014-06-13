@@ -30,6 +30,18 @@ module.exports = function(el){
     ractive.set('to', address)
   })
 
+  ractive.on('open-qr', function(){
+    var failHandler = function (error) {
+      alert("Scanning failed: " + error);
+    }
+
+    var successHandler = function (result) {
+      ractive.set('to', result.text);
+    }
+
+    cordova.plugins.barcodeScanner.scan(successHandler, failHandler);
+  })
+
   ractive.on('open-geo', function(){
     var data = {
       overlay: 'geo',
