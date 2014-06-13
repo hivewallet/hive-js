@@ -16,7 +16,8 @@ module.exports = function(el){
     template: require('./index.ract').template,
     data: {
       currencies: currencies,
-      exchangeRates: {}
+      exchangeRates: {},
+      isCordova: window.hasOwnProperty('cordova')
     }
   })
 
@@ -32,10 +33,11 @@ module.exports = function(el){
 
   ractive.on('open-qr', function(){
     var failHandler = function (error) {
-      alert("Scanning failed: " + error);
+      alert(error);
     }
 
     var successHandler = function (result) {
+      var walletAddress = result.text.replace('bitcoin:', '');
       ractive.set('to', result.text);
     }
 

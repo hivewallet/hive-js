@@ -26,6 +26,11 @@
     @include icon(42px, 42px, block);
     background-size: 30px 30px;
     background-repeat: no-repeat;
+
+    &._qr {
+      background-image: url('../img/qr_temp.png');
+      margin-right: 10px;
+    }
   }
 
   ._input {
