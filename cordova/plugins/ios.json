@@ -23,6 +23,10 @@
                         {
                             "xml": "<feature name=\"BarcodeScanner\"><param name=\"ios-package\" value=\"CDVBarcodeScanner\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Device\"><param name=\"ios-package\" value=\"CDVDevice\" /></feature>",
+                            "count": 1
                         }
                     ],
                     "/widget": [
@@ -83,6 +87,9 @@
             "PACKAGE_NAME": "com.hivewallet.app"
         },
         "com.testflightapp.cordova-plugin": {
+            "PACKAGE_NAME": "com.hivewallet.app"
+        },
+        "org.apache.cordova.device": {
             "PACKAGE_NAME": "com.hivewallet.app"
         }
     },

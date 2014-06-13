@@ -20,6 +20,13 @@ module.exports = [
         "clobbers": [
             "TestFlight"
         ]
+    },
+    {
+        "file": "plugins/org.apache.cordova.device/www/device.js",
+        "id": "org.apache.cordova.device.device",
+        "clobbers": [
+            "device"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -27,7 +34,8 @@ module.exports.metadata =
 {
     "org.apache.cordova.statusbar": "0.1.3",
     "com.phonegap.plugins.barcodescanner": "1.0.1",
-    "com.testflightapp.cordova-plugin": "3.1.0"
+    "com.testflightapp.cordova-plugin": "3.1.0",
+    "org.apache.cordova.device": "0.2.10"
 }
 // BOTTOM OF METADATA
 });
