@@ -163,7 +163,7 @@ module.exports = function(el){
     var childEl = el.childNodes[0]
 
     Velocity.animate(el, props, {
-      easing: "ease",
+      easing: "linear",
       duration: 400,
       display: display
     })
