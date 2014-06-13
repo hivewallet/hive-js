@@ -7,7 +7,6 @@ var browserify = require('browserify')
 var source = require('vinyl-source-stream')
 var glob = require('glob')
 var refresh = require('gulp-livereload')
-var livereload = require('connect-livereload')
 var lrserver = require('tiny-lr')()
 var buildServer = require('./server/express')
 var sketch = require('gulp-sketch');
@@ -17,14 +16,12 @@ var replace = require('gulp-replace');
 
 var livereloadport = 35729
 var serverport = 8080
-var server = buildServer(livereload({
-  port: livereloadport
-}))
+var server = buildServer()
 
 gulp.task('serve', function() {
   server.listen(serverport);
   lrserver.listen(livereloadport);
-});
+})
 
 // main tasks ------------------------------ //
 

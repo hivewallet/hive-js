@@ -5,16 +5,20 @@ var path = require('path')
 var auth = require('./auth')
 var geo = require('./geo')
 var validatePin = require('hive-pin-validator')
+var crypto = require('crypto')
 
-module.exports = function (prependMiddleware){
+module.exports = function (){
   var app = express()
-  // if(prependMiddleware) {
-  //   app.use(prependMiddleware)
-  // }
   app.use(requireHTTPS)
   app.use(express.bodyParser())
   app.use(express.cookieParser(process.env.COOKIE_SALT))
-  app.use(express.session())
+  app.use(express.cookieSession({
+    cookie: {
+      maxAge: 1000*60*60,
+      httpOnly: true,
+      proxy: true
+    }
+  }))
   app.use(express.compress())
   app.use(express.static(path.join(__dirname, '..', 'build')))
 
@@ -80,7 +84,8 @@ module.exports = function (prependMiddleware){
     delete data.lat
     delete data.lon
 
-    data.id = req.sessionID
+    req.session.tmpSessionID = crypto.randomBytes(16).toString('base64')
+    data.id = req.session.tmpSessionID
     geo.save(lat, lon, data, function(err, found) {
       if(err) return res.json(400, err)
       res.json(200, found)
@@ -88,7 +93,7 @@ module.exports = function (prependMiddleware){
   })
 
   app.delete('/location', function(req, res) {
-    geo.remove(req.sessionID, function(err, found) {
+    geo.remove(req.session.tmpSessionID, function(err, found) {
       if(err) return res.json(400, err)
       res.json(200, found)
     })
@@ -120,10 +125,8 @@ module.exports = function (prependMiddleware){
   }
 
   function setCookie(req, wallet_id, callback){
-    req.session.regenerate(function(){
-      req.session.wallet_id = wallet_id
-      callback()
-    })
+    req.session.wallet_id = wallet_id
+    callback()
   }
 
   function requireHTTPS(req, res, next) {
