@@ -41,13 +41,14 @@ module.exports = function(el){
   })
 
   ractive.on('open-send', function(){
-    validateSend(function(err){
+    validateSend(function(err, tx){
       if(err) return showError({title: 'Uh oh!', message: err.message});
 
       showConfirmation({
         to: ractive.get('to'),
         amount: ractive.get('value'),
-        denomination: ractive.get('denomination')
+        denomination: ractive.get('denomination'),
+        fee: satoshiToBtc(tx.estimateFee())
       })
     })
   })
@@ -95,6 +96,7 @@ module.exports = function(el){
     var amount = ractive.get('value')
     var address = ractive.get('to')
     var wallet = getWallet()
+    var tx = null
 
     try{
       Address.fromBase58Check(address)
@@ -103,7 +105,7 @@ module.exports = function(el){
     }
 
     try {
-      wallet.createTx(address, btcToSatoshi(amount))
+      tx = wallet.createTx(address, btcToSatoshi(amount))
     } catch(e) {
       var message = e.message
       var userMessage = message
@@ -116,7 +118,7 @@ module.exports = function(el){
       return callback(new Error(userMessage))
     }
 
-    callback(null)
+    callback(null, tx)
   }
 
   function onTxSent(err, tx){
