@@ -37,11 +37,11 @@ module.exports = function(el){
     }
 
     var successHandler = function (result) {
-      var walletAddress = result.text.replace('bitcoin:', '');
-      ractive.set('to', result.text);
+      var walletAddress = result.text.replace('bitcoin:', '')
+      ractive.set('to', result.text)
     }
 
-    cordova.plugins.barcodeScanner.scan(successHandler, failHandler);
+    cordova.plugins.barcodeScanner.scan(successHandler, failHandler)
   })
 
   ractive.on('open-geo', function(){
