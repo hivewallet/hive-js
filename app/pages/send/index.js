@@ -45,11 +45,15 @@ module.exports = function(el){
 
     showConfirmation({
       to: ractive.get('to'),
-      amount: ractive.get('value')
+      amount: ractive.get('value'),
+      denomination: ractive.get('denomination')
     })
   })
 
 
+  emitter.on('wallet-ready', function(){
+    ractive.set('denomination', getWallet().denomination)
+  })
 
   emitter.on('db-ready', function(){
     db.get(function(err, doc){
