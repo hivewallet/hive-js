@@ -33,6 +33,7 @@ gulp.task('styles', function(){
     .pipe(sass())
     .pipe(prefix())
     .pipe(gulp.dest('./build/assets/css/'))
+    .pipe(gulp.dest('./cordova/www/assets/css/'))
     .pipe(refresh(lrserver));
 });
 
@@ -40,31 +41,26 @@ gulp.task('scripts', function(){
   var bundler = browserify('./app/application.js')
   bundle(bundler, './application.js')
     .pipe(gulp.dest('./build/assets/js/'))
+    .pipe(gulp.dest('./cordova/www/assets/js/'))
     .pipe(refresh(lrserver));
 });
 
 gulp.task('html', function(){
+  var headTag = '</head>';
+  var cordovaScriptTag = '<script src="cordova.js"></script>';
+
   gulp.src('./app/index.html')
     .pipe(gulp.dest('./build/'))
+    .pipe(replace(headTag, ['  '+cordovaScriptTag, headTag].join('\n')))
+    .pipe(gulp.dest('./cordova/www/'))
     .pipe(refresh(lrserver));
 });
 
 gulp.task('assets', function(){
   gulp.src('./app/assets/**/*')
     .pipe(gulp.dest('./build/assets/'))
-    .pipe(refresh(lrserver));
-});
-
-gulp.task('cordova', function() {
-  gulp.src('./build/assets/**/*')
     .pipe(gulp.dest('./cordova/www/assets/'))
-
-  var headTag = '</head>';
-  var cordovaScriptTag = '  <script src="cordova.js"></script>';
-
-  gulp.src('./build/index.html')
-    .pipe(replace(headTag, [cordovaScriptTag, headTag].join('\n')))
-    .pipe(gulp.dest('./cordova/www/'))
+    .pipe(refresh(lrserver));
 });
 
 gulp.task('tests', function(){
