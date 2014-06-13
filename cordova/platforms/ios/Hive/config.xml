@@ -33,4 +33,7 @@
     <access origin="*" />
     <preference name="StatusBarOverlaysWebView" value="false" />
     <preference name="StatusBarBackgroundColor" value="#000000" />
+    <feature name="TestFlightSDK">
+        <param name="ios-package" value="CDVTestFlight" />
+    </feature>
 </widget>

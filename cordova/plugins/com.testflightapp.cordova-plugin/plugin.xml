@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+    id="com.testflightapp.cordova-plugin"
+    version="3.1.0">
+
+    <name>TestFlight SDK Plugin</name>
+    <description>Cordova plugin for the TestFlight SDK 2.0</description>
+    <license>Apache 2.0 License</license>
+
+    <engines>
+        <engine name="cordova" version=">=2.9.0" />
+        <engine name="cordova-android" version=">=3.1.0" />
+    </engines>
+    
+    <js-module src="www/testflight.js" name="TestFlight">
+        <clobbers target="TestFlight" />
+    </js-module>
+
+    <access origin="*.testflightapp.com" />
+
+    <!-- ios -->
+    <platform name="ios">
+
+        <config-file target="config.xml" parent="/widget">
+          <feature name="TestFlightSDK">
+            <param name="ios-package" value="CDVTestFlight"/>
+          </feature>
+        </config-file>
+
+        <header-file src="src/ios/TestFlight.h" />
+        <header-file src="src/ios/TestFlight+AsyncLogging.h" />
+        <header-file src="src/ios/TestFlight+ManualSessions.h" />
+        <header-file src="src/ios/CDVTestFlight.h"/>
+
+        <source-file src="src/ios/CDVTestFlight.m" />
+        <source-file src="src/ios/libTestFlight.a" framework="true"/>
+
+        <framework src="libz.dylib" />
+    </platform>
+
+</plugin>

@@ -24,6 +24,12 @@
                             "xml": "<feature name=\"BarcodeScanner\"><param name=\"ios-package\" value=\"CDVBarcodeScanner\" /></feature>",
                             "count": 1
                         }
+                    ],
+                    "/widget": [
+                        {
+                            "xml": "<feature name=\"TestFlightSDK\"><param name=\"ios-package\" value=\"CDVTestFlight\" /></feature>",
+                            "count": 1
+                        }
                     ]
                 }
             },
@@ -58,6 +64,12 @@
                             "xml": "false",
                             "count": 1
                         }
+                    ],
+                    "libz.dylib": [
+                        {
+                            "xml": "false",
+                            "count": 1
+                        }
                     ]
                 }
             }
@@ -68,6 +80,9 @@
             "PACKAGE_NAME": "com.hivewallet.app"
         },
         "com.phonegap.plugins.barcodescanner": {
+            "PACKAGE_NAME": "com.hivewallet.app"
+        },
+        "com.testflightapp.cordova-plugin": {
             "PACKAGE_NAME": "com.hivewallet.app"
         }
     },
