@@ -35,6 +35,9 @@ gulp.task('styles', function(){
 });
 
 gulp.task('scripts', function(){
+  gulp.src('./app/ios.js')
+    .pipe(gulp.dest('./cordova/www/assets/js/'));
+
   var bundler = browserify('./app/application.js')
   bundle(bundler, './application.js')
     .pipe(gulp.dest('./build/assets/js/'))
@@ -43,13 +46,14 @@ gulp.task('scripts', function(){
 });
 
 gulp.task('html', function(){
-  var cordovaScript = '  <script src="cordova.js"></script>';
-  var testFlightScript = '  <script src="testflight.js"></script>';
-  var headTag = '</head>';
+  var injectScripts = ['cordova.js', 'testflight.js', 'assets/js/ios.js'];
+  var injectTags = injectScripts.map(function(src) {
+    return '  <script src="'+src+'"></script>'
+  }).concat('</head>').join('\n');
 
   gulp.src('./app/index.html')
     .pipe(gulp.dest('./build/'))
-    .pipe(replace(headTag, [cordovaScript, testFlightScript, headTag].join('\n')))
+    .pipe(replace('</head>', injectTags))
     .pipe(gulp.dest('./cordova/www/'))
     .pipe(refresh(lrserver));
 });
