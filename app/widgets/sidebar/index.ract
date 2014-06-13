@@ -2,9 +2,10 @@
 <div class="sidebar__header">
 
   <div class="sidebar__logo"></div>
-  <span class="sidebar__version">v0.1.0</div>
+  <span class="sidebar__version">v0.1.0</span>
 
 </div>
+
 <div id="settings"></div>
 
 <div class="sidebar__logout" on-click="logout">
