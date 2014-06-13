@@ -12,7 +12,7 @@
         <span class="_currency">{{denomination}}</span>
       </div>
 
-      <span class="_fee">+0.0001 {{denomination}} transaction fee</span>
+      <span class="_fee">+{{fee}} {{denomination}} transaction fee</span>
       <span class="_icon ss-icon">down</span>
       <span class="_address">{{to}}</span>
 
