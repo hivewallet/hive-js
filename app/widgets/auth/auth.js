@@ -34,9 +34,12 @@ var Auth = Ractive.extend({
     }
 
     function getNetwork() {
-      if(location.search.indexOf('network=testnet') > 0) {
-        return 'testnet'
-      }
+      var regex = /^network=/
+      var networkParam = location.search.substr(1).split('&').filter(function(e){
+        return e.match(regex)
+      })[0]
+
+      return networkParam.replace(regex, '')
     }
 
     function loading() {
