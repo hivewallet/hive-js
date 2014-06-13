@@ -7,8 +7,10 @@ var db = require('hive-db')
 var getWallet = require('hive-wallet').getWallet
 var currencies = require('hive-ticker-api').currencies
 var btcToSatoshi = require('hive-convert').btcToSatoshi
+var satoshiToBtc = require('hive-convert').satoshiToBtc
 var showError = require('hive-flash-modal').showError
 var showConfirmation = require('hive-confirm-overlay')
+var Address = require('bitcoinjs-lib').Address
 
 module.exports = function(el){
   var ractive = new Ractive({
@@ -39,14 +41,14 @@ module.exports = function(el){
   })
 
   ractive.on('open-send', function(){
+    validateSend(function(err){
+      if(err) return showError({title: 'Uh oh!', message: err.message});
 
-    var validated = validateSend()
-    if(!validated) return;
-
-    showConfirmation({
-      to: ractive.get('to'),
-      amount: ractive.get('value'),
-      denomination: ractive.get('denomination')
+      showConfirmation({
+        to: ractive.get('to'),
+        amount: ractive.get('value'),
+        denomination: ractive.get('denomination')
+      })
     })
   })
 
@@ -89,46 +91,32 @@ module.exports = function(el){
     ractive.set('fiatValue', fiat)
   })
 
-  function validateSend() {
+  function validateSend(callback) {
     var amount = ractive.get('value')
     var address = ractive.get('to')
     var wallet = getWallet()
-    var balance = wallet.getBalance() - btcToSatoshi(0.0001)
 
-    if(address === '' || address === undefined) {
-
-      var data = {
-        message: "Please enter an address to send to."
-      }
-      showError(data)
-
-      return false
+    try{
+      Address.fromBase58Check(address)
+    } catch(e) {
+      return callback(new Error('Please enter a valid address to send to.'))
     }
 
-    if(amount === undefined) {
+    try {
+      wallet.createTx(address, btcToSatoshi(amount))
+    } catch(e) {
+      var message = e.message
+      var userMessage = message
 
-      var data = {
-        message: 'Please enter an amount to send.'
+      if(message.match(/dust threshold/)) {
+        userMessage = 'Please an amount above ' + satoshiToBtc(wallet.dustThreshold)
+      } else if(message.match(/Not enough funds/)) {
+        userMessage = "You don't have enough funds in your wallet."
       }
-      showError(data)
-
-      return false
+      return callback(new Error(userMessage))
     }
 
-    amount = btcToSatoshi(amount)
-
-    if(amount > balance) {
-
-      var data = {
-        title: 'Uh oh!',
-        message: "You don't have enough funds in your wallet."
-      }
-      showError(data)
-
-      return false
-    }
-
-    return true;
+    callback(null)
   }
 
   function onTxSent(err, tx){
