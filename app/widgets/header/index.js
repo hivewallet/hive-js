@@ -20,6 +20,7 @@ module.exports = function(el){
   emitter.on('wallet-ready', function(){
     var wallet = getWallet();
     ractive.set('bitcoinBalance', wallet.getBalance())
+    ractive.set('denomination', wallet.denomination)
   })
 
   emitter.on('update-balance', function() {

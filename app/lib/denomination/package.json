@@ -1,0 +1,8 @@
+{
+  "name": "hive-denomination",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "author": "Wei Lu",
+  "license": "GPL-3.0"
+}
