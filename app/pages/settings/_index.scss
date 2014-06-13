@@ -63,10 +63,14 @@
   }
 }
 
+#details-preview {
+  padding-top: 20px;
+}
+
 
 .settings__group {
   overflow: hidden;
-
+  background-color: darken($purple--light, 5%);
   &.open {
 
   }
@@ -74,7 +78,7 @@
   ._content {
     padding: 20px;
     padding-bottom: 30px;
-    background-color: darken($purple--light, 5%);
+    transform: translateY(-100%);
   }
 }
 

@@ -131,7 +131,6 @@ module.exports = function(el){
 
     if(ractive.get('animating')) return;
     var elem = ractive.nodes[node]
-    var childEl = elem.childNodes[0]
     var dataString = node + ''
     var state = ractive.get(dataString)
     var classes = elem.classList
@@ -151,23 +150,32 @@ module.exports = function(el){
   hideDropdown(ractive.nodes['security_settings'])
 
   function showDropdown(el, callback){
-    animateDropdown(el, {maxHeight: '500px'}, 'block', callback)
+    animateDropdown(el, {maxHeight: '500px'}, {translateY: 0}, 'block', callback)
   }
 
   function hideDropdown(el, callback){
-    animateDropdown(el, {maxHeight: '0px'}, 'none', callback)
+    animateDropdown(el, {maxHeight: '0px'}, {translateY: '-100%'}, 'none', callback)
   }
 
-  function animateDropdown(el, props, display, callback) {
+  function animateDropdown(el, props, childProps, display, callback) {
+
     ractive.set('animating', true)
+    var childEl = el.childNodes[0]
+
     Velocity.animate(el, props, {
       easing: "ease",
       duration: 400,
+      display: display
+    })
+
+    Velocity.animate(childEl, childProps, {
+      easing: "ease",
+      duration: 300,
+      delay: 100,
       complete: function(){
         ractive.set('animating', false)
         if(callback) callback()
-      },
-      display: display
+      }
     })
   }
 
