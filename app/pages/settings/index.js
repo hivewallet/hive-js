@@ -8,7 +8,6 @@ var db = require('hive-db')
 var openDisablePinModal = require('hive-disable-pin-modal')
 var showError = require('hive-flash-modal').showError
 var Velocity = require('velocity-animate')
-var $ = require('browserify-zepto')
 
 module.exports = function(el){
   var ractive = new Ractive({
@@ -29,15 +28,14 @@ module.exports = function(el){
 
   var $previewEl = ractive.nodes['details-preview']
   var $editEl = ractive.nodes['details-edit']
+  var $initialUserEl = ractive.nodes['user_settings']
+  var $initialSecurityEl = ractive.nodes['security_settings']
+  var $userIcon = ractive.nodes['user_arrow']
+  var $securityIcon = ractive.nodes['security_arrow']
 
-  var propsAnimateIn = {
-    scale: [1.0, 'spring'],
-    opacity: 1.0
-  }
-  var propsAnimateOut = {
-    scale: 0.2,
-    opacity: 0
-  }
+  // animate on load to avoid style property bugs
+  showDropdown($initialUserEl, $userIcon)
+  hideDropdown($initialSecurityEl, $securityIcon)
 
   emitter.on('wallet-ready', function(){
     var wallet = getWallet()
@@ -96,12 +94,30 @@ module.exports = function(el){
     })
   })
 
+  ractive.on('disable-pin', function(){
+    openDisablePinModal()
+  })
+
+  function handleUserError(response) {
+    var data = {
+      title: "Uh Oh!",
+      message: "Could not save your details"
+    }
+    showError(data)
+  }
+
   function showDetails(el, callback){
-    animateDetails(el, propsAnimateIn, 'block', callback)
+    animateDetails(el, {
+      scale: [1.0, 'spring'],
+      opacity: 1.0
+    }, 'block', callback)
   }
 
   function hideDetails(el, callback){
-    animateDetails(el, propsAnimateOut, 'none', callback)
+    animateDetails(el, {
+      scale: 0.2,
+      opacity: 0
+    }, 'none', callback)
   }
 
   function animateDetails(el, props, display, callback) {
@@ -116,18 +132,6 @@ module.exports = function(el){
       display: display
     })
   }
-
-  function handleUserError(response) {
-    var data = {
-      title: "Uh Oh!",
-      message: "Could not save your details"
-    }
-    showError(data)
-  }
-
-  ractive.on('disable-pin', function(){
-    openDisablePinModal()
-  })
 
   function toggleDropdown(node, icon){
 
@@ -145,49 +149,49 @@ module.exports = function(el){
     }
   }
 
-  var initialUserEl = ractive.nodes['user_settings']
-  var initialSecurityEl = ractive.nodes['security_settings']
-  var userIcon = ractive.nodes['user_arrow']
-  var securityIcon = ractive.nodes['security_arrow']
-
-  showDropdown(initialUserEl, userIcon)
-  hideDropdown(initialSecurityEl, securityIcon)
-
-  function showDropdown(el, icon, callback){
-    spin(icon, {rotateZ: '180deg'})
-    animateDropdown(el, {maxHeight: '500px'}, {translateY: 0}, 'block', callback)
+  function showDropdown(el, icon){
+    var props = {
+      icon: {rotateZ: '180deg'},
+      container: {maxHeight: '500px'},
+      content: {translateY: 0}
+    }
+    animateDropdown(el, icon, props, 'block')
   }
 
-  function hideDropdown(el, icon, callback){
-    spin(icon, {rotateZ: '0deg'})
-    animateDropdown(el, {maxHeight: '0px'}, {translateY: '-100%'}, 'none', callback)
+  function hideDropdown(el, icon){
+    var props = {
+      icon: {rotateZ: '0deg'},
+      container: {maxHeight: '0px'},
+      content: {translateY: '-100%'}
+    }
+    animateDropdown(el, icon, props, 'none')
   }
 
-  function spin(el, props) {
-    Velocity.animate(el, props, {
-      easing: "ease",
-      duration: 300
-    })
-  }
-
-  function animateDropdown(el, props, childProps, display, callback) {
+  function animateDropdown(el, icon, props, display) {
 
     ractive.set('animating', true)
     var childEl = el.childNodes[0]
 
-    Velocity.animate(el, props, {
+    // arrow
+    Velocity.animate(icon, props.icon, {
+      easing: "ease",
+      duration: 300
+    })
+
+    // container
+    Velocity.animate(el, props.container, {
       easing: "linear",
       duration: 400,
       display: display
     })
 
-    Velocity.animate(childEl, childProps, {
+    // content
+    Velocity.animate(childEl, props.content, {
       easing: "ease",
       duration: 300,
       delay: 100,
       complete: function(){
         ractive.set('animating', false)
-        if(callback) callback()
       }
     })
   }

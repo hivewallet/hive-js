@@ -31,7 +31,6 @@
     "proxyquire": "~0.6.0"
   },
   "dependencies": {
-    "velocity": "git://github.com/haustraliaer/velocity.git",
     "aperture": "^1.0.0",
     "arrival": "~1.0.0",
     "big.js": "^2.5.0",
@@ -61,6 +60,7 @@
     "st": "^0.3.1",
     "uglifyify": "~2.4.0",
     "uniqueify": "~1.0.0",
+    "velocity-animate": "git://github.com/haustraliaer/velocity.git",
     "vinyl-source-stream": "^0.1.1",
     "gulp-sketch": "0.0.2"
   },
