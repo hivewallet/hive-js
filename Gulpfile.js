@@ -43,12 +43,13 @@ gulp.task('scripts', function(){
 });
 
 gulp.task('html', function(){
+  var cordovaScript = '  <script src="cordova.js"></script>';
+  var testFlightScript = '  <script src="testflight.js"></script>';
   var headTag = '</head>';
-  var cordovaScriptTag = '<script src="cordova.js"></script>';
 
   gulp.src('./app/index.html')
     .pipe(gulp.dest('./build/'))
-    .pipe(replace(headTag, ['  '+cordovaScriptTag, headTag].join('\n')))
+    .pipe(replace(headTag, [cordovaScript, testFlightScript, headTag].join('\n')))
     .pipe(gulp.dest('./cordova/www/'))
     .pipe(refresh(lrserver));
 });
