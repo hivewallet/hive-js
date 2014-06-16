@@ -40,7 +40,7 @@ module.exports = function(el){
 
     var successHandler = function (result) {
       var walletAddress = result.text.replace('bitcoin:', '')
-      ractive.set('to', result.text)
+      ractive.set('to', walletAddress)
     }
 
     cordova.plugins.barcodeScanner.scan(successHandler, failHandler)
