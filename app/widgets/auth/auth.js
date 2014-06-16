@@ -43,15 +43,13 @@ var Auth = Ractive.extend({
     }
 
     function loading() {
-      timerId = setInterval(function(){
-        var text = self.get('progress')
-        self.set('progress', text + '.')
-      }, 500)
+      // add class here
+      console.log('loading...')
     }
 
     function pauseLoading() {
-      clearInterval(timerId)
-      timerId = null
+      // remove class here
+      console.log('finished loading.')
     }
 
     this.onSyncDone = onSyncDone

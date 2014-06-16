@@ -1,1 +1,7 @@
-<div class="auth__btn--existing" on-click="enter-pin">Open wallet</div>
+{{^opening}}
+  <div class="auth__btn--existing" on-click="enter-pin">Open wallet</div>
+{{/opening}}
+
+{{#opening}}
+  <div class="auth__btn--existing">{{progress}}</div>
+{{/opening}}
