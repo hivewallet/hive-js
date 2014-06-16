@@ -1,4 +1,4 @@
-<div class="overlay--flash _cancel" on-click="cancel">
+<div class="overlay--flash _cancel js__fadeEl" on-click="cancel">
   <div class="flash">
     {{>content}}
   </div>
