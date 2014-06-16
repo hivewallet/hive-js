@@ -7,6 +7,7 @@ var db = require('./db')
 var emitter = require('hive-emitter')
 var crypto = require('crypto')
 var AES = require('hive-aes')
+var denominations = require('hive-denomination')
 var ThirdParty = require('hive-thrid-party-api')
 var API = ThirdParty.Blockr
 var txToHiveTx = ThirdParty.txToHiveTx
@@ -176,6 +177,7 @@ function initWallet(data, network) {
   api = new API(network)
 
   wallet.sendTx = sendTx
+  wallet.denomination = denominations[network].default
 
   return data.mnemonic
 }

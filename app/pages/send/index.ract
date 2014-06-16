@@ -17,7 +17,7 @@
         <label class="_label" for="bitcoin">Amount</label>
 
           <div class="_input-group">
-            <span class="_currency">BTC</span>
+            <span class="_currency">{{denomination}}</span>
             <input id="bitcoin" class="_input" type="number" min="0" value="{{value}}" on-keyup="bitcoin-to-fiat" on-enter="open-send">
           </div>
 
