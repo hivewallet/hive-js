@@ -250,7 +250,7 @@ function setUnspentOutputs(done){
 }
 
 function firstTimeSync(done){
-  emitter.emit('wallet-opening', 'Synchronizing wallet balance and transaction history')
+  emitter.emit('wallet-opening', 'Synchronizing Wallet')
 
   done = done || defaultCallback
 

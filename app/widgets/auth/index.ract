@@ -6,18 +6,12 @@
 
     <div class="auth__btngroup">
       {{>content}}
-      {{^opening}}
-        {{>actions}}
-      {{/opening}}
+      {{>actions}}
     </div>
 
     <div class="auth__footer">
       {{>footer}}
     </div>
-
-    {{#opening}}
-      <span class="auth__pending">{{progress}}</span>
-    {{/opening}}
   </div>
 </div>
 
