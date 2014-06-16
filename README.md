@@ -49,6 +49,17 @@ Click on the bottom link "fix this" to create an admin user, say:
     DB_HOST=127.0.0.1 DB_PORT=5984 DB_USER=admin DB_PASSWORD=password COOKIE_SALT=secret npm start
     open http://localhost:8080
 
+## iOS Development
+
+Hive can also be packaged as an iOS app using Apache Cordova. To run locally, make sure you've got XCode installed. Everything is contained within the `./cordova` directory. To run the app inside the iOS Simulator;
+
+`npm install -g cordova`
+`gulp build`
+`cd ./cordova`
+`cordova run ios --emulator` (or `--device`)
+
+Obviously we can't start a server or CouchDB within the iOS app, so it instead makes requests to the Heroku endpoint.
+
 ## Contributing
 
 ### Instructions
