@@ -3,5 +3,8 @@
 {{/opening}}
 
 {{#opening}}
-  <div class="auth__btn--existing">{{progress}}</div>
+  <div class="auth__btn--loading">
+    <span class="_icon"></span>
+    <span class="_text">{{progress}}</span>
+  </div>
 {{/opening}}
