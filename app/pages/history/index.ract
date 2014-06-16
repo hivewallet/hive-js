@@ -3,7 +3,7 @@
   {{#transactions.length}}
     <h3 class="_title">Your transaction history</h3>
   {{/transactions.length}}
-  {{#transactions}}
+  {{#transactions:index}}
     <div class="transactions__item" title="{{id}}">
 
       <div class="_detail">
@@ -20,7 +20,7 @@
 
       </div>
 
-      <div class="_avatar hexagon"></div>
+      <div class="_avatar" style="background-image: url('/assets/img/avatar_{{ set_avatar(index) }}.png')"></div>
 
       <div class="_address">{{toAddress || 'Received'}}</div>
 

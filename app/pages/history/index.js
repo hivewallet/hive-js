@@ -32,6 +32,9 @@ module.exports = function(el){
       truncate: function(amount) {
         return amount.toFixed(5)
       },
+      set_avatar: function(index) {
+        return Math.round(((index / 10) % 1) * 10)
+      },
       satoshiToBtc: satoshiToBtc
     }
   })

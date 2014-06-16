@@ -27,6 +27,8 @@
   border-top: 1px solid darken($grey--light, 10%);
 
   ._avatar {
+    @include icon(55px, 55px, block, '/assets/img/avatar_1.png');
+    margin-top: 10px;
     width: 55px;
     float: left;
     margin-right: 10px;
@@ -37,7 +39,7 @@
     @include media-obj;
     @extend .jigsaw-light;
     margin-left: 10px;
-    padding-top: 27px;
+    padding-top: 23px;
     font-size: 21px;
   }
 
