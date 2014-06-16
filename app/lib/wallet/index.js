@@ -105,7 +105,7 @@ function nextReceiveAddress() {
 }
 
 function createWallet(passphrase, network, callback) {
-  var message = passphrase ? 'Decoding seed phrase' : 'Generating seed phrase'
+  var message = passphrase ? 'Decoding seed phrase' : 'Generating...'
   emitter.emit('wallet-opening', message)
   worker.postMessage({passphrase: passphrase})
   worker.addEventListener('message', function(e) {

@@ -52,16 +52,6 @@
   right: 0;
 }
 
-
-@keyframes infinite-spinning {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
 .header__refresh {
   @extend .icon_atom;
   width: 50px;
