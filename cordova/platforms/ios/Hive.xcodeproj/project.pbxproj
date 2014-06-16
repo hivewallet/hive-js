@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		13074A885A594EE7A71EC64D /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2D8D693B80C4351B553C8AD /* CoreVideo.framework */; };
 		1D3623260D0F684500981E51 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* AppDelegate.m */; };
