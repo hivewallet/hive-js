@@ -39,7 +39,7 @@ var Auth = Ractive.extend({
         return e.match(regex)
       })[0]
 
-      return networkParam.replace(regex, '')
+      return networkParam ? networkParam.replace(regex, '') : 'bitcoin'
     }
 
     function loading() {
