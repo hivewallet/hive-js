@@ -155,7 +155,10 @@ module.exports = function(el){
       container: {maxHeight: '500px'},
       content: {translateY: 0}
     }
-    animateDropdown(el, icon, props, 'block')
+    var options = {
+      display: 'block'
+    }
+    animateDropdown(el, icon, props, options)
   }
 
   function hideDropdown(el, icon){
@@ -164,10 +167,14 @@ module.exports = function(el){
       container: {maxHeight: '0px'},
       content: {translateY: '-100%'}
     }
-    animateDropdown(el, icon, props, 'none')
+    var options = {
+      display: 'none',
+      contentDelay: 200
+    }
+    animateDropdown(el, icon, props, options)
   }
 
-  function animateDropdown(el, icon, props, display) {
+  function animateDropdown(el, icon, props, options) {
 
     ractive.set('animating', true)
     var childEl = el.childNodes[0]
@@ -182,13 +189,14 @@ module.exports = function(el){
     Velocity.animate(el, props.container, {
       easing: "linear",
       duration: 400,
-      display: display
+      display: options.display
     })
 
     // content
     Velocity.animate(childEl, props.content, {
       easing: "ease",
       duration: 300,
+      delay: options.contentDelay || undefined,
       complete: function(){
         ractive.set('animating', false)
       }
