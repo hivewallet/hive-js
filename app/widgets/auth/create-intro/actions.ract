@@ -1,1 +1,10 @@
-<div class="auth__btn" on-click="generate-phrase">Generate passphrase</div>
+{{^opening}}
+  <div class="auth__btn" on-click="generate-phrase">Generate passphrase</div>
+{{/opening}}
+
+{{#opening}}
+  <div class="auth__btn--loading">
+    <span class="_icon"></span>
+    <span class="_text">{{progress}}</span>
+  </div>
+{{/opening}}

@@ -105,7 +105,7 @@ function nextReceiveAddress() {
 }
 
 function createWallet(passphrase, network, callback) {
-  var message = passphrase ? 'Decoding seed phrase' : 'Generating seed phrase'
+  var message = passphrase ? 'Decoding seed phrase' : 'Generating...'
   emitter.emit('wallet-opening', message)
   worker.postMessage({passphrase: passphrase})
   worker.addEventListener('message', function(e) {
@@ -250,7 +250,7 @@ function setUnspentOutputs(done){
 }
 
 function firstTimeSync(done){
-  emitter.emit('wallet-opening', 'Synchronizing wallet balance and transaction history')
+  emitter.emit('wallet-opening', 'Synchronizing Wallet')
 
   done = done || defaultCallback
 
