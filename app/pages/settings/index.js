@@ -189,7 +189,6 @@ module.exports = function(el){
     Velocity.animate(childEl, props.content, {
       easing: "ease",
       duration: 300,
-      delay: 100,
       complete: function(){
         ractive.set('animating', false)
       }
