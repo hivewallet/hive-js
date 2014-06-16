@@ -128,6 +128,8 @@ module.exports = function(el){
         userMessage = 'Please an amount above ' + satoshiToBtc(wallet.dustThreshold)
       } else if(message.match(/Not enough funds/)) {
         userMessage = "You don't have enough funds in your wallet."
+      } else {
+        return callback(e)
       }
       return callback(new Error(userMessage))
     }
