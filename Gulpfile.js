@@ -46,7 +46,7 @@ gulp.task('scripts', function(){
 });
 
 gulp.task('html', function(){
-  var injectScripts = ['cordova.js', 'testflight.js', 'assets/js/ios.js'];
+  var injectScripts = ['cordova.js', 'assets/js/ios.js'];
   var injectTags = injectScripts.map(function(src) {
     return '  <script src="'+src+'"></script>'
   }).concat('</head>').join('\n');

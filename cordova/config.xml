@@ -6,10 +6,6 @@
     <content src="index.html" />
     <access origin="*" />
 
-    <plugins>
-      <plugin name="TestFlightSDK" value="CDVTestFlight" />
-    </plugins>
-
     <preference name="StatusBarOverlaysWebView" value="false" />
     <preference name="StatusBarBackgroundColor" value="#000000" />
 </widget>

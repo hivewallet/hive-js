@@ -29,17 +29,11 @@
     <feature name="Device">
         <param name="ios-package" value="CDVDevice" />
     </feature>
-    <feature name="TestFlightSDK">
-        <param name="ios-package" value="CDVTestFlight" />
-    </feature>
     <name>Hive</name>
     <description>Hive Cryptocurrency Wallet for iOS</description>
     <author href="http://github.com/hivewallet/hive-js">Hive</author>
     <content src="index.html" />
     <access origin="*" />
-    <plugins>
-        <plugin name="TestFlightSDK" value="CDVTestFlight" />
-    </plugins>
     <preference name="StatusBarOverlaysWebView" value="false" />
     <preference name="StatusBarBackgroundColor" value="#000000" />
 </widget>
