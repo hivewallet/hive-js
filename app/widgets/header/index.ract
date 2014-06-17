@@ -23,8 +23,8 @@
 
   {{#showFiat}}
     <div class="header__balance" on-click="toggle-currencies">
-      <span class="_amount">3.24</span>
-      <span class="_currency">AUD</span>
+      <span class="_amount">{{bitcoinToFiat(bitcoinBalance, exchangeRates[fiatCurrency])}}</span>
+      <span class="_currency">{{fiatCurrency}}</span>
     </div>
   {{/showFiat}}
 
