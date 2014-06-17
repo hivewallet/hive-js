@@ -9,6 +9,7 @@ var openDisablePinModal = require('hive-disable-pin-modal')
 var showError = require('hive-flash-modal').showError
 var Dropdown = require('hive-transitions/dropdown.js')
 var Profile = require('hive-transitions/profileAnimation.js')
+var showTooltip = require('hive-tooltip')
 
 module.exports = function(el){
   var ractive = new Ractive({
@@ -63,6 +64,12 @@ module.exports = function(el){
 
   emitter.on('ticker', function(rates){
     ractive.set('exchangeRates', rates)
+  })
+
+  ractive.on('help', function() {
+    showTooltip({
+      message: 'Gravatar is a service that lets you re-use the same avatar across websites and apps by specifying your email.'
+    })
   })
 
   ractive.on('toggle', function(event){

@@ -1,0 +1,3 @@
+<div class="tooltip">
+  <p class="tooltip__message">{{message}}</p>
+</div>
