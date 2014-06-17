@@ -16,6 +16,7 @@ module.exports = function(prevPage){
 
   ractive.on('back', function(event){
     prevPage()
+    ractive.teardown()
   })
 
   ractive.on('generate-phrase', function(){
@@ -25,6 +26,7 @@ module.exports = function(prevPage){
     Hive.createWallet(null, this.getNetwork(), function(err, data){
       if(err) return showError(err);
       confirmPassphrasePage(data)
+      ractive.teardown()
     })
   })
 

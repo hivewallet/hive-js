@@ -46,6 +46,7 @@ module.exports = function(prevPage, data){
 
   ractive.on('back', function(){
     if(prevPage) prevPage(data)
+    ractive.teardown()
   })
 
   function getPin(){

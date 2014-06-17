@@ -22,6 +22,10 @@ var Auth = Ractive.extend({
       loading()
     })
 
+    self.on('teardown', function(){
+      emitter.removeAllListeners('wallet-opening')
+    })
+
     function onSyncDone(err, transactions) {
       self.set('opening', false)
       if(err) {

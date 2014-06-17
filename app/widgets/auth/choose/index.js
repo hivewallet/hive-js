@@ -14,10 +14,12 @@ module.exports = function choose(){
 
   ractive.on('create-new-wallet', function(){
     createIntroPage(choose)
+    ractive.teardown()
   })
 
   ractive.on('reveal-passphrase-input', function(){
     passphrasePage(choose)
+    ractive.teardown()
   })
 
   return ractive
