@@ -28,7 +28,9 @@
         <label class="_label">Gravatar Email
           <input value="{{user.email}}" type="text" class="_input" on-enter="submit-details"/>
         </label>
+        <span class="_help" on-click="help">?</span>
       </div>
+
 
       <div class="settings__btn" on-click="submit-details">Submit</div>
     </div>

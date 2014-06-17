@@ -1,18 +1,19 @@
-<div class="set-details__container">
-  <div class="set-details__field">
-    <label>
-        Your name:
-      <input type="text" value="{{name}}" on-enter='disable-pin' autofocus/>
-    </label>
-  </div>
+<div class="flash">
+  <div class="set-details__container">
+    <div class="set-details__field">
+      <label>
+          Your name:
+        <input type="text" value="{{name}}" on-enter='disable-pin' autofocus/>
+      </label>
+    </div>
 
-  <div class="set-details__field">
-    <label>
-        Gravatar email:
-      <input type="email" value="{{email}}" on-enter='submit-details'/>
-    </label>
-  </div>
+    <div class="set-details__field">
+      <label>
+          Gravatar email:
+        <input type="email" value="{{email}}" on-enter='submit-details'/>
+      </label>
+    </div>
 
-  <div class="settings__btn" on-click="submit-details">Save</div>
+    <div class="settings__btn" on-click="submit-details">Save</div>
+  </div>
 </div>
-

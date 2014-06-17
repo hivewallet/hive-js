@@ -93,6 +93,7 @@
 }
 
 .settings__input-group {
+  position: relative;
 
   & + .settings__input-group {
     padding-top: 10px;
@@ -120,5 +121,19 @@
       outline: 0;
       border: 1px solid $purple--highlight;
     }
+  }
+
+  ._help {
+    @include clickbtn;
+    position: absolute;
+    top: 13px;
+    right: 0;
+    font-size: 12px;
+    text-align: center;
+    color: $purple;
+    border: 1px solid $purple;
+    width: 18px;
+    height: 18px;
+    border-radius: 9px;
   }
 }
