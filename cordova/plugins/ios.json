@@ -27,6 +27,10 @@
                         {
                             "xml": "<feature name=\"Device\"><param name=\"ios-package\" value=\"CDVDevice\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"SplashScreen\"><param name=\"ios-package\" value=\"CDVSplashScreen\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
                         }
                     ],
                     "/widget": []
@@ -64,7 +68,13 @@
                             "count": 1
                         }
                     ],
-                    "libz.dylib": []
+                    "libz.dylib": [],
+                    "CoreGraphics.framework": [
+                        {
+                            "xml": "false",
+                            "count": 1
+                        }
+                    ]
                 }
             }
         }
@@ -77,6 +87,9 @@
             "PACKAGE_NAME": "com.hivewallet.app"
         },
         "org.apache.cordova.device": {
+            "PACKAGE_NAME": "com.hivewallet.app"
+        },
+        "org.apache.cordova.splashscreen": {
             "PACKAGE_NAME": "com.hivewallet.app"
         }
     },

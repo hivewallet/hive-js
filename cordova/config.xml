@@ -10,4 +10,7 @@
     <preference name="StatusBarBackgroundColor" value="#000000" />
 
     <preference name="DisallowOverscroll" value="true"/>
+
+    <preference name="AutoHideSplashScreen" value="false" />
+    <preference name="ShowSplashScreenSpinner" value="false"/>
 </widget>

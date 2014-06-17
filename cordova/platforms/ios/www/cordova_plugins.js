@@ -20,6 +20,13 @@ module.exports = [
         "clobbers": [
             "device"
         ]
+    },
+    {
+        "file": "plugins/org.apache.cordova.splashscreen/www/splashscreen.js",
+        "id": "org.apache.cordova.splashscreen.SplashScreen",
+        "clobbers": [
+            "navigator.splashscreen"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -27,7 +34,8 @@ module.exports.metadata =
 {
     "org.apache.cordova.statusbar": "0.1.3",
     "com.phonegap.plugins.barcodescanner": "1.0.1",
-    "org.apache.cordova.device": "0.2.10"
+    "org.apache.cordova.device": "0.2.10",
+    "org.apache.cordova.splashscreen": "0.3.1"
 }
 // BOTTOM OF METADATA
 });

@@ -90,7 +90,7 @@ html {
   font-smoothing: antialiased;
 
   color: $foreground;
-  background-color: $background;
+  background-color: $purple--light;
 
   overflow-y: scroll;
 
@@ -111,6 +111,7 @@ html {
 body {
   width: 100%;
   height: 100%;
+  background-color: $purple--light;
 }
 
 img {
