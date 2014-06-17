@@ -3,20 +3,5 @@
   @extend .overlay;
   @include clickbtn;
   overflow-y: auto;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.5);
 }
-
-.flash {
-  position: fixed;
-  top: 0;
-  left: 50%;
-  margin-left: -150px;
-  width: 300px;
-
-  background-color: $background;
-  box-shadow: 0 2px 2px 1px rgba(000,000,000,0.2);
-
-  border-bottom-left-radius: 3px;
-  border-bottom-right-radius: 3px;
-}
-

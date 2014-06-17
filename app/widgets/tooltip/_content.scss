@@ -1,16 +1,29 @@
 
 .tooltip {
-  margin-top: 40px;
   padding: 20px;
   max-width: 280px;
-  background-color: $purple;
+  background-color: $purple--light;
   border-radius: 10px;
   margin: 0 auto;
+  margin-top: 40px;
+
+  font-size: 18px;
+  box-shadow: 0 2px 2px 1px rgba(000,000,000,0.2);
 }
 
 .tooltip__message {
   color: white;
-  font-size: 14px;
 }
 
+.tooltip__link {
+  display: block;
+  margin-top: 20px;
+  color: $purple--highlight;
+  &:hover {
+    color: $purple--highlight;
+  }
+  &:active {
+    text-decoration: underline;
+  }
+}
 
