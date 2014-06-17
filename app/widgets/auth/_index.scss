@@ -148,7 +148,7 @@
   }
 
   ._icon {
-    @include icon(25px, 25px, block, '/assets/img/refresh.svg');
+    @include icon(25px, 25px, block, '../img/refresh.svg');
     opacity: 0.3;
     margin-right: 10px;
     margin-top: 1px;

@@ -59,7 +59,7 @@
   margin-top: 2px;
   ._icon {
     @include icon(25px, 25px, block);
-    background-image: url('/assets/img/refresh.svg');
+    background-image: url('../img/refresh.svg');
     margin: 0 auto;
   }
 

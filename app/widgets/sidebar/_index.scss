@@ -38,7 +38,7 @@
 }
 
 .sidebar__logo {
-  @include icon(100px, 38px, block, '/assets/img/logo.svg');
+  @include icon(100px, 38px, block, '../img/logo.svg');
 }
 
 .sidebar__version {
