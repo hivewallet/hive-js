@@ -1,3 +1,4 @@
 <div class="tooltip">
   <p class="tooltip__message">{{message}}</p>
+  <a href="{{link.url}}" target="_blank" class="tooltip__link">{{link.text}}</a>
 </div>
