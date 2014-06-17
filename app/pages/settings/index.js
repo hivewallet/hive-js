@@ -107,10 +107,10 @@ module.exports = function(el){
     showError(data)
   }
 
-
   function toggleDropdown(node, icon){
 
     if(ractive.get('animating')) return;
+
     var elem = ractive.nodes[node]
     var dataString = node + ''
     var state = ractive.get(dataString)
