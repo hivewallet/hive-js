@@ -37,7 +37,6 @@ var Modal = Ractive.extend({
     function dismissModal(){
       var onDismiss = self.get('onDismiss')
       if(onDismiss) onDismiss();
-
       fadeOut(fadeEl, function() {
         appEl.classList.remove('is_hidden')
         htmlEl.classList.remove('prevent_scroll')
