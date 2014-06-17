@@ -84,8 +84,12 @@ module.exports = function (){
     delete data.lat
     delete data.lon
 
-    req.session.tmpSessionID = crypto.randomBytes(16).toString('base64')
-    data.id = req.session.tmpSessionID
+    var id = req.session.tmpSessionID
+    if(!id) {
+      id = crypto.randomBytes(16).toString('base64')
+      req.session.tmpSessionID = id
+    }
+    data.id = id
     geo.save(lat, lon, data, function(err, found) {
       if(err) return res.json(400, err)
       res.json(200, found)

@@ -185,10 +185,10 @@ describe('DELETE /pin', function(){
 })
 
 describe('POST /location', function(){
-  function post(endpoint, data, callback){
+  function post(endpoint, data, cookie, callback){
     request(app)
       .post(endpoint)
-      .set('cookie', null)
+      .set('cookie', cookie)
       .send(data)
       .end(callback)
   }
@@ -200,7 +200,7 @@ describe('POST /location', function(){
       name: "Wei Lu",
       email: "wei@example.com"
     }
-    post('/location', data, function(err, res){
+    post('/location', data, null, function(err, res){
       assert.equal(res.status, 200)
       assert.deepEqual(JSON.parse(res.text), geoRes)
       assert(res.headers['set-cookie'])
@@ -208,10 +208,24 @@ describe('POST /location', function(){
     })
   })
 
+  it('does not regenerate id when there is already one', function(done){
+    var data = { lat: 123.4, lon: 45.6 }
+    var setCookie
+    post('/location', data, null, function(err, res){
+      assert.equal(res.status, 200)
+      setCookie = res.headers['set-cookie']
+      post('/location', data, setCookie, function(err, res){
+        assert.equal(res.status, 200)
+        assert.deepEqual(res.headers['set-cookie'], setCookie)
+        done()
+      })
+    })
+  })
+
   it('returns vad request on geo.save error', function(done){
     var data = { name: 'Fail Me' }
 
-    post('/location', data, function(err, res){
+    post('/location', data, null, function(err, res){
       assert.equal(res.status, 400)
       done()
     })
