@@ -102,7 +102,7 @@ gulp.task('watch', function() {
 
 });
 
-// $ gulp sketch  ------------------------- //
+// $ gulp sketch -------------------------- //
 
 gulp.task('sketch', function() {
   gulp.src('./app/assets-master.sketch')
@@ -111,6 +111,37 @@ gulp.task('sketch', function() {
     }))
     .pipe(gulp.dest('./app/assets/img/'));
 });
+
+gulp.task('cordova-icons', function() {
+  gulp.src('./cordova/assets-cordova.sketch')
+    .pipe(sketch({
+      export: 'artboards',
+      items: [
+        'icon-40',
+        'icon-50',
+        'icon-60',
+        'icon-72',
+        'icon-76',
+        'icon-small',
+        'icon'
+        ]
+    }))
+    .pipe(gulp.dest('./cordova/platforms/ios/Hive/Resources/icons/'));
+});
+
+gulp.task('cordova-splash', function() {
+  gulp.src('./cordova/assets-cordova.sketch')
+    .pipe(sketch({
+      export: 'artboards',
+      items: [
+        'Default',
+        'Default-Landscape',
+        'Default-Portrait',
+        'Default-568h@2x~iphone'
+        ]
+    }))
+    .pipe(gulp.dest('./cordova/platforms/ios/Hive/Resources/splash/'));
+})
 
 // $ gulp build --------------------------- //
 
