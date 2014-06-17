@@ -10,7 +10,13 @@ function satoshiToBtc(satoshi) {
   return satoshi / 100000000
 }
 
+function toDecimal(val, precision) {
+  if(val == undefined || val === '') return;
+  return Math.floor(precision * val) / precision
+}
+
 module.exports = {
   btcToSatoshi: btcToSatoshi,
-  satoshiToBtc: satoshiToBtc
+  satoshiToBtc: satoshiToBtc,
+  toDecimal: toDecimal
 }
