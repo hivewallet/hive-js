@@ -3,21 +3,21 @@
 <div class="settings__toggle" on-click="toggle" data-target="user_settings">
   <span class="_icon ss-icon">user</span>
   <span class="_title">Your Details</span>
-  <span class="_arrow ss-icon">navigatedown</span>
+  <span class="_state">
+    <span id="user_arrow" class="_icon"></span>
+  </span>
 </div>
 
 <div id="user_settings" class="settings__group open">
+  <div class="_content">
 
-  {{#user_preview}}
-    <div>
+    <div id="details-preview">
       <div class="settings__avatar" style="background-image: url('{{emailToAvatar(user.email)}}')"></div>
       <h3 class="settings__name">{{user.name}}</h3>
       <span class="settings__editBtn" on-click="edit-details">Change your details</span>
     </div>
-  {{/user_preview}}
 
-  {{^user_preview}}
-    <div>
+    <div id="details-edit">
       <div class="settings__input-group">
         <label class="_label">Your name
           <input type="text" value="{{user.name}}" class="_input" />
@@ -32,16 +32,20 @@
 
       <div class="settings__btn" on-click="submit-details">Submit</div>
     </div>
-  {{/user_preview}}
 
+  </div>
 </div>
 
 <div class="settings__toggle" on-click="toggle" data-target="security_settings">
   <span class="_icon ss-icon">lock</span>
   <span class="_title">Security</span>
-  <span class="_arrow ss-icon">navigatedown</span>
+  <span class="_state">
+    <span id="security_arrow" class="_icon"></span>
+  </span>
 </div>
 
 <div id="security_settings" class="settings__group">
-  <div class="settings__btn" style="margin-bottom: 20px;" on-click="disable-pin">Disable pin</div>
+  <div class="_content">
+    <div class="settings__btn" style="margin-bottom: 20px;" on-click="disable-pin">Disable pin</div>
+  </div>
 </div>

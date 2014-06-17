@@ -12,7 +12,7 @@
 </div>
 
 {{#qrVisible}}
-  <div class="modal__container" intro-outro="fade">
+  <div id="qr-modal" class="modal__container">
     <div id="qrcontainer" on-click="hide-qr"></div>
   </div>
 {{/qrVisible}}

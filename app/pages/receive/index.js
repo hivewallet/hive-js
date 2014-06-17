@@ -4,12 +4,11 @@ var Ractive = require('hive-ractive')
 var emitter = require('hive-emitter')
 var qrcode = require('hive-qrcode')
 var Hive = require('hive-wallet')
-var transitions = require('hive-transitions')
 var geo = require('hive-geo')
 var showError = require('hive-flash-modal').showError
 var showSetDetails = require('hive-set-details-modal')
-
-Ractive.transitions.fade = transitions.fade;
+var fadeIn = require('hive-transitions/fade.js').fadeIn
+var fadeOut = require('hive-transitions/fade.js').fadeOut
 
 module.exports = function(el){
   var ractive = new Ractive({
@@ -20,10 +19,7 @@ module.exports = function(el){
       qrVisible: false,
       btn_message: 'Turn waggle on',
       connecting: false,
-      broadcasting: false,
-      transitions: {
-        fade: transitions.fade
-      }
+      broadcasting: false
     }
   })
 
@@ -69,6 +65,8 @@ module.exports = function(el){
     ractive.set('qrVisible', true)
     emitter.emit('open-overlay', data)
 
+    fadeIn(ractive.nodes['qr-modal'])
+
     var qr = qrcode('bitcoin:' + getAddress())
     var container = ractive.find('#qrcontainer')
     container.innerHTML = ''
@@ -81,8 +79,10 @@ module.exports = function(el){
   ractive.on('hide-qr', function(){
     var container = ractive.find('#qrcontainer')
     container.classList.remove('is_visible')
-    ractive.set('qrVisible', false)
-    emitter.emit('close-overlay')
+    fadeOut(ractive.nodes['qr-modal'], function() {
+      ractive.set('qrVisible', false)
+      emitter.emit('close-overlay')
+    })
   })
 
   function getAddress(){

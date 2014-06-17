@@ -62,6 +62,7 @@
     "st": "^0.3.1",
     "uglifyify": "~2.4.0",
     "uniqueify": "~1.0.0",
+    "velocity-animate": "git://github.com/haustraliaer/velocity.git",
     "vinyl-source-stream": "^0.1.1",
     "gulp-sketch": "0.0.2"
   },

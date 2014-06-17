@@ -1,6 +1,7 @@
 
 #sidebar {
-  display: block;
+  display: flex;
+  flex-direction: column;
   min-height: 100%;
   width: 100%;
   flex: 1; // take up full width
@@ -49,8 +50,8 @@
 
 .sidebar__logout {
   @include clickbtn;
-  position: absolute;
   display: flex;
+  // align-self: flex-end;
   bottom: 0;
   left: 0;
   width: 100%;

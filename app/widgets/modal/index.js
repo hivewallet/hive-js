@@ -1,7 +1,8 @@
 'use strict';
 
 var Ractive = require('hive-ractive')
-var transitions = require('hive-transitions')
+var fadeIn = require('hive-transitions/fade.js').fadeIn
+var fadeOut = require('hive-transitions/fade.js').fadeOut
 
 var Modal = Ractive.extend({
   el: document.getElementById('general-purpose-overlay'),
@@ -9,20 +10,17 @@ var Modal = Ractive.extend({
   partials: {
     content: require('./content.ract').template,
   },
-  data: {
-    transitions: {
-      fadeNscale: transitions.fadeNscaleTransition,
-      fade: transitions.fade
-    }
-  },
   init: function(){
     var self = this
 
     var htmlEl = document.getElementsByTagName('html')[0]
     var appEl = document.getElementById('app')
+    var fadeEl = self.find('.js__fadeEl')
 
     appEl.classList.add('is_hidden')
     htmlEl.classList.add('prevent_scroll')
+
+    fadeIn(fadeEl)
 
     self.on('cancel', function(event){
       if(!event || event.original.srcElement.classList.contains('_cancel')){
@@ -39,10 +37,11 @@ var Modal = Ractive.extend({
     function dismissModal(){
       var onDismiss = self.get('onDismiss')
       if(onDismiss) onDismiss();
-
-      appEl.classList.remove('is_hidden')
-      htmlEl.classList.remove('prevent_scroll')
-      self.teardown()
+      fadeOut(fadeEl, function() {
+        appEl.classList.remove('is_hidden')
+        htmlEl.classList.remove('prevent_scroll')
+        self.teardown()
+      })
     }
 
     function keydownHandler(event) {

@@ -5,11 +5,10 @@ var getWallet = require('hive-wallet').getWallet
 var emitter = require('hive-emitter')
 var emailToAvatar = require('hive-gravatar').emailToAvatar
 var db = require('hive-db')
-var transitions = require('hive-transitions')
 var openDisablePinModal = require('hive-disable-pin-modal')
 var showError = require('hive-flash-modal').showError
-
-Ractive.transitions.fadeNscale = transitions.fadeNscaleTransition
+var Dropdown = require('hive-transitions/dropdown.js')
+var Profile = require('hive-transitions/profileAnimation.js')
 
 module.exports = function(el){
   var ractive = new Ractive({
@@ -20,15 +19,24 @@ module.exports = function(el){
         name: '',
         email: ''
       },
-      transitions: {
-        fadeNscale: transitions.fadeNscaleTransition
-      },
       editingName: false,
       editingEmail: false,
       emailToAvatar: emailToAvatar,
+      animating: false,
       user_settings: true
     }
   })
+
+  var $previewEl = ractive.nodes['details-preview']
+  var $editEl = ractive.nodes['details-edit']
+  var $initialUserEl = ractive.nodes['user_settings']
+  var $initialSecurityEl = ractive.nodes['security_settings']
+  var $userIcon = ractive.nodes['user_arrow']
+  var $securityIcon = ractive.nodes['security_arrow']
+
+  // animate on load to avoid style property bugs
+  Dropdown.show($initialUserEl, $userIcon, ractive)
+  Dropdown.hide($initialSecurityEl, $securityIcon, ractive)
 
   emitter.on('wallet-ready', function(){
     var wallet = getWallet()
@@ -41,8 +49,14 @@ module.exports = function(el){
 
       ractive.set('user.name', doc.userInfo.firstName)
       ractive.set('user.email', doc.userInfo.email)
+      var hiddenState = {
+          display: 'none',
+          opacity: 0
+        }
       if(ractive.get('user.name')) {
-        ractive.set('user_preview', true);
+        Profile.hide($editEl, ractive)
+      } else {
+        Profile.hide($previewEl, ractive)
       }
     })
   })
@@ -53,14 +67,20 @@ module.exports = function(el){
 
   ractive.on('toggle', function(event){
     event.original.preventDefault();
-    toggleDropdown(event.node.dataset.target);
+    var arrow = event.node.lastChild.childNodes[0]
+    var target = event.node.dataset.target
+    toggleDropdown(target, arrow);
   })
 
   ractive.on('edit-details', function(){
-    ractive.set('user_preview', false)
+    if(ractive.get('animating')) return;
+    Profile.hide($previewEl, ractive, function(){
+      Profile.show($editEl, ractive)
+    })
   })
 
   ractive.on('submit-details', function(){
+    if(ractive.get('animating')) return;
     var details = {
       firstName: ractive.get('user.name'),
       email: ractive.get('user.email')
@@ -69,8 +89,14 @@ module.exports = function(el){
     db.set('userInfo', details, function(err, response){
       if(err) return handleUserError(response)
 
-      ractive.set('user_preview', true)
+      Profile.hide($editEl, ractive, function(){
+        Profile.show($previewEl, ractive)
+      })
     })
+  })
+
+  ractive.on('disable-pin', function(){
+    openDisablePinModal()
   })
 
   function handleUserError(response) {
@@ -81,22 +107,20 @@ module.exports = function(el){
     showError(data)
   }
 
-  ractive.on('disable-pin', function(){
-    openDisablePinModal()
-  })
+  function toggleDropdown(node, icon){
 
-  function toggleDropdown(node){
+    if(ractive.get('animating')) return;
+
     var elem = ractive.nodes[node]
     var dataString = node + ''
     var state = ractive.get(dataString)
-    var classes = elem.classList
 
     if(state) {
       ractive.set(dataString, false)
-      classes.remove('open')
+      Dropdown.hide(elem, icon, ractive)
     } else {
       ractive.set(dataString, true)
-      classes.add('open')
+      Dropdown.show(elem, icon, ractive)
     }
   }
 

@@ -3,15 +3,12 @@
 var Ractive = require('hive-ractive')
 var getWallet = require('hive-wallet').getWallet
 var emailToAvatar = require('hive-gravatar').emailToAvatar
-var transitions = require('hive-transitions')
 var emitter = require('hive-emitter')
 var geo = require('hive-geo')
 var db = require('hive-db')
 var showError = require('hive-flash-modal').showError
-
-Ractive.transitions.fade = transitions.fade;
-Ractive.transitions.dropdown = transitions.dropdown;
-Ractive.transitions.pulse = transitions.pulse;
+var fadeIn = require('hive-transitions/fade.js').fadeIn
+var fadeOut = require('hive-transitions/fade.js').fadeOut
 
 module.exports = function(el){
   var nearbys = []
@@ -21,11 +18,6 @@ module.exports = function(el){
     template: require('./index.ract').template,
     data: {
       exchangeRates: {},
-      transitions: {
-        fade: transitions.fade,
-        dropdown: transitions.dropdown,
-        pulse: transitions.pulse
-      },
       nearbys: nearbys,
       searching: true,
       emailToAvatar: emailToAvatar
@@ -34,8 +26,8 @@ module.exports = function(el){
 
   emitter.on('open-overlay', function(data){
     if(data.overlay === 'geo') {
+      fadeIn(ractive.find('.js__fadeEl'))
       ractive.set('searching', true)
-      ractive.set('visible', true)
       ractive.set('search_message', 'Searching your area for other Hive Web users')
       ractive.fire('search-nearby')
     }
@@ -68,13 +60,15 @@ module.exports = function(el){
   ractive.on('close-geo', function(){
     clearTimeout(xhr_timeout)
     clearInterval(oval_interval)
-    ractive.set('nearbys', [])
-    ractive.set('oval_visible', false)
-    ractive.set('visible', false)
-    ractive.set('searching', false)
-    ractive.set('results', false)
-    emitter.emit('close-overlay')
-    geo.remove()
+    fadeOut(ractive.find('.js__fadeEl'), function(){
+      ractive.set('nearbys', [])
+      ractive.set('oval_visible', false)
+      ractive.set('searching', false)
+      ractive.set('results', false)
+      emitter.emit('close-overlay')
+      geo.remove()
+    })
+
   })
 
   window.onbeforeunload = function() {
