@@ -1,6 +1,6 @@
 'use strict'
 
-var Velocity = require('velocity-animate')
+var Velocity = require('./index.js')
 
 function fadeAnimation(el, props, options, callback) {
   Velocity.animate(el, props, {

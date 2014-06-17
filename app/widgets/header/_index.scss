@@ -17,6 +17,10 @@
   @include clickbtn;
   font-weight: $light;
   display: flex;
+  justify-content: center;
+  margin-right: 10px;
+  margin-left: 10px;
+  width: 100%;
 
   ._amount {
     font-size: 32px;

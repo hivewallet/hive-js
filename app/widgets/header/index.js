@@ -6,6 +6,7 @@ var sync = require('hive-wallet').sync
 var getWallet = require('hive-wallet').getWallet
 var satoshiToBtc = require('hive-convert').satoshiToBtc
 var showError = require('hive-flash-modal').showError
+var db = require('hive-db')
 
 module.exports = function(el){
   var ractive = new Ractive({
@@ -13,7 +14,9 @@ module.exports = function(el){
     template: require('./index.ract').template,
     data: {
       satoshiToBtc: satoshiToBtc,
-      menuOpen: false
+      menuOpen: false,
+      exchangeRates: {},
+      bitcoinToFiat: bitcoinToFiat
     }
   })
 
@@ -21,6 +24,10 @@ module.exports = function(el){
     var wallet = getWallet();
     ractive.set('bitcoinBalance', wallet.getBalance())
     ractive.set('denomination', wallet.denomination)
+    db.get('systemInfo', function(err, info){
+      if(err) return console.error(err);
+      ractive.set('fiatCurrency', info.preferredCurrency)
+    })
   })
 
   emitter.on('update-balance', function() {
@@ -52,12 +59,27 @@ module.exports = function(el){
   })
 
   ractive.on('toggle-currencies', function(){
-    var data = {
-      overlay: 'currency',
-      balance: ractive.get('bitcoinBalance')
+    if(ractive.get('showFiat')) {
+      ractive.set('showFiat', false)
+    } else {
+      ractive.set('showFiat', true)
     }
-    emitter.emit('open-overlay', data)
   })
+
+  emitter.on('preferred-currency-changed', function(currency){
+    ractive.set('fiatCurrency', currency)
+  })
+
+  emitter.on('ticker', function(rates){
+    ractive.set('exchangeRates', rates)
+  })
+
+  function bitcoinToFiat(amount, exchangeRate){
+    if(amount == undefined) return;
+
+    var btc = satoshiToBtc(amount)
+    return (btc * exchangeRate).toFixed(2)
+  }
 
   ractive.toggleIcon = toggleIcon
 

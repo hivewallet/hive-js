@@ -14,10 +14,19 @@
     {{/menuOpen}}
   </div>
 
-  <div class="header__balance" on-click="toggle-currencies">
-    <span class="_amount">{{satoshiToBtc(bitcoinBalance)}}</span>
-    <span class="_currency">{{denomination}}</span>
-  </div>
+  {{^showFiat}}
+    <div class="header__balance" on-click="toggle-currencies">
+      <span class="_amount">{{satoshiToBtc(bitcoinBalance)}}</span>
+      <span class="_currency">{{denomination}}</span>
+    </div>
+  {{/showFiat}}
+
+  {{#showFiat}}
+    <div class="header__balance" on-click="toggle-currencies">
+      <span class="_amount">{{bitcoinToFiat(bitcoinBalance, exchangeRates[fiatCurrency])}}</span>
+      <span class="_currency">{{fiatCurrency}}</span>
+    </div>
+  {{/showFiat}}
 
   <div class='header__refresh {{#updating_transactions}}is_updating{{/updating_transactions}}' on-click="sync">
     <span class="_icon"></span>
