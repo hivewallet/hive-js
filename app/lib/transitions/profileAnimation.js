@@ -1,6 +1,6 @@
 'use strict'
 
-var Velocity = require('velocity-animate')
+var Velocity = require('./index.js')
 
 function animateProfile(el, props, display, context, callback) {
   context.set('animating', true)
