@@ -52,11 +52,11 @@ module.exports = function(el){
   })
 
   ractive.on('toggle-currencies', function(){
-    var data = {
-      overlay: 'currency',
-      balance: ractive.get('bitcoinBalance')
+    if(ractive.get('showFiat')) {
+      ractive.set('showFiat', false)
+    } else {
+      ractive.set('showFiat', true)
     }
-    emitter.emit('open-overlay', data)
   })
 
   ractive.toggleIcon = toggleIcon
