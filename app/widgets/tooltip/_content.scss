@@ -16,14 +16,15 @@
 }
 
 .tooltip__link {
-  display: block;
-  margin-top: 20px;
-  color: $purple--highlight;
-  &:hover {
+  padding-top: 20px;
+  a {
     color: $purple--highlight;
-  }
-  &:active {
-    text-decoration: underline;
+    &:hover {
+      color: $purple--highlight;
+    }
+    &:active {
+      text-decoration: underline;
+    }
   }
 }
 
