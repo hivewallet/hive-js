@@ -7,7 +7,8 @@ var emailToAvatar = require('hive-gravatar').emailToAvatar
 var db = require('hive-db')
 var openDisablePinModal = require('hive-disable-pin-modal')
 var showError = require('hive-flash-modal').showError
-var Velocity = require('velocity-animate')
+var Dropdown = require('hive-transitions/dropdown.js')
+var Profile = require('hive-transitions/profileAnimation.js')
 
 module.exports = function(el){
   var ractive = new Ractive({
@@ -34,8 +35,8 @@ module.exports = function(el){
   var $securityIcon = ractive.nodes['security_arrow']
 
   // animate on load to avoid style property bugs
-  showDropdown($initialUserEl, $userIcon)
-  hideDropdown($initialSecurityEl, $securityIcon)
+  Dropdown.show($initialUserEl, $userIcon, ractive)
+  Dropdown.hide($initialSecurityEl, $securityIcon, ractive)
 
   emitter.on('wallet-ready', function(){
     var wallet = getWallet()
@@ -53,9 +54,9 @@ module.exports = function(el){
           opacity: 0
         }
       if(ractive.get('user.name')) {
-        hideDetails($editEl)
+        Profile.hide($editEl, ractive)
       } else {
-        hideDetails($previewEl)
+        Profile.hide($previewEl, ractive)
       }
     })
   })
@@ -73,8 +74,8 @@ module.exports = function(el){
 
   ractive.on('edit-details', function(){
     if(ractive.get('animating')) return;
-    hideDetails($previewEl, function(){
-      showDetails($editEl)
+    Profile.hide($previewEl, ractive, function(){
+      Profile.show($editEl, ractive)
     })
   })
 
@@ -88,8 +89,8 @@ module.exports = function(el){
     db.set('userInfo', details, function(err, response){
       if(err) return handleUserError(response)
 
-      hideDetails($editEl, function(){
-        showDetails($previewEl)
+      Profile.hide($editEl, ractive, function(){
+        Profile.show($previewEl, ractive)
       })
     })
   })
@@ -106,32 +107,6 @@ module.exports = function(el){
     showError(data)
   }
 
-  function showDetails(el, callback){
-    animateDetails(el, {
-      scale: [1.0, 'spring'],
-      opacity: 1.0
-    }, 'block', callback)
-  }
-
-  function hideDetails(el, callback){
-    animateDetails(el, {
-      scale: 0.2,
-      opacity: 0
-    }, 'none', callback)
-  }
-
-  function animateDetails(el, props, display, callback) {
-    ractive.set('animating', true)
-    Velocity.animate(el, props, {
-      easing: "ease",
-      duration: 300,
-      complete: function(){
-        ractive.set('animating', false)
-        if(callback) callback()
-      },
-      display: display
-    })
-  }
 
   function toggleDropdown(node, icon){
 
@@ -142,65 +117,11 @@ module.exports = function(el){
 
     if(state) {
       ractive.set(dataString, false)
-      hideDropdown(elem, icon)
+      Dropdown.hide(elem, icon, ractive)
     } else {
       ractive.set(dataString, true)
-      showDropdown(elem, icon)
+      Dropdown.show(elem, icon, ractive)
     }
-  }
-
-  function showDropdown(el, icon){
-    var props = {
-      icon: {rotateZ: '180deg'},
-      container: {maxHeight: '500px'},
-      content: {translateY: 0}
-    }
-    var options = {
-      display: 'block'
-    }
-    animateDropdown(el, icon, props, options)
-  }
-
-  function hideDropdown(el, icon){
-    var props = {
-      icon: {rotateZ: '0deg'},
-      container: {maxHeight: '0px'},
-      content: {translateY: '-100%'}
-    }
-    var options = {
-      display: 'none',
-      contentDelay: 200
-    }
-    animateDropdown(el, icon, props, options)
-  }
-
-  function animateDropdown(el, icon, props, options) {
-
-    ractive.set('animating', true)
-    var childEl = el.childNodes[0]
-
-    // arrow
-    Velocity.animate(icon, props.icon, {
-      easing: "ease",
-      duration: 300
-    })
-
-    // container
-    Velocity.animate(el, props.container, {
-      easing: "linear",
-      duration: 400,
-      display: options.display
-    })
-
-    // content
-    Velocity.animate(childEl, props.content, {
-      easing: "ease",
-      duration: 300,
-      delay: options.contentDelay || undefined,
-      complete: function(){
-        ractive.set('animating', false)
-      }
-    })
   }
 
   return ractive
