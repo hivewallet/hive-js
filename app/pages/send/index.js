@@ -45,11 +45,14 @@ module.exports = function(el){
     validateSend(function(err, tx){
       if(err) return showError({title: 'Uh oh!', message: err.message});
 
+      var network = getWallet().getMasterKey().network
+      var fee = network.estimateFee(tx)
+
       showConfirmation({
         to: ractive.get('to'),
         amount: ractive.get('value'),
         denomination: ractive.get('denomination'),
-        fee: satoshiToBtc(tx.estimateFee())
+        fee: satoshiToBtc(fee)
       })
     })
   })

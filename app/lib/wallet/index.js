@@ -10,7 +10,6 @@ var AES = require('hive-aes')
 var denominations = require('hive-denomination')
 var ThirdParty = require('hive-thrid-party-api')
 var API = ThirdParty.Blockr
-var txToHiveTx = ThirdParty.txToHiveTx
 var uniqueify = require('uniqueify')
 
 var Transaction = Bitcoin.Transaction
@@ -30,14 +29,13 @@ function sendTx(tx, callback) {
     processTx(tx)
     db.addPendingTx(txHex, function(err){
       if(err) { console.log("failed to save pending transaction to local db") }
-      callback(null, txToHiveTx(tx))
+      callback(null, api.txToHiveTx(tx))
     })
   })
 }
 
 function processTx(tx) {
-
-  wallet.processTx(tx)
+  wallet.processPendingTx(tx)
 
   if(addressUsed(wallet.currentAddress)){ // in case one sends to him/her self
     wallet.currentAddress = nextReceiveAddress()
@@ -47,39 +45,23 @@ function processTx(tx) {
   }
 }
 
-function processLocalPendingTxs(callback) {
+function processLocalPendingTxs(utxoIds, callback) {
   db.getPendingTxs(function(err, txs){
     if(err) return callback(err);
-
-    var pendingTxs = []
-    var hiveTxs = []
-    txs.forEach(function(txHex){
-      var tx = Transaction.fromHex(txHex)
-      hiveTxs.push(txToHiveTx(tx))
-
-      tx.ins.forEach(function(txIn, i){
-        var op = txIn.outpoint
-        var o = wallet.outputs[op.hash+':'+op.index]
-
-        if(o) { // not yet spent for real
-          pendingTxs.push(tx)
-        }
+    var txObjs = txs
+      .map(Transaction.fromHex)
+      .filter(function(tx){
+        return utxoIds.indexOf(tx.getId()) > -1
       })
-    })
 
-    pendingTxs = uniqueify(pendingTxs)
-    pendingTxs.forEach(processTx)
+    txObjs.forEach(processTx)
 
-    // one or more pending txs are confirmed
-    if(pendingTxs.length !== txs.length) {
-      db.setPendingTxs(pendingTxs, function(err){
-        if(err) return callback(err);
-        callback(null, hiveTxs)
-      })
-    }
-
-    callback(null, hiveTxs)
+    callback(null, txObjs.map(api.txToHiveTx.bind(api)))
   })
+
+  function ignoreError(err){
+    if(err) console.error("failed to remove pending txs from db", err)
+  }
 }
 
 function addressUsed(address){
@@ -186,22 +168,28 @@ function sync(done) {
   var pending = 3
   var transactions = []
 
-  api.getTransactions(wallet.addresses, function(err, transactions){
+  api.getTransactions(wallet.addresses, function(err, txs){
     if(err) return done(err);
-    maybeDone(transactions)
+    maybeDone(txs)
   })
 
   setUnspentOutputs(function(err){
     if(err) return done(err);
-    processLocalPendingTxs(function(err, transactions){
+
+    var unspentTxIds = wallet.getUnspentOutputs().map(function(uo){
+      return uo.hash
+    })
+
+    processLocalPendingTxs(unspentTxIds, function(err, txs){
       if(err) return done(err);
-      maybeDone(transactions)
+
+      maybeDone(txs)
     })
   })
 
-  fetchChangeAddressSentTransactions(function(err, transactions){
+  fetchChangeAddressSentTransactions(function(err, txs){
     if(err) return done(err)
-    maybeDone(transactions)
+    maybeDone(txs)
   })
 
   function maybeDone(txs){
@@ -223,9 +211,16 @@ function fetchChangeAddressSentTransactions(callback){
 }
 
 function consolidateTransactions(transactions){
-  return uniqueify(transactions).sort(function(tx1, tx2){
+  var sorted = transactions.sort(function(tx1, tx2){
     return tx1.timestamp > tx2.timestamp ? -1 : 1
   })
+
+  sorted.forEach(function(tx){
+    if(tx.pending) tx.timestamp = null
+    return tx
+  })
+
+  return uniqueify(sorted)
 }
 
 function defaultCallback(err){ if(err) console.error(err) }

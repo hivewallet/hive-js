@@ -3,9 +3,10 @@
 var xhr = require('hive-xhr')
 var Address = require('./address')
 var Transaction = require('./transaction')
-var Script = require('bitcoinjs-lib').Script
 var Blockchain = require('./blockchain')
 var btcToSatoshi = require('hive-convert').btcToSatoshi
+var Bitcoin = require('bitcoinjs-lib')
+
 
 var apiRoot = null;
 
@@ -16,7 +17,8 @@ var networks = {
 }
 
 function Blockr(network){
-  apiRoot = networks[network] || networks.bitcoin
+  this.network = network || 'bitcoin'
+  apiRoot = networks[network]
 }
 
 function listAddresses(addresses, onAddresses){
@@ -155,6 +157,7 @@ function parseTransactions(apiTxs, callback){
     txs.forEach(function(tx){
       var firstOut = tx.vouts[0]
       var id = tx.tx
+
       result[id].toAddress = firstOut.address
       if(result[id].amount < 0) {
         result[id].amount = -firstOut.amount
@@ -199,8 +202,24 @@ function makeRequest(endpoint, params, callback){
   }, callback)
 }
 
+function txToHiveTx(tx) {
+  var result = new Transaction(tx.getId())
+  var out = tx.outs[0]
+  result.timestamp = (new Date()).getTime()
+  result.amount = -out.value
+  result.direction = 'outgoing'
+
+  var network = Bitcoin.networks[this.network]
+  result.toAddress = Bitcoin.Address.fromOutputScript(out.script, network).toString()
+  result.pending = true
+
+  return result
+}
+
+
 Blockr.prototype.listAddresses = listAddresses
 Blockr.prototype.getUnspent = getUnspent
 Blockr.prototype.sendTx = sendTx
 Blockr.prototype.getTransactions = getTransactions
+Blockr.prototype.txToHiveTx = txToHiveTx
 module.exports = Blockr

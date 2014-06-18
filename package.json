@@ -34,7 +34,7 @@
     "aperture": "^1.0.0",
     "arrival": "~1.0.0",
     "big.js": "^2.5.0",
-    "bitcoinjs-lib": "git://github.com/bitcoinjs/bitcoinjs-lib.git#ad9a73a81b68499fe2dc07bd30c1c546e81f504a",
+    "bitcoinjs-lib": "git://github.com/weilu/bitcoinjs-lib.git#utxo",
     "bl": "^0.7.0",
     "browserify": "~4.1.9",
     "browserify-zepto": "~1.1.2",
