@@ -56,6 +56,10 @@ function processLocalPendingTxs(utxoIds, callback) {
 
     txObjs.forEach(processTx)
 
+    db.setPendingTxs(txObjs.map(function(tx){
+      return tx.toHex()
+    }), ignoreError)
+
     callback(null, txObjs.map(api.txToHiveTx.bind(api)))
   })
 
