@@ -136,7 +136,10 @@ function parseTransactions(apiTxs, callback){
     if(address.txs.length === 0) return;
 
     address.txs.forEach(function(tx){
-      result[tx.tx] = tx
+      var id = tx.tx
+      if(result[id] && result[id].amount < 0) return; // tx keyed by sent addr takes precedence e.g. change1 -> dest + change2 we want change1
+
+      result[id] = tx
     })
   })
 
