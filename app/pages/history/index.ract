@@ -4,7 +4,7 @@
     <h3 class="_title">Your transaction history</h3>
   {{/transactions.length}}
   {{#transactions}}
-    <div class="transactions__item">
+    <div class="transactions__item" title="{{id}}">
 
       <div class="_detail">
 
