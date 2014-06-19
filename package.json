@@ -51,7 +51,6 @@
     "glob": "^3.2.9",
     "gulp": "~3.6.0",
     "gulp-autoprefixer": "0.0.6",
-    "gulp-browserify": "~0.5.0",
     "gulp-concat": "~2.1.7",
     "gulp-sass": "~0.7.1",
     "gulp-sketch": "0.0.2",
