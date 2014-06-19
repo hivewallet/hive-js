@@ -39,6 +39,13 @@ gulp.task('scripts', function(){
     .pipe(refresh(lrserver));
 });
 
+gulp.task('loader', function(){
+  var bundler = browserify('./app/loader/index.js')
+  bundle(bundler, './loader.js')
+    .pipe(gulp.dest('./build/assets/js/'))
+    .pipe(refresh(lrserver));
+});
+
 gulp.task('html', function(){
   gulp.src('./app/index.html')
     .pipe(gulp.dest('./build/'))
@@ -81,7 +88,7 @@ function bundle(bundler, outFilename){
 gulp.task('watch', function() {
 
   gulp.watch(['app/**/*.scss'], ['styles']);
-  gulp.watch(['app/**/*.js', 'app/**/*.ract', '!app/**/node_modules/**/*'], ['scripts', 'tests']);
+  gulp.watch(['app/**/*.js', 'app/**/*.ract', '!app/**/node_modules/**/*'], ['loader', 'scripts', 'tests']);
   gulp.watch('app/assets/**/*', ['assets']);
   gulp.watch('app/index.html', ['html']);
   gulp.watch(['app/**/test/*.js', '!app/**/node_modules/**/*'], ['tests']);
@@ -100,8 +107,8 @@ gulp.task('sketch', function() {
 
 // $ gulp build --------------------------- //
 
-gulp.task('build', ['html', 'scripts', 'styles', 'assets', 'tests']);
+gulp.task('build', ['html', 'loader', 'scripts', 'styles', 'assets', 'tests']);
 
 // $ gulp ---------------------------------- //
 
-gulp.task('default', ['scripts', 'styles', 'html', 'assets', 'tests', 'serve', 'watch']);
+gulp.task('default', ['loader', 'scripts', 'styles', 'html', 'assets', 'tests', 'serve', 'watch']);

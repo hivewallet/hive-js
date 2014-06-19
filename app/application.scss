@@ -40,10 +40,12 @@
 @import "widgets/tooltip/_content";
 @import "widgets/geo-overlay/_index";
 @import "widgets/confirm-overlay/_index";
-@import "widgets/loader/_index";
 
 // pages
 @import "pages/send/_index";
 @import "pages/receive/_index";
 @import "pages/history/_index";
 @import "pages/settings/_index";
+
+// loader
+@import "loader/_index";
