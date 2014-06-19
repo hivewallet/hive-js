@@ -5,11 +5,11 @@ var emitter = require('hive-emitter')
 
 var defaults = {
   error: {
-    icon: 'error_temp',
+    icon: 'error',
     title: 'Whoops!'
   },
   info: {
-    icon: 'info_temp',
+    icon: 'success',
     title: 'Just saying...'
   }
 }
