@@ -10,9 +10,6 @@ var showError = require('hive-flash-modal').showError
 var initGeoOverlay = require('hive-geo-overlay')
 var $ = require('browserify-zepto')
 
-require('browsernizr/test/storage/localstorage')
-var Modernizr = require('browsernizr')
-
 var appEl = document.getElementById('app')
 var frame = initFrame(appEl)
 var auth = null
@@ -22,12 +19,6 @@ var _app = $(appEl)
 fastclick(document.body)
 
 initGeoOverlay(document.getElementById('geo-overlay'))
-
-if(!Modernizr.localstorage) {
-  showError({
-    message: 'Your browser does not support localStorage, try switching to public mode'
-  })
-}
 
 walletExists(function(exists){
   auth = exists ? initAuth.pin(null, { userExists: true }) : initAuth.choose()

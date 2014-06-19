@@ -40,6 +40,10 @@ gulp.task('scripts', function(){
 });
 
 gulp.task('loader', function(){
+  var bundler = browserify('./app/loader/nope.js')
+  bundle(bundler, './nope.js')
+    .pipe(gulp.dest('./build/assets/js/'));
+
   var bundler = browserify('./app/loader/index.js')
   bundle(bundler, './loader.js')
     .pipe(gulp.dest('./build/assets/js/'))
