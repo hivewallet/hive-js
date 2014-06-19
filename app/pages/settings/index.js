@@ -10,7 +10,7 @@ var showError = require('hive-flash-modal').showError
 var Dropdown = require('hive-transitions/dropdown.js')
 var Profile = require('hive-transitions/profileAnimation.js')
 var showTooltip = require('hive-tooltip')
-var $ = require('browserify-zepto')
+var getNetwork = require('hive-network')
 
 module.exports = function(el){
   var ractive = new Ractive({
@@ -21,10 +21,22 @@ module.exports = function(el){
         name: '',
         email: ''
       },
+      tokens: [
+        'bitcoin',
+        'litecoin'
+      ],
       editingName: false,
       editingEmail: false,
       animating: false,
-      user_settings: true
+      user_settings: true,
+      capitalize: function(str){
+        return str.replace(/^.|\s\S/g, function(a) {
+         return a.toUpperCase()
+        })
+      },
+      getNetworkClass: function(elId){
+        return getNetwork() === elId ? "current" : ""
+      }
     }
   })
 
@@ -133,11 +145,11 @@ module.exports = function(el){
 
   ractive.on('switch-token', function(event) {
 
-    var el = event.node
-    if($(el).hasClass('current')) return;
+    var token = event.node.id
+
+    if(token === getNetwork()) return;
 
     var host = window.location.host
-    var token = el.id
     var url
 
     if(token === 'bitcoin') {

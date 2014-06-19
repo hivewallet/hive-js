@@ -49,14 +49,12 @@
 <div id="token_settings" class="settings__group">
   <div class="_content">
     <div class="tokens">
-      <div id="bitcoin" on-click="switch-token" class="token__item current">
-        <span class="_icon i-bitcoin-token"></span>
-        <h3 class="_title">Bitcoin</h3>
+    {{#tokens}}
+      <div id="{{.}}" on-click="switch-token" class="token__item {{getNetworkClass(.)}}">
+        <span class="_icon i-{{.}}-token"></span>
+        <h3 class="_title">{{capitalize(.)}}</h3>
       </div>
-      <div id="litecoin" on-click="switch-token" class="token__item">
-        <span class="_icon i-litecoin-token"></span>
-        <h3 class="_title">Litecoin</h3>
-      </div>
+    {{/tokens}}
     </div>
   </div>
 </div>
