@@ -22,7 +22,6 @@ module.exports = function(el){
       },
       editingName: false,
       editingEmail: false,
-      emailToAvatar: emailToAvatar,
       animating: false,
       user_settings: true
     }
@@ -50,6 +49,10 @@ module.exports = function(el){
 
       ractive.set('user.name', doc.userInfo.firstName)
       ractive.set('user.email', doc.userInfo.email)
+      ractive.set('user.avatarIndex', doc.userInfo.avatarIndex)
+
+      setAvatar()
+
       var hiddenState = {
           display: 'none',
           opacity: 0
@@ -92,9 +95,17 @@ module.exports = function(el){
 
   ractive.on('submit-details', function(){
     if(ractive.get('animating')) return;
+
+    var email = ractive.get('user.email')
+
     var details = {
       firstName: ractive.get('user.name'),
-      email: ractive.get('user.email')
+      email: email
+    }
+
+    var avatarIndex = ractive.get('user.avatarIndex')
+    if(blank(email) && avatarIndex == undefined) {
+      details.avatarIndex = randAvatarIndex()
     }
 
     db.set('userInfo', details, function(err, response){
@@ -106,9 +117,24 @@ module.exports = function(el){
     })
   })
 
+  function randAvatarIndex(){
+    return Math.floor(Math.random() * 10)
+  }
+
   ractive.on('disable-pin', function(){
     openDisablePinModal()
   })
+
+  function setAvatar(){
+    var email = ractive.get('user.email')
+    var avatar = "/assets/img/avatar_" + ractive.get('user.avatarIndex') + ".png"
+
+    if(!blank(email)){
+      avatar = emailToAvatar(email)
+    }
+
+    ractive.set('avatar', avatar)
+  }
 
   function handleUserError(response) {
     var data = {
@@ -133,6 +159,10 @@ module.exports = function(el){
       ractive.set(dataString, true)
       Dropdown.show(elem, icon, ractive)
     }
+  }
+
+  function blank(str) {
+    return (str == undefined || str.trim() === '')
   }
 
   return ractive

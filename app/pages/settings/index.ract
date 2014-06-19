@@ -12,7 +12,7 @@
   <div class="_content">
 
     <div id="details-preview">
-      <div class="settings__avatar" style="background-image: url('{{emailToAvatar(user.email)}}')"></div>
+      <div class="settings__avatar" style="background-image: url('{{avatar}}')"></div>
       <h3 class="settings__name">{{user.name}}</h3>
       <span class="settings__editBtn" on-click="edit-details">Change your details</span>
     </div>

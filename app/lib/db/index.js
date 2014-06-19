@@ -122,7 +122,8 @@ function initializeRecord(){
     userInfo: {
       firstName: '',
       lastName: '',
-      email: ''
+      email: '',
+      avatarIndex: randAvatarIndex()
     }
   }
 
@@ -136,6 +137,10 @@ function initializeRecord(){
 
     emitter.emit('db-ready')
   })
+}
+
+function randAvatarIndex(){
+  return Math.floor(Math.random() * 10)
 }
 
 function setupPulling(options){
