@@ -10,6 +10,7 @@ var showError = require('hive-flash-modal').showError
 var Dropdown = require('hive-transitions/dropdown.js')
 var Profile = require('hive-transitions/profileAnimation.js')
 var showTooltip = require('hive-tooltip')
+var $ = require('browserify-zepto')
 
 module.exports = function(el){
   var ractive = new Ractive({
@@ -131,9 +132,13 @@ module.exports = function(el){
   }
 
   ractive.on('switch-token', function(event) {
-    var url
+
+    var el = event.node
+    if($(el).hasClass('current')) return;
+
     var host = window.location.host
-    var token = event.node.id
+    var token = el.id
+    var url
 
     if(token === 'bitcoin') {
       url = 'http://' + host + '/'
