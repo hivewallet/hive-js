@@ -3,6 +3,7 @@
 var Ractive = require('hive-ractive')
 var emitter = require('hive-emitter')
 var satoshiToBtc = require('hive-convert').satoshiToBtc
+var getAvatarByIndex = require('hive-avatar').getAvatarByIndex
 var strftime = require('strftime')
 
 module.exports = function(el){
@@ -32,8 +33,8 @@ module.exports = function(el){
       truncate: function(amount) {
         return amount.toFixed(5)
       },
-      set_avatar: function(index) {
-        return Math.round(((index / 10) % 1) * 10)
+      getAvatarByIndex: function(index) {
+        return getAvatarByIndex(Math.round(((index / 10) % 1) * 10))
       },
       satoshiToBtc: satoshiToBtc
     }

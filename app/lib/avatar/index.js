@@ -24,8 +24,20 @@ function getAvatarByIndex(index) {
   return "/assets/img/avatar_" + index + ".png"
 }
 
+function getAvatar(email, avatarIndex){
+  if(!blank(email)){
+    return emailToAvatar(email)
+  }
+  return getAvatarByIndex(avatarIndex)
+}
+
+function blank(str) {
+  return (str == undefined || str.trim() === '')
+}
+
 module.exports = {
   emailToAvatar: emailToAvatar,
   randAvatarIndex: randAvatarIndex,
-  getAvatarByIndex: getAvatarByIndex
+  getAvatarByIndex: getAvatarByIndex,
+  getAvatar: getAvatar
 }

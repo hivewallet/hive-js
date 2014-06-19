@@ -122,13 +122,8 @@ module.exports = function(el){
   })
 
   function setAvatar(){
-    var email = ractive.get('user.email')
-    var avatar = Avatar.getAvatarByIndex(ractive.get('user.avatarIndex'))
-
-    if(!blank(email)){
-      avatar = Avatar.emailToAvatar(email)
-    }
-
+    var avatar = Avatar.getAvatar(ractive.get('user.email'),
+                                  ractive.get('user.avatarIndex'))
     ractive.set('avatar', avatar)
   }
 
