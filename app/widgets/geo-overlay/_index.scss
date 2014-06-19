@@ -77,9 +77,9 @@
   }
 
   ._avatar {
-    width: 70px;
-    height: 70px;
-    -webkit-mask-image: url(../img/hex.png);
+    @include icon(70px, 70px, block);
+    -webkit-mask-image: url(../img/hex-large.svg);
+    -webkit-mask-size: 70px 70px;
   }
 
   ._name {
