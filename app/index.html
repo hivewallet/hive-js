@@ -13,7 +13,13 @@
 <body>
 
   <div id="app"></div>
-  <div id="auth" class="auth__modal"></div>
+  <div id="auth" class="auth__modal current">
+    <div id="loader">
+      <div class="rabbit"></div>
+      <div class="clouds"></div>
+      Loading it, mate. Wait up.
+    </div>
+  </div>
   <!-- overlays -->
   <div id="geo-overlay" class="z-1000"></div>
   <div id="general-purpose-overlay" class="z-1000"></div>
@@ -25,7 +31,7 @@
     //monkey patch URL for safari 6
     URL = window.URL || window.webkitURL
   </script>
-  <script src='assets/js/application.js'></script>
+  <script async defer src='assets/js/application.js'></script>
 </body>
 </html>
 
