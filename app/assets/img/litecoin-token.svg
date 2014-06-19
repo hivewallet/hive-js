@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="100px" height="100px" viewBox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch Beta 3.0.4 (7897) - http://www.bohemiancoding.com/sketch -->
+    <title>litecoin</title>
+    <desc>Created with Sketch Beta.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="litecoin" sketch:type="MSArtboardGroup">
+            <rect id="Rectangle-156" fill="#D8D8D8" sketch:type="MSShapeGroup" x="0" y="0" width="100" height="100"></rect>
+            <path id="symbol" fill="#FFFFFF" sketch:type="MSShapeGroup"></path>
+            <path id="symbol" fill="#720606" sketch:type="MSShapeGroup"></path>
+            <path d="M30.12341,73.446852 L34.1547705,57.767091 L28.4937111,60.0194327 L29.9518628,53.6089228 L35.8702429,51.44321 L42.5605857,25.5412849 L57.3994229,25.5412849 L52.338779,45.3792142 L58.9433479,42.866987 L57.2278756,49.1908687 L50.6233065,51.7030955 L47.4496823,64.0043442 L71.6378435,64.0043456 L69.2361821,73.4468505 L30.12341,73.446852 Z" id="Path-228" fill="#FFFFFF" sketch:type="MSShapeGroup"></path>
+        </g>
+    </g>
+</svg>

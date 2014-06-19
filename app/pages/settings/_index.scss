@@ -140,9 +140,39 @@
 .tokens {
   display: flex;
   justify-content: space-between;
+  padding-top: 20px;
 }
 
 .token__item {
   @include clickbtn;
   width: 45%;
+  text-align: center;
+  opacity: 0.8;
+
+  ._icon {
+    margin-bottom: 10px;
+    background-color: $yellow;
+    border-radius: 50%;
+  }
+  ._title {
+    font-size: 18px;
+  }
+
+  &.current {
+    opacity: 1;
+    ._icon {
+      border: 5px solid $blue;
+    }
+  }
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.i-bitcoin-token {
+  @include icon(80px, 80px, inline-block, '/assets/img/bitcoin-token.svg');
+}
+.i-litecoin-token {
+  @include icon(80px, 80px, inline-block, '/assets/img/litecoin-token.svg');
 }
