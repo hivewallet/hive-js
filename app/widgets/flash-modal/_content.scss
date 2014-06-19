@@ -23,8 +23,8 @@
 }
 
 .flash__heading {
+  @extend .jigsaw-bold;
   font-size: 24px;
-  font-weight: $bold;
   padding-bottom: 10px;
 
   &.error {

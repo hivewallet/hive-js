@@ -30,7 +30,7 @@
 
   ._input {
     @extend .generic_box;
-    font-weight: $light;
+    @extend .jigsaw-light;
     font-family: 'jigsaw', sans-serif;
     margin-top: 5px;
     padding-left: 10px;
@@ -57,13 +57,13 @@
 
   ._currency {
     @include noselect;
+    @extend .jigsaw-light;
     position: absolute;
     z-index: 500;
     cursor: pointer;
     display: block;
     text-align: right;
     font-size: 18px;
-    font-weight: $light;
     right: 10px;
     top: 9px;
     color: $grey;
@@ -71,7 +71,7 @@
 
   ._input {
     @extend .generic_box;
-    font-weight: $light;
+    @extend .jigsaw-light;
     font-family: 'jigsaw', sans-serif;
     padding-left: 10px;
     height: auto;

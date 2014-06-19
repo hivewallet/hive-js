@@ -69,9 +69,9 @@
   }
 
   ._title {
+    @extend .jigsaw-bold;
     font-size: 42px;
     line-height: 1.4;
-    font-weight: $bold;
     color: white;
   }
 

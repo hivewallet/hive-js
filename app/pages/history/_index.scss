@@ -35,10 +35,10 @@
   ._address {
     @include ellipsis();
     @include media-obj;
+    @extend .jigsaw-light;
     margin-left: 10px;
     padding-top: 27px;
     font-size: 21px;
-    font-weight: $light;
   }
 
   ._expandBtn {
@@ -55,8 +55,8 @@
   }
 
   ._amount {
+    @extend .jigsaw-light;
     font-size: 24px;
-    font-weight: $light;
   }
 
   ._currency {

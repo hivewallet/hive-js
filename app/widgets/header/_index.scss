@@ -15,7 +15,7 @@
 
 .header__balance {
   @include clickbtn;
-  font-weight: $light;
+  @extend .jigsaw-light;
   display: flex;
   justify-content: center;
   margin-right: 10px;

@@ -17,8 +17,8 @@
 
   ._address {
     @include ellipsis();
+    @extend .jigsaw-light;
     display: block;
-    font-weight: $light;
     padding-right: 40px;
   }
 

@@ -106,10 +106,9 @@
   }
 
   ._input {
+    @extend .jigsaw-light;
     background-color: darken($purple--light, 10%);
     border: 1px solid $purple;
-    font-weight: $light;
-    font-family: 'jigsaw', sans-serif;
     color: white;
     margin-top: 5px;
     padding-top: 20px;
