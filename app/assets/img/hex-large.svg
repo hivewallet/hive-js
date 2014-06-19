@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="109px" height="120px" viewBox="0 0 109 120" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch Beta 3.0.4 (7897) - http://www.bohemiancoding.com/sketch -->
+    <title>polygon</title>
+    <desc>Created with Sketch Beta.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <path d="M50.5411472,0.973028548 C52.4518278,-0.126005789 55.55938,-0.120410845 57.4603338,0.973028548 L103.580392,27.5015477 C105.491073,28.6005821 107.039985,31.284602 107.039985,33.4950179 L107.039985,86.5049821 C107.039985,88.71605 105.481346,91.4050129 103.580392,92.4984523 L57.4603338,119.026971 C55.5496531,120.126006 52.4421009,120.120411 50.5411472,119.026971 L4.42108903,92.4984523 C2.51040841,91.3994179 0.961495733,88.715398 0.961495733,86.5049821 L0.961495733,33.4950179 C0.961495733,31.28395 2.52013527,28.5949871 4.42108903,27.5015477 L50.5411472,0.973028548 Z" id="polygon" fill="#464368" sketch:type="MSShapeGroup"></path>
+    </g>
+</svg>
