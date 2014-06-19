@@ -31,7 +31,6 @@
   ._input {
     @extend .generic_box;
     @extend .jigsaw-light;
-    font-family: 'jigsaw', sans-serif;
     margin-top: 5px;
     padding-left: 10px;
     border-radius: 2px;
@@ -72,7 +71,6 @@
   ._input {
     @extend .generic_box;
     @extend .jigsaw-light;
-    font-family: 'jigsaw', sans-serif;
     padding-left: 10px;
     height: auto;
     margin: 0;
