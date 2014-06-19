@@ -2,7 +2,7 @@
 
 var Ractive = require('hive-ractive')
 var getWallet = require('hive-wallet').getWallet
-var emailToAvatar = require('hive-avatar').emailToAvatar
+var getAvatar = require('hive-avatar').getAvatar
 var emitter = require('hive-emitter')
 var geo = require('hive-geo')
 var db = require('hive-db')
@@ -20,7 +20,7 @@ module.exports = function(el){
       exchangeRates: {},
       nearbys: nearbys,
       searching: true,
-      emailToAvatar: emailToAvatar
+      getAvatar: getAvatar
     }
   })
 

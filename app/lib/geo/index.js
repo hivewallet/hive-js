@@ -14,6 +14,7 @@ function fetchUserInfo(callback){
     userInfo = {}
     userInfo.name = doc.userInfo.firstName
     userInfo.email = doc.userInfo.email
+    userInfo.avatarIndex = doc.userInfo.avatarIndex
     userInfo.address = getWallet().currentAddress
 
     callback()

@@ -29,7 +29,7 @@
                data-wallet={{address}}
                data-name={{name}}
                data-email={{email}}>
-                <img class="_avatar" src="{{emailToAvatar(email)}}" />
+                <img class="_avatar" src="{{getAvatar(email, avatarIndex)}}" />
                 <h3 class="_name">{{name}}</h3>
             </div>
           {{/nearbys}}
