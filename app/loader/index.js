@@ -1,15 +1,14 @@
 require('browsernizr/lib/load')
 require('browsernizr/test/storage/localstorage')
+require('browsernizr/test/workers/webworkers')
+require('browsernizr/test/blob')
 
 var Modernizr = require('browsernizr')
 
 Modernizr.load({
-  test: Modernizr.localstorage,
+  test: (Modernizr.localstorage && Modernizr.webworkers && Modernizr.blobconstructor),
   yep: 'assets/js/application.js',
-  nope: 'assets/js/nope.js',
-  callback: function(url, result, key){
-    console.log(arguments)
-  }
+  nope: 'assets/js/nope.js'
 })
 
 //monkey patch URL for safari 6
