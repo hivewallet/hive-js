@@ -3,6 +3,7 @@
 var Ractive = require('hive-ractive')
 var emitter = require('hive-emitter')
 var satoshiToBtc = require('hive-convert').satoshiToBtc
+var strftime = require('strftime')
 
 module.exports = function(el){
   var transactions = []
@@ -26,13 +27,7 @@ module.exports = function(el){
       },
       formatTimestamp: function(timestamp){
         var date = new Date(timestamp)
-        var options = {
-          day: "numeric",
-          month: "short",
-          hour: "2-digit",
-          minute: "2-digit"
-        }
-        return date.toLocaleTimeString(navigator.language, options)
+        return strftime('%b %d %l:%M %p', date)
       },
       truncate: function(amount) {
         return amount.toFixed(5)
