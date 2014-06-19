@@ -136,3 +136,13 @@
     border-radius: 9px;
   }
 }
+
+.tokens {
+  display: flex;
+  justify-content: space-between;
+}
+
+.token__item {
+  @include clickbtn;
+  width: 45%;
+}

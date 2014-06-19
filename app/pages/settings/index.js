@@ -31,12 +31,15 @@ module.exports = function(el){
   var $editEl = ractive.nodes['details-edit']
   var $initialUserEl = ractive.nodes['user_settings']
   var $initialSecurityEl = ractive.nodes['security_settings']
+  var $initialTokenEl = ractive.nodes['token_settings']
   var $userIcon = ractive.nodes['user_arrow']
   var $securityIcon = ractive.nodes['security_arrow']
+  var $tokenIcon = ractive.nodes['token_arrow']
 
   // animate on load to avoid style property bugs
   Dropdown.show($initialUserEl, $userIcon, ractive)
   Dropdown.hide($initialSecurityEl, $securityIcon, ractive)
+  Dropdown.hide($initialTokenEl, $tokenIcon, ractive)
 
   emitter.on('wallet-ready', function(){
     var wallet = getWallet()
@@ -126,6 +129,20 @@ module.exports = function(el){
                                   ractive.get('user.avatarIndex'))
     ractive.set('avatar', avatar)
   }
+
+  ractive.on('switch-token', function(event) {
+    var url
+    var host = window.location.host
+    var token = event.node.id
+
+    if(token === 'bitcoin') {
+      url = 'http://' + host + '/'
+    } else {
+      url = 'http://' + host + '/?network=' + token
+    }
+
+    window.location.assign(url);
+  })
 
   function handleUserError(response) {
     var data = {

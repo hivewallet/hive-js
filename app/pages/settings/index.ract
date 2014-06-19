@@ -38,6 +38,30 @@
   </div>
 </div>
 
+<div class="settings__toggle" on-click="toggle" data-target="token_settings">
+  <span class="_icon ss-icon">dollarsign</span>
+  <span class="_title">Available Tokens</span>
+  <span class="_state">
+    <span id="token_arrow" class="_icon"></span>
+  </span>
+</div>
+
+<div id="token_settings" class="settings__group">
+  <div class="_content">
+    <div class="tokens">
+      <div id="bitcoin" on-click="switch-token" class="token__item">
+        <span class="_icon"></span>
+        <span class="_title">Bitcoin</span>
+      </div>
+      <div id="litecoin" on-click="switch-token" class="token__item">
+        <span class="_icon"></span>
+        <span class="_title">Litecoin</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <div class="settings__toggle" on-click="toggle" data-target="security_settings">
   <span class="_icon ss-icon">lock</span>
   <span class="_title">Security</span>
