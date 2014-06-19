@@ -30,7 +30,6 @@ function enterPassphrase(prevPage){
   }
 
   function onWalletCreated(err, data) {
-    ractive.pauseLoading()
     ractive.set('opening', false)
 
     if(err) {

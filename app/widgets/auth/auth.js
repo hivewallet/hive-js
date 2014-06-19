@@ -19,7 +19,6 @@ var Auth = Ractive.extend({
 
     emitter.on('wallet-opening', function(progress){
       self.set('progress', progress)
-      loading()
     })
 
     self.on('teardown', function(){
@@ -46,20 +45,8 @@ var Auth = Ractive.extend({
       return networkParam ? networkParam.replace(regex, '') : 'bitcoin'
     }
 
-    function loading() {
-      // add class here
-      console.log('loading...')
-    }
-
-    function pauseLoading() {
-      // remove class here
-      console.log('finished loading.')
-    }
-
     this.onSyncDone = onSyncDone
     this.getNetwork = getNetwork
-    this.loading = loading
-    this.pauseLoading = pauseLoading
   }
 })
 
