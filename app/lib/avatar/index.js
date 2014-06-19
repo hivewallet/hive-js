@@ -16,6 +16,16 @@ function emailToAvatar(email){
   ].join('')
 }
 
+function randAvatarIndex(){
+  return Math.floor(Math.random() * 10)
+}
+
+function getAvatarByIndex(index) {
+  return "/assets/img/avatar_" + index + ".png"
+}
+
 module.exports = {
-  emailToAvatar: emailToAvatar
+  emailToAvatar: emailToAvatar,
+  randAvatarIndex: randAvatarIndex,
+  getAvatarByIndex: getAvatarByIndex
 }

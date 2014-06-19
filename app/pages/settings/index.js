@@ -3,7 +3,7 @@
 var Ractive = require('hive-ractive')
 var getWallet = require('hive-wallet').getWallet
 var emitter = require('hive-emitter')
-var emailToAvatar = require('hive-avatar').emailToAvatar
+var Avatar = require('hive-avatar')
 var db = require('hive-db')
 var openDisablePinModal = require('hive-disable-pin-modal')
 var showError = require('hive-flash-modal').showError
@@ -105,7 +105,7 @@ module.exports = function(el){
 
     var avatarIndex = ractive.get('user.avatarIndex')
     if(blank(email) && avatarIndex == undefined) {
-      details.avatarIndex = randAvatarIndex()
+      details.avatarIndex = Avatar.randAvatarIndex()
     }
 
     db.set('userInfo', details, function(err, response){
@@ -117,20 +117,16 @@ module.exports = function(el){
     })
   })
 
-  function randAvatarIndex(){
-    return Math.floor(Math.random() * 10)
-  }
-
   ractive.on('disable-pin', function(){
     openDisablePinModal()
   })
 
   function setAvatar(){
     var email = ractive.get('user.email')
-    var avatar = "/assets/img/avatar_" + ractive.get('user.avatarIndex') + ".png"
+    var avatar = Avatar.getAvatarByIndex(ractive.get('user.avatarIndex'))
 
     if(!blank(email)){
-      avatar = emailToAvatar(email)
+      avatar = Avatar.emailToAvatar(email)
     }
 
     ractive.set('avatar', avatar)
