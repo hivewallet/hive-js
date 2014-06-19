@@ -9,7 +9,8 @@ var glob = require('glob')
 var refresh = require('gulp-livereload')
 var lrserver = require('tiny-lr')()
 var buildServer = require('./server/express')
-var sketch = require('gulp-sketch');
+var sketch = require('gulp-sketch')
+var clean = require('gulp-clean')
 
 // server --------------------------------- //
 
@@ -56,7 +57,12 @@ gulp.task('html', function(){
     .pipe(refresh(lrserver));
 });
 
-gulp.task('assets', function(){
+gulp.task('clean-assets', function(){
+  return gulp.src('./build/assets/', {read: false})
+    .pipe(clean())
+});
+
+gulp.task('assets', ['clean-assets'], function(){
   gulp.src('./app/assets/**/*')
     .pipe(gulp.dest('./build/assets/'))
     .pipe(refresh(lrserver));
