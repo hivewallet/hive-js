@@ -9,6 +9,7 @@ var initAuth = require('hive-auth')
 var showError = require('hive-flash-modal').showError
 var initGeoOverlay = require('hive-geo-overlay')
 var $ = require('browserify-zepto')
+var getNetwork = require('hive-network')
 
 var appEl = document.getElementById('app')
 var frame = initFrame(appEl)
@@ -42,7 +43,7 @@ emitter.on('wallet-ready', function(){
 
 function updateExchangeRates(){
   var tickerUpdateInterval = 1000 * 60 * 2
-  var ticker = new Ticker()
+  var ticker = new Ticker(getNetwork())
 
   ticker.getExchangeRates(function(err, rates){
     if(rates) emitter.emit('ticker', rates)

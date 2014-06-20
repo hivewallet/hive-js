@@ -3,8 +3,12 @@
 var xhr = require('xhr')
 var currencies = require('./currencies')
 
-function BitcoinAverage(testnet){
-  if(testnet) throw new Error("testnet not supported")
+function BitcoinAverage(network){
+  if(network === 'bitcoin' || network == 'testnet') {
+    BitcoinAverage.prototype.getExchangeRates = getExchangeRates
+  } else {
+    throw new Error(network + " price ticker is not supported")
+  }
 }
 BitcoinAverage.apiRoot = "https://api.bitcoinaverage.com/ticker/"
 
