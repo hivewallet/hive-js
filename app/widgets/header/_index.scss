@@ -62,8 +62,8 @@
   padding-right: 10px;
   margin-top: 2px;
   ._icon {
-    @include icon(25px, 25px, block);
-    background-image: url('/assets/img/refresh.svg');
+    @include icon(20px, 20px, block);
+    background-image: url('/assets/img/spinner.svg');
     margin: 0 auto;
   }
 
