@@ -52,8 +52,3 @@ function updateExchangeRates(){
 
 updateExchangeRates()
 
-// inline reload script because gulp stooged it
-if(process.env.NODE_ENV !== "production") {
-  document.write('<script src="' + (location.protocol || 'http:') + '//' + (location.hostname || 'localhost') + ':35729/livereload.js?snipver=1" type="text/javascript"><\/script>')
-}
-
