@@ -5,7 +5,7 @@ var emitter = require('hive-emitter')
 var sync = require('hive-wallet').sync
 var getWallet = require('hive-wallet').getWallet
 var satoshiToBtc = require('hive-convert').satoshiToBtc
-var toDecimal = require('hive-convert').toDecimal
+var Big = require('big.js')
 var showError = require('hive-flash-modal').showError
 var db = require('hive-db')
 
@@ -20,7 +20,7 @@ module.exports = function(el){
       bitcoinToFiat: bitcoinToFiat,
       cropBalance: function(amount) {
         if(amount > 0.0001) {
-          return toDecimal(amount, 10000)
+          return amount.toFixed(4)
         } else {
           return amount
         }
@@ -86,7 +86,7 @@ module.exports = function(el){
     if(amount == undefined) return;
 
     var btc = satoshiToBtc(amount)
-    return toDecimal(btc * exchangeRate, 100).toFixed(2)
+    return new Big(exchangeRate).times(btc).toFixed(2)
   }
 
   ractive.toggleIcon = toggleIcon

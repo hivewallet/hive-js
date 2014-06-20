@@ -9,6 +9,7 @@ describe('convert', function(){
     it('works for non-zero', function(){
       expect(convert.btcToSatoshi(1)).toEqual(100000000)
       expect(convert.btcToSatoshi(0.005)).toEqual(500000)
+      expect(convert.btcToSatoshi(0.009)).toEqual(900000)
     })
 
     it('returns undefined for empty value', function(){

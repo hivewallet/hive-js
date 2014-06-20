@@ -1,22 +1,18 @@
 'use strict'
 
+var Big = require('big.js')
+
 function btcToSatoshi(btc) {
   if(btc == undefined || btc === '') return;
-  return btc * 100000000
+  return parseInt(new Big(btc).times(100000000), 10)
 }
 
 function satoshiToBtc(satoshi) {
   if(satoshi == undefined || satoshi === '') return;
-  return satoshi / 100000000
-}
-
-function toDecimal(val, precision) {
-  if(val == undefined || val === '') return;
-  return Math.floor(precision * val) / precision
+  return parseFloat(new Big(satoshi).div(100000000))
 }
 
 module.exports = {
   btcToSatoshi: btcToSatoshi,
-  satoshiToBtc: satoshiToBtc,
-  toDecimal: toDecimal
+  satoshiToBtc: satoshiToBtc
 }
