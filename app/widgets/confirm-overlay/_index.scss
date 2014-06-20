@@ -100,36 +100,19 @@
 }
 
 .confirm__responseIcon {
-  @include icon(120px, 120px, block);
-  width: 109px;
-  -webkit-mask-image: url(../img/hex-large.svg);
   margin: 0 auto;
-  padding-bottom: 20px;
-
+  margin-bottom: 20px;
+  @include icon(120px, 120px, block);
 }
 
 .confirm__responseIcon--error {
   @extend .confirm__responseIcon;
-  background-color: darken($red, 10%);
-  span {
-    font-size: 50px;
-    text-align: center;
-    display: block;
-    padding-top: 30px;
-    color: white;
-  }
+  background-image: url('/assets/img/error.svg');
 }
 
 &.confirm__responseIcon--success {
   @extend .confirm__responseIcon;
-  background-color: darken($green, 10%);
-  span {
-    font-size: 50px;
-    text-align: center;
-    display: block;
-    padding-top: 30px;
-    color: white;
-  }
+  background-image: url('/assets/img/success.svg');
 }
 
 .confirm__responseTitle {

@@ -9,6 +9,6 @@
 <div id="settings"></div>
 
 <div class="sidebar__logout" on-click="logout">
-  <span class="_icon ss-icon">logout</span>
+  <span class="_icon"></span>
   <span class="_text">Logout</span>
 </div>

@@ -1,6 +1,6 @@
 <div class="overlay--geo js__fadeEl">
   <div class="geo__content">
-    <div class="overlay__close--geo ss-icon" on-click="close-geo">delete</div>
+    <div class="overlay__close--geo" on-click="close-geo"></div>
 
     {{#searching}}
       <div id="searching_container" class="geo__searching">

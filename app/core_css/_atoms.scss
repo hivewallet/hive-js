@@ -138,12 +138,10 @@
 
 .overlay__close {
   @include clickbtn;
+  @include icon(30px, 30px, block, '/assets/img/close.svg');
   position: absolute;
   top: 16px;
   right: 12px;
-  width: 34px;
-  height: 34px;
-  text-align: center;
   padding-top: 5px;
   font-size: 22px;
   z-index: 9000;

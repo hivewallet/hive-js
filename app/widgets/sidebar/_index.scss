@@ -62,9 +62,9 @@
 
 
   ._icon {
-    font-size: 24px;
     opacity: 0.1;
-    margin-top: 6px;
+    margin-top: 7px;
+    @include icon(30px, 30px, block, '/assets/img/exit.svg');
   }
 
   ._text {

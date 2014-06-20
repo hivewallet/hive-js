@@ -80,7 +80,7 @@
   text-align: center;
 
   ._icon {
-    font-size: 32px;
+    @include icon(30px, 30px, block, '/assets/img/help.svg')
   }
 
   ._message {

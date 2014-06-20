@@ -41,12 +41,6 @@
   background-color: $purple--light;
   border-bottom: 1px solid darken($purple--light, 5%);
 
-  ._icon {
-    font-size: 20px;
-    padding-top: 5px;
-    opacity: 0.1;
-  }
-
   ._title {
     margin-left: 10px;
     padding-top: 6px;
@@ -63,6 +57,26 @@
     }
   }
 }
+
+.settings__toggle-icon {
+  @include icon(26px, 26px, block);
+  margin-top: 4px;
+  opacity: 0.1;
+}
+
+.i-user {
+  background-image: url('/assets/img/user.svg')
+}
+
+.i-lock {
+  background-image: url('/assets/img/lock.svg')
+}
+
+.i-money {
+  background-image: url('/assets/img/money.svg')
+}
+
+
 
 #user_settings {
   ._content {

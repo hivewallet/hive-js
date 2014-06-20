@@ -11,7 +11,7 @@
         <div class="_amount {{directionClass(direction)}}">{{directionIcon(direction)}}{{truncate(satoshiToBtc(amount))}}</div>
 
         {{#pending}}
-          <span class='_time'>sync<span class="ss-icon">action</span> confirming</span>
+          <span class='_time'>pending confirmation</span>
         {{/pending}}
 
         {{^pending}}
@@ -28,7 +28,7 @@
   {{/transactions}}
   {{^transactions}}
     <div class="transactions__message">
-      <div class="_icon ss-icon">help</div>
+      <div class="_icon"></div>
       <div class="_message">You don't have any transactions yet</div>
     </div>
   {{/transactions}}

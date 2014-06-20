@@ -34,16 +34,26 @@
 
 .icon_atom {
   @include clickbtn;
-  width: 40px;
+  width: 50px;
   padding-top: 12px;
-  font-size: 19px;
   text-align: center;
   margin-bottom: 5px;
 }
 
 .header__toggle {
   @extend .icon_atom;
-  margin-left: 10px;
+  padding-left: 10px;
+
+  ._icon {
+    @include icon(25px, 25px, block, '/assets/img/settings.svg');
+    margin: 0 auto;
+  }
+
+  &.is_open {
+    ._icon {
+      background-image: url('/assets/img/close.svg');
+    }
+  }
 }
 
 .toggle_overlay {
@@ -58,12 +68,9 @@
 
 .header__refresh {
   @extend .icon_atom;
-  width: 50px;
   padding-right: 10px;
-  margin-top: 2px;
   ._icon {
-    @include icon(20px, 20px, block);
-    background-image: url('/assets/img/spinner.svg');
+    @include icon(25px, 25px, block, '/assets/img/refresh.svg');
     margin: 0 auto;
   }
 
