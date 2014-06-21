@@ -17,16 +17,16 @@ function reset(pinEl, callback) {
 
 function drop(pinEl, pulseEl, callback) {
   Velocity.animate(pinEl, {translateY: 0}, {
-    easing: [ 400, 26 ],
+    easing: [ 400, 28 ],
     duration: 400,
     delay: 500,
     complete: function(){
       if(callback) callback()
-      pulseInterval = setInterval(function(){
-        pulse(pulseEl)
-      }, 850)
     }
   })
+  pulseInterval = setInterval(function(){
+    pulse(pulseEl)
+  }, 850)
 }
 
 function pulse(pulseEl) {

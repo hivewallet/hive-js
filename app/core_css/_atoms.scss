@@ -140,9 +140,7 @@
   @include clickbtn;
   @include icon(30px, 30px, block, '/assets/img/close.svg');
   position: absolute;
-  top: 16px;
-  right: 12px;
-  padding-top: 5px;
-  font-size: 22px;
+  top: 20px;
+  right: 20px;
   z-index: 9000;
 }
