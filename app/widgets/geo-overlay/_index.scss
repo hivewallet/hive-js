@@ -14,8 +14,15 @@
   padding-top: 60px;
 }
 
-
 .geo__searching {
+
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
   ._text {
     font-size: 14px;
     text-align: center;
@@ -37,11 +44,12 @@
     margin-left: -49px;
     margin-top: -50px;
     z-index: 100;
-    transform: scale(0.1);
+    opacity: 0;
   }
 }
 
 .geo__pindrop {
+  transform: translateY(-100%);
   position: absolute;
   top: 0;
   bottom: 0;
@@ -54,14 +62,12 @@
     left: 50%;
     margin-top: -90px;
     margin-left: -35px;
-    background-image: url('../img/waggle.svg');
-    @include icon(70px, 70px, block);
+    @include icon(70px, 70px, block, '/assets/img/waggle.svg');
     z-index: 200;
   }
 }
 
 .geo__results {
-
 
   ._item {
     @include clickbtn;

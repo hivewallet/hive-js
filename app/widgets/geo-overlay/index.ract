@@ -3,12 +3,10 @@
     <div class="overlay__close--geo" on-click="close-geo"></div>
 
     {{#searching}}
-      <div id="searching_container" class="geo__searching">
-        {{#oval_visible}}
-          <span id="pulsing_oval" class="_oval"></span>
-        {{/oval_visible}}
+      <div id="searching_container" class="geo__searching" on-click="close-geo">
+        <span id="geo-pulse" class="_oval"></span>
         <p class="_text">{{search_message}}</p>
-        <div class="geo__pindrop">
+        <div id="geo-pin" class="geo__pindrop">
           <span class="_pin"></span>
         </div>
       </div>
