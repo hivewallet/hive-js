@@ -10,7 +10,6 @@ var showError = require('hive-flash-modal').showError
 var fadeIn = require('hive-transitions/fade.js').fadeIn
 var fadeOut = require('hive-transitions/fade.js').fadeOut
 var animatePin = require('hive-transitions/pinDrop.js').drop
-var animatePulse = require('hive-transitions/pinDrop.js').pulse
 var resetPin = require('hive-transitions/pinDrop.js').reset
 
 module.exports = function(el){
