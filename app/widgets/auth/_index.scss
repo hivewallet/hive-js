@@ -47,9 +47,9 @@
   color: white;
 
   ._img {
+    @include icon(105px, 99px, block, '/assets/img/logo-stack.svg');
     margin: 0 auto;
     margin-bottom: 10px;
-    display: block;
   }
 
   ._img--large {
