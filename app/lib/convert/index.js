@@ -12,7 +12,13 @@ function satoshiToBtc(satoshi) {
   return parseFloat(new Big(satoshi).div(100000000))
 }
 
+function toFixedFloor(x, decimal){
+  var y = x.toFixed(decimal + 1)
+  return y.substring(0, y.length - 1)
+}
+
 module.exports = {
   btcToSatoshi: btcToSatoshi,
-  satoshiToBtc: satoshiToBtc
+  satoshiToBtc: satoshiToBtc,
+  toFixedFloor: toFixedFloor
 }

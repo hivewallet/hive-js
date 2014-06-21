@@ -8,6 +8,7 @@ var getWallet = require('hive-wallet').getWallet
 var currencies = require('hive-ticker-api').currencies
 var btcToSatoshi = require('hive-convert').btcToSatoshi
 var satoshiToBtc = require('hive-convert').satoshiToBtc
+var toFixedFloor = require('hive-convert').toFixedFloor
 var showError = require('hive-flash-modal').showError
 var showConfirmation = require('hive-confirm-overlay')
 var Address = require('bitcoinjs-lib').Address
@@ -80,7 +81,7 @@ module.exports = function(el){
     if(fiat == undefined || fiat === '') return;
 
     var exchangeRate = ractive.get('exchangeRates')[ractive.get('selectedFiat')]
-    var bitcoin = new Big(fiat).div(exchangeRate).toFixed(8)
+    var bitcoin = toFixedFloor(new Big(fiat).div(exchangeRate), 8)
 
     ractive.set('value', bitcoin)
   })
@@ -92,7 +93,7 @@ module.exports = function(el){
 
     var exchangeRate = ractive.get('exchangeRates')[ractive.get('selectedFiat')]
     var val = new Big(bitcoin).times(exchangeRate)
-    var fiat = val.toFixed(2)
+    var fiat = toFixedFloor(val, 2)
 
     ractive.set('fiatValue', fiat)
   })
