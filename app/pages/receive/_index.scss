@@ -7,7 +7,6 @@
   padding-top: 5px;
 }
 
-
 .address__box {
   @extend .generic_box;
   margin-top: 5px;
@@ -53,12 +52,12 @@
       margin-bottom: 15px;
 
       &.is_broadcasting {
-        background-color: $green;
-        box-shadow: 0 3px 0 0 darken($green, 10%);
-        color: darken($green, 20%);
+        background-color: $yellow;
+        box-shadow: 0 3px 0 0 darken($yellow, 10%);
+        color: darken($yellow, 20%);
 
         &:hover {
-          color: darken($green, 20%);
+          color: darken($yellow, 20%);
         }
       }
 

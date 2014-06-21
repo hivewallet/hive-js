@@ -9,6 +9,8 @@ var showError = require('hive-flash-modal').showError
 var showSetDetails = require('hive-set-details-modal')
 var fadeIn = require('hive-transitions/fade.js').fadeIn
 var fadeOut = require('hive-transitions/fade.js').fadeOut
+var setPulse = require('hive-transitions/fade.js').setPulse
+var clearPulse = require('hive-transitions/fade.js').clearPulse
 
 module.exports = function(el){
   var ractive = new Ractive({
@@ -40,6 +42,8 @@ module.exports = function(el){
     }
   })
 
+  var waggleInterval;
+
   function waggleOff(){
     ractive.set('broadcasting', false)
     ractive.set('btn_message', 'Turn waggle on')
@@ -53,7 +57,7 @@ module.exports = function(el){
       if(err) return handleWaggleError(err)
       ractive.set('connecting', false)
       ractive.set('broadcasting', true)
-      ractive.set('btn_message', 'Waggle is broadcasting')
+      ractive.set('btn_message', 'Turn waggle off')
     })
   }
 
