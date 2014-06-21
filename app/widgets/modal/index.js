@@ -23,7 +23,10 @@ var Modal = Ractive.extend({
     fadeIn(fadeEl)
 
     self.on('cancel', function(event){
-      dismissModal()
+      var originalElement = event.original.srcElement || event.original.originalTarget;
+      if(!event || originalElement.classList.contains('_cancel')){
+        dismissModal()
+      }
     })
 
     document.addEventListener('keydown', keydownHandler)
