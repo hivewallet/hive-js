@@ -5,6 +5,7 @@ var emitter = require('hive-emitter')
 var sync = require('hive-wallet').sync
 var getWallet = require('hive-wallet').getWallet
 var satoshiToBtc = require('hive-convert').satoshiToBtc
+var toFixedFloor = require('hive-convert').toFixedFloor
 var Big = require('big.js')
 var showError = require('hive-flash-modal').showError
 var db = require('hive-db')
@@ -20,7 +21,7 @@ module.exports = function(el){
       bitcoinToFiat: bitcoinToFiat,
       cropBalance: function(amount) {
         if(amount > 0.0001) {
-          return amount.toFixed(4)
+          return toFixedFloor(amount, 4)
         } else {
           return amount
         }
