@@ -39,6 +39,10 @@ events.rightarrow = makeKeyDefinition(39);
 events.downarrow = makeKeyDefinition(40);
 events.uparrow = makeKeyDefinition(38);
 
+var partials = Ractive.partials
+
+partials.cancelSvg = require('hive-svg/cancel.ract').template
+
 Ractive.prototype.hide = function(){
   this.fire('before-hide')
   this.el.classList.remove('current')
