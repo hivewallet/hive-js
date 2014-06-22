@@ -72,3 +72,25 @@
     padding-top: 11px;
   }
 }
+
+.sidebar__support {
+  @extend .sidebar__logout;
+  border-left: 1px solid $purple--light;
+
+  ._icon {
+    opacity: 0.1;
+    margin-top: 7px;
+    @include icon(30px, 30px, block, '/assets/img/help.svg');
+  }
+
+  ._text {
+    margin-left: 10px;
+    padding-top: 11px;
+  }
+}
+
+.settings__footer {
+  padding-right: 15%;
+  display: flex;
+  flex-direction: row;
+}
