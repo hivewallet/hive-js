@@ -63,7 +63,8 @@
     "uniqueify": "~1.0.0",
     "velocity-animate": "git://github.com/haustraliaer/velocity.git",
     "vinyl-source-stream": "^0.1.1",
-    "gulp-clean": "~0.3.0"
+    "gulp-clean": "~0.3.0",
+    "async": "~0.9.0"
   },
   "aperture": {
     "sources": [
