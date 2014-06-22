@@ -129,16 +129,6 @@ module.exports = function(el){
     callback(null, tx)
   }
 
-  function onTxSent(err, tx){
-    if(err) {
-      return showError({ message: "error sending transaction. " + err })
-    }
-
-    // update balance & tx history
-    emitter.emit('wallet-ready')
-    emitter.emit('transactions-loaded', [tx])
-  }
-
   function setPreferredCurrency(currency, old){
     if(old == undefined) return; //when loading wallet
 
