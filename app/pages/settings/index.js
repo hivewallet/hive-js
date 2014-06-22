@@ -115,7 +115,7 @@ module.exports = function(el){
     var email = ractive.get('user.email')
 
     var details = {
-      firstName: ractive.get('user.name'),
+      firstName: ractive.get('user.name') + '',
       email: email
     }
 
