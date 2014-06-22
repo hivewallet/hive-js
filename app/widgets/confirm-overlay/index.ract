@@ -13,7 +13,7 @@
       </div>
 
       <span class="_fee">+{{fee}} {{denomination}} transaction fee</span>
-      <span class="_icon">⬇</span>
+      <span class="_icon"></span>
       <span class="_address">{{to}}</span>
 
     </div>

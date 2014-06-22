@@ -26,8 +26,9 @@
     font-size: 32px;
   }
   ._currency {
+    @extend .jigsaw-medium;
     font-size: 14px;
-    padding-top: 7px;
+    padding-top: 5px;
     margin-left: 3px;
   }
 }

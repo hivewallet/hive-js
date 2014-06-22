@@ -12,6 +12,7 @@ input,
 select,option,optgroup,
 textarea{
   font:inherit;
+  -webkit-font-smoothing: antialiased;
 }
 
 
