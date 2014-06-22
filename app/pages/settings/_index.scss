@@ -165,7 +165,6 @@
 
   ._icon {
     margin-bottom: 10px;
-    background-color: $yellow;
     border-radius: 50%;
   }
   ._title {
@@ -175,7 +174,7 @@
   &.current {
     opacity: 1;
     ._icon {
-      border: 5px solid $blue;
+      border: 5px solid $purple--highlight;
     }
   }
 
@@ -185,8 +184,10 @@
 }
 
 .i-bitcoin-token {
-  @include icon(80px, 80px, inline-block, '/assets/img/bitcoin-token.svg');
+  @include icon(80px, 80px, inline-block, '/assets/img/token-bitcoin.svg');
+  background-color: #F7931A;
 }
 .i-litecoin-token {
-  @include icon(80px, 80px, inline-block, '/assets/img/litecoin-token.svg');
+  @include icon(80px, 80px, inline-block, '/assets/img/token-litecoin.svg');
+  background-color: #C4C4C4;
 }
