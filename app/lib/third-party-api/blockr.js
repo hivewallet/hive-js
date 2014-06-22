@@ -3,10 +3,8 @@
 var xhr = require('hive-xhr')
 var Address = require('./address')
 var Transaction = require('./transaction')
-var Blockchain = require('./blockchain')
 var btcToSatoshi = require('hive-convert').btcToSatoshi
 var Bitcoin = require('bitcoinjs-lib')
-
 
 var apiRoot = null;
 
@@ -64,10 +62,17 @@ function getUnspent(addresses, callback){
 
 function sendTx(txHex, callback) {
   var uri = apiRoot + "tx/push"
+
+  // begin cors proxy
+  var param = encodeURIComponent(uri)
+  var corsUri = process.env.PROXY_URL + "?url=" + param
+  // end cors proxy
+
   xhr({
-    uri: uri,
+    uri: corsUri,
     method: 'POST',
-    body: JSON.stringify({hex: txHex})
+    body: JSON.stringify({hex: txHex}),
+    headers: { "Content-Type": "application/json" }
   }, function(err, resp, body){
     if(resp.statusCode !== 200) {
       console.error(body)
