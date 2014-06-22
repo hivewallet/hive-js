@@ -53,16 +53,19 @@ function listAddresses(addresses, onAddresses){
 }
 
 function getUnspent(addresses, callback){
-  batchAddressRequests(addresses, requestUnspent, callback)
+  batchRequests(addresses, requestUnspent, callback)
 }
 
-function batchAddressRequests(addresses, fn, callback) {
+function batchRequests(items, fn, callback) {
+  items = items.slice() // do not modify items
   var batches = []
-  while(addresses.length > 20){
-    var batch = addresses.splice(0, 20)
+  var itemsPerBatch = 20
+
+  while(items.length > itemsPerBatch){
+    var batch = items.splice(0, itemsPerBatch)
     batches.push(batch)
   }
-  batches.push(addresses)
+  batches.push(items)
 
   async.parallel(batches.map(function(batch){
     return fn(batch)
@@ -151,12 +154,18 @@ function toAddress(address){
 }
 
 function getTransactions(addresses, callback) {
-  makeRequest('address/txs/' + addresses.join(','), function (err, resp, body) {
-    if(err) return callback(err)
+  batchRequests(addresses, requestTransactionsForAddresses, callback)
+}
 
-    var txs = JSON.parse(resp.body).data
-    parseTransactions(txs, callback)
-  })
+function requestTransactionsForAddresses(addresses){
+  return function(callback){
+    makeRequest('address/txs/' + addresses.join(','), function (err, resp, body) {
+      if(err) return callback(err)
+
+      var txs = JSON.parse(resp.body).data
+      parseTransactions(txs, callback)
+    })
+  }
 }
 
 function parseTransactions(apiTxs, callback){
@@ -178,11 +187,8 @@ function parseTransactions(apiTxs, callback){
   var txIds = Object.keys(result)
   if(txIds.length === 0) return callback(null, []);
 
-  makeRequest('tx/info/' + txIds.join(','), function (err, resp, body) {
-    if(err) return callback(err)
-
-    var txs = JSON.parse(resp.body).data
-    if(!Array.isArray(txs)) { txs = [txs] }
+  batchRequests(txIds, requestTransactions, function(err, txs){
+    if(err) return callback(err);
 
     txs.forEach(function(tx){
       var firstOut = tx.vouts[0]
@@ -196,6 +202,18 @@ function parseTransactions(apiTxs, callback){
 
     return callback(null, values(result).map(toTransaction))
   })
+}
+
+function requestTransactions(txIds){
+  return function(callback){
+    makeRequest('tx/info/' + txIds.join(','), function (err, resp, body) {
+      if(err) return callback(err)
+
+      var txs = JSON.parse(resp.body).data
+      if(!Array.isArray(txs)) { txs = [txs] }
+      callback(null, txs)
+    })
+  }
 }
 
 function values(obj){
