@@ -41,7 +41,31 @@ events.uparrow = makeKeyDefinition(38);
 
 var partials = Ractive.partials
 
-partials.cancelSvg = require('hive-svg/cancel.ract').template
+partials.svg_arrow = require('hive-svg/arrow.ract').template
+partials.svg_cancel = require('hive-svg/cancel.ract').template
+partials.svg_caret = require('hive-svg/caret.ract').template
+partials.svg_close = require('hive-svg/close.ract').template
+partials.svg_exit = require('hive-svg/exit.ract').template
+partials.svg_help = require('hive-svg/help.ract').template
+partials.svg_hex_large = require('hive-svg/hex_large.ract').template
+partials.svg_history = require('hive-svg/history.ract').template
+partials.svg_lock = require('hive-svg/lock.ract').template
+partials.svg_logo_key = require('hive-svg/logo_key.ract').template
+partials.svg_logo_stack = require('hive-svg/logo_stack.ract').template
+partials.svg_logo = require('hive-svg/logo.ract').template
+partials.svg_qr = require('hive-svg/qr.ract').template
+partials.svg_receive = require('hive-svg/receive.ract').template
+partials.svg_refresh = require('hive-svg/refresh.ract').template
+partials.svg_send = require('hive-svg/send.ract').template
+partials.svg_sendto = require('hive-svg/sendto.ract').template
+partials.svg_settings = require('hive-svg/settings.ract').template
+partials.svg_success = require('hive-svg/success.ract').template
+partials.svg_token_bitcoin = require('hive-svg/token_bitcoin.ract').template
+partials.svg_token_litecoin = require('hive-svg/token_litecoin.ract').template
+partials.svg_token = require('hive-svg/token.ract').template
+partials.svg_user = require('hive-svg/user.ract').template
+partials.svg_waggle = require('hive-svg/waggle.ract').template
+partials.svg_warning = require('hive-svg/warning.ract').template
 
 Ractive.prototype.hide = function(){
   this.fire('before-hide')

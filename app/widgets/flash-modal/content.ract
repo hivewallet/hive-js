@@ -2,7 +2,7 @@
 <div class="flash">
   <div class="flash__content">
     <div class="flash__icon">
-      {{>cancelSvg}}
+      {{>svg_cancel}}
     </div>
     <h2 class="flash__heading {{type}}">{{title}}</h2>
     <p class="flash__message">{{message}}</p>
