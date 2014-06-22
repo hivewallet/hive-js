@@ -60,7 +60,7 @@
   }
 
   ._icon {
-    @include icon(25px, 25px, inline-block, '/assets/img/sendto.svg');
+    @include icon(100%, 25px, inline-block, '/assets/img/sendto.svg');
     margin-top: 5px;
     color: $grey;
   }
