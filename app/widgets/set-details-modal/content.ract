@@ -3,7 +3,7 @@
     <div class="set-details__field">
       <label>
           Your name:
-        <input type="text" value="{{name}}" on-enter='disable-pin' autofocus/>
+        <input type="text" value="{{name}}" on-enter='submit-details' autofocus/>
       </label>
     </div>
 

@@ -28,7 +28,7 @@ function openModal(data){
     }
   })
 
-  ractive.on('submit-details', function(){
+  ractive.on('submit-details', function(event){
     var details = {
       firstName: ractive.get('name'),
       email: ractive.get('email')
@@ -41,7 +41,8 @@ function openModal(data){
     db.set('userInfo', details, function(err, resp){
       if(err) return data.callback(err);
 
-      ractive.fire('cancel')
+      event.cancel_modal = true
+      ractive.fire('cancel', event)
       data.callback()
     })
   })
