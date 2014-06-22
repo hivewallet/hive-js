@@ -45,13 +45,20 @@ function processTx(tx) {
   }
 }
 
-function processLocalPendingTxs(utxoIds, callback) {
+function processLocalPendingTxs(callback) {
+  // only pending spending txs are kept locally
   db.getPendingTxs(function(err, txs){
     if(err) return callback(err);
     var txObjs = txs
       .map(Transaction.fromHex)
       .filter(function(tx){
-        return utxoIds.indexOf(tx.getId()) > -1
+        // keep tx whose input has not been consumed
+        return tx.ins.some(function(input){
+          var hashClone = new Buffer(input.hash.length)
+          input.hash.copy(hashClone)
+          var txId = [].reverse.call(hashClone).toString('hex')
+          return (txId + ":" + input.index in wallet.outputs)
+        })
       })
 
     txObjs.forEach(processTx)
@@ -180,11 +187,7 @@ function sync(done) {
   setUnspentOutputs(function(err){
     if(err) return done(err);
 
-    var unspentTxIds = wallet.getUnspentOutputs().map(function(uo){
-      return uo.hash
-    })
-
-    processLocalPendingTxs(unspentTxIds, function(err, txs){
+    processLocalPendingTxs(function(err, txs){
       if(err) return done(err);
 
       maybeDone(txs)
