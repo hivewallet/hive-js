@@ -39,7 +39,7 @@
 </div>
 
 <div class="settings__toggle" on-click="toggle" data-target="token_settings">
-  <span class="settings__toggle-icon i-money"></span>
+  <span class="settings__toggle-icon i-token"></span>
   <span class="_title">Available Tokens</span>
   <span class="_state">
     <span id="token_arrow" class="_icon"></span>
