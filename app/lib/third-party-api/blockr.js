@@ -5,6 +5,7 @@ var Address = require('./address')
 var Transaction = require('./transaction')
 var btcToSatoshi = require('hive-convert').btcToSatoshi
 var Bitcoin = require('bitcoinjs-lib')
+var async = require('async')
 
 var apiRoot = null;
 
@@ -52,12 +53,36 @@ function listAddresses(addresses, onAddresses){
 }
 
 function getUnspent(addresses, callback){
-  makeRequest('address/unspent/' + addresses.join(','), function (err, resp, body) {
-    if(err) return callback(err)
+  batchAddressRequests(addresses, requestUnspent, callback)
+}
 
-    var utxo = JSON.parse(resp.body).data
-    callback(null, parseUnspentOutputs(utxo))
+function batchAddressRequests(addresses, fn, callback) {
+  var batches = []
+  while(addresses.length > 20){
+    var batch = addresses.splice(0, 20)
+    batches.push(batch)
+  }
+  batches.push(addresses)
+
+  async.parallel(batches.map(function(batch){
+    return fn(batch)
+  }),
+  function(err, results) {
+    if(err) return callback(err);
+
+    callback(null, Array.prototype.concat.apply([], results))
   })
+}
+
+function requestUnspent(addresses){
+  return function(callback){
+    makeRequest('address/unspent/' + addresses.join(','), function (err, resp, body) {
+      if(err) return callback(err)
+
+      var utxo = JSON.parse(resp.body).data
+      callback(null, parseUnspentOutputs(utxo))
+    })
+  }
 }
 
 function sendTx(txHex, callback) {
