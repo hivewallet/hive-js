@@ -22,8 +22,14 @@ module.exports = function(el){
         email: ''
       },
       tokens: [
-        'bitcoin',
-        'litecoin'
+        {
+          token: 'bitcoin',
+          bitcoin: true
+        },
+        {
+          token: 'litecoin',
+          litecoin: true
+        }
       ],
       editingName: false,
       editingEmail: false,

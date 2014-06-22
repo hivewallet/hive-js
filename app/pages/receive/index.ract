@@ -2,7 +2,11 @@
 <h3 class="_title">Your wallet address</h3>
 <div class="address__box">
   <span class="_address">{{address}}</span>
-  <span class="_btn" on-click="show-qr"></span>
+  <div class="_btn" on-click="show-qr">
+    <span class="_icon">
+      {{>svg_qr}}
+    </span>
+  </div>
 </div>
 <div class="geo__label">
 {{^broadcasting}}

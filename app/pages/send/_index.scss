@@ -21,11 +21,19 @@
     @extend .hivebtn;
     margin-top: 29px;
     padding: 0;
+    width: 42px;
+    height: 42px;
+    position: relative;
 
-    background-image: url('/assets/img/waggle.svg');
-    @include icon(42px, 42px, block);
-    background-size: 30px 30px;
-    background-repeat: no-repeat;
+    ._icon {
+      width: 30px;
+      height: 30px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-top: -15px;
+      margin-left: -15px;
+    }
   }
 
   ._input {

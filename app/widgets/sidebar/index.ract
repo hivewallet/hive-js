@@ -1,7 +1,9 @@
 
 <div class="sidebar__header">
 
-  <div class="sidebar__logo"></div>
+  <div class="sidebar__logo">
+    {{>svg_logo}}
+  </div>
   <span class="sidebar__version">v0.1.0</span>
 
 </div>
@@ -10,12 +12,16 @@
 
 <div class="settings__footer">
   <div class="sidebar__logout" on-click="logout">
-    <span class="_icon"></span>
+    <span class="_icon">
+      {{>svg_help}}
+    </span>
     <span class="_text">Logout</span>
   </div>
 
   <div class="sidebar__support" on-click="#">
-    <span class="_icon"></span>
+    <span class="_icon">
+      {{>svg_exit}}
+    </span>
     <span class="_text">Support</span>
   </div>
 </div>

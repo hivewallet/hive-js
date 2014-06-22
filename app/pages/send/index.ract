@@ -6,7 +6,11 @@
         <label class="_label" for="to">Wallet address
           <input id="to" class="_input" type="text" value="{{to}}" />
         </label>
-        <div class="_btn" on-click="open-geo"></div>
+        <div class="_btn" on-click="open-geo">
+          <span class="_icon">
+            {{>svg_waggle}}
+          </span>
+        </div>
       </div>
 
       <div class="send__amount">

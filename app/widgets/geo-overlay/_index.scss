@@ -25,7 +25,9 @@
     @include clickbtn;
     margin-left: 20px;
     ._icon {
-      @include icon(30px, 30px, block, '/assets/img/refresh.svg');
+      display: block;
+      width: 30px;
+      height: 30px;
     }
 
     &.is_updating {
@@ -38,7 +40,9 @@
   ._cancel {
     @include clickbtn;
     margin-right: 20px;
-    @include icon(30px, 30px, block, '/assets/img/close.svg');
+    display: block;
+    width: 30px;
+    height: 30px;
   }
 }
 
@@ -92,7 +96,9 @@
     left: 50%;
     margin-top: -90px;
     margin-left: -35px;
-    @include icon(70px, 70px, block, '/assets/img/waggle.svg');
+    display: block;
+    width: 70px;
+    height: 70px;
     z-index: 200;
   }
 }

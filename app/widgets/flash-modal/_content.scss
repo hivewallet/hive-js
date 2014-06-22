@@ -34,11 +34,11 @@
   padding-bottom: 10px;
 
   &.error {
-    color: #eebf31;
+    color: $red;
   }
 
   &.info {
-    color: #14a5f0;
+    color: $yellow;
   }
 }
 

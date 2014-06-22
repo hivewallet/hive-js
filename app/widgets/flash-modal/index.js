@@ -5,18 +5,19 @@ var emitter = require('hive-emitter')
 
 var defaults = {
   error: {
-    icon: 'error',
+    error: true,
     title: 'Whoops!'
   },
   info: {
-    icon: 'success',
+    warning: true,
     title: 'Just saying...'
   }
 }
 
 function openModal(type, data){
   data = data || {}
-  data.icon = data.icon || defaults[type].icon
+  data.error = defaults[type].error
+  data.warning = defaults[type].warning
   data.title = data.title || defaults[type].title
   data.type = type
 

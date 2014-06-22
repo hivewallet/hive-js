@@ -38,7 +38,9 @@
 }
 
 .sidebar__logo {
-  @include icon(100px, 38px, block, '/assets/img/logo.svg');
+  width: 100px;
+  height: 38px;
+  display: block;
 }
 
 .sidebar__version {
@@ -64,7 +66,9 @@
   ._icon {
     opacity: 0.1;
     margin-top: 7px;
-    @include icon(30px, 30px, block, '/assets/img/exit.svg');
+    width: 30px;
+    height: 30px;
+    display: block;
   }
 
   ._text {
@@ -80,7 +84,9 @@
   ._icon {
     opacity: 0.1;
     margin-top: 7px;
-    @include icon(30px, 30px, block, '/assets/img/help.svg');
+    width: 30px;
+    height: 30px;
+    display: block;
   }
 
   ._text {

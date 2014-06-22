@@ -30,13 +30,14 @@
 
 .confirm__transaction{
 
+  text-align: center;
+
   ._amount {
     padding-top: 20px;
     padding-left: 20px;
     padding-right: 20px;
     display: flex;
     justify-content: center;
-    text-align: center;
 
     ._value {
       @extend .jigsaw-light;
@@ -60,7 +61,9 @@
   }
 
   ._icon {
-    @include icon(100%, 25px, inline-block, '/assets/img/sendto.svg');
+    display: inline-block;
+    width: 25px;
+    height: 25px;
     margin-top: 5px;
     color: $grey;
   }
@@ -101,17 +104,9 @@
 .confirm__responseIcon {
   margin: 0 auto;
   margin-bottom: 20px;
-  @include icon(120px, 120px, block);
-}
-
-.confirm__responseIcon--error {
-  @extend .confirm__responseIcon;
-  background-image: url('/assets/img/error.svg');
-}
-
-&.confirm__responseIcon--success {
-  @extend .confirm__responseIcon;
-  background-image: url('/assets/img/success.svg');
+  width: 120px;
+  height: 120px;
+  display: block;
 }
 
 .confirm__responseTitle {

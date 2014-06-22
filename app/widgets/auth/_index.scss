@@ -47,7 +47,9 @@
   color: white;
 
   ._img {
-    @include icon(105px, 99px, block, '/assets/img/logo-stack.svg');
+    width: 105px;
+    height: 99px;
+    display: block;
     margin: 0 auto;
     margin-bottom: 10px;
   }
@@ -149,10 +151,12 @@
   }
 
   ._icon {
-    @include icon(25px, 25px, block, '/assets/img/refresh.svg');
+    display: block;
+    width: 25px;
+    height: 25px;
     position: absolute;
     left: 15px;
-    top: 17px;
+    top: 18px;
     opacity: 0.3;
     animation:  infinite-spinning 1s linear infinite;
   }

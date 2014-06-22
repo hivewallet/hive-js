@@ -46,14 +46,10 @@
   padding-left: 10px;
 
   ._icon {
-    @include icon(25px, 25px, block, '/assets/img/settings.svg');
+    width: 25px;
+    height: 25px;
+    display: block;
     margin: 0 auto;
-  }
-
-  &.is_open {
-    ._icon {
-      background-image: url('/assets/img/close.svg');
-    }
   }
 }
 
@@ -71,7 +67,9 @@
   @extend .icon_atom;
   padding-right: 10px;
   ._icon {
-    @include icon(25px, 25px, block, '/assets/img/refresh.svg');
+    width: 25px;
+    height: 25px;
+    display: block;
     margin: 0 auto;
   }
 

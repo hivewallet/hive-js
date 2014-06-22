@@ -13,7 +13,9 @@
       </div>
 
       <span class="_fee">+{{fee}} {{denomination}} transaction fee</span>
-      <span class="_icon"></span>
+      <span class="_icon">
+        {{>svg_sendto}}
+      </span>
       <span class="_address">{{to}}</span>
 
     </div>
@@ -28,7 +30,9 @@
 
   {{#success}}
 
-    <div class="confirm__responseIcon--success"></div>
+    <div class="confirm__responseIcon">
+      {{>svg_success}}
+    </div>
 
     <h3 class="confirm__responseTitle">Transaction Successful</h3>
 
@@ -41,7 +45,9 @@
 
   {{#error}}
 
-    <div class="confirm__responseIcon--error"></div>
+    <div class="confirm__responseIcon">
+      {{>svg_error}}
+    </div>
 
     <h3 class="confirm__responseTitle">Transaction Failed</h3>
 

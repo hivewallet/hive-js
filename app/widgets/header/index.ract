@@ -5,7 +5,14 @@
   {{/menuOpen}}
 
   <div id="menu_btn" class="header__toggle {{#menuOpen}}is_open{{/menuOpen}}" on-click="toggle">
-    <span class="_icon"></span>
+    <span class="_icon">
+      {{^menuOpen}}
+        {{>svg_settings}}
+      {{/menuOpen}}
+      {{#menuOpen}}
+        {{>svg_close}}
+      {{/menuOpen}}
+    </span>
   </div>
 
   {{^showFiat}}
@@ -23,7 +30,9 @@
   {{/showFiat}}
 
   <div class='header__refresh {{#updating_transactions}}is_updating{{/updating_transactions}}' on-click="sync">
-    <span class="_icon"></span>
+    <span class="_icon">
+      {{>svg_refresh}}
+    </span>
   </div>
 
 </div>

@@ -40,23 +40,13 @@
 }
 
 #tabs .tabs .tab__icon {
-  @include icon(28px, 28px, block);
+  width: 28px;
+  height: 28px;
+  display: block;
   margin: 0 auto;
   margin-top: 2px;
   margin-bottom: 5px;
   opacity: 0.3;
-}
-
-.i-send {
-  background-image: url('/assets/img/send.svg');
-}
-
-.i-receive {
-  background-image: url('/assets/img/receive.svg');
-}
-
-.i-history {
-  background-image: url('/assets/img/history.svg');
 }
 
 .tab__text {

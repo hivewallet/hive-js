@@ -34,12 +34,17 @@
     padding-top: 7px;
     border-radius: 2px;
 
-    background-image: url('/assets/img/qr.svg');
-    @include icon(36px, 36px, block);
-    background-size: 30px 30px;
-    background-repeat: no-repeat;
+    ._icon {
+      width: 26px;
+      height: 26px;
+      display: block;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-top: -13px;
+      margin-left: -13px;
+    }
   }
-
 }
 
 .geo__label {

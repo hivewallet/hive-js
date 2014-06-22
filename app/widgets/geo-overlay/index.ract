@@ -4,14 +4,18 @@
 
     {{^searching}}
       <div class='_refresh {{#updating_nearbys}}is_updating{{/updating_nearbys}}' on-click="refresh-list">
-        <span class="_icon"></span>
+        <span class="_icon">
+          {{>svg_refresh}}
+        </span>
       </div>
     {{/searching}}
 
       <h3 class="_title">Waggle</h3>
 
     {{^searching}}
-      <div class="_cancel" on-click="close-geo"></div>
+      <div class="_cancel" on-click="close-geo">
+        {{>svg_close}}
+      </div>
     {{/searching}}
 
     </div>
@@ -21,7 +25,9 @@
         <span id="geo-pulse" class="_oval"></span>
         <p class="_text">{{search_message}}</p>
         <div id="geo-pin" class="geo__pindrop">
-          <span class="_pin"></span>
+          <span class="_pin">
+            {{>svg_waggle}}
+          </span>
         </div>
       </div>
     {{/searching}}

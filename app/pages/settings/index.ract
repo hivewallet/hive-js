@@ -1,10 +1,14 @@
 
 
 <div class="settings__toggle" on-click="toggle" data-target="user_settings">
-  <span class="settings__toggle-icon i-user"></span>
+  <span class="settings__toggle-icon">
+    {{>svg_user}}
+  </span>
   <span class="_title">Your Details</span>
   <span class="_state">
-    <span id="user_arrow" class="_icon"></span>
+    <span id="user_arrow" class="_icon">
+      {{>svg_arrow}}
+    </span>
   </span>
 </div>
 
@@ -39,10 +43,14 @@
 </div>
 
 <div class="settings__toggle" on-click="toggle" data-target="token_settings">
-  <span class="settings__toggle-icon i-token"></span>
+  <span class="settings__toggle-icon">
+    {{>svg_token}}
+  </span>
   <span class="_title">Available Tokens</span>
   <span class="_state">
-    <span id="token_arrow" class="_icon"></span>
+    <span id="token_arrow" class="_icon">
+      {{>svg_arrow}}
+    </span>
   </span>
 </div>
 
@@ -50,9 +58,16 @@
   <div class="_content">
     <div class="tokens">
     {{#tokens}}
-      <div id="{{.}}" on-click="switch-token" class="token__item {{getNetworkClass(.)}}">
-        <span class="_icon i-{{.}}-token"></span>
-        <h3 class="_title">{{capitalize(.)}}</h3>
+      <div id="{{token}}" on-click="switch-token" class="token__item {{getNetworkClass(token)}}">
+        <span class="_icon i-{{token}}-token">
+          {{#bitcoin}}
+            {{>svg_token_bitcoin}}
+          {{/bitcoin}}
+          {{#litecoin}}
+            {{>svg_token_litecoin}}
+          {{/litecoin}}
+        </span>
+        <h3 class="_title">{{capitalize(token)}}</h3>
       </div>
     {{/tokens}}
     </div>
@@ -61,10 +76,14 @@
 
 
 <div class="settings__toggle" on-click="toggle" data-target="security_settings">
-  <span class="settings__toggle-icon i-lock"></span>
+  <span class="settings__toggle-icon">
+    {{>svg_lock}}
+  </span>
   <span class="_title">Security</span>
   <span class="_state">
-    <span id="security_arrow" class="_icon"></span>
+    <span id="security_arrow" class="_icon">
+      {{>svg_arrow}}
+    </span>
   </span>
 </div>
 

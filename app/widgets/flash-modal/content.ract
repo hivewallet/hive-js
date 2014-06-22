@@ -2,7 +2,12 @@
 <div class="flash">
   <div class="flash__content">
     <div class="flash__icon">
-      {{>svg_cancel}}
+      {{#error}}
+        {{>svg_cancel}}
+      {{/error}}
+      {{#warning}}
+        {{>svg_warning}}
+      {{/warning}}
     </div>
     <h2 class="flash__heading {{type}}">{{title}}</h2>
     <p class="flash__message">{{message}}</p>
