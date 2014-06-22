@@ -19,7 +19,7 @@ module.exports = function(el){
     data: {
       address: '',
       qrVisible: false,
-      btn_message: 'Turn waggle on',
+      btn_message: 'Turn Waggle on',
       connecting: false,
       broadcasting: false
     }
@@ -46,18 +46,18 @@ module.exports = function(el){
 
   function waggleOff(){
     ractive.set('broadcasting', false)
-    ractive.set('btn_message', 'Turn waggle on')
+    ractive.set('btn_message', 'Turn Waggle on')
     geo.remove(true)
   }
 
   function waggleOn(){
     ractive.set('connecting', true)
-    ractive.set('btn_message', 'Connecting to waggle')
+    ractive.set('btn_message', 'Connecting to Waggle')
     geo.search(function(err, results){
       if(err) return handleWaggleError(err)
       ractive.set('connecting', false)
       ractive.set('broadcasting', true)
-      ractive.set('btn_message', 'Turn waggle off')
+      ractive.set('btn_message', 'Turn Waggle off')
     })
   }
 
@@ -98,13 +98,13 @@ module.exports = function(el){
 
     var data = {
       title: 'Uh Oh...',
-      message: "We couldn't connect you to waggle, please check your internet connection."
+      message: "We couldn't connect you to Waggle, please check your internet connection."
     }
 
     showError(data)
     ractive.set('connecting', false)
     ractive.set('broadcasting', false)
-    ractive.set('btn_message', 'Turn waggle on')
+    ractive.set('btn_message', 'Turn Waggle on')
   }
 
   return ractive
