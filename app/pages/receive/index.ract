@@ -4,15 +4,17 @@
   <span class="_address">{{address}}</span>
   <span class="_btn" on-click="show-qr"></span>
 </div>
+<div class="geo__label">
 {{^broadcasting}}
-  <h3 class="_title">Location services</h3>
+  <h3 class="_title">Waggle</h3>
 {{/broadcasting}}
 {{#broadcasting}}
   <h3 id="broadcast_text" class="_title animate__pulseFade">Broadcasting your location...</h3>
 {{/broadcasting}}
+<span class="_help">?</span>
+</div>
 <div class="geo__box">
   <span class="_btn {{#broadcasting}}is_broadcasting{{/broadcasting}}{{#connecting}}is_connecting{{/connecting}}" on-click="toggle-broadcast">{{btn_message}}</span>
-  <p class="_text">Waggle lets other Hive users nearby discover your wallet address by comparing your location.</p>
 </div>
 
 {{#qrVisible}}

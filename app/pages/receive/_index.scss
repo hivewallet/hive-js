@@ -42,6 +42,25 @@
 
 }
 
+.geo__label {
+  position: relative;
+
+  ._help {
+    @include clickbtn;
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 12px;
+    text-align: center;
+    color: $purple;
+    border: 1px solid $purple;
+    width: 18px;
+    height: 18px;
+    border-radius: 9px;
+  }
+
+}
+
 .geo__box {
   @extend .generic_box;
   margin-top: 5px;
@@ -49,7 +68,7 @@
 
     ._btn {
       @extend .hivebtn;
-      margin-bottom: 15px;
+      margin-bottom: 5px;
 
       &.is_broadcasting {
         background-color: $yellow;
