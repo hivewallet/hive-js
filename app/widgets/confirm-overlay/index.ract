@@ -22,7 +22,16 @@
 
     <div class="confirm__inputs">
       <div class="_cancel" on-click="test-error">Cancel</div>
-      <div class="_send" on-click="send">Send</div>
+      {{^sending}}
+        <div class="_send" on-click="send">Send</div>
+      {{/sending}}
+      {{#sending}}
+        <div class="_send--sending">
+          <span class="_icon">
+            {{>svg_refresh}}
+          </span>
+        </div>
+      {{/sending}}
     </div>
 
   {{/confirmation}}

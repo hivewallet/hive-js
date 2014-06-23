@@ -99,6 +99,33 @@
     @extend .hivebtn;
     margin-left: 5px;
   }
+
+  ._send--sending {
+    @extend .hivebtn;
+    position: relative;
+    margin-left: 5px;
+    color: darken($grey, 20%);
+    background-color: $grey;
+    transform: translate(0px, 3px);
+    box-shadow: 0 0px 0 0;
+    &:hover {
+      color: darken($grey, 20%);
+    }
+    ._icon {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-top: -15px;
+      margin-left: -15px;
+      width: 30px;
+      height: 30px;
+      display: inline;
+      animation:  infinite-spinning 1s linear infinite;
+      .svg-refresh {
+        fill: darken($grey, 20%);
+      }
+    }
+  }
 }
 
 .confirm__responseIcon {
