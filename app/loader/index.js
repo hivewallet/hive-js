@@ -17,7 +17,7 @@ var elems =  {
 
 var containerEl = document.getElementById('loader')
 var keyEl = document.getElementById('logo_key')
-
+var goodToGo;
 
 animateLogo(elems)
 
@@ -25,10 +25,15 @@ Modernizr.load({
   test: (Modernizr.localstorage && Modernizr.webworkers && Modernizr.blobconstructor),
   yep: 'assets/js/application.js',
   nope: 'assets/js/nope.js',
+  callback: function(testResult, key) {
+    goodToGo = key
+  },
   complete: function() {
-    setTimeout(function(){
-      fadeOut(containerEl, keyEl)
-    }, 1000)
+    if(goodToGo) {
+      setTimeout(function(){
+        fadeOut(containerEl, keyEl)
+      }, 1000)
+    }
   }
 })
 
