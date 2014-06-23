@@ -20,6 +20,7 @@ function open(data){
   })
 
   ractive.on('send', function(){
+    ractive.set('sending', true)
     var to = ractive.get('to')
     var value = btcToSatoshi(ractive.get('amount'))
     var wallet = getWallet()

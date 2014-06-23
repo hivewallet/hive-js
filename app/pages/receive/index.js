@@ -42,8 +42,6 @@ module.exports = function(el){
     }
   })
 
-  var waggleInterval;
-
   function waggleOff(){
     ractive.set('broadcasting', false)
     ractive.set('btn_message', 'Turn Waggle on')

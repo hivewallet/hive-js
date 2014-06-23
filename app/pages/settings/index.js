@@ -115,6 +115,13 @@ module.exports = function(el){
     })
   })
 
+  emitter.on('details-updated', function(details){
+    ractive.set('user.name', details.firstName)
+    Profile.hide($editEl, ractive, function(){
+      Profile.show($previewEl, ractive)
+    })
+  })
+
   ractive.on('submit-details', function(){
     if(ractive.get('animating')) return;
 
@@ -123,6 +130,14 @@ module.exports = function(el){
     var details = {
       firstName: ractive.get('user.name') + '',
       email: email
+    }
+
+    if(!details.firstName || details.firstName.trim() === 'undefined') {
+      details.firstName = '';
+      db.set('userInfo', details, function(err, response){
+        if(err) return handleUserError(response)
+      })
+      return showError({message: "A name is required to set your profile on Hive"})
     }
 
     var avatarIndex = ractive.get('user.avatarIndex')
