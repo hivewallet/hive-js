@@ -82,9 +82,12 @@
   width: 100%;
   background-color: $purple;
   padding: 20px;
-  padding-top: 16px;
-  padding-right: 15%;
+  padding-top: 12px;
+  text-align: center;
 
+  &:hover {
+    background-color: darken($purple, 3%);
+  }
 
   ._icon {
     opacity: 0.1;
@@ -95,8 +98,9 @@
   }
 
   ._text {
-    margin-left: 10px;
+    //margin-left: 10px;
     padding-top: 11px;
+    margin: 0 auto;
   }
 }
 
@@ -119,8 +123,9 @@
   }
 
   ._text {
-    margin-left: 10px;
+    //margin-left: 10px;
     padding-top: 11px;
+    margin: 0 auto;
   }
 }
 
