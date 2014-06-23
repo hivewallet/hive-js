@@ -41,12 +41,17 @@
 .sidebar__header {
   display: flex;
   justify-content: space-between;
-  padding-top: 15px;
+  padding-top: 20px;
   padding-left: 20px;
   padding-right: 15%;
   padding-bottom: 19px;
 
   background-color: $purple;
+
+  @include breakpoint(iphone5) {
+    padding-top: 29px;
+    padding-bottom: 30px;
+  }
 }
 
 .litecoin {

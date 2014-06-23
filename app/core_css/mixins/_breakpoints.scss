@@ -7,6 +7,8 @@
 
 $mquery: false !default;
 
+$iphone5: 28em;
+
 $portrait: 48em;    // based on ipad ~ 768px
 $landscape: 64em;   // based on ipad ~ 1024px
 
@@ -16,7 +18,18 @@ $landscape: 64em;   // based on ipad ~ 1024px
 
     $width: $portrait;
 
-    @media (min-width: $width) { 
+    @media (min-width: $width) {
+      $mquery: true;
+      @content;
+      $mquery: false;
+    }
+  }
+
+  @if $point == iphone5 {
+
+    $height: $iphone5;
+
+    @media (min-height: $height) {
       $mquery: true;
       @content;
       $mquery: false;
@@ -27,10 +40,10 @@ $landscape: 64em;   // based on ipad ~ 1024px
 
     $width: $landscape;
 
-    @media (min-width: $width) { 
+    @media (min-width: $width) {
       $mquery: true;
       @content;
       $mquery: false;
-    } 
+    }
   }
 }
