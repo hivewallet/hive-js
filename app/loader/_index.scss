@@ -26,7 +26,7 @@ $shadow: $foreground;
 }
 
 #logo_frame {
-  @include icon(82px, 92px, block, '/assets/img/logo_frame.svg');
+  @include icon(82px, 92px, block, '../img/logo_frame.svg');
   position: absolute;
   top: 0;
   left: 0;
@@ -34,7 +34,7 @@ $shadow: $foreground;
 
 #logo_block1 {
   opacity: 0;
-  @include icon(22px, 12px, block, '/assets/img/logo_block1.svg');
+  @include icon(22px, 12px, block, '../img/logo_block1.svg');
   position: absolute;
   left: 50%;
   margin-left: -11px;
@@ -43,7 +43,7 @@ $shadow: $foreground;
 
 #logo_block2 {
   opacity: 0;
-  @include icon(48px, 12px, block, '/assets/img/logo_block2.svg');
+  @include icon(48px, 12px, block, '../img/logo_block2.svg');
   position: absolute;
   left: 50%;
   margin-left: -24px;
@@ -52,7 +52,7 @@ $shadow: $foreground;
 
 #logo_block3 {
   opacity: 0;
-  @include icon(70px, 15px, block, '/assets/img/logo_block3.svg');
+  @include icon(70px, 15px, block, '../img/logo_block3.svg');
   position: absolute;
   left: 50%;
   margin-left: -35px;
@@ -60,7 +60,7 @@ $shadow: $foreground;
 }
 
 #logo_key {
-  @include icon(16px, 16px, block, '/assets/img/logo_key.svg');
+  @include icon(16px, 16px, block, '../img/logo_key.svg');
   position: absolute;
   top: 0;
   left: 27px;
@@ -68,7 +68,7 @@ $shadow: $foreground;
 
 #logo_block4 {
   opacity: 0;
-  @include icon(48px, 12px, block, '/assets/img/logo_block4.svg');
+  @include icon(48px, 12px, block, '../img/logo_block4.svg');
   position: absolute;
   left: 50%;
   margin-left: -24px;
@@ -77,7 +77,7 @@ $shadow: $foreground;
 
 #logo_block5 {
   opacity: 0;
-  @include icon(22px, 12px, block, '/assets/img/logo_block5.svg');
+  @include icon(22px, 12px, block, '../img/logo_block5.svg');
   position: absolute;
   left: 50%;
   margin-left: -11px;
