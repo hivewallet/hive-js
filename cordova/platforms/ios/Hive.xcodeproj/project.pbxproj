@@ -49,6 +49,7 @@
 		E67A27077545433785A3D29D /* CDVStatusBar.m in Sources */ = {isa = PBXBuildFile; fileRef = F791B689B5BD4C5EA21234E3 /* CDVStatusBar.m */; };
 		F496ED016734413E88A09DC9 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CB1DC0ECC914DC89ACCDC7C /* AVFoundation.framework */; };
 		42D145D5DE934ACFA5138EE9 /* CDVLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 5544C525664E42C9B48315B4 /* CDVLogger.m */; };
+		DBFA521A2C174230AAA758BE /* CDVLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 275A9C28DCCB464188C264B2 /* CDVLocation.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -130,6 +131,8 @@
 		F8D5E9D183354764ADD552EA /* zxing-all-in-one.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = unknown; name = "zxing-all-in-one.cpp"; path = "com.phonegap.plugins.barcodescanner/zxing-all-in-one.cpp"; sourceTree = "<group>"; };
 		5544C525664E42C9B48315B4 /* CDVLogger.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "CDVLogger.m"; path = "org.apache.cordova.console/CDVLogger.m"; sourceTree = "<group>"; fileEncoding = 4; };
 		6B707AEA15D544C687115306 /* CDVLogger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CDVLogger.h"; path = "org.apache.cordova.console/CDVLogger.h"; sourceTree = "<group>"; fileEncoding = 4; };
+		275A9C28DCCB464188C264B2 /* CDVLocation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "CDVLocation.m"; path = "org.apache.cordova.geolocation/CDVLocation.m"; sourceTree = "<group>"; fileEncoding = 4; };
+		BA40CC04E68F40FFAE600416 /* CDVLocation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CDVLocation.h"; path = "org.apache.cordova.geolocation/CDVLocation.h"; sourceTree = "<group>"; fileEncoding = 4; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -271,6 +274,8 @@
 				6DBAFAB8E833430D9B4CAE4C /* CDVSplashScreen.h */,
 				5544C525664E42C9B48315B4 /* CDVLogger.m */,
 				6B707AEA15D544C687115306 /* CDVLogger.h */,
+				275A9C28DCCB464188C264B2 /* CDVLocation.m */,
+				BA40CC04E68F40FFAE600416 /* CDVLocation.h */,
 			);
 			name = Plugins;
 			path = Hive/Plugins;
@@ -477,6 +482,7 @@
 				DA77EFCC717A41FAA065E6B7 /* CDVDevice.m in Sources */,
 				72C2DA7B64454D1F816AFFC7 /* CDVSplashScreen.m in Sources */,
 				42D145D5DE934ACFA5138EE9 /* CDVLogger.m in Sources */,
+				DBFA521A2C174230AAA758BE /* CDVLocation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

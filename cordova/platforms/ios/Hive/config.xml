@@ -36,6 +36,9 @@
     <feature name="Console">
         <param name="ios-package" value="CDVLogger" />
     </feature>
+    <feature name="Geolocation">
+        <param name="ios-package" value="CDVLocation" />
+    </feature>
     <name>Hive</name>
     <description>Hive Cryptocurrency Wallet for iOS</description>
     <author href="http://github.com/hivewallet/hive-js">Hive</author>

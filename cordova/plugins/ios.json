@@ -35,6 +35,10 @@
                         {
                             "xml": "<feature name=\"Console\"><param name=\"ios-package\" value=\"CDVLogger\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Geolocation\"><param name=\"ios-package\" value=\"CDVLocation\" /></feature>",
+                            "count": 1
                         }
                     ],
                     "/widget": []
@@ -97,6 +101,9 @@
             "PACKAGE_NAME": "com.hivewallet.app"
         },
         "org.apache.cordova.console": {
+            "PACKAGE_NAME": "com.hivewallet.app"
+        },
+        "org.apache.cordova.geolocation": {
             "PACKAGE_NAME": "com.hivewallet.app"
         }
     },
