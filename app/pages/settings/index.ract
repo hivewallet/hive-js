@@ -74,21 +74,3 @@
   </div>
 </div>
 
-
-<div class="settings__toggle" on-click="toggle" data-target="security_settings">
-  <span class="settings__toggle-icon">
-    {{>svg_lock}}
-  </span>
-  <span class="_title">Security</span>
-  <span class="_state">
-    <span id="security_arrow" class="_icon">
-      {{>svg_arrow}}
-    </span>
-  </span>
-</div>
-
-<div id="security_settings" class="settings__group">
-  <div class="_content">
-    <div class="settings__btn" style="margin-bottom: 20px;" on-click="disable-pin">Disable pin</div>
-  </div>
-</div>

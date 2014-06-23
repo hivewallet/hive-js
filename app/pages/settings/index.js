@@ -5,7 +5,6 @@ var getWallet = require('hive-wallet').getWallet
 var emitter = require('hive-emitter')
 var Avatar = require('hive-avatar')
 var db = require('hive-db')
-var openDisablePinModal = require('hive-disable-pin-modal')
 var showError = require('hive-flash-modal').showError
 var Dropdown = require('hive-transitions/dropdown.js')
 var Profile = require('hive-transitions/profileAnimation.js')
@@ -52,12 +51,10 @@ module.exports = function(el){
   var $initialSecurityEl = ractive.nodes['security_settings']
   var $initialTokenEl = ractive.nodes['token_settings']
   var $userIcon = ractive.nodes['user_arrow']
-  var $securityIcon = ractive.nodes['security_arrow']
   var $tokenIcon = ractive.nodes['token_arrow']
 
   // animate on load to avoid style property bugs
   Dropdown.show($initialUserEl, $userIcon, ractive)
-  Dropdown.hide($initialSecurityEl, $securityIcon, ractive)
   Dropdown.hide($initialTokenEl, $tokenIcon, ractive)
 
   emitter.on('wallet-ready', function(){
@@ -152,10 +149,6 @@ module.exports = function(el){
         Profile.show($previewEl, ractive)
       })
     })
-  })
-
-  ractive.on('disable-pin', function(){
-    openDisablePinModal()
   })
 
   function setAvatar(){
