@@ -4,9 +4,9 @@
       Before you start using Waggle, you need to enter a name that will help others identify you.
     </div>
     <div class="set-details__field">
-      <label>
+      <label class="_label">
           Your name
-        <input type="text" value="{{name}}" on-enter='submit-details' autofocus/>
+        <input class="_input" type="text" value="{{name}}" on-enter='submit-details' />
       </label>
     </div>
 
