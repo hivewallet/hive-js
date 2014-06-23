@@ -1,0 +1,36 @@
+.support {
+  padding: 20px;
+
+  ._info {
+
+    @extend .jigsaw-light;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid $grey;
+  }
+}
+
+.support__field {
+
+  margin-top: 20px;
+
+  ._label {
+    @include noselect;
+    cursor: pointer;
+    display: block;
+  }
+  ._input, ._textarea {
+    @extend .generic_box;
+    @extend .jigsaw-light;
+    margin-top: 5px;
+    padding-left: 10px;
+    border-radius: 2px;
+
+    height: auto;
+
+    &:active, &:focus {
+      outline: 0;
+      border: 1px solid $blue;
+    }
+  }
+}

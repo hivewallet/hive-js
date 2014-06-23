@@ -26,7 +26,7 @@ function openModal(data){
 
   var params = {}
   ractive.on('submit-details', function(){
-    ['name', 'email', 'subject', 'description'].forEach(function(field){
+    ['name', 'email', 'description'].forEach(function(field){
       if(isBlankField(field)) {
         return showError({message: field + " can't be blank"})
       }
@@ -34,6 +34,8 @@ function openModal(data){
       params[field] = ractive.get(field)
     })
 
+    params['subject'] = 'This is a support request from Hive web'
+    console.log(params)
     sendRequest(params)
   })
 
