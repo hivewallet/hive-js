@@ -3,7 +3,7 @@
 var Ractive = require('hive-modal')
 var db = require('hive-db')
 var showError = require('hive-flash-modal').showError
-var xhr = require('hive-xhr')
+var sendRequest = require('hive-zendesk')
 
 function fetchDetails(callback){
   db.get(function(err, doc){
@@ -35,27 +35,8 @@ function openModal(data){
     })
 
     params['subject'] = 'This is a support request from Hive web'
-    console.log(params)
-    sendRequest(params)
+    sendRequest(params, data.callback)
   })
-
-  function sendRequest(paramsObj){
-    var params = Object.keys(paramsObj).map(function(key) {
-      return key + '=' + paramsObj[key];
-    }).join('&')
-    var uri = "https://hivewallet.zendesk.com/requests/embedded/create/?" + params
-    var corsUri = process.env.PROXY_URL + "?url=" + encodeURIComponent(uri)
-
-    xhr({
-      uri: corsUri
-    }, function(err, resp, body){
-      if(resp.statusCode !== 200) {
-        console.error(body)
-        return data.callback(err)
-      }
-      data.callback(null)
-    })
-  }
 
   function isBlankField(field){
     var value = ractive.get(field)
