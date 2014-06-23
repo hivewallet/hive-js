@@ -41,5 +41,15 @@
   </div>
 
   <div class="send__buttons">
-    <div on-click="open-send" class="send__btn attach_fastclick">Confirm</div>
+    {{^validating}}
+      <div on-click="open-send" class="send__btn">Confirm</div>
+    {{/validating}}
+    {{#validating}}
+      <div class="send__btn--validating">
+        <span class="_icon">
+          {{>svg_refresh}}
+        </span>
+      </div>
+    {{/validating}}
   </div>
+

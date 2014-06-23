@@ -14,6 +14,8 @@ function open(data){
     data: data
   })
 
+  emitter.emit('send-confirm-open')
+
   ractive.on('clear', function() {
     ractive.fire('cancel')
     emitter.emit('clear-send-form')
