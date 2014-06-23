@@ -73,5 +73,3 @@
     </div>
   </div>
 </div>
-
-<div class="settings__btn" style="margin-bottom: 20px;" on-click="open-support">Support</div>

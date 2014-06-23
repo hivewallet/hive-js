@@ -15,7 +15,10 @@
     <span class="_text">Logout</span>
   </div>
 
-  <div class="sidebar__support" on-click="#">
+  <div class="sidebar__support" on-click="open-support">
+    <span class="_icon">
+      {{>svg_help}}
+    </span>
     <span class="_text">Support</span>
   </div>
 </div>
