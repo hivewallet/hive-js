@@ -100,8 +100,44 @@
     box-shadow: inset 0px 1px 3px 0px rgba(0,0,0,0.25);
     border-radius: 4px;
   }
+
+
 }
 
+.passphrase__accept {
+  display: flex;
+  padding-top: 20px;
+
+  max-width: 260px;
+  margin: 0 auto;
+
+  ._checkbox {
+    @include clickbtn;
+    width: 24px;
+    height: 24px;
+    background-color: $purple;
+    position: relative;
+    outline: 1px solid rgba(133, 141, 240, 0);
+  }
+
+  ._check {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    top: 50%;
+    left: 50%;
+    margin-top: -7px;
+    margin-left: -7px;
+    background-color: $purple--highlight;
+  }
+
+  ._checktext {
+    flex: 1;
+    font-size: 13px;
+    margin-left: 10px;
+    text-align: left;
+  }
+}
 
 // buttons ---------------------------------------- //
 
