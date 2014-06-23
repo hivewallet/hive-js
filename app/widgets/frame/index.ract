@@ -1,6 +1,6 @@
 <div class="frame">
 
-  <div id="sidebar" class="animate_in">test</div>
+  <div id="sidebar" class="animate_in"></div>
 
   <div id="main" class="animate_in">
 
