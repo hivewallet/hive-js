@@ -3,9 +3,9 @@
 var xhr = require('hive-xhr')
 var Address = require('./address')
 var Transaction = require('./transaction')
-var Script = require('bitcoinjs-lib').Script
-var Blockchain = require('./blockchain')
 var btcToSatoshi = require('hive-convert').btcToSatoshi
+var Bitcoin = require('bitcoinjs-lib')
+var async = require('async')
 
 var apiRoot = null;
 
@@ -16,7 +16,8 @@ var networks = {
 }
 
 function Blockr(network){
-  apiRoot = networks[network] || networks.bitcoin
+  this.network = network || 'bitcoin'
+  apiRoot = networks[network]
 }
 
 function listAddresses(addresses, onAddresses){
@@ -52,20 +53,54 @@ function listAddresses(addresses, onAddresses){
 }
 
 function getUnspent(addresses, callback){
-  makeRequest('address/unspent/' + addresses.join(','), function (err, resp, body) {
-    if(err) return callback(err)
+  batchRequests(addresses, requestUnspent, callback)
+}
 
-    var utxo = JSON.parse(resp.body).data
-    callback(null, parseUnspentOutputs(utxo))
+function batchRequests(items, fn, callback) {
+  items = items.slice() // do not modify items
+  var batches = []
+  var itemsPerBatch = 20
+
+  while(items.length > itemsPerBatch){
+    var batch = items.splice(0, itemsPerBatch)
+    batches.push(batch)
+  }
+  batches.push(items)
+
+  async.parallel(batches.map(function(batch){
+    return fn(batch)
+  }),
+  function(err, results) {
+    if(err) return callback(err);
+
+    callback(null, Array.prototype.concat.apply([], results))
   })
+}
+
+function requestUnspent(addresses){
+  return function(callback){
+    makeRequest('address/unspent/' + addresses.join(','), function (err, resp, body) {
+      if(err) return callback(err)
+
+      var utxo = JSON.parse(resp.body).data
+      callback(null, parseUnspentOutputs(utxo))
+    })
+  }
 }
 
 function sendTx(txHex, callback) {
   var uri = apiRoot + "tx/push"
+
+  // begin cors proxy
+  var param = encodeURIComponent(uri)
+  var corsUri = process.env.PROXY_URL + "?url=" + param
+  // end cors proxy
+
   xhr({
-    uri: uri,
+    uri: corsUri,
     method: 'POST',
-    body: JSON.stringify({hex: txHex})
+    body: JSON.stringify({hex: txHex}),
+    headers: { "Content-Type": "application/json" }
   }, function(err, resp, body){
     if(resp.statusCode !== 200) {
       console.error(body)
@@ -119,12 +154,18 @@ function toAddress(address){
 }
 
 function getTransactions(addresses, callback) {
-  makeRequest('address/txs/' + addresses.join(','), function (err, resp, body) {
-    if(err) return callback(err)
+  batchRequests(addresses, requestTransactionsForAddresses, callback)
+}
 
-    var txs = JSON.parse(resp.body).data
-    parseTransactions(txs, callback)
-  })
+function requestTransactionsForAddresses(addresses){
+  return function(callback){
+    makeRequest('address/txs/' + addresses.join(','), function (err, resp, body) {
+      if(err) return callback(err)
+
+      var txs = JSON.parse(resp.body).data
+      parseTransactions(txs, callback)
+    })
+  }
 }
 
 function parseTransactions(apiTxs, callback){
@@ -136,22 +177,23 @@ function parseTransactions(apiTxs, callback){
     if(address.txs.length === 0) return;
 
     address.txs.forEach(function(tx){
-      result[tx.tx] = tx
+      var id = tx.tx
+      if(result[id] && result[id].amount < 0) return; // tx keyed by sent addr takes precedence e.g. change1 -> dest + change2 we want change1
+
+      result[id] = tx
     })
   })
 
   var txIds = Object.keys(result)
   if(txIds.length === 0) return callback(null, []);
 
-  makeRequest('tx/info/' + txIds.join(','), function (err, resp, body) {
-    if(err) return callback(err)
-
-    var txs = JSON.parse(resp.body).data
-    if(!Array.isArray(txs)) { txs = [txs] }
+  batchRequests(txIds, requestTransactions, function(err, txs){
+    if(err) return callback(err);
 
     txs.forEach(function(tx){
       var firstOut = tx.vouts[0]
       var id = tx.tx
+
       result[id].toAddress = firstOut.address
       if(result[id].amount < 0) {
         result[id].amount = -firstOut.amount
@@ -160,6 +202,18 @@ function parseTransactions(apiTxs, callback){
 
     return callback(null, values(result).map(toTransaction))
   })
+}
+
+function requestTransactions(txIds){
+  return function(callback){
+    makeRequest('tx/info/' + txIds.join(','), function (err, resp, body) {
+      if(err) return callback(err)
+
+      var txs = JSON.parse(resp.body).data
+      if(!Array.isArray(txs)) { txs = [txs] }
+      callback(null, txs)
+    })
+  }
 }
 
 function values(obj){
@@ -196,8 +250,24 @@ function makeRequest(endpoint, params, callback){
   }, callback)
 }
 
+function txToHiveTx(tx) {
+  var result = new Transaction(tx.getId())
+  var out = tx.outs[0]
+  result.timestamp = (new Date()).getTime()
+  result.amount = -out.value
+  result.direction = 'outgoing'
+
+  var network = Bitcoin.networks[this.network]
+  result.toAddress = Bitcoin.Address.fromOutputScript(out.script, network).toString()
+  result.pending = true
+
+  return result
+}
+
+
 Blockr.prototype.listAddresses = listAddresses
 Blockr.prototype.getUnspent = getUnspent
 Blockr.prototype.sendTx = sendTx
 Blockr.prototype.getTransactions = getTransactions
+Blockr.prototype.txToHiveTx = txToHiveTx
 module.exports = Blockr

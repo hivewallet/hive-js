@@ -30,6 +30,8 @@
 
 .confirm__transaction{
 
+  text-align: center;
+
   ._amount {
     padding-top: 20px;
     padding-left: 20px;
@@ -38,13 +40,13 @@
     justify-content: center;
 
     ._value {
+      @extend .jigsaw-light;
       font-size: 32px;
-      font-weight: $light;
     }
 
     ._currency {
+      @extend .jigsaw-light;
       font-size: 14px;
-      font-weight: $light;
       padding-top: 6px;
       margin-left: 3px;
     }
@@ -59,15 +61,15 @@
   }
 
   ._icon {
-    padding-top: 10px;
-    display: block;
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    margin-top: 5px;
     color: $grey;
-    text-align: center;
   }
 
   ._address {
-    font-weight: $light;
-    padding-top: 10px;
+    @extend .jigsaw-light;
     display: block;
     text-align: center;
   }
@@ -100,35 +102,11 @@
 }
 
 .confirm__responseIcon {
-  @include icon(120px, 120px, block);
-  -webkit-mask-image: url(../img/hex_large.png);
   margin: 0 auto;
-  padding-bottom: 20px;
-
-}
-
-.confirm__responseIcon--error {
-  @extend .confirm__responseIcon;
-  background-color: darken($red, 10%);
-  span {
-    font-size: 50px;
-    text-align: center;
-    display: block;
-    padding-top: 30px;
-    color: white;
-  }
-}
-
-&.confirm__responseIcon--success {
-  @extend .confirm__responseIcon;
-  background-color: darken($green, 10%);
-  span {
-    font-size: 50px;
-    text-align: center;
-    display: block;
-    padding-top: 30px;
-    color: white;
-  }
+  margin-bottom: 20px;
+  width: 120px;
+  height: 120px;
+  display: block;
 }
 
 .confirm__responseTitle {

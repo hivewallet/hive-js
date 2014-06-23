@@ -4,7 +4,9 @@
 
 {{#opening}}
   <div class="auth__btn--loading">
-    <span class="_icon"></span>
+    <span class="_icon">
+      {{>svg_refresh}}
+    </span>
     <span class="_text">{{progress}}</span>
   </div>
 {{/opening}}

@@ -15,7 +15,7 @@
 
 .header__balance {
   @include clickbtn;
-  font-weight: $light;
+  @extend .jigsaw-light;
   display: flex;
   justify-content: center;
   margin-right: 10px;
@@ -26,24 +26,31 @@
     font-size: 32px;
   }
   ._currency {
+    @extend .jigsaw-medium;
     font-size: 14px;
-    padding-top: 7px;
+    padding-top: 5px;
     margin-left: 3px;
   }
 }
 
 .icon_atom {
   @include clickbtn;
-  width: 40px;
+  width: 50px;
   padding-top: 12px;
-  font-size: 19px;
   text-align: center;
   margin-bottom: 5px;
 }
 
 .header__toggle {
   @extend .icon_atom;
-  margin-left: 10px;
+  padding-left: 10px;
+
+  ._icon {
+    width: 25px;
+    height: 25px;
+    display: block;
+    margin: 0 auto;
+  }
 }
 
 .toggle_overlay {
@@ -58,12 +65,11 @@
 
 .header__refresh {
   @extend .icon_atom;
-  width: 50px;
   padding-right: 10px;
-  margin-top: 2px;
   ._icon {
-    @include icon(25px, 25px, block);
-    background-image: url('../img/refresh.svg');
+    width: 25px;
+    height: 25px;
+    display: block;
     margin: 0 auto;
   }
 

@@ -27,6 +27,8 @@
   border-top: 1px solid darken($grey--light, 10%);
 
   ._avatar {
+    @include icon(55px, 55px, block, '/assets/img/avatar_1.png');
+    margin-top: 10px;
     width: 55px;
     float: left;
     margin-right: 10px;
@@ -35,10 +37,10 @@
   ._address {
     @include ellipsis();
     @include media-obj;
+    @extend .jigsaw-light;
     margin-left: 10px;
-    padding-top: 27px;
+    padding-top: 23px;
     font-size: 21px;
-    font-weight: $light;
   }
 
   ._expandBtn {
@@ -55,8 +57,8 @@
   }
 
   ._amount {
+    @extend .jigsaw-light;
     font-size: 24px;
-    font-weight: $light;
   }
 
   ._currency {
@@ -78,7 +80,12 @@
   text-align: center;
 
   ._icon {
-    font-size: 32px;
+    @include icon(80px, 80px, block);
+    margin: 0 auto;
+    margin-bottom: 20px;
+    .svg-help {
+      fill: $grey;
+    }
   }
 
   ._message {

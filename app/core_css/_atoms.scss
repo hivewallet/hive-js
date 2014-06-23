@@ -8,7 +8,7 @@
 
   padding-left: 30px;
   padding-right: 30px;
-  padding-top: 15px;
+  padding-top: 18px;
   padding-bottom: 15px;
   border-radius: 2px;
 
@@ -16,7 +16,7 @@
   text-align: center;
   font-size: 18px;
   background-color: $blue;
-  box-shadow: 0 3px 0 0 darken($blue, 10%);
+  box-shadow: 0 2px 0 0 darken($blue, 10%);
 
   transition: none;
   position: relative;
@@ -61,7 +61,7 @@
   border: 1px solid $grey;
   background-color: $grey--light;
   border-radius: 3px;
-  padding: 10px 8px;
+  padding: 10px 10px;
 }
 
 .hexagon {
@@ -123,22 +123,24 @@
 
 .z-1000 {
   z-index: 1000;
+  * {
+    z-index: 9000;
+  }
 }
 
 .z-9000 {
   z-index: 9000;
+  * {
+    z-index: 9000;
+  }
 }
 
 
 .overlay__close {
   @include clickbtn;
+  @include icon(30px, 30px, block, '/assets/img/close.svg');
   position: absolute;
-  top: 16px;
-  right: 12px;
-  width: 34px;
-  height: 34px;
-  text-align: center;
-  padding-top: 5px;
-  font-size: 22px;
+  top: 20px;
+  right: 20px;
   z-index: 9000;
 }

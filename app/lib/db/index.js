@@ -4,6 +4,7 @@ var emitter = require('hive-emitter')
 var PouchDB = require('pouchdb')
 var $ = require('browserify-zepto')
 var AES = require('hive-aes')
+var randAvatarIndex = require('hive-avatar').randAvatarIndex
 var encrypt = AES.encrypt
 var decrypt = AES.decrypt
 
@@ -122,7 +123,8 @@ function initializeRecord(){
     userInfo: {
       firstName: '',
       lastName: '',
-      email: ''
+      email: '',
+      avatarIndex: randAvatarIndex()
     }
   }
 

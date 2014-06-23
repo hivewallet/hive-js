@@ -17,38 +17,31 @@
 //   font-stretch: normal;
 // }
 
-@font-face {
-  font-family: 'Jigsaw';
-  src: url("https://s3.amazonaws.com/fonts.typotheque.com/WF-018717-007225-000029-1402973418.eot");
-  src: url("https://s3.amazonaws.com/fonts.typotheque.com/WF-018717-007225-000029-1402973418.eot?#iefix") format("embedded-opentype"), url("https://s3.amazonaws.com/fonts.typotheque.com/WF-018717-007225-000029-1402973418.woff") format("woff"), url("https://s3.amazonaws.com/fonts.typotheque.com/WF-018717-007225-000029-1402973418.svg#typotheque_webfonts_service") format("svg");
+.jigsaw-light {
+  font-family: "Jigsaw Light";
   font-style: normal;
-  font-weight: 300;
+  font-weight: normal;
   font-stretch: normal;
 }
 
-@font-face {
-  font-family: 'Jigsaw';
-  src: url("https://s3.amazonaws.com/fonts.typotheque.com/WF-018717-007225-000031-1402973418.eot");
-  src: url("https://s3.amazonaws.com/fonts.typotheque.com/WF-018717-007225-000031-1402973418.eot?#iefix") format("embedded-opentype"), url("https://s3.amazonaws.com/fonts.typotheque.com/WF-018717-007225-000031-1402973418.woff") format("woff"), url("https://s3.amazonaws.com/fonts.typotheque.com/WF-018717-007225-000031-1402973418.svg#typotheque_webfonts_service") format("svg");
+.jigsaw-regular {
+  font-family: "Jigsaw Regular";
   font-style: normal;
-  font-weight: 400;
+  font-weight: normal;
   font-stretch: normal;
 }
 
-@font-face {
-  font-family: 'Jigsaw';
-  src: url("https://s3.amazonaws.com/fonts.typotheque.com/WF-018717-007225-000033-1402973418.eot");
-  src: url("https://s3.amazonaws.com/fonts.typotheque.com/WF-018717-007225-000033-1402973418.eot?#iefix") format("embedded-opentype"), url("https://s3.amazonaws.com/fonts.typotheque.com/WF-018717-007225-000033-1402973418.woff") format("woff"), url("https://s3.amazonaws.com/fonts.typotheque.com/WF-018717-007225-000033-1402973418.svg#typotheque_webfonts_service") format("svg");
+.jigsaw-medium {
+  font-family: "Jigsaw Medium";
   font-style: normal;
-  font-weight: 500;
+  font-weight: normal;
   font-stretch: normal;
 }
 
-@font-face {
-  font-family: 'Jigsaw';
-  src: url("https://s3.amazonaws.com/fonts.typotheque.com/WF-018717-007225-000035-1402973419.eot");
-  src: url("https://s3.amazonaws.com/fonts.typotheque.com/WF-018717-007225-000035-1402973419.eot?#iefix") format("embedded-opentype"), url("https://s3.amazonaws.com/fonts.typotheque.com/WF-018717-007225-000035-1402973419.woff") format("woff"), url("https://s3.amazonaws.com/fonts.typotheque.com/WF-018717-007225-000035-1402973419.svg#typotheque_webfonts_service") format("svg");
+.jigsaw-bold {
+  font-family: "Jigsaw Bold";
   font-style: normal;
-  font-weight: 700;
+  font-weight: normal;
   font-stretch: normal;
- }
+}
+

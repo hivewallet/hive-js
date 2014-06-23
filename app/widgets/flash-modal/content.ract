@@ -1,7 +1,14 @@
 
 <div class="flash">
   <div class="flash__content">
-    <img class="flash__icon" src="./assets/img/{{icon}}.png" />
+    <div class="flash__icon">
+      {{#error}}
+        {{>svg_cancel}}
+      {{/error}}
+      {{#warning}}
+        {{>svg_warning}}
+      {{/warning}}
+    </div>
     <h2 class="flash__heading {{type}}">{{title}}</h2>
     <p class="flash__message">{{message}}</p>
   </div>

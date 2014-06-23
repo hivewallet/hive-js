@@ -6,10 +6,11 @@
         <label class="_label" for="to">Wallet address
           <input id="to" class="_input" type="text" value="{{to}}" />
         </label>
-        {{#isCordova}}
-          <div class="_btn _qr" on-click="open-qr"></div>
-        {{/isCordova}}
-        <div class="_btn" on-click="open-geo"></div>
+        <div class="_btn" on-click="open-geo">
+          <span class="_icon">
+            {{>svg_waggle}}
+          </span>
+        </div>
       </div>
 
       <div class="send__amount">
@@ -30,6 +31,7 @@
               </select>
             </span>
             <input id="fiat" class="_input" type="number" min="0" value="{{fiatValue}}" on-keyup="fiat-to-bitcoin">
+            {{test_val}}
           </div>
 
 

@@ -7,7 +7,6 @@
   padding-top: 5px;
 }
 
-
 .address__box {
   @extend .generic_box;
   margin-top: 5px;
@@ -17,8 +16,8 @@
 
   ._address {
     @include ellipsis();
+    @extend .jigsaw-light;
     display: block;
-    font-weight: $light;
     padding-right: 40px;
   }
 
@@ -35,10 +34,34 @@
     padding-top: 7px;
     border-radius: 2px;
 
-    background-image: url('../img/qr.svg');
-    @include icon(36px, 36px, block);
-    background-size: 26px 26px;
-    background-repeat: no-repeat;
+    ._icon {
+      width: 26px;
+      height: 26px;
+      display: block;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-top: -13px;
+      margin-left: -13px;
+    }
+  }
+}
+
+.geo__label {
+  position: relative;
+
+  ._help {
+    @include clickbtn;
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 12px;
+    text-align: center;
+    color: $purple;
+    border: 1px solid $purple;
+    width: 18px;
+    height: 18px;
+    border-radius: 9px;
   }
 
 }
@@ -50,15 +73,15 @@
 
     ._btn {
       @extend .hivebtn;
-      margin-bottom: 15px;
+      margin-bottom: 5px;
 
       &.is_broadcasting {
-        background-color: $green;
-        box-shadow: 0 3px 0 0 darken($green, 10%);
-        color: darken($green, 20%);
+        background-color: $yellow;
+        box-shadow: 0 3px 0 0 darken($yellow, 10%);
+        color: darken($yellow, 20%);
 
         &:hover {
-          color: darken($green, 20%);
+          color: darken($yellow, 20%);
         }
       }
 
@@ -109,5 +132,6 @@
     margin-top: -100px;
 
     border: 5px solid white;
+    border-radius: 3px;
   }
 }

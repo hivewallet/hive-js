@@ -30,7 +30,7 @@ function openModal(data){
 
   ractive.on('submit-details', function(){
     var details = {
-      firstName: ractive.get('name'),
+      firstName: ractive.get('name') + '',
       email: ractive.get('email')
     }
 
@@ -41,7 +41,7 @@ function openModal(data){
     db.set('userInfo', details, function(err, resp){
       if(err) return data.callback(err);
 
-      ractive.fire('cancel')
+      ractive.fire('cancel', undefined)
       data.callback()
     })
   })

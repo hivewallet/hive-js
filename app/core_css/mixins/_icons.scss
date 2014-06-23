@@ -8,6 +8,7 @@
   display: $display;
   width: $width;
   height: $height;
+  background-repeat: no-repeat;
   background-position: center center;
   background-size: $width $height;
   @if $url != 'auto' {

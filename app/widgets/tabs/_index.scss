@@ -40,15 +40,18 @@
 }
 
 #tabs .tabs .tab__icon {
+  width: 28px;
+  height: 28px;
   display: block;
-  margin-top: 5px;
-  font-size: 20px;
+  margin: 0 auto;
+  margin-top: 2px;
+  margin-bottom: 5px;
   opacity: 0.3;
 }
 
 .tab__text {
   display: block;
-  font-weight: $light;
+  @extend .jigsaw-light;
   font-size: 14px;
   opacity: 0.3;
 }
@@ -57,7 +60,6 @@
 .hide--portrait {
   display: inline-block;
   padding-left: 10px;
-  font-family: $sans;
   @include breakpoint(portrait) {
     display: none;
   }

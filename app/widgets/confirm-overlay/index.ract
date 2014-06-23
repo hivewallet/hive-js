@@ -13,13 +13,15 @@
       </div>
 
       <span class="_fee">+{{fee}} {{denomination}} transaction fee</span>
-      <span class="_icon ss-icon">down</span>
+      <span class="_icon">
+        {{>svg_sendto}}
+      </span>
       <span class="_address">{{to}}</span>
 
     </div>
 
     <div class="confirm__inputs">
-      <div class="_cancel" on-click="cancel">Cancel</div>
+      <div class="_cancel" on-click="test-error">Cancel</div>
       <div class="_send" on-click="send">Send</div>
     </div>
 
@@ -28,8 +30,8 @@
 
   {{#success}}
 
-    <div class="confirm__responseIcon--success">
-      <span class="ss-icon">tick</span>
+    <div class="confirm__responseIcon">
+      {{>svg_success}}
     </div>
 
     <h3 class="confirm__responseTitle">Transaction Successful</h3>
@@ -43,8 +45,8 @@
 
   {{#error}}
 
-    <div class="confirm__responseIcon--error">
-      <span class="ss-icon">delete</span>
+    <div class="confirm__responseIcon">
+      {{>svg_error}}
     </div>
 
     <h3 class="confirm__responseTitle">Transaction Failed</h3>

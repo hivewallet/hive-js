@@ -1,0 +1,83 @@
+// http://codepen.io/katydecorah/full/uIEFy
+
+$shadow: $foreground;
+
+#loader {
+  color: white;
+  text-align: center;
+  margin: 0 auto;
+}
+
+
+#logo_animation {
+  position: relative;
+  width: 82px;
+  height: 92px;
+  margin: 0 auto;
+}
+
+#loader-message {
+  padding-top: 40px;
+  max-width: 160px;
+  margin: 0 auto;
+  height: 90px;
+}
+
+#logo_frame {
+  @include icon(82px, 92px, block, '/assets/img/logo_frame.svg');
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#logo_block1 {
+  opacity: 0;
+  @include icon(22px, 12px, block, '/assets/img/logo_block1.svg');
+  position: absolute;
+  left: 50%;
+  margin-left: -11px;
+  top: 69px;
+}
+
+#logo_block2 {
+  opacity: 0;
+  @include icon(48px, 12px, block, '/assets/img/logo_block2.svg');
+  position: absolute;
+  left: 50%;
+  margin-left: -24px;
+  top: 55px;
+}
+
+#logo_block3 {
+  opacity: 0;
+  @include icon(70px, 15px, block, '/assets/img/logo_block3.svg');
+  position: absolute;
+  left: 50%;
+  margin-left: -35px;
+  top: 38px;
+}
+
+#logo_key {
+  @include icon(16px, 16px, block, '/assets/img/logo_key.svg');
+  position: absolute;
+  top: 0;
+  left: 27px;
+}
+
+#logo_block4 {
+  opacity: 0;
+  @include icon(48px, 12px, block, '/assets/img/logo_block4.svg');
+  position: absolute;
+  left: 50%;
+  margin-left: -24px;
+  top: 25px;
+}
+
+#logo_block5 {
+  opacity: 0;
+  @include icon(22px, 12px, block, '/assets/img/logo_block5.svg');
+  position: absolute;
+  left: 50%;
+  margin-left: -11px;
+  top: 11px;
+}

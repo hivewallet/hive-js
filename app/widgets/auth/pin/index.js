@@ -27,7 +27,6 @@ module.exports = function(prevPage, data){
 
     ractive.set('opening', true)
     ractive.set('progress', 'Verifying pin')
-    ractive.loading()
 
     if(userExists) {
       return Hive.walletExists(function(walletExists){
@@ -46,6 +45,7 @@ module.exports = function(prevPage, data){
 
   ractive.on('back', function(){
     if(prevPage) prevPage(data)
+    ractive.teardown()
   })
 
   function getPin(){

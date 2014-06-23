@@ -47,14 +47,16 @@
   color: white;
 
   ._img {
+    width: 105px;
+    height: 99px;
+    display: block;
     margin: 0 auto;
     margin-bottom: 10px;
-    display: block;
   }
 
   ._img--large {
     width: 100px;
-    height: 117px;
+    height: 100px;
     margin: 0 auto;
     display: block;
   }
@@ -69,9 +71,9 @@
   }
 
   ._title {
+    @extend .jigsaw-bold;
     font-size: 42px;
     line-height: 1.4;
-    font-weight: $bold;
     color: white;
   }
 
@@ -128,6 +130,7 @@
 
 .auth__btn--loading {
   @extend .hivebtn;
+  position: relative;
   color: rgba(255,255,255, 0.3);
   background-color: #2d5f8d;
   box-shadow:inset 0 1px 1px 1px darken(#2d5f8d, 20%);
@@ -148,10 +151,13 @@
   }
 
   ._icon {
-    @include icon(25px, 25px, block, '../img/refresh.svg');
+    display: block;
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    left: 15px;
+    top: 18px;
     opacity: 0.3;
-    margin-right: 10px;
-    margin-top: 1px;
     animation:  infinite-spinning 1s linear infinite;
   }
 }

@@ -16,6 +16,7 @@ function enterPassphrase(prevPage){
 
   ractive.on('back', function(event){
     prevPage()
+    ractive.teardown()
   })
 
   ractive.on('open-wallet-with-passphrase', function(event){
@@ -29,7 +30,6 @@ function enterPassphrase(prevPage){
   }
 
   function onWalletCreated(err, data) {
-    ractive.pauseLoading()
     ractive.set('opening', false)
 
     if(err) {
@@ -37,6 +37,7 @@ function enterPassphrase(prevPage){
     }
 
     pinPage(enterPassphrase, data)
+    ractive.teardown()
   }
 
   return ractive

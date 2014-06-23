@@ -3,13 +3,14 @@
 var Ractive = require('hive-ractive')
 var getWallet = require('hive-wallet').getWallet
 var emitter = require('hive-emitter')
-var emailToAvatar = require('hive-gravatar').emailToAvatar
+var Avatar = require('hive-avatar')
 var db = require('hive-db')
 var openDisablePinModal = require('hive-disable-pin-modal')
 var showError = require('hive-flash-modal').showError
 var Dropdown = require('hive-transitions/dropdown.js')
 var Profile = require('hive-transitions/profileAnimation.js')
 var showTooltip = require('hive-tooltip')
+var getNetwork = require('hive-network')
 
 module.exports = function(el){
   var ractive = new Ractive({
@@ -20,11 +21,28 @@ module.exports = function(el){
         name: '',
         email: ''
       },
+      tokens: [
+        {
+          token: 'bitcoin',
+          bitcoin: true
+        },
+        {
+          token: 'litecoin',
+          litecoin: true
+        }
+      ],
       editingName: false,
       editingEmail: false,
-      emailToAvatar: emailToAvatar,
       animating: false,
-      user_settings: true
+      user_settings: true,
+      capitalize: function(str){
+        return str.replace(/^.|\s\S/g, function(a) {
+         return a.toUpperCase()
+        })
+      },
+      getNetworkClass: function(elId){
+        return getNetwork() === elId ? "current" : ""
+      }
     }
   })
 
@@ -32,12 +50,15 @@ module.exports = function(el){
   var $editEl = ractive.nodes['details-edit']
   var $initialUserEl = ractive.nodes['user_settings']
   var $initialSecurityEl = ractive.nodes['security_settings']
+  var $initialTokenEl = ractive.nodes['token_settings']
   var $userIcon = ractive.nodes['user_arrow']
   var $securityIcon = ractive.nodes['security_arrow']
+  var $tokenIcon = ractive.nodes['token_arrow']
 
   // animate on load to avoid style property bugs
   Dropdown.show($initialUserEl, $userIcon, ractive)
   Dropdown.hide($initialSecurityEl, $securityIcon, ractive)
+  Dropdown.hide($initialTokenEl, $tokenIcon, ractive)
 
   emitter.on('wallet-ready', function(){
     var wallet = getWallet()
@@ -50,6 +71,10 @@ module.exports = function(el){
 
       ractive.set('user.name', doc.userInfo.firstName)
       ractive.set('user.email', doc.userInfo.email)
+      ractive.set('user.avatarIndex', doc.userInfo.avatarIndex)
+
+      setAvatar()
+
       var hiddenState = {
           display: 'none',
           opacity: 0
@@ -92,9 +117,17 @@ module.exports = function(el){
 
   ractive.on('submit-details', function(){
     if(ractive.get('animating')) return;
+
+    var email = ractive.get('user.email')
+
     var details = {
-      firstName: ractive.get('user.name'),
-      email: ractive.get('user.email')
+      firstName: ractive.get('user.name') + '',
+      email: email
+    }
+
+    var avatarIndex = ractive.get('user.avatarIndex')
+    if(blank(email) && avatarIndex == undefined) {
+      details.avatarIndex = Avatar.randAvatarIndex()
     }
 
     db.set('userInfo', details, function(err, response){
@@ -108,6 +141,30 @@ module.exports = function(el){
 
   ractive.on('disable-pin', function(){
     openDisablePinModal()
+  })
+
+  function setAvatar(){
+    var avatar = Avatar.getAvatar(ractive.get('user.email'),
+                                  ractive.get('user.avatarIndex'))
+    ractive.set('avatar', avatar)
+  }
+
+  ractive.on('switch-token', function(event) {
+
+    var token = event.node.id
+
+    if(token === getNetwork()) return;
+
+    var host = window.location.host
+    var url
+
+    if(token === 'bitcoin') {
+      url = 'http://' + host + '/'
+    } else {
+      url = 'http://' + host + '/?network=' + token
+    }
+
+    window.location.assign(url);
   })
 
   function handleUserError(response) {
@@ -133,6 +190,10 @@ module.exports = function(el){
       ractive.set(dataString, true)
       Dropdown.show(elem, icon, ractive)
     }
+  }
+
+  function blank(str) {
+    return (str == undefined || str.trim() === '')
   }
 
   return ractive

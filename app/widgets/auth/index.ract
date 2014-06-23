@@ -1,4 +1,4 @@
-<div class="auth">
+<div id="auth_content" class="auth">
   <div id="landing_el" class="current">
     <div class="auth__header">
       {{>header}}

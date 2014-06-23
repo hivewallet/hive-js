@@ -5,25 +5,26 @@ var emitter = require('hive-emitter')
 
 var defaults = {
   error: {
-    icon: 'error_temp',
+    error: true,
     title: 'Whoops!'
   },
   info: {
-    icon: 'info_temp',
+    warning: true,
     title: 'Just saying...'
   }
 }
 
 function openModal(type, data){
   data = data || {}
-  data.icon = data.icon || defaults[type].icon
+  data.error = defaults[type].error
+  data.warning = defaults[type].warning
   data.title = data.title || defaults[type].title
   data.type = type
 
   var ractive = new Ractive({
     el: document.getElementById('flash-modal'),
     partials: {
-      content: require('./content.ract').template,
+      content: require('./content.ract').template
     },
     data: data
   })

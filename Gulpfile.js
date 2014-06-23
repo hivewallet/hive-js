@@ -11,6 +11,7 @@ var lrserver = require('tiny-lr')()
 var buildServer = require('./server/express')
 var sketch = require('gulp-sketch');
 var replace = require('gulp-replace');
+var clean = require('gulp-clean')
 
 // server --------------------------------- //
 
@@ -45,6 +46,17 @@ gulp.task('scripts', function(){
     .pipe(refresh(lrserver));
 });
 
+gulp.task('loader', function(){
+  var bundler = browserify('./app/loader/nope.js')
+  bundle(bundler, './nope.js')
+    .pipe(gulp.dest('./build/assets/js/'));
+
+  var bundler = browserify('./app/loader/index.js')
+  bundle(bundler, './loader.js')
+    .pipe(gulp.dest('./build/assets/js/'))
+    .pipe(refresh(lrserver));
+});
+
 gulp.task('html', function(){
   var injectScripts = ['cordova.js', 'assets/js/ios.js'];
   var injectTags = injectScripts.map(function(src) {
@@ -58,7 +70,12 @@ gulp.task('html', function(){
     .pipe(refresh(lrserver));
 });
 
-gulp.task('assets', function(){
+gulp.task('clean-assets', function(){
+  return gulp.src('./build/assets/', {read: false})
+    .pipe(clean())
+});
+
+gulp.task('assets', ['clean-assets'], function(){
   gulp.src('./app/assets/**/*')
     .pipe(gulp.dest('./build/assets/'))
     .pipe(gulp.dest('./cordova/www/assets/'))
@@ -95,7 +112,7 @@ function bundle(bundler, outFilename){
 gulp.task('watch', function() {
 
   gulp.watch(['app/**/*.scss'], ['styles']);
-  gulp.watch(['app/**/*.js', 'app/**/*.ract', '!app/**/node_modules/**/*'], ['scripts', 'tests']);
+  gulp.watch(['app/**/*.js', 'app/**/*.ract', '!app/**/node_modules/**/*'], ['loader', 'scripts', 'tests']);
   gulp.watch('app/assets/**/*', ['assets']);
   gulp.watch('app/index.html', ['html']);
   gulp.watch(['app/**/test/*.js', '!app/**/node_modules/**/*'], ['tests']);
@@ -145,8 +162,8 @@ gulp.task('cordova-splash', function() {
 
 // $ gulp build --------------------------- //
 
-gulp.task('build', ['html', 'scripts', 'styles', 'assets', 'tests']);
+gulp.task('build', ['html', 'loader', 'scripts', 'styles', 'assets', 'tests']);
 
 // $ gulp ---------------------------------- //
 
-gulp.task('default', ['scripts', 'styles', 'html', 'assets', 'tests', 'serve', 'watch']);
+gulp.task('default', ['loader', 'scripts', 'styles', 'html', 'assets', 'tests', 'serve', 'watch']);

@@ -12,6 +12,7 @@ input,
 select,option,optgroup,
 textarea{
   font:inherit;
+  -webkit-font-smoothing: antialiased;
 }
 
 
@@ -44,10 +45,10 @@ input[type="search"]::-webkit-search-decoration {
   display: none;
 }
 
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button { 
-  -webkit-appearance: none; 
-  margin: 0; 
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 // Use divs around fieldsets or spans inside legends for styling.
@@ -67,7 +68,7 @@ textarea {
   &:invalid {
     @include box-shadow(none);
   }
-  
+
   &:focus {
     @include box-shadow(none);
     z-index: 1; // for Opera
@@ -139,9 +140,9 @@ input[type="button"] {
 
   font-family: "Helvetica Neue", Arial, "Liberation Sans", FreeSans, sans-serif;
   font-weight: normal;
-  font-size: $base_font_size; 
+  font-size: $base_font_size;
   line-height: $base_line_height;
-  
+
   color: $foreground;
 
   &:hover {
@@ -183,7 +184,7 @@ input[type="tel"],
 input[type="text"],
 input[type="time"],
 input[type="url"],
-input[type="week"] {  
+input[type="week"] {
   @include background-clip(padding-box);
   @include border-radius(0);
 
@@ -229,7 +230,7 @@ textarea[disabled] {
 }
 
 
-// Placeholders (separate cross-browser rules) 
+// Placeholders (separate cross-browser rules)
 
 input::-webkit-input-placeholder,
 textarea::-webkit-input-placeholder {
@@ -263,7 +264,7 @@ select[size="1"] {
 }
 
 
-// Tweaks for Safari + Chrome 
+// Tweaks for Safari + Chrome
 
 @media (-webkit-min-device-pixel-ratio: 0) {
 
@@ -353,7 +354,7 @@ tbody, tfoot {
 }
 
 th {
-  font-weight: $bold;
+  @extend .jigsaw-bold;
   text-align: left;
 
   padding-right: 10px;

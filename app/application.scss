@@ -24,7 +24,6 @@
 @import "core_css/_javascript";
 @import "core_css/_base";
 @import "core_css/_atoms";
-@import "core_css/_symbol-set";
 @import "core_css/_app";
 
 // widgets
@@ -46,3 +45,6 @@
 @import "pages/receive/_index";
 @import "pages/history/_index";
 @import "pages/settings/_index";
+
+// loader
+@import "loader/_index";

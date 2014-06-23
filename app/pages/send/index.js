@@ -8,6 +8,7 @@ var getWallet = require('hive-wallet').getWallet
 var currencies = require('hive-ticker-api').currencies
 var btcToSatoshi = require('hive-convert').btcToSatoshi
 var satoshiToBtc = require('hive-convert').satoshiToBtc
+var toFixedFloor = require('hive-convert').toFixedFloor
 var showError = require('hive-flash-modal').showError
 var showConfirmation = require('hive-confirm-overlay')
 var Address = require('bitcoinjs-lib').Address
@@ -58,11 +59,14 @@ module.exports = function(el){
     validateSend(function(err, tx){
       if(err) return showError({title: 'Uh oh!', message: err.message});
 
+      var network = getWallet().getMasterKey().network
+      var fee = network.estimateFee(tx)
+
       showConfirmation({
         to: ractive.get('to'),
         amount: ractive.get('value'),
         denomination: ractive.get('denomination'),
-        fee: satoshiToBtc(tx.estimateFee())
+        fee: satoshiToBtc(fee)
       })
     })
   })
@@ -91,7 +95,7 @@ module.exports = function(el){
     if(fiat == undefined || fiat === '') return;
 
     var exchangeRate = ractive.get('exchangeRates')[ractive.get('selectedFiat')]
-    var bitcoin = new Big(fiat).div(exchangeRate).toFixed(8)
+    var bitcoin = toFixedFloor(new Big(fiat).div(exchangeRate), 8)
 
     ractive.set('value', bitcoin)
   })
@@ -100,8 +104,10 @@ module.exports = function(el){
     var bitcoin = ractive.nodes.bitcoin.value
     if(bitcoin == undefined || bitcoin === '') return;
 
+
     var exchangeRate = ractive.get('exchangeRates')[ractive.get('selectedFiat')]
-    var fiat = new Big(bitcoin).times(exchangeRate).toFixed(2)
+    var val = new Big(bitcoin).times(exchangeRate)
+    var fiat = toFixedFloor(val, 2)
 
     ractive.set('fiatValue', fiat)
   })
@@ -135,16 +141,6 @@ module.exports = function(el){
     }
 
     callback(null, tx)
-  }
-
-  function onTxSent(err, tx){
-    if(err) {
-      return showError({ message: "error sending transaction. " + err })
-    }
-
-    // update balance & tx history
-    emitter.emit('wallet-ready')
-    emitter.emit('transactions-loaded', [tx])
   }
 
   function setPreferredCurrency(currency, old){

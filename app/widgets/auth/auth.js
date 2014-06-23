@@ -4,6 +4,7 @@ var Ractive = require('hive-ractive')
 var Hive = require('hive-wallet')
 var emitter = require('hive-emitter')
 var showError = require('hive-flash-modal').showError
+var getNetwork = require('hive-network')
 
 var Auth = Ractive.extend({
   el: document.getElementById("auth"),
@@ -19,7 +20,10 @@ var Auth = Ractive.extend({
 
     emitter.on('wallet-opening', function(progress){
       self.set('progress', progress)
-      loading()
+    })
+
+    self.on('teardown', function(){
+      emitter.removeAllListeners('wallet-opening')
     })
 
     function onSyncDone(err, transactions) {
@@ -33,29 +37,8 @@ var Auth = Ractive.extend({
       emitter.emit('transactions-loaded', transactions)
     }
 
-    function getNetwork() {
-      var regex = /^network=/
-      var networkParam = location.search.substr(1).split('&').filter(function(e){
-        return e.match(regex)
-      })[0]
-
-      return networkParam ? networkParam.replace(regex, '') : 'bitcoin'
-    }
-
-    function loading() {
-      // add class here
-      console.log('loading...')
-    }
-
-    function pauseLoading() {
-      // remove class here
-      console.log('finished loading.')
-    }
-
     this.onSyncDone = onSyncDone
     this.getNetwork = getNetwork
-    this.loading = loading
-    this.pauseLoading = pauseLoading
   }
 })
 

@@ -21,22 +21,24 @@
     @extend .hivebtn;
     margin-top: 29px;
     padding: 0;
+    width: 42px;
+    height: 42px;
+    position: relative;
 
-    background-image: url('../img/pin.svg');
-    @include icon(42px, 42px, block);
-    background-size: 30px 30px;
-    background-repeat: no-repeat;
-
-    &._qr {
-      background-image: url('../img/qr.svg');
-      margin-right: 10px;
+    ._icon {
+      width: 30px;
+      height: 30px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-top: -15px;
+      margin-left: -15px;
     }
   }
 
   ._input {
     @extend .generic_box;
-    font-weight: $light;
-    font-family: 'jigsaw', sans-serif;
+    @extend .jigsaw-light;
     margin-top: 5px;
     padding-left: 10px;
     border-radius: 2px;
@@ -62,13 +64,13 @@
 
   ._currency {
     @include noselect;
+    @extend .jigsaw-light;
     position: absolute;
     z-index: 500;
     cursor: pointer;
     display: block;
     text-align: right;
     font-size: 18px;
-    font-weight: $light;
     right: 10px;
     top: 9px;
     color: $grey;
@@ -76,8 +78,7 @@
 
   ._input {
     @extend .generic_box;
-    font-weight: $light;
-    font-family: 'jigsaw', sans-serif;
+    @extend .jigsaw-light;
     padding-left: 10px;
     height: auto;
     margin: 0;

@@ -9,6 +9,8 @@ var showError = require('hive-flash-modal').showError
 var showSetDetails = require('hive-set-details-modal')
 var fadeIn = require('hive-transitions/fade.js').fadeIn
 var fadeOut = require('hive-transitions/fade.js').fadeOut
+var setPulse = require('hive-transitions/fade.js').setPulse
+var clearPulse = require('hive-transitions/fade.js').clearPulse
 
 module.exports = function(el){
   var ractive = new Ractive({
@@ -17,7 +19,7 @@ module.exports = function(el){
     data: {
       address: '',
       qrVisible: false,
-      btn_message: 'Turn waggle on',
+      btn_message: 'Turn Waggle on',
       connecting: false,
       broadcasting: false
     }
@@ -40,20 +42,22 @@ module.exports = function(el){
     }
   })
 
+  var waggleInterval;
+
   function waggleOff(){
     ractive.set('broadcasting', false)
-    ractive.set('btn_message', 'Turn waggle on')
+    ractive.set('btn_message', 'Turn Waggle on')
     geo.remove(true)
   }
 
   function waggleOn(){
     ractive.set('connecting', true)
-    ractive.set('btn_message', 'Connecting to waggle')
+    ractive.set('btn_message', 'Checking your location')
     geo.search(function(err, results){
       if(err) return handleWaggleError(err)
       ractive.set('connecting', false)
       ractive.set('broadcasting', true)
-      ractive.set('btn_message', 'Waggle is broadcasting')
+      ractive.set('btn_message', 'Turn Waggle off')
     })
   }
 
@@ -94,13 +98,13 @@ module.exports = function(el){
 
     var data = {
       title: 'Uh Oh...',
-      message: "We couldn't connect you to waggle, please check your internet connection."
+      message: "We couldn't connect you to Waggle, please check your internet connection."
     }
 
     showError(data)
     ractive.set('connecting', false)
     ractive.set('broadcasting', false)
-    ractive.set('btn_message', 'Turn waggle on')
+    ractive.set('btn_message', 'Turn Waggle on')
   }
 
   return ractive

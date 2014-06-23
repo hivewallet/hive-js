@@ -5,18 +5,58 @@
   background-color: $blue;
 }
 
-.overlay__close--geo {
-  @extend .overlay__close;
-  color: white;
+.geo__header {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+  display: flex;
+  justify-content: space-between;
+
+  ._title {
+    @extend .jigsaw-light;
+    text-align: center;
+    flex: 1;
+    font-size: 22px;
+    color: white;
+  }
+
+  ._refresh {
+    @include clickbtn;
+    margin-left: 20px;
+    ._icon {
+      display: block;
+      width: 30px;
+      height: 30px;
+    }
+
+    &.is_updating {
+      ._icon {
+        animation:  infinite-spinning 1s linear infinite;
+      }
+    }
+  }
+
+  ._cancel {
+    @include clickbtn;
+    margin-right: 20px;
+    display: block;
+    width: 30px;
+    height: 30px;
+  }
 }
 
-.geo__content {
-  padding: 20px;
-  padding-top: 60px;
-}
 
 
 .geo__searching {
+
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
   ._text {
     font-size: 14px;
     text-align: center;
@@ -38,11 +78,12 @@
     margin-left: -49px;
     margin-top: -50px;
     z-index: 100;
-    transform: scale(0.1);
+    opacity: 0;
   }
 }
 
 .geo__pindrop {
+  transform: translateY(-100%);
   position: absolute;
   top: 0;
   bottom: 0;
@@ -55,37 +96,52 @@
     left: 50%;
     margin-top: -90px;
     margin-left: -35px;
-    background-image: url('../img/pin.svg');
-    @include icon(70px, 70px, block);
+    display: block;
+    width: 70px;
+    height: 70px;
     z-index: 200;
   }
 }
 
 .geo__results {
 
-
   ._item {
     @include clickbtn;
     display: flex;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 30px;
+    padding-right: 20px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.4);
 
     &:first-child {
-      padding-top: 0;
+      display: block;
+      padding-bottom: 30px;
+
+      ._avatar {
+        @include icon(120px, 120px, block);
+        -webkit-mask-size: 120px 120px;
+        margin: 0 auto;
+      }
+      ._name {
+        font-size: 24px;
+        margin-left: 0;
+        text-align: center;
+      }
     }
   }
 
   ._avatar {
-    width: 70px;
-    height: 70px;
-    -webkit-mask-image: url(../img/hex.png);
+    @include icon(60px, 60px, block);
+    -webkit-mask-image: url(/assets/img/hex-large.svg);
+    -webkit-mask-size: 60px 60px;
   }
 
   ._name {
+    @extend .jigsaw-light;
     color: white;
-    font-size: 24px;
-    padding-top: 18px;
+    font-size: 21px;
+    padding-top: 23px;
     margin-left: 10px;
   }
 }

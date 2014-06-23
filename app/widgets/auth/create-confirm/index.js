@@ -18,6 +18,7 @@ function confirm(data){
 
   ractive.on('create-pin', function(event) {
     pinPage(confirm, data)
+    ractive.teardown()
   })
 
   return ractive
