@@ -8,6 +8,12 @@
   padding-bottom: 12px;
 }
 
+.litecoin {
+  .header {
+    background-color: darken($silver, 30%);
+  }
+}
+
 .header__balance {
   @include clickbtn;
   @extend .jigsaw-light;

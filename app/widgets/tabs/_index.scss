@@ -4,6 +4,12 @@
   background-color: $purple--light;
 }
 
+.litecoin {
+  #tabs {
+    background-color: darken($silver, 20%);
+  }
+}
+
 #tabs .tabs {
   display: flex;
   justify-content: space-between;
@@ -39,6 +45,14 @@
   }
 }
 
+.litecoin {
+  #tabs .tabs .tab {
+    &.active {
+        border-bottom: 4px solid lighten($silver, 10%);
+    }
+  }
+}
+
 #tabs .tabs .tab__icon {
   width: 28px;
   height: 28px;
@@ -55,7 +69,6 @@
   font-size: 14px;
   opacity: 0.3;
 }
-
 
 .hide--portrait {
   display: inline-block;

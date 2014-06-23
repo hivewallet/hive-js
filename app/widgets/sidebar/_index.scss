@@ -31,6 +31,13 @@
   }
 }
 
+
+.litecoin {
+  #sidebar {
+    background-color: darken($silver, 20%);
+  }
+}
+
 .sidebar__header {
   display: flex;
   justify-content: space-between;
@@ -40,6 +47,12 @@
   padding-bottom: 19px;
 
   background-color: $purple;
+}
+
+.litecoin {
+  .sidebar__header {
+    background-color: darken($silver, 30%);
+  }
 }
 
 .sidebar__logo {
@@ -82,6 +95,12 @@
   }
 }
 
+.litecoin {
+  .sidebar__logout {
+    background-color: darken($silver, 30%);
+  }
+}
+
 .sidebar__support {
   @extend .sidebar__logout;
   border-left: 1px solid $purple--light;
@@ -104,4 +123,10 @@
   padding-right: 15%;
   display: flex;
   flex-direction: row;
+}
+
+.litecoin {
+  .sidebar__support {
+    border-left: 1px solid darken($silver, 20%);
+  }
 }

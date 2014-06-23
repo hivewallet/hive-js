@@ -103,6 +103,11 @@ html {
     left: 0;
     right: 0;
   }
+
+  &.litecoin {
+    color: darken($silver, 20%);
+    background-color: $silver;
+  }
 }
 
 body {
