@@ -22,7 +22,11 @@ module.exports = function(el){
     if(open) {
       classes.add('open')
     } else {
+      classes.add('animating')
       classes.remove('open')
+      setTimeout(function(){
+        classes.remove('animating')
+      }, 300)
     }
   })
 
