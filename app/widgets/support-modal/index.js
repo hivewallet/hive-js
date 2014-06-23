@@ -43,14 +43,6 @@ function openModal(data){
     return (!value || value.toString().trim() === '')
   }
 
-  function center(){
-    var modal = ractive.find('.flash')
-    var background = ractive.find('.overlay--flash')
-    var top = (background.clientHeight - modal.clientHeight) / 2
-    modal.style.top = top + 'px'
-  }
-
-  center()
   return ractive
 }
 
