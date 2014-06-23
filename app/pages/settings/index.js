@@ -115,6 +115,13 @@ module.exports = function(el){
     })
   })
 
+  emitter.on('details-updated', function(details){
+    ractive.set('user.name', details.firstName)
+    Profile.hide($editEl, ractive, function(){
+      Profile.show($previewEl, ractive)
+    })
+  })
+
   ractive.on('submit-details', function(){
     if(ractive.get('animating')) return;
 

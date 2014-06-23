@@ -2,6 +2,7 @@
 
 var Ractive = require('hive-modal')
 var db = require('hive-db')
+var emitter = require('hive-emitter')
 var showError = require('hive-flash-modal').showError
 
 function fetchDetails(callback){
@@ -42,6 +43,7 @@ function openModal(data){
       if(err) return data.callback(err);
 
       ractive.fire('cancel', undefined)
+      emitter.emit('details-updated', details)
       data.callback()
     })
   })
