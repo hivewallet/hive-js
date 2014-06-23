@@ -29,6 +29,11 @@
     transform: translateX(0);
     position: relative;
   }
+
+  @include breakpoint(landscape) {
+    transform: translateX(0);
+    position: relative;
+  }
 }
 
 
@@ -51,6 +56,11 @@
   @include breakpoint(iphone5) {
     padding-top: 29px;
     padding-bottom: 30px;
+  }
+
+  @include breakpoint(landscape) {
+    padding-right: 0;
+    background: none;
   }
 }
 
@@ -133,6 +143,10 @@
   padding-right: 15%;
   display: flex;
   flex-direction: row;
+
+  @include breakpoint(landscape) {
+    padding-right: 0;
+  }
 }
 
 .litecoin {

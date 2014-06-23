@@ -8,15 +8,26 @@
 $mquery: false !default;
 
 $iphone5: 28em;
-
+$mob: 25em;
 $portrait: 48em;    // based on ipad ~ 768px
 $landscape: 64em;   // based on ipad ~ 1024px
 
 @mixin breakpoint($point) {
 
-  @if $point == portrait {
+  @if $point == iphone5 {
 
-    $width: $portrait;
+    $height: $iphone5;
+
+    @media (min-height: $height) {
+      $mquery: true;
+      @content;
+      $mquery: false;
+    }
+  }
+
+  @if $point == mob {
+
+    $width: $mob;
 
     @media (min-width: $width) {
       $mquery: true;
@@ -25,11 +36,11 @@ $landscape: 64em;   // based on ipad ~ 1024px
     }
   }
 
-  @if $point == iphone5 {
+  @if $point == portrait {
 
-    $height: $iphone5;
+    $width: $portrait;
 
-    @media (min-height: $height) {
+    @media (min-width: $width) {
       $mquery: true;
       @content;
       $mquery: false;

@@ -4,6 +4,10 @@
   padding-bottom: 130px;
   padding-right: 15%;
   flex-grow: 1;
+
+  @include breakpoint(landscape) {
+    padding-right: 0;
+  }
 }
 
 .settings__avatar {
