@@ -93,7 +93,7 @@ function sendTx(txHex, callback) {
 
   // begin cors proxy
   var param = encodeURIComponent(uri)
-  var corsUri = process.env.PROXY_URL + "?url=" + param
+  var corsUri = require('hive-proxy-url')() + "?url=" + param
   // end cors proxy
 
   xhr({
