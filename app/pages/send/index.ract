@@ -6,6 +6,15 @@
         <label class="_label" for="to">Wallet address
           <input id="to" class="_input" type="text" value="{{to}}" />
         </label>
+
+        {{#isCordova}}
+          <div class="_btn qr" on-click="open-qr">
+            <span class="_icon">
+              {{>svg_qr}}
+            </span>
+          </div>
+        {{/isCordova}}
+
         <div class="_btn" on-click="open-geo">
           <span class="_icon">
             {{>svg_waggle}}
