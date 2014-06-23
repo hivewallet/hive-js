@@ -18,9 +18,11 @@ $shadow: $foreground;
 
 #loader-message {
   padding-top: 40px;
-  max-width: 160px;
+  max-width: 220px;
   margin: 0 auto;
   height: 90px;
+  color: white;
+  text-align: center;
 }
 
 #logo_frame {

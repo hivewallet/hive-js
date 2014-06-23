@@ -25,8 +25,8 @@ window.initHiveApp = function() {
     auth = exists ? initAuth.pin(null, { userExists: true }) : initAuth.choose()
     var authContentEl = document.getElementById('auth_content')
     authContentEl.style.opacity = 0;
-    auth.show()
     fadeIn(authContentEl)
+    auth.show()
   })
 
   emitter.on('open-overlay', function(){

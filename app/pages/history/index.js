@@ -42,7 +42,7 @@ module.exports = function(el){
 
   emitter.on('transactions-loaded', function(newTxs){
     Array.prototype.unshift.apply(transactions, newTxs)
-    ractive.update('transactions')
+    ractive.set('transactions', transactions)
   })
 
   emitter.on('update-transactions', function(newTxs) {

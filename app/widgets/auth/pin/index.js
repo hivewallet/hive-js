@@ -26,7 +26,11 @@ module.exports = function(prevPage, data){
     }
 
     ractive.set('opening', true)
-    ractive.set('progress', 'Verifying pin')
+    if(ractive.get('userExists')) {
+      ractive.set('progress', 'Verifying pin')
+    } else {
+      ractive.set('progress', 'Setting pin')
+    }
 
     if(userExists) {
       return Hive.walletExists(function(walletExists){
