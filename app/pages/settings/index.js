@@ -5,6 +5,7 @@ var getWallet = require('hive-wallet').getWallet
 var emitter = require('hive-emitter')
 var Avatar = require('hive-avatar')
 var db = require('hive-db')
+var openSupportModal = require('hive-support-modal')
 var showError = require('hive-flash-modal').showError
 var Dropdown = require('hive-transitions/dropdown.js')
 var Profile = require('hive-transitions/profileAnimation.js')
@@ -149,6 +150,10 @@ module.exports = function(el){
         Profile.show($previewEl, ractive)
       })
     })
+  })
+
+  ractive.on('open-support', function(){
+    openSupportModal()
   })
 
   function setAvatar(){

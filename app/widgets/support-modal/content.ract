@@ -1,0 +1,37 @@
+<div class="flash">
+  <div class="set-details__container">
+    <div class="_info">
+      Ask us anything
+    </div>
+
+    <div class="set-details__field">
+      <label>
+          Question
+        <input type="text" value="{{subject}}"/>
+      </label>
+    </div>
+
+    <div class="set-details__field">
+      <label>
+          Details
+        <input type="text" value="{{description}}"/>
+      </label>
+    </div>
+
+    <div class="set-details__field">
+      <label>
+          Your name
+        <input type="text" value="{{name}}" autofocus/>
+      </label>
+    </div>
+
+    <div class="set-details__field">
+      <label>
+          Your email address
+        <input type="text" value="{{email}}"/>
+      </label>
+    </div>
+
+    <div class="settings__btn" on-click="submit-details">Submit</div>
+  </div>
+</div>
