@@ -1,7 +1,7 @@
 <div class="auth__passphrase">
-
-  <label>Enter Passphrase:
-    <input id="passphraseField" type="text" placeholder="12-word passphrase" value="{{passphrase}}" on-enter="open-wallet-with-passphrase" autofocus/>
-  </label>
-
+  <div class="auth__input-group">
+    <label class="_label">Enter Passphrase:
+      <input id="passphraseField" class="_input" type="text" placeholder="12-word passphrase" value="{{passphrase}}" on-enter="open-wallet-with-passphrase" autofocus/>
+    </label>
+  </div>
 </div>

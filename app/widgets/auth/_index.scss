@@ -173,7 +173,7 @@
 // inputs ---------------------------------------- //
 
 .auth__passphrase {
-  padding-bottom: 20px;
+  padding-bottom: 10px;
   label {
     @include clickbtn;
     color: white;
@@ -181,7 +181,7 @@
 }
 
 .auth__pin {
-  padding-bottom: 20px;
+  padding-bottom: 10px;
   color: white;
   label {
     @include clickbtn;
@@ -273,6 +273,32 @@
 
     &:active {
       text-decoration: underline;
+    }
+  }
+}
+
+
+.auth__input-group {
+
+  ._label {
+    @include noselect;
+    cursor: pointer;
+    display: block;
+  }
+
+  ._input {
+    @extend .jigsaw-light;
+    background-color: darken($purple--light, 10%);
+    border: 1px solid $purple--light;
+    color: white;
+    margin-top: 5px;
+    height: 50px;
+    padding-left: 10px;
+    border-radius: 3px;
+
+    &:active, &:focus {
+      outline: 0;
+      border: 1px solid $purple--highlight;
     }
   }
 }
