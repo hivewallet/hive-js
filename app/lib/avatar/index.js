@@ -21,7 +21,7 @@ function randAvatarIndex(){
 }
 
 function getAvatarByIndex(index) {
-  return "/assets/img/avatar_" + index + ".png"
+  return "./assets/img/avatar_" + index + ".png"
 }
 
 function getAvatar(email, avatarIndex){
