@@ -132,6 +132,14 @@ module.exports = function(el){
       email: email
     }
 
+    if(!details.firstName || details.firstName.trim() === 'undefined') {
+      details.firstName = '';
+      db.set('userInfo', details, function(err, response){
+        if(err) return handleUserError(response)
+      })
+      return showError({message: "A name is required to set your profile on Hive"})
+    }
+
     var avatarIndex = ractive.get('user.avatarIndex')
     if(blank(email) && avatarIndex == undefined) {
       details.avatarIndex = Avatar.randAvatarIndex()
