@@ -6,7 +6,7 @@
   width: 100%;
   flex: 1; // take up full width
 
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   right: 0;
@@ -21,7 +21,7 @@
   transition: transform .3s ease;
 
   &.animating {
-    position: fixed;
+    position: absolute;
     bottom: auto;
   }
 
@@ -33,6 +33,7 @@
   @include breakpoint(landscape) {
     transform: translateX(0);
     position: relative;
+    transition: none;
   }
 }
 
@@ -60,7 +61,6 @@
 
   @include breakpoint(landscape) {
     padding-right: 0;
-    background: none;
   }
 }
 
@@ -86,7 +86,6 @@
 .sidebar__logout {
   @include clickbtn;
   display: flex;
-  // align-self: flex-end;
   bottom: 0;
   left: 0;
   width: 100%;

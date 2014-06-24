@@ -4,9 +4,16 @@
   padding-bottom: 130px;
   padding-right: 15%;
   flex-grow: 1;
+  background-color: darken($purple--light, 5%);
 
   @include breakpoint(landscape) {
     padding-right: 0;
+  }
+}
+
+.litecoin {
+  #settings {
+    background-color: darken($silver, 25%);
   }
 }
 
@@ -42,8 +49,8 @@
   display: flex;
   padding: 20px;
   padding-bottom: 16px;
-  background-color: $purple--light;
-  border-bottom: 1px solid darken($purple--light, 5%);
+  background-color: darken($purple--light, 2%);
+  border-bottom: 1px solid darken($purple--light, 8%);
 
   ._title {
     margin-left: 10px;
@@ -67,8 +74,8 @@
 
 .litecoin {
   .settings__toggle {
-    background-color: darken($silver, 20%);
-    border-bottom: 1px solid darken($silver, 25%);
+    background-color: darken($silver, 22%);
+    border-bottom: 1px solid darken($silver, 28%);
   }
 }
 
@@ -102,12 +109,16 @@
     padding-left: 20px;
     padding-bottom: 30px;
     transform: translateY(-100%);
+    border-bottom: 1px solid darken($purple--light, 8%);
   }
 }
 
 .litecoin {
   .settings__group {
     background-color: darken($silver, 25%);
+    ._content {
+      border-bottom: 1px solid darken($silver, 28%);
+    }
   }
 }
 
@@ -214,5 +225,15 @@
 
   &:hover {
     opacity: 1;
+  }
+}
+
+.litecoin {
+  .token__item {
+    &.current {
+      ._icon {
+        border: 5px solid $silver;
+      }
+    }
   }
 }

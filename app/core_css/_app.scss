@@ -4,8 +4,19 @@
 #app {
   display: none;
   height: 100%;
+  position: relative;
   &.current {
     display: block;
+  }
+
+  @include breakpoint(mob) {
+    max-width: 450px;
+    margin: 0 auto;
+  }
+
+  @include breakpoint(landscape) {
+    max-width: 760px;
+    margin: 0 auto;
   }
 }
 

@@ -114,6 +114,11 @@
     padding-right: 20px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.4);
 
+    @include breakpoint(mob) {
+      max-width: 450px;
+      margin: 0 auto;
+    }
+
     &:first-child {
       display: block;
       padding-bottom: 30px;

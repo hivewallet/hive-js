@@ -55,7 +55,7 @@
   {{#error}}
 
     <div class="confirm__responseIcon">
-      {{>svg_error}}
+      {{>svg_cancel}}
     </div>
 
     <h3 class="confirm__responseTitle">Transaction Failed</h3>

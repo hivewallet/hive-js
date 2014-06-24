@@ -5,20 +5,11 @@
   min-height: 100%;
   overflow: hidden;
   position: relative;
-  @include breakpoint(mob) {
-    max-width: 450px;
-    margin: 0 auto;
-  }
-
-  @include breakpoint(landscape) {
-    max-width: 760px;
-    margin: 0 auto;
-  }
 }
 
 .is_hidden {
   .frame {
-    position: fixed;
+    position: absolute;
     top:0;
     bottom:0;
     left:0;
@@ -37,20 +28,24 @@
   box-shadow: -5px 0px 15px 0px rgba(25,25,25,0.3);
 
   @include breakpoint(landscape) {
-    transform: translateX(0);
-    position: relative;
     flex: 2;
     box-shadow: none;
+    transition: none;
   }
 
   &.closed {
-    position: fixed;
+    position: absolute;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
     transform: translateX(85%);
     overflow: hidden;
+
+    @include breakpoint(landscape) {
+      transform: translateX(0);
+      position: relative;
+    }
   }
 
   .content {
