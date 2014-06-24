@@ -2,11 +2,26 @@
   padding: 20px;
 
   ._info {
-
-    @extend .jigsaw-light;
+    position: relative;
+    @extend .jigsaw-medium;
     margin-bottom: 10px;
     padding-bottom: 10px;
+    font-size: 18px;
+    text-align: center;
     border-bottom: 1px solid $grey;
+  }
+
+  ._icon {
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 3px;
+    width: 20px;
+    height: 20px;
+  }
+
+  .svg-close {
+    fill: $grey;
   }
 }
 
@@ -33,4 +48,10 @@
       border: 1px solid $blue;
     }
   }
+}
+
+.support__close {
+  padding-top: 20px;
+  text-align: center;
+  color: $grey;
 }

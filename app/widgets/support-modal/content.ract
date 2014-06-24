@@ -1,11 +1,14 @@
 <div class="flash">
   <div class="support">
     <div class="_info">
-      Ask us anything
+      Having problems?
+      <span class="_icon svg-close" on-click="close">
+        {{>svg_close}}
+      </span>
     </div>
 
     <div class="support__field">
-      <label class="_label" for="support_details">Question</label>
+      <label class="_label" for="support_details">Description</label>
       <textarea class="_textarea" id="support_details" rows="6" value="{{description}}">{{description}}</textarea>
     </div>
 
@@ -20,5 +23,6 @@
     </div>
 
     <div class="settings__btn" on-click="submit-details">Submit</div>
+    <div class="support__close" on-click="close">Nevermind</div>
   </div>
 </div>
