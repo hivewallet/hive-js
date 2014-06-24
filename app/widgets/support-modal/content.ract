@@ -5,7 +5,7 @@
     </div>
 
     <div class="support__field">
-      <label class="_label" for="support_details">Details</label>
+      <label class="_label" for="support_details">Question</label>
       <textarea class="_textarea" id="support_details" rows="6" value="{{description}}">{{description}}</textarea>
     </div>
 

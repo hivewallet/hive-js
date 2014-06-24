@@ -4,15 +4,15 @@ var Ractive = require('hive-modal')
 var db = require('hive-db')
 var showError = require('hive-flash-modal').showError
 var sendRequest = require('hive-zendesk')
+var getNetwork = require('hive-network')
 
-function fetchDetails(callback){
+function fetchDetails(){
   db.get(function(err, doc){
-    if(err) return callback(err);
+    if(err) return showError(err);
 
     openModal({
       name: doc.userInfo.firstName,
-      email: doc.userInfo.email,
-      callback: callback
+      email: doc.userInfo.email
     })
   })
 }
@@ -34,8 +34,10 @@ function openModal(data){
       params[field] = ractive.get(field)
     })
 
-    params['subject'] = 'This is a support request from Hive web'
-    sendRequest(params, data.callback)
+    params['subject'] = 'Support request from Hive web for ' + getNetwork()
+    sendRequest(params, function(){
+      ractive.fire('cancel')
+    })
   })
 
   function isBlankField(field){

@@ -11,7 +11,7 @@ function sendRequest(paramsObj, callback){
   xhr({
     uri: corsUri
   }, function(err, resp, body){
-    if(resp.statusCode !== 200) {
+    if(resp.statusCode !== 201) {
       console.error(body)
       return callback(err)
     }
