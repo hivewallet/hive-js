@@ -29,6 +29,8 @@ module.exports = function (){
     setAllHeaders: false,
     safari5: true
   }))
+  app.use(helmet.iexss())
+  app.use(helmet.xframe('deny'))
 
   app.use(express.bodyParser())
   app.use(express.cookieParser(process.env.COOKIE_SALT))
