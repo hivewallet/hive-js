@@ -6,10 +6,30 @@ var auth = require('./auth')
 var geo = require('./geo')
 var validatePin = require('hive-pin-validator')
 var crypto = require('crypto')
+var helmet = require('helmet')
 
 module.exports = function (){
   var app = express()
   app.use(requireHTTPS)
+
+  var proxyHost = process.env.PROXY_URL.replace("https://", '')
+  app.use(helmet.csp({
+    'default-src': ["'self'"],
+    'connect-src': [
+      "'self'",
+      'api.bitcoinaverage.com', 'chain.so', // tickers
+      'btc.blockr.io', 'tbtc.blockr.io', 'ltc.blockr.io', // blockchain APIs
+      process.env.DB_HOST + ":" + process.env.DB_PORT, proxyHost
+    ],
+    'font-src': ['s3.amazonaws.com'],
+    'img-src': ["'self'", 'data:', 'www.gravatar.com'],
+    'style-src': ["'self'", 's3.amazonaws.com'],
+    'script-src': ["'self'", "'unsafe-eval'"], // https://github.com/ractivejs/ractive/issues/285
+    reportOnly: false,
+    setAllHeaders: false,
+    safari5: true
+  }))
+
   app.use(express.bodyParser())
   app.use(express.cookieParser(process.env.COOKIE_SALT))
   app.use(express.cookieSession({

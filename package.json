@@ -33,6 +33,7 @@
   "dependencies": {
     "aperture": "^1.0.0",
     "arrival": "~1.0.0",
+    "async": "~0.9.0",
     "big.js": "^2.5.0",
     "bitcoinjs-lib": "git://github.com/weilu/bitcoinjs-lib.git#utxo",
     "bl": "^0.7.0",
@@ -51,10 +52,12 @@
     "glob": "^3.2.9",
     "gulp": "~3.6.0",
     "gulp-autoprefixer": "0.0.6",
+    "gulp-clean": "~0.3.0",
     "gulp-concat": "~2.1.7",
     "gulp-sass": "~0.7.1",
     "gulp-sketch": "0.0.2",
     "gulp-util": "~2.2.14",
+    "helmet": "^0.2.4",
     "ractify": "~0.4.0",
     "ractive": "~0.4.0",
     "st": "^0.3.1",
@@ -62,9 +65,7 @@
     "uglifyify": "~2.4.0",
     "uniqueify": "~1.0.0",
     "velocity-animate": "git://github.com/haustraliaer/velocity.git",
-    "vinyl-source-stream": "^0.1.1",
-    "gulp-clean": "~0.3.0",
-    "async": "~0.9.0"
+    "vinyl-source-stream": "^0.1.1"
   },
   "aperture": {
     "sources": [
