@@ -13,13 +13,17 @@ module.exports = function (){
   app.use(requireHTTPS)
 
   var proxyHost = process.env.PROXY_URL.replace("https://", '')
+  var dbHost = process.env.DB_HOST
+  if(process.env.NODE_ENV !== "production"){
+    dbHost += ":" + process.env.DB_PORT
+  }
   app.use(helmet.csp({
     'default-src': ["'self'"],
     'connect-src': [
       "'self'",
       'api.bitcoinaverage.com', 'chain.so', // tickers
       'btc.blockr.io', 'tbtc.blockr.io', 'ltc.blockr.io', // blockchain APIs
-      process.env.DB_HOST + ":" + process.env.DB_PORT, proxyHost
+      dbHost, proxyHost
     ],
     'font-src': ['s3.amazonaws.com'],
     'img-src': ["'self'", 'data:', 'www.gravatar.com'],
