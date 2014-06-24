@@ -3,9 +3,12 @@ require('browsernizr/test/storage/localstorage')
 require('browsernizr/test/workers/webworkers')
 require('browsernizr/test/blob')
 
+var token = require('hive-network')()
 var animateLogo = require('hive-transitions/loader.js').in
 var fadeOut = require('hive-transitions/loader.js').out
 var Modernizr = require('browsernizr')
+
+document.getElementsByTagName('html')[0].classList.add(token)
 
 var elems =  {
   block1: document.getElementById('logo_block1'),

@@ -4,6 +4,7 @@ var Ractive = require('hive-ractive')
 var emitter = require('hive-emitter')
 var qrcode = require('hive-qrcode')
 var Hive = require('hive-wallet')
+var showTooltip = require('hive-tooltip')
 var geo = require('hive-geo')
 var showError = require('hive-flash-modal').showError
 var showSetDetails = require('hive-set-details-modal')
@@ -84,6 +85,12 @@ module.exports = function(el){
     fadeOut(ractive.nodes['qr-modal'], function() {
       ractive.set('qrVisible', false)
       emitter.emit('close-overlay')
+    })
+  })
+
+  ractive.on('help', function() {
+    showTooltip({
+      message: 'Waggle lets you broadcast your wallet address to other nearby Hive users by comparing GPS data. This data it is deleted once you turn Waggle off.'
     })
   })
 

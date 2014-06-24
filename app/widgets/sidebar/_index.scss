@@ -31,15 +31,33 @@
   }
 }
 
+
+.litecoin {
+  #sidebar {
+    background-color: darken($silver, 20%);
+  }
+}
+
 .sidebar__header {
   display: flex;
   justify-content: space-between;
-  padding-top: 15px;
+  padding-top: 20px;
   padding-left: 20px;
   padding-right: 15%;
   padding-bottom: 19px;
 
   background-color: $purple;
+
+  @include breakpoint(iphone5) {
+    padding-top: 29px;
+    padding-bottom: 30px;
+  }
+}
+
+.litecoin {
+  .sidebar__header {
+    background-color: darken($silver, 30%);
+  }
 }
 
 .sidebar__logo {
@@ -64,9 +82,12 @@
   width: 100%;
   background-color: $purple;
   padding: 20px;
-  padding-top: 16px;
-  padding-right: 15%;
+  padding-top: 12px;
+  text-align: center;
 
+  &:hover {
+    background-color: darken($purple, 3%);
+  }
 
   ._icon {
     opacity: 0.1;
@@ -77,8 +98,15 @@
   }
 
   ._text {
-    margin-left: 10px;
+    //margin-left: 10px;
     padding-top: 11px;
+    margin: 0 auto;
+  }
+}
+
+.litecoin {
+  .sidebar__logout {
+    background-color: darken($silver, 30%);
   }
 }
 
@@ -95,8 +123,9 @@
   }
 
   ._text {
-    margin-left: 10px;
+    //margin-left: 10px;
     padding-top: 11px;
+    margin: 0 auto;
   }
 }
 
@@ -104,4 +133,10 @@
   padding-right: 15%;
   display: flex;
   flex-direction: row;
+}
+
+.litecoin {
+  .sidebar__support {
+    border-left: 1px solid darken($silver, 20%);
+  }
 }

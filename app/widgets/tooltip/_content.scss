@@ -11,6 +11,12 @@
   box-shadow: 0 2px 2px 1px rgba(000,000,000,0.2);
 }
 
+.litecoin {
+  .tooltip {
+    background-color: darken($silver, 30%);
+  }
+}
+
 .tooltip__message {
   color: white;
 }
@@ -28,3 +34,13 @@
   }
 }
 
+.litecoin {
+  .tooltip__link {
+    a {
+      color: $silver;
+      &:hover {
+        color: $silver;
+      }
+    }
+  }
+}

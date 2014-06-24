@@ -1,5 +1,7 @@
 {{^userExists}}
-  <span class="_link" on-click="back">Review passphrase again</span>
+  {{^opening}}
+    <span class="_link" on-click="back">Review passphrase again</span>
+  {{/opening}}
 {{/userExists}}
 
 {{#userExists}}

@@ -1,0 +1,24 @@
+<div class="flash">
+  <div class="support">
+    <div class="_info">
+      Ask us anything
+    </div>
+
+    <div class="support__field">
+      <label class="_label" for="support_details">Question</label>
+      <textarea class="_textarea" id="support_details" rows="6" value="{{description}}">{{description}}</textarea>
+    </div>
+
+    <div class="support__field">
+      <label class="_label" for="support_name">Your name</label>
+      <input class="_input" id="support_name" type="text" value="{{name}}" />
+    </div>
+
+    <div class="support__field">
+      <label class="_label" for="support_email">Your email address</label>
+      <input class="_input" id="support_email" type="text" value="{{email}}"/>
+    </div>
+
+    <div class="settings__btn" on-click="submit-details">Submit</div>
+  </div>
+</div>

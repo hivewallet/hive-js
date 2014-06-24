@@ -3,6 +3,7 @@
 var Ractive = require('hive-ractive')
 var emitter = require('hive-emitter')
 var initSettings = require('hive-settings')
+var openSupportModal = require('hive-support-modal')
 
 module.exports = function(el){
   var ractive = new Ractive({
@@ -11,6 +12,10 @@ module.exports = function(el){
   })
 
   var settings = initSettings(ractive.find("#settings"))
+
+  ractive.on('open-support', function(){
+    openSupportModal()
+  })
 
   ractive.on('logout', function(event){
     event.original.preventDefault()

@@ -1,8 +1,3 @@
-
-#header {
-  position: relative;
-}
-
 .header {
   display: flex;
   justify-content: space-between;
@@ -11,6 +6,17 @@
   color: white;
   padding-top: 12px;
   padding-bottom: 12px;
+
+  @include breakpoint(iphone5) {
+    padding-top: 22px;
+    padding-bottom: 22px;
+  }
+}
+
+.litecoin {
+  .header {
+    background-color: darken($silver, 30%);
+  }
 }
 
 .header__balance {
@@ -18,6 +24,7 @@
   @extend .jigsaw-light;
   display: flex;
   justify-content: center;
+  margin-top: 5px;
   margin-right: 10px;
   margin-left: 10px;
   width: 100%;
