@@ -178,56 +178,87 @@ function initWallet(data, network) {
 }
 
 function sync(done) {
+  var unconfirmedTxs = []
+
   async.parallel([
-    fetchReceiveAddressUnconfirmedTransactions,
     fetchReceiveAddressTransactions,
+    fetchReceiveAddressUnconfirmedTransactions,
     fetchChangeAddressSentTransactions,
-    fetchRemoteAndLocalUnspent
+    fetchChangeAddressUnconfirmedSentTransactions
   ], function(err, results){
     if(err) return done(err);
 
     var txs = results.reduce(function(memo, e){ return memo.concat(e)}, [])
-    done(null, consolidateTransactions(txs))
-  })
 
-  function fetchReceiveAddressUnconfirmedTransactions(callback){
-    return api.getUnconfirmedTransactions(wallet.addresses, callback)
-  }
-
-  function fetchReceiveAddressTransactions(callback){
-    return api.getTransactions(wallet.addresses, callback)
-  }
-
-  function fetchRemoteAndLocalUnspent(callback){
-    return setUnspentOutputs(function(err){
+    setUnspentOutputs(function(err){
       if(err) return done(err);
 
-      processLocalPendingTxs(callback)
+      unconfirmedTxs.forEach(processPendingTx)
+
+      processLocalPendingTxs(function(err, pendingTxs){
+        if(err) return done(err);
+
+        txs.concat(pendingTxs)
+        done(null, consolidateTransactions(txs))
+      })
+    })
+  })
+
+  function fetchReceiveAddressTransactions(callback){
+    api.getTransactions(wallet.addresses, callback)
+  }
+
+  function fetchReceiveAddressUnconfirmedTransactions(callback){
+    api.getUnconfirmedTransactions(wallet.addresses, function(err, txs){
+      if(err) return callback(err);
+
+      unconfirmedTxs = unconfirmedTxs.concat(getTxObjs(txs))
+      callback(null, txs)
     })
   }
-}
 
-function fetchChangeAddressSentTransactions(callback){
-  api.getTransactions(wallet.changeAddresses, function(err, txs){
-    if(err) return callback(err);
+  function fetchChangeAddressSentTransactions(callback){
+    api.getTransactions(wallet.changeAddresses, function(err, txs){
+      if(err) return callback(err);
 
-    callback(null, txs.filter(function(tx){
-      return tx.amount < 0 // include only sent transactions
-    }))
-  })
-}
+      callback(null, getSentTransactions(txs))
+    })
+  }
 
-function consolidateTransactions(transactions){
-  var sorted = transactions.sort(function(tx1, tx2){
-    return tx1.timestamp > tx2.timestamp ? -1 : 1
-  })
+  function fetchChangeAddressUnconfirmedSentTransactions(callback){
+    api.getUnconfirmedTransactions(wallet.changeAddresses, function(err, txs){
+      if(err) return callback(err);
 
-  sorted.forEach(function(tx){
-    if(tx.pending) tx.timestamp = null
-    return tx
-  })
+      var sentTxs = getSentTransactions(txs)
+      unconfirmedTxs = unconfirmedTxs.concat(getTxObjs(sentTxs))
+      callback(null, sentTxs)
+    })
+  }
 
-  return uniqueify(sorted)
+  function getSentTransactions(txs){
+    return txs.filter(function(tx){
+      return tx.amount < 0
+    })
+  }
+
+  function getTxObjs(txs) {
+    return txs.map(function(tx){
+      return Transaction.fromHex(tx.raw)
+    })
+  }
+
+  function consolidateTransactions(transactions){
+    var sorted = transactions.sort(function(tx1, tx2){
+      return tx1.timestamp > tx2.timestamp ? -1 : 1
+    })
+
+    sorted.forEach(function(tx){
+      if(tx.pending) tx.timestamp = null
+      return tx
+    })
+
+    return uniqueify(sorted)
+  }
 }
 
 function defaultCallback(err){ if(err) console.error(err) }

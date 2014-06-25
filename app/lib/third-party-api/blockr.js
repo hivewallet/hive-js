@@ -167,7 +167,7 @@ function requestTransactionsForAddresses(addresses){
       if(err) return callback(err)
 
       var txs = JSON.parse(resp.body).data
-      parseTransactions(txs, 'txs', callback)
+      parseTransactions(txs, callback)
     })
   }
 }
@@ -178,7 +178,7 @@ function requestUnconfirmedTransactionsForAddresses(addresses){
       if(err) return callback(err)
 
       var txs = JSON.parse(resp.body).data
-      parseTransactions(txs, 'unconfirmed', callback)
+      parseUnconfirmedTransactions(txs, callback)
     })
   }
 }
@@ -202,8 +202,8 @@ function transactionsById(apiTxs, txField){
   return results
 }
 
-function parseTransactions(apiTxs, txField, callback){
-  var transactions = transactionsById(apiTxs, txField)
+function parseTransactions(apiTxs, callback){
+  var transactions = transactionsById(apiTxs, 'txs')
 
   var txIds = Object.keys(transactions)
   if(txIds.length === 0) return callback(null, []);
@@ -225,9 +225,42 @@ function parseTransactions(apiTxs, txField, callback){
   })
 }
 
+function parseUnconfirmedTransactions(apiTxs, callback){
+  var transactions = transactionsById(apiTxs, 'unconfirmed')
+
+  var txIds = Object.keys(transactions)
+  if(txIds.length === 0) return callback(null, []);
+
+  batchRequests(txIds, requestRawTransactions, function(err, txs){
+    if(err) return callback(err);
+
+    txs.forEach(function(resp){
+      var tx = resp.tx
+      var firstOut = tx.vout[0]
+      var id = tx.txid
+
+      transactions[id].raw = tx.hex
+      transactions[id].toAddress = firstOut.scriptPubKey.address
+      if(transactions[id].amount < 0) {
+        transactions[id].amount = -firstOut.value
+      }
+    })
+
+    return callback(null, values(transactions).map(toTransaction))
+  })
+}
+
 function requestTransactions(txIds){
+  return makeTransactionRequest(txIds, 'info')
+}
+
+function requestRawTransactions(txIds){
+  return makeTransactionRequest(txIds, 'raw')
+}
+
+function makeTransactionRequest(txIds, type){
   return function(callback){
-    makeRequest('tx/info/' + txIds.join(','), function (err, resp, body) {
+    makeRequest('tx/' + type + '/' + txIds.join(','), function (err, resp, body) {
       if(err) return callback(err)
 
       var txs = JSON.parse(resp.body).data
@@ -248,6 +281,8 @@ function toTransaction(tx){
   result.timestamp = Date.parse(tx['time_utc'])
   result.amount = btcToSatoshi(tx['amount'])
   result.pending = !tx['confirmations']
+  result.raw = tx.raw
+
   if(result.amount > 0) {
     result.direction = 'incoming'
   } else {
