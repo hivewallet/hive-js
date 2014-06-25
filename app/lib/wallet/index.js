@@ -248,20 +248,46 @@ function sync(done) {
   }
 
   function consolidateTransactions(transactions){
-    var sorted = transactions.sort(function(tx1, tx2){
-      return tx1.timestamp > tx2.timestamp ? -1 : 1
-    })
+    var sorted = sortTxsByPendingAndTimestamp(transactions)
+    sorted = mergePendingAndConfirmedTxs(sorted)
 
+    // prepare pending Txs for uniqueify
     sorted.forEach(function(tx){
-      if(tx.pending) tx.timestamp = null
-      return tx
+      if(sorted.pending) tx.timestamp = null
     })
-
     return uniqueify(sorted)
   }
-}
 
-function defaultCallback(err){ if(err) console.error(err) }
+  function sortTxsByPendingAndTimestamp(txs){
+    // pending txs before confirmed txs
+    return txs.sort(function(tx1, tx2){
+      if(tx1.pending && !tx2.pending){
+        return -1
+      } else if(!tx1.pending && tx2.pending){
+        return 1
+      } else {
+        return tx1.timestamp > tx2.timestamp ? -1 : 1
+      }
+    })
+  }
+
+  // if a pending tx is also found in confirmed tx, treat it as confirmed
+  // (blockr bug workaround. FIXME when blockr fixes their side)
+  function mergePendingAndConfirmedTxs(txs) {
+    var pendingTxs = txs.filter(function(tx){ return tx.pending })
+    var pendingTxIds = pendingTxs.map(function(tx){ return tx.id })
+
+    var mergeTxIds = txs.filter(function(tx){
+      return !tx.pending && pendingTxIds.indexOf(tx.id) > -1
+    }).map(function(tx){
+      return tx.id
+    })
+
+    return txs.filter(function(tx){
+      return !tx.pending || mergeTxIds.indexOf(tx.id) < 0
+    })
+  }
+}
 
 function setUnspentOutputs(done){
   if(wallet.addresses[0] === wallet.currentAddress) { // new wallet
@@ -281,6 +307,8 @@ function setUnspentOutputs(done){
     done()
   })
 }
+
+function defaultCallback(err){ if(err) console.error(err) }
 
 function firstTimeSync(done){
   emitter.emit('wallet-opening', 'Synchronizing Wallet')
