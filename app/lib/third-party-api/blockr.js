@@ -183,23 +183,29 @@ function requestUnconfirmedTransactionsForAddresses(addresses){
   }
 }
 
-function parseTransactions(apiTxs, txField, callback){
-  if(!apiTxs) return callback(null, []);
+function transactionsById(apiTxs, txField){
+  if(!apiTxs) return [];
   if(!Array.isArray(apiTxs)) { apiTxs = [apiTxs] }
 
-  var result = {}
+  var results = {}
   apiTxs.forEach(function(address){
     if(address[txField].length === 0) return;
 
     address[txField].forEach(function(tx){
       var id = tx.tx
-      if(result[id] && result[id].amount < 0) return; // tx keyed by sent addr takes precedence e.g. change1 -> dest + change2 we want change1
+      if(results[id] && results[id].amount < 0) return; // tx keyed by sent addr takes precedence e.g. change1 -> dest + change2 we want change1
 
-      result[id] = tx
+      results[id] = tx
     })
   })
 
-  var txIds = Object.keys(result)
+  return results
+}
+
+function parseTransactions(apiTxs, txField, callback){
+  var transactions = transactionsById(apiTxs, txField)
+
+  var txIds = Object.keys(transactions)
   if(txIds.length === 0) return callback(null, []);
 
   batchRequests(txIds, requestTransactions, function(err, txs){
@@ -209,13 +215,13 @@ function parseTransactions(apiTxs, txField, callback){
       var firstOut = tx.vouts[0]
       var id = tx.tx
 
-      result[id].toAddress = firstOut.address
-      if(result[id].amount < 0) {
-        result[id].amount = -firstOut.amount
+      transactions[id].toAddress = firstOut.address
+      if(transactions[id].amount < 0) {
+        transactions[id].amount = -firstOut.amount
       }
     })
 
-    return callback(null, values(result).map(toTransaction))
+    return callback(null, values(transactions).map(toTransaction))
   })
 }
 
