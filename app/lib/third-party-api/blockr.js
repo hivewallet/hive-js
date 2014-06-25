@@ -157,26 +157,41 @@ function getTransactions(addresses, callback) {
   batchRequests(addresses, requestTransactionsForAddresses, callback)
 }
 
+function getUnconfirmedTransactions(addresses, callback) {
+  batchRequests(addresses, requestUnconfirmedTransactionsForAddresses, callback)
+}
+
 function requestTransactionsForAddresses(addresses){
   return function(callback){
     makeRequest('address/txs/' + addresses.join(','), function (err, resp, body) {
       if(err) return callback(err)
 
       var txs = JSON.parse(resp.body).data
-      parseTransactions(txs, callback)
+      parseTransactions(txs, 'txs', callback)
     })
   }
 }
 
-function parseTransactions(apiTxs, callback){
+function requestUnconfirmedTransactionsForAddresses(addresses){
+  return function(callback){
+    makeRequest('address/unconfirmed/' + addresses.join(','), function (err, resp, body) {
+      if(err) return callback(err)
+
+      var txs = JSON.parse(resp.body).data
+      parseTransactions(txs, 'unconfirmed', callback)
+    })
+  }
+}
+
+function parseTransactions(apiTxs, txField, callback){
   if(!apiTxs) return callback(null, []);
   if(!Array.isArray(apiTxs)) { apiTxs = [apiTxs] }
 
   var result = {}
   apiTxs.forEach(function(address){
-    if(address.txs.length === 0) return;
+    if(address[txField].length === 0) return;
 
-    address.txs.forEach(function(tx){
+    address[txField].forEach(function(tx){
       var id = tx.tx
       if(result[id] && result[id].amount < 0) return; // tx keyed by sent addr takes precedence e.g. change1 -> dest + change2 we want change1
 
@@ -226,7 +241,7 @@ function toTransaction(tx){
   var result = new Transaction(tx['tx'])
   result.timestamp = Date.parse(tx['time_utc'])
   result.amount = btcToSatoshi(tx['amount'])
-  result.pending = tx['confirmations'] < 6
+  result.pending = !tx['confirmations']
   if(result.amount > 0) {
     result.direction = 'incoming'
   } else {
@@ -269,5 +284,6 @@ Blockr.prototype.listAddresses = listAddresses
 Blockr.prototype.getUnspent = getUnspent
 Blockr.prototype.sendTx = sendTx
 Blockr.prototype.getTransactions = getTransactions
+Blockr.prototype.getUnconfirmedTransactions = getUnconfirmedTransactions
 Blockr.prototype.txToHiveTx = txToHiveTx
 module.exports = Blockr

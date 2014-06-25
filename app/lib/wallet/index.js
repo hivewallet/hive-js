@@ -179,6 +179,7 @@ function initWallet(data, network) {
 
 function sync(done) {
   async.parallel([
+    fetchReceiveAddressUnconfirmedTransactions,
     fetchReceiveAddressTransactions,
     fetchChangeAddressSentTransactions,
     fetchRemoteAndLocalUnspent
@@ -188,6 +189,10 @@ function sync(done) {
     var txs = results.reduce(function(memo, e){ return memo.concat(e)}, [])
     done(null, consolidateTransactions(txs))
   })
+
+  function fetchReceiveAddressUnconfirmedTransactions(callback){
+    return api.getUnconfirmedTransactions(wallet.addresses, callback)
+  }
 
   function fetchReceiveAddressTransactions(callback){
     return api.getTransactions(wallet.addresses, callback)
