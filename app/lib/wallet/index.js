@@ -11,6 +11,7 @@ var denominations = require('hive-denomination')
 var ThirdParty = require('hive-thrid-party-api')
 var API = ThirdParty.Blockr
 var uniqueify = require('uniqueify')
+var async = require('async')
 
 var Transaction = Bitcoin.Transaction
 var Wallet = Bitcoin.Wallet
@@ -27,6 +28,7 @@ function sendTx(tx, callback) {
     if(err) { return callback(err) }
 
     processTx(tx)
+
     db.addPendingTx(txHex, function(err){
       if(err) { console.log("failed to save pending transaction to local db") }
       callback(null, api.txToHiveTx(tx))
@@ -176,35 +178,27 @@ function initWallet(data, network) {
 }
 
 function sync(done) {
-  var pending = 3
-  var transactions = []
-
-  api.getTransactions(wallet.addresses, function(err, txs){
+  async.parallel([
+    fetchReceiveAddressTransactions,
+    fetchChangeAddressSentTransactions,
+    fetchRemoteAndLocalUnspent
+  ], function(err, results){
     if(err) return done(err);
-    maybeDone(txs)
+
+    var txs = results.reduce(function(memo, e){ return memo.concat(e)}, [])
+    done(null, consolidateTransactions(txs))
   })
 
-  setUnspentOutputs(function(err){
-    if(err) return done(err);
+  function fetchReceiveAddressTransactions(callback){
+    return api.getTransactions(wallet.addresses, callback)
+  }
 
-    processLocalPendingTxs(function(err, txs){
+  function fetchRemoteAndLocalUnspent(callback){
+    return setUnspentOutputs(function(err){
       if(err) return done(err);
 
-      maybeDone(txs)
+      processLocalPendingTxs(callback)
     })
-  })
-
-  fetchChangeAddressSentTransactions(function(err, txs){
-    if(err) return done(err)
-    maybeDone(txs)
-  })
-
-  function maybeDone(txs){
-    if(txs) transactions = transactions.concat(txs)
-
-    if(--pending === 0) {
-      done(null, consolidateTransactions(transactions))
-    }
   }
 }
 
