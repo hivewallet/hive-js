@@ -27,7 +27,7 @@ function sendTx(tx, callback) {
   api.sendTx(txHex, function(err, hiveTx){
     if(err) { return callback(err) }
 
-    processTx(tx)
+    processPendingTx(tx)
 
     db.addPendingTx(txHex, function(err){
       if(err) { console.log("failed to save pending transaction to local db") }
@@ -36,7 +36,7 @@ function sendTx(tx, callback) {
   })
 }
 
-function processTx(tx) {
+function processPendingTx(tx) {
   wallet.processPendingTx(tx)
 
   if(addressUsed(wallet.currentAddress)){ // in case one sends to him/her self
@@ -63,7 +63,7 @@ function processLocalPendingTxs(callback) {
         })
       })
 
-    txObjs.forEach(processTx)
+    txObjs.forEach(processPendingTx)
 
     db.setPendingTxs(txObjs.map(function(tx){
       return tx.toHex()
@@ -209,10 +209,11 @@ function sync(done) {
 
 function fetchChangeAddressSentTransactions(callback){
   api.getTransactions(wallet.changeAddresses, function(err, txs){
-    if(err) return callback(err)
-      callback(null, txs.filter(function(tx){
-        return tx.amount < 0 // include only sent transactions
-      }))
+    if(err) return callback(err);
+
+    callback(null, txs.filter(function(tx){
+      return tx.amount < 0 // include only sent transactions
+    }))
   })
 }
 
