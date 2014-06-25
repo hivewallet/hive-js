@@ -75,7 +75,7 @@ function getLocation(callback){
   }
 
   var error = function(){
-    callback(new Error('Unable to retreive your location'))
+    callback(new Error('Unable to retrieve your location'))
   }
 
   navigator.geolocation.getCurrentPosition(success, error)

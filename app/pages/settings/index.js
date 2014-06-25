@@ -154,7 +154,8 @@ module.exports = function(el){
   function setAvatar(){
     var avatar = Avatar.getAvatar(ractive.get('user.email'),
                                   ractive.get('user.avatarIndex'))
-    ractive.set('avatar', avatar)
+    var avatarEl = ractive.nodes['details-preview'].querySelector('.settings__avatar')
+    avatarEl.style.setProperty('background-image', "url('" + avatar + "')")
   }
 
   ractive.on('switch-token', function(event) {

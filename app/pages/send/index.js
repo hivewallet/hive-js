@@ -55,10 +55,16 @@ module.exports = function(el){
     emitter.emit('open-overlay', data)
   })
 
-  ractive.on('open-send', function(){
-    validateSend(function(err, tx){
-      if(err) return showError({title: 'Uh oh!', message: err.message});
+  emitter.on('send-confirm-open', function() {
+    ractive.set('validating', false)
+  })
 
+  ractive.on('open-send', function(){
+
+    validateSend(function(err, tx){
+      if(err) {
+        return showError({title: 'Uh oh!', message: err.message});
+      }
       var network = getWallet().getMasterKey().network
       var fee = network.estimateFee(tx)
 

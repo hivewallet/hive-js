@@ -20,7 +20,9 @@
 
       </div>
 
-      <div class="_avatar" style="background-image: url('{{ getAvatarByIndex(index) }}')"></div>
+      <div class="_avatar">
+        <img src='{{ getAvatarByIndex(index) }}' />
+      </div>
 
       <div class="_address">{{toAddress || 'Received'}}</div>
 

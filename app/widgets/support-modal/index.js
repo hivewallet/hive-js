@@ -40,6 +40,10 @@ function openModal(data){
     })
   })
 
+  ractive.on('close', function(){
+    ractive.fire('cancel')
+  })
+
   function isBlankField(field){
     var value = ractive.get(field)
     return (!value || value.toString().trim() === '')
