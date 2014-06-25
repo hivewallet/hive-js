@@ -6,7 +6,6 @@ window.initHiveApp = function() {
   var fastclick = require('fastclick')
   var initFrame = require('hive-frame')
   var initAuth = require('hive-auth')
-  var showError = require('hive-flash-modal').showError
   var initGeoOverlay = require('hive-geo-overlay')
   var $ = require('browserify-zepto')
   var getNetwork = require('hive-network')
