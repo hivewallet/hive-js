@@ -240,7 +240,7 @@ function parseUnconfirmedTransactions(apiTxs, callback){
       var id = tx.txid
 
       transactions[id].raw = tx.hex
-      transactions[id].toAddress = firstOut.scriptPubKey.address
+      transactions[id].toAddress = firstOut.scriptPubKey.addresses[0]
       if(transactions[id].amount < 0) {
         transactions[id].amount = -firstOut.value
       }
