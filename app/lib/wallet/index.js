@@ -11,6 +11,7 @@ var denominations = require('hive-denomination')
 var ThirdParty = require('hive-thrid-party-api')
 var API = ThirdParty.Blockr
 var uniqueify = require('uniqueify')
+var async = require('async')
 
 var Transaction = Bitcoin.Transaction
 var Wallet = Bitcoin.Wallet
@@ -26,7 +27,8 @@ function sendTx(tx, callback) {
   api.sendTx(txHex, function(err, hiveTx){
     if(err) { return callback(err) }
 
-    processTx(tx)
+    processPendingTx(tx)
+
     db.addPendingTx(txHex, function(err){
       if(err) { console.log("failed to save pending transaction to local db") }
       callback(null, api.txToHiveTx(tx))
@@ -34,7 +36,7 @@ function sendTx(tx, callback) {
   })
 }
 
-function processTx(tx) {
+function processPendingTx(tx) {
   wallet.processPendingTx(tx)
 
   if(addressUsed(wallet.currentAddress)){ // in case one sends to him/her self
@@ -61,7 +63,7 @@ function processLocalPendingTxs(callback) {
         })
       })
 
-    txObjs.forEach(processTx)
+    txObjs.forEach(processPendingTx)
 
     db.setPendingTxs(txObjs.map(function(tx){
       return tx.toHex()
@@ -176,61 +178,116 @@ function initWallet(data, network) {
 }
 
 function sync(done) {
-  var pending = 3
-  var transactions = []
+  var unconfirmedTxs = []
 
-  api.getTransactions(wallet.addresses, function(err, txs){
+  async.parallel([
+    fetchReceiveAddressTransactions,
+    fetchReceiveAddressUnconfirmedTransactions,
+    fetchChangeAddressSentTransactions,
+    fetchChangeAddressUnconfirmedSentTransactions
+  ], function(err, results){
     if(err) return done(err);
-    maybeDone(txs)
-  })
 
-  setUnspentOutputs(function(err){
-    if(err) return done(err);
+    var txs = results.reduce(function(memo, e){ return memo.concat(e)}, [])
 
-    processLocalPendingTxs(function(err, txs){
+    setUnspentOutputs(function(err){
       if(err) return done(err);
 
-      maybeDone(txs)
+      unconfirmedTxs.forEach(processPendingTx)
+
+      processLocalPendingTxs(function(err, pendingTxs){
+        if(err) return done(err);
+
+        txs.concat(pendingTxs)
+        done(null, consolidateTransactions(txs))
+      })
     })
   })
 
-  fetchChangeAddressSentTransactions(function(err, txs){
-    if(err) return done(err)
-    maybeDone(txs)
-  })
+  function fetchReceiveAddressTransactions(callback){
+    api.getTransactions(wallet.addresses, callback)
+  }
 
-  function maybeDone(txs){
-    if(txs) transactions = transactions.concat(txs)
+  function fetchReceiveAddressUnconfirmedTransactions(callback){
+    api.getUnconfirmedTransactions(wallet.addresses, function(err, txs){
+      if(err) return callback(err);
 
-    if(--pending === 0) {
-      done(null, consolidateTransactions(transactions))
-    }
+      unconfirmedTxs = unconfirmedTxs.concat(getTxObjs(txs))
+      callback(null, txs)
+    })
+  }
+
+  function fetchChangeAddressSentTransactions(callback){
+    api.getTransactions(wallet.changeAddresses, function(err, txs){
+      if(err) return callback(err);
+
+      callback(null, getSentTransactions(txs))
+    })
+  }
+
+  function fetchChangeAddressUnconfirmedSentTransactions(callback){
+    api.getUnconfirmedTransactions(wallet.changeAddresses, function(err, txs){
+      if(err) return callback(err);
+
+      var sentTxs = getSentTransactions(txs)
+      unconfirmedTxs = unconfirmedTxs.concat(getTxObjs(sentTxs))
+      callback(null, sentTxs)
+    })
+  }
+
+  function getSentTransactions(txs){
+    return txs.filter(function(tx){
+      return tx.amount < 0
+    })
+  }
+
+  function getTxObjs(txs) {
+    return txs.map(function(tx){
+      return Transaction.fromHex(tx.raw)
+    })
+  }
+
+  function consolidateTransactions(transactions){
+    var sorted = sortTxsByPendingAndTimestamp(transactions)
+    sorted = mergePendingAndConfirmedTxs(sorted)
+
+    // prepare pending Txs for uniqueify
+    sorted.forEach(function(tx){
+      if(sorted.pending) tx.timestamp = null
+    })
+    return uniqueify(sorted)
+  }
+
+  function sortTxsByPendingAndTimestamp(txs){
+    // pending txs before confirmed txs
+    return txs.sort(function(tx1, tx2){
+      if(tx1.pending && !tx2.pending){
+        return -1
+      } else if(!tx1.pending && tx2.pending){
+        return 1
+      } else {
+        return tx1.timestamp > tx2.timestamp ? -1 : 1
+      }
+    })
+  }
+
+  // if a pending tx is also found in confirmed tx, treat it as confirmed
+  // (blockr bug workaround. FIXME when blockr fixes their side)
+  function mergePendingAndConfirmedTxs(txs) {
+    var pendingTxs = txs.filter(function(tx){ return tx.pending })
+    var pendingTxIds = pendingTxs.map(function(tx){ return tx.id })
+
+    var mergeTxIds = txs.filter(function(tx){
+      return !tx.pending && pendingTxIds.indexOf(tx.id) > -1
+    }).map(function(tx){
+      return tx.id
+    })
+
+    return txs.filter(function(tx){
+      return !tx.pending || mergeTxIds.indexOf(tx.id) < 0
+    })
   }
 }
-
-function fetchChangeAddressSentTransactions(callback){
-  api.getTransactions(wallet.changeAddresses, function(err, txs){
-    if(err) return callback(err)
-      callback(null, txs.filter(function(tx){
-        return tx.amount < 0 // include only sent transactions
-      }))
-  })
-}
-
-function consolidateTransactions(transactions){
-  var sorted = transactions.sort(function(tx1, tx2){
-    return tx1.timestamp > tx2.timestamp ? -1 : 1
-  })
-
-  sorted.forEach(function(tx){
-    if(tx.pending) tx.timestamp = null
-    return tx
-  })
-
-  return uniqueify(sorted)
-}
-
-function defaultCallback(err){ if(err) console.error(err) }
 
 function setUnspentOutputs(done){
   if(wallet.addresses[0] === wallet.currentAddress) { // new wallet
@@ -250,6 +307,8 @@ function setUnspentOutputs(done){
     done()
   })
 }
+
+function defaultCallback(err){ if(err) console.error(err) }
 
 function firstTimeSync(done){
   emitter.emit('wallet-opening', 'Synchronizing Wallet')

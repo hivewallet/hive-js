@@ -157,6 +157,10 @@ function getTransactions(addresses, callback) {
   batchRequests(addresses, requestTransactionsForAddresses, callback)
 }
 
+function getUnconfirmedTransactions(addresses, callback) {
+  batchRequests(addresses, requestUnconfirmedTransactionsForAddresses, callback)
+}
+
 function requestTransactionsForAddresses(addresses){
   return function(callback){
     makeRequest('address/txs/' + addresses.join(','), function (err, resp, body) {
@@ -168,23 +172,40 @@ function requestTransactionsForAddresses(addresses){
   }
 }
 
-function parseTransactions(apiTxs, callback){
-  if(!apiTxs) return callback(null, []);
+function requestUnconfirmedTransactionsForAddresses(addresses){
+  return function(callback){
+    makeRequest('address/unconfirmed/' + addresses.join(','), function (err, resp, body) {
+      if(err) return callback(err)
+
+      var txs = JSON.parse(resp.body).data
+      parseUnconfirmedTransactions(txs, callback)
+    })
+  }
+}
+
+function transactionsById(apiTxs, txField){
+  if(!apiTxs) return [];
   if(!Array.isArray(apiTxs)) { apiTxs = [apiTxs] }
 
-  var result = {}
+  var results = {}
   apiTxs.forEach(function(address){
-    if(address.txs.length === 0) return;
+    if(address[txField].length === 0) return;
 
-    address.txs.forEach(function(tx){
+    address[txField].forEach(function(tx){
       var id = tx.tx
-      if(result[id] && result[id].amount < 0) return; // tx keyed by sent addr takes precedence e.g. change1 -> dest + change2 we want change1
+      if(results[id] && results[id].amount < 0) return; // tx keyed by sent addr takes precedence e.g. change1 -> dest + change2 we want change1
 
-      result[id] = tx
+      results[id] = tx
     })
   })
 
-  var txIds = Object.keys(result)
+  return results
+}
+
+function parseTransactions(apiTxs, callback){
+  var transactions = transactionsById(apiTxs, 'txs')
+
+  var txIds = Object.keys(transactions)
   if(txIds.length === 0) return callback(null, []);
 
   batchRequests(txIds, requestTransactions, function(err, txs){
@@ -194,19 +215,52 @@ function parseTransactions(apiTxs, callback){
       var firstOut = tx.vouts[0]
       var id = tx.tx
 
-      result[id].toAddress = firstOut.address
-      if(result[id].amount < 0) {
-        result[id].amount = -firstOut.amount
+      transactions[id].toAddress = firstOut.address
+      if(transactions[id].amount < 0) {
+        transactions[id].amount = -firstOut.amount
       }
     })
 
-    return callback(null, values(result).map(toTransaction))
+    return callback(null, values(transactions).map(toTransaction))
+  })
+}
+
+function parseUnconfirmedTransactions(apiTxs, callback){
+  var transactions = transactionsById(apiTxs, 'unconfirmed')
+
+  var txIds = Object.keys(transactions)
+  if(txIds.length === 0) return callback(null, []);
+
+  batchRequests(txIds, requestRawTransactions, function(err, txs){
+    if(err) return callback(err);
+
+    txs.forEach(function(resp){
+      var tx = resp.tx
+      var firstOut = tx.vout[0]
+      var id = tx.txid
+
+      transactions[id].raw = tx.hex
+      transactions[id].toAddress = firstOut.scriptPubKey.addresses[0]
+      if(transactions[id].amount < 0) {
+        transactions[id].amount = -firstOut.value
+      }
+    })
+
+    return callback(null, values(transactions).map(toTransaction))
   })
 }
 
 function requestTransactions(txIds){
+  return makeTransactionRequest(txIds, 'info')
+}
+
+function requestRawTransactions(txIds){
+  return makeTransactionRequest(txIds, 'raw')
+}
+
+function makeTransactionRequest(txIds, type){
   return function(callback){
-    makeRequest('tx/info/' + txIds.join(','), function (err, resp, body) {
+    makeRequest('tx/' + type + '/' + txIds.join(','), function (err, resp, body) {
       if(err) return callback(err)
 
       var txs = JSON.parse(resp.body).data
@@ -226,7 +280,9 @@ function toTransaction(tx){
   var result = new Transaction(tx['tx'])
   result.timestamp = Date.parse(tx['time_utc'])
   result.amount = btcToSatoshi(tx['amount'])
-  result.pending = tx['confirmations'] < 6
+  result.pending = !tx['confirmations']
+  result.raw = tx.raw
+
   if(result.amount > 0) {
     result.direction = 'incoming'
   } else {
@@ -269,5 +325,6 @@ Blockr.prototype.listAddresses = listAddresses
 Blockr.prototype.getUnspent = getUnspent
 Blockr.prototype.sendTx = sendTx
 Blockr.prototype.getTransactions = getTransactions
+Blockr.prototype.getUnconfirmedTransactions = getUnconfirmedTransactions
 Blockr.prototype.txToHiveTx = txToHiveTx
 module.exports = Blockr
