@@ -9,7 +9,12 @@ Work in progress
 
     git clone git@github.com:hivewallet/hive-js.git
     cd hive-js
-    npm install
+
+### Install required node modules
+
+    npm install -g aperture
+    npm install -g gulp@3.6.2
+    PROXY_URL=https://hive-proxy.herokuapp.com npm install
 
 ### Setup CouchDB
 
