@@ -168,9 +168,9 @@ module.exports = function(el){
     var url
 
     if(token === 'bitcoin') {
-      url = 'http://' + host + '/'
+      url = '?'
     } else {
-      url = 'http://' + host + '/?network=' + token
+      url = '?network=' + token
     }
 
     window.location.assign(url);
