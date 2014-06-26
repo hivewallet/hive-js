@@ -12,7 +12,7 @@ module.exports = function (){
   var app = express()
   app.use(requireHTTPS)
 
-  var proxyHost = process.env.PROXY_URL.replace("https://", '')
+  var proxyHost = (process.env.PROXY_URL || '').replace("https://", '')
   var dbHost = process.env.DB_HOST
   if(process.env.NODE_ENV !== "production"){
     dbHost += ":" + process.env.DB_PORT
