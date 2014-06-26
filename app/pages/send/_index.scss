@@ -73,7 +73,22 @@
     font-size: 18px;
     right: 10px;
     top: 9px;
-    color: $grey;
+    opacity: 0.4;
+
+    select {
+      @extend .jigsaw-light;
+      border: none;
+      background-color: none;
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    &.dropdown {
+      top: 7px;
+      right: 3px;
+    }
   }
 
   ._input {
