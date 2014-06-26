@@ -290,10 +290,6 @@ function sync(done) {
 }
 
 function setUnspentOutputs(done){
-  if(wallet.addresses[0] === wallet.currentAddress) { // new wallet
-    return done();
-  }
-
   var addresses = wallet.addresses.concat(wallet.changeAddresses)
   api.getUnspent(addresses, function(err, unspent){
     if(err) return done(err);
