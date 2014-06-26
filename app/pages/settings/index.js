@@ -165,13 +165,9 @@ module.exports = function(el){
     if(token === getNetwork()) return;
 
     var host = window.location.host
-    var url
+    var url = window.hasOwnProperty('cordova') ? 'index.html' : '/'
 
-    if(token === 'bitcoin') {
-      url = '?'
-    } else {
-      url = '?network=' + token
-    }
+    if(token !== 'bitcoin') url += '?network=' + token
 
     window.location.assign(url);
   })
