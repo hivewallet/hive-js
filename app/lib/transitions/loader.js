@@ -33,7 +33,7 @@ module.exports =  {
   },
   out: function(container, key) {
     Velocity.animate(key, {
-      rotateZ: '20deg',
+      rotateZ: '30deg',
     }, {
       easing: "linear",
       duration: 100,
