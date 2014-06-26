@@ -1,1 +1,1 @@
-web: aperture link && node server/server.js
+web: npm start

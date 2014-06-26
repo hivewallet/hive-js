@@ -51,7 +51,7 @@ Click on the bottom link "fix this" to create an admin user, say:
 
 ### Profit
 
-    DB_HOST=127.0.0.1 DB_PORT=5984 DB_USER=admin DB_PASSWORD=password COOKIE_SALT=secret PROXY_URL=https://hive-proxy.herokuapp.com npm start
+    DB_HOST=127.0.0.1 DB_PORT=5984 DB_USER=admin DB_PASSWORD=password COOKIE_SALT=secret PROXY_URL=https://hive-proxy.herokuapp.com npm run dev
     open http://localhost:8080
 
 ### Live Reload (Optional)
