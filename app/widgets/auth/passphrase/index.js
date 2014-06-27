@@ -19,14 +19,18 @@ function enterPassphrase(prevPage){
     ractive.teardown()
   })
 
-  ractive.on('open-wallet-with-passphrase', function(event){
-    Hive.createWallet(getPassphrase(), ractive.getNetwork(), onWalletCreated)
-    ractive.set('opening', true)
-    ractive.set('progress', 'Checking passphrase...')
+  ractive.on('open-wallet-with-passphrase', function(event) {
+    var passphrase = getPassphrase()
+
+    if (passphrase !== '') {
+      Hive.createWallet(passphrase, ractive.getNetwork(), onWalletCreated)
+      ractive.set('opening', true)
+      ractive.set('progress', 'Checking passphrase...')
+    }
   })
 
-  function getPassphrase(){
-    return ractive.get('passphrase').trim()
+  function getPassphrase() {
+    return (ractive.get('passphrase') || '').trim()
   }
 
   function onWalletCreated(err, data) {

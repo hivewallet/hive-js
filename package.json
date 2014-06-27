@@ -4,11 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "gulp",
+    "start": "aperture link && gulp build && node server/server.js",
+    "dev": "aperture link && gulp",
     "test": "npm run test-server; npm run test-client",
     "test-client": "karma start --single-run",
     "test-server": "mocha server/test",
-    "postinstall": "aperture open; gulp build"
+    "postinstall": "aperture open"
   },
   "author": "",
   "license": "GPL-3.0",

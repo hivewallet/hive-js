@@ -32,8 +32,8 @@
           </div>
 
           <div class="_input-group">
-            <span class="_currency">
-              <select class='large-2 small-4 columns' value="{{selectedFiat}}">
+            <span class="_currency dropdown">
+              <select value="{{selectedFiat}}">
                 {{#currencies}}
                   <option value="{{.}}">{{.}}</option>
                 {{/currencies}}

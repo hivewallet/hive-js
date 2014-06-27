@@ -164,7 +164,7 @@ gulp.task('cordova-splash', function() {
 
 // $ gulp build --------------------------- //
 
-gulp.task('build', ['html', 'loader', 'scripts', 'styles', 'assets', 'tests']);
+gulp.task('build', ['html', 'loader', 'scripts', 'styles', 'assets']);
 
 // $ gulp ---------------------------------- //
 
