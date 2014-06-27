@@ -28,13 +28,13 @@ module.exports = function (){
     'font-src': ['s3.amazonaws.com'],
     'img-src': ["'self'", 'data:', 'www.gravatar.com'],
     'style-src': ["'self'", 's3.amazonaws.com'],
-    'script-src': ["'self'", "'unsafe-eval'"], // https://github.com/ractivejs/ractive/issues/285
+    'script-src': ["'self'", 'blob:', "'unsafe-eval'"], // http://lists.w3.org/Archives/Public/public-webappsec/2014Apr/0021.html, https://github.com/ractivejs/ractive/issues/285
     reportOnly: false,
     setAllHeaders: false,
     safari5: true
   }))
   app.use(helmet.iexss())
-  app.use(helmet.xframe('deny'))
+  app.use(helmet.xframe('sameorigin'))
 
   app.use(express.bodyParser())
   app.use(express.cookieParser(process.env.COOKIE_SALT))
