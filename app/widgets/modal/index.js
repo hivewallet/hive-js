@@ -11,6 +11,7 @@ var Modal = Ractive.extend({
     content: require('./content.ract').template,
   },
   init: function(){
+
     var self = this
 
     var htmlEl = document.getElementsByTagName('html')[0]
@@ -20,7 +21,9 @@ var Modal = Ractive.extend({
     appEl.classList.add('is_hidden')
     htmlEl.classList.add('prevent_scroll')
 
-    fadeIn(fadeEl)
+    fadeIn(fadeEl, function(){
+      fadeEl.focus()
+    })
 
     self.on('cancel', function(event){
       if(!event) return dismissModal();

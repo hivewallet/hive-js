@@ -30,7 +30,8 @@ var Auth = Ractive.extend({
       self.set('opening', false)
       if(err) {
         if(err === 'user_deleted') return location.reload(false);
-        return showError({ message: err })
+        emitter.emit('clear-pin')
+        return showError({ message: 'Your PIN is incorrect' })
       }
 
       emitter.emit('wallet-ready')

@@ -2,6 +2,7 @@
 
 var Ractive = require('../auth')
 var Hive = require('hive-wallet')
+var emitter = require('hive-emitter')
 var validatePin = require('hive-pin-validator')
 var showError = require('hive-flash-modal').showError
 
@@ -21,7 +22,8 @@ module.exports = function(prevPage, data){
   })
 
   ractive.on('enter-pin', function(event){
-    if(!validatePin(getPin(), userExists)){
+    if(!validatePin(getPin())){
+      emitter.emit('clear-pin')
       return showError({ message: 'Pin must be a 4-digit number' })
     }
 
@@ -39,6 +41,10 @@ module.exports = function(prevPage, data){
       })
     }
     setPin()
+  })
+
+  emitter.on('clear-pin', function() {
+    ractive.set('pin', '')
   })
 
   ractive.on('clear-credentials', function(event){
