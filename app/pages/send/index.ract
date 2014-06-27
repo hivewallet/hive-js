@@ -4,7 +4,7 @@
 
       <div class="send__address">
         <label class="_label" for="to">Wallet address
-          <input id="to" class="_input" type="text" value="{{to}}" />
+          <input id="to" class="_input" type="text" autocorrect="off" autocapitalize="off" value="{{to}}" />
         </label>
 
         {{#isCordova}}

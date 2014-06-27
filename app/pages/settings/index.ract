@@ -30,7 +30,7 @@
 
       <div class="settings__input-group">
         <label class="_label">Gravatar Email
-          <input value="{{user.email}}" type="text" class="_input" on-enter="submit-details"/>
+          <input value="{{user.email}}" type="email" class="_input" on-enter="submit-details"/>
         </label>
         <span class="_help" on-click="help">?</span>
       </div>
