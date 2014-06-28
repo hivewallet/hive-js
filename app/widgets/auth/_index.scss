@@ -89,15 +89,15 @@
   }
 
   ._passphrase {
-    margin-left: 20px;
-    margin-right: 20px;
+    font-family: monospace;
     padding: 20px;
     overflow: hidden;
-    font-size: 18px;
+    font-size: 16px;
     line-height: 1.6;
     background-color: #343157;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
     box-shadow: inset 0px 1px 3px 0px rgba(0,0,0,0.25);
-    border-radius: 4px;
   }
 }
 
@@ -112,8 +112,7 @@
 .passphrase__accept {
   display: flex;
   padding-top: 20px;
-
-  max-width: 260px;
+  max-width: 240px;
   margin: 0 auto;
 
   ._checkbox {
@@ -122,7 +121,9 @@
     height: 24px;
     background-color: $purple;
     position: relative;
+    border-radius: 3px;
     outline: 1px solid rgba(133, 141, 240, 0);
+    box-shadow: inset 0px 1px 3px 0px rgba(0,0,0,0.25);
   }
 
   ._check {
@@ -155,6 +156,15 @@
   }
 }
 
+.passphrase__warning {
+  font-size: 13px;
+  background-color: $yellow;
+  color: darken($yellow, 25%);
+  padding: 10px;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+
 // buttons ---------------------------------------- //
 
 
@@ -180,6 +190,30 @@
 .auth__btn {
   @extend .hivebtn;
   margin-bottom: 5px;
+}
+
+.auth__btn--inactive {
+  display: block;
+  width: 100%;
+
+  margin-bottom: 5px;
+  padding-top: 18px;
+  padding-bottom: 15px;
+
+  user-select: none;
+  text-align: center;
+  font-size: 18px;
+  background-color: $blue;
+  border-radius: 2px;
+
+  color: rgba(255,255,255, 0.3);
+  background-color: #2d5f8d;
+  box-shadow:inset 0 1px 1px 1px darken(#2d5f8d, 20%);
+  transform: translate(0px, 3px);
+
+  &:hover {
+    color: rgba(255,255,255, 0.3);
+  }
 }
 
 .auth__btn--choose {
