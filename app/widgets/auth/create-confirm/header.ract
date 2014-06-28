@@ -11,6 +11,6 @@ Without it you will lose access to your wallet.</div>
     {{/checked}}
   </div>
 
-  <p class="_checktext">I have written down my passphrase and stored it securely</p>
+  <p class="_checktext">I have written down or otherwise securely stored my passphrase</p>
 </div>
 
