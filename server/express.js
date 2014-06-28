@@ -12,29 +12,27 @@ module.exports = function (){
   var app = express()
   app.use(requireHTTPS)
 
-  var proxyHost = process.env.PROXY_URL.replace("https://", '')
-  var dbHost = process.env.DB_HOST
-  if(process.env.NODE_ENV !== "production"){
-    dbHost += ":" + process.env.DB_PORT
+  if(process.env.NODE_ENV === "production"){
+    var proxyHost = process.env.PROXY_URL.replace("https://", '')
+    app.use(helmet.csp({
+      'default-src': ["'self'"],
+      'connect-src': [
+        "'self'",
+        'api.bitcoinaverage.com', 'chain.so', // tickers
+        'btc.blockr.io', 'tbtc.blockr.io', 'ltc.blockr.io', // blockchain APIs
+        process.env.DB_HOST, proxyHost
+      ],
+      'font-src': ['s3.amazonaws.com'],
+      'img-src': ["'self'", 'data:', 'www.gravatar.com'],
+      'style-src': ["'self'", 's3.amazonaws.com'],
+      'script-src': ["'self'", 'blob:', "'unsafe-eval'"], // http://lists.w3.org/Archives/Public/public-webappsec/2014Apr/0021.html, https://github.com/ractivejs/ractive/issues/285
+      reportOnly: false,
+      setAllHeaders: false,
+      safari5: true
+    }))
+    app.use(helmet.iexss())
+    app.use(helmet.xframe('sameorigin'))
   }
-  app.use(helmet.csp({
-    'default-src': ["'self'"],
-    'connect-src': [
-      "'self'",
-      'api.bitcoinaverage.com', 'chain.so', // tickers
-      'btc.blockr.io', 'tbtc.blockr.io', 'ltc.blockr.io', // blockchain APIs
-      dbHost, proxyHost
-    ],
-    'font-src': ['s3.amazonaws.com'],
-    'img-src': ["'self'", 'data:', 'www.gravatar.com'],
-    'style-src': ["'self'", 's3.amazonaws.com'],
-    'script-src': ["'self'", 'blob:', "'unsafe-eval'"], // http://lists.w3.org/Archives/Public/public-webappsec/2014Apr/0021.html, https://github.com/ractivejs/ractive/issues/285
-    reportOnly: false,
-    setAllHeaders: false,
-    safari5: true
-  }))
-  app.use(helmet.iexss())
-  app.use(helmet.xframe('sameorigin'))
 
   app.use(express.bodyParser())
   app.use(express.cookieParser(process.env.COOKIE_SALT))
