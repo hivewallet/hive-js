@@ -98,7 +98,8 @@ function bundle(bundler, outFilename){
 gulp.task('watch', function() {
 
   gulp.watch(['app/**/*.scss'], ['styles']);
-  gulp.watch(['app/**/*.js', 'app/**/*.ract', '!app/**/node_modules/**/*'], ['loader', 'scripts', 'tests']);
+  gulp.watch(['app/**/*.js', 'app/**/*.ract', '!app/**/node_modules/**/*', '!app/loader/**'], ['scripts', 'tests']);
+  gulp.watch(['app/loader/**.js'], ['loader', 'tests']);
   gulp.watch('app/assets/**/*', ['assets']);
   gulp.watch('app/index.html', ['html']);
   gulp.watch(['app/**/test/*.js', '!app/**/node_modules/**/*'], ['tests']);
