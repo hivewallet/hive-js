@@ -17,7 +17,6 @@ function confirm(data){
   })
 
   ractive.on('toggle-check', function(){
-    console.log('checkk')
     if(ractive.get('checked')) {
       ractive.set('checked', false)
     } else {
