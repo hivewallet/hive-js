@@ -34,6 +34,7 @@ var Auth = Ractive.extend({
         return showError({ message: 'Your PIN is incorrect' })
       }
 
+      window.scrollTo( 0, 0 )
       emitter.emit('wallet-ready')
       emitter.emit('transactions-loaded', transactions)
     }
