@@ -12,4 +12,5 @@
     <h2 class="flash__heading {{type}}">{{title}}</h2>
     <p class="flash__message">{{message}}</p>
   </div>
+  <span class="flash__cancel _cancel"></span>
 </div>
