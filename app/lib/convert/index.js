@@ -13,8 +13,9 @@ function satoshiToBtc(satoshi) {
 }
 
 function toFixedFloor(x, decimal){
-  var y = x.toFixed(decimal + 1)
-  return y.substring(0, y.length - 1)
+  var factor = Math.pow(10, decimal)
+  var y = parseInt(x * factor)
+  return (y / factor).toFixed(decimal)
 }
 
 module.exports = {
