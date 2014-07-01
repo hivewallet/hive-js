@@ -12,6 +12,7 @@ var ThirdParty = require('hive-thrid-party-api')
 var API = ThirdParty.Blockr
 var uniqueify = require('uniqueify')
 var async = require('async')
+var validateSend = require('./validator')
 
 var Transaction = Bitcoin.Transaction
 var Wallet = Bitcoin.Wallet
@@ -398,5 +399,6 @@ module.exports = {
   walletExists: walletExists,
   reset: reset,
   sync: sync,
-  estimateTotalFee: estimateTotalFee
+  estimateTotalFee: estimateTotalFee,
+  validateSend: validateSend
 }

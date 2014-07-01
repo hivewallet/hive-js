@@ -13,8 +13,7 @@ var toFixedFloor = require('hive-convert').toFixedFloor
 var showError = require('hive-flash-modal').showError
 var showInfo = require('hive-flash-modal').showInfo
 var showConfirmation = require('hive-confirm-overlay')
-var Address = require('bitcoinjs-lib').Address
-var assert = require('assert')
+var validateAddress = require('hive-wallet').validateSend
 
 module.exports = function(el){
   var ractive = new Ractive({
@@ -118,40 +117,37 @@ module.exports = function(el){
     var network = wallet.getMasterKey().network
     var tx = null
 
-    try{
-      var addressObj = Address.fromBase58Check(address)
-      assert(addressObj.version === network.pubKeyHash)
-    } catch(e) {
-      return callback(new Error('Please enter a valid address to send to.'))
-    }
+    validateAddress(wallet, address, amount, function(err){
+      if(err) return callback(err);
 
-    try {
-      tx = wallet.createTx(address, amount)
-    } catch(e) {
-      var message = e.message
-      var userMessage = message
+      try {
+        tx = wallet.createTx(address, amount)
+      } catch(e) {
+        var message = e.message
+        var userMessage = message
 
-      if(message.match(/dust threshold/)) {
-        userMessage = 'Please an amount above ' + satoshiToBtc(network.dustThreshold)
-      } else if(message.match(/Not enough funds/)) {
-        if(attemptToEmptyWallet()){
-          var sendableBalance = getSendableBalance()
-          userMessage = [
-            "It seems like you are trying to empty your wallet.",
-            "Taking transaction fee into account, we estimated that the max amount you can send is",
-            sendableBalance + ".",
-            "We have amended the value in the amount field for you."
-          ].join(' ')
+        if(message.match(/dust threshold/)) {
+          userMessage = 'Please an amount above ' + satoshiToBtc(network.dustThreshold)
+        } else if(message.match(/Not enough funds/)) {
+          if(attemptToEmptyWallet()){
+            var sendableBalance = getSendableBalance()
+            userMessage = [
+              "It seems like you are trying to empty your wallet.",
+              "Taking transaction fee into account, we estimated that the max amount you can send is",
+              sendableBalance + ".",
+              "We have amended the value in the amount field for you."
+            ].join(' ')
+          } else {
+            userMessage = "You don't have enough funds in your wallet."
+          }
         } else {
-          userMessage = "You don't have enough funds in your wallet."
+          return callback(e)
         }
-      } else {
-        return callback(e)
+        return callback(new Error(userMessage))
       }
-      return callback(new Error(userMessage))
-    }
 
-    callback(null, tx)
+      callback(null, tx)
+    })
 
     function attemptToEmptyWallet(){
       return amount === balance ||
