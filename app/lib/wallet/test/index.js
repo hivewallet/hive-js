@@ -31,7 +31,7 @@ describe('validate', function(){
 
     it('allows valid address', function(done){
       validateSend(wallet, to, 0.0001, function(err){
-        expect(err).toBeUndefined()
+        expect(err).toBeNull()
         done()
       })
     })
@@ -72,6 +72,14 @@ describe('validate', function(){
       function getExpectedMessage(amount){
         return "It seems like you are trying to empty your wallet. Taking transaction fee into account, we estimated that the max amount you can send is " + amount + ". We have amended the value in the amount field for you."
       }
+    })
+
+    it('returns fee when amount is valid', function(done){
+      validateSend(wallet, to, 0.0001, function(err, fee){
+        expect(err).toBeNull()
+        expect(fee).toEqual(0.0001)
+        done()
+      })
     })
   })
 

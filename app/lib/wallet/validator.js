@@ -7,6 +7,7 @@ var toFixedFloor = require('hive-convert').toFixedFloor
 function validateSend(wallet, to, btcValue, callback){
   var amount = btcToSatoshi(btcValue)
   var network = wallet.getMasterKey().network
+  var tx = null
 
   try{
     var addressObj = Address.fromBase58Check(to)
@@ -45,7 +46,8 @@ function validateSend(wallet, to, btcValue, callback){
     return new callback(new Error(message))
   }
 
-  callback()
+  var fee = network.estimateFee(tx)
+  callback(null, satoshiToBtc(fee))
 
   function attemptToEmptyWallet(){
     var balance = wallet.getBalance()
