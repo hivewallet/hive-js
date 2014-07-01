@@ -129,7 +129,8 @@ module.exports = function(el){
       var userMessage = message
 
       if(message.match(/dust threshold/)) {
-        userMessage = 'Please an amount above ' + satoshiToBtc(wallet.dustThreshold)
+        var network = wallet.getMasterKey().network
+        userMessage = 'Please an amount above ' + satoshiToBtc(network.dustThreshold)
       } else if(message.match(/Not enough funds/)) {
         if(attemptToEmptyWallet()){
           var sendableBalance = getSendableBalance()
