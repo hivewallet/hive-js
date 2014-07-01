@@ -5,11 +5,13 @@ var Big = require('big.js')
 var emitter = require('hive-emitter')
 var db = require('hive-db')
 var getWallet = require('hive-wallet').getWallet
+var estimateTotalFee = require('hive-wallet').estimateTotalFee
 var currencies = require('hive-ticker-api').currencies
 var btcToSatoshi = require('hive-convert').btcToSatoshi
 var satoshiToBtc = require('hive-convert').satoshiToBtc
 var toFixedFloor = require('hive-convert').toFixedFloor
 var showError = require('hive-flash-modal').showError
+var showInfo = require('hive-flash-modal').showInfo
 var showConfirmation = require('hive-confirm-overlay')
 var Address = require('bitcoinjs-lib').Address
 
@@ -49,6 +51,10 @@ module.exports = function(el){
 
     validateSend(function(err, tx){
       if(err) {
+        if(err.message.match(/trying to empty your wallet/)){
+          ractive.set('value', getSendableBalance())
+          return showInfo({message: err.message})
+        }
         return showError({title: 'Uh oh!', message: err.message});
       }
       var network = getWallet().getMasterKey().network
@@ -62,7 +68,6 @@ module.exports = function(el){
       })
     })
   })
-
 
   emitter.on('wallet-ready', function(){
     ractive.set('denomination', getWallet().denomination)
@@ -105,9 +110,10 @@ module.exports = function(el){
   })
 
   function validateSend(callback) {
-    var amount = ractive.get('value')
+    var amount = btcToSatoshi(ractive.get('value'))
     var address = ractive.get('to')
     var wallet = getWallet()
+    var balance = wallet.getBalance()
     var tx = null
 
     try{
@@ -117,7 +123,7 @@ module.exports = function(el){
     }
 
     try {
-      tx = wallet.createTx(address, btcToSatoshi(amount))
+      tx = wallet.createTx(address, amount)
     } catch(e) {
       var message = e.message
       var userMessage = message
@@ -125,7 +131,17 @@ module.exports = function(el){
       if(message.match(/dust threshold/)) {
         userMessage = 'Please an amount above ' + satoshiToBtc(wallet.dustThreshold)
       } else if(message.match(/Not enough funds/)) {
-        userMessage = "You don't have enough funds in your wallet."
+        if(attemptToEmptyWallet()){
+          var sendableBalance = getSendableBalance()
+          userMessage = [
+            "It seems like you are trying to empty your wallet.",
+            "Taking transaction fee into account, we estimated that the max amount you can send is",
+            sendableBalance + ".",
+            "We have amended the value in the amount field for you."
+          ].join(' ')
+        } else {
+          userMessage = "You don't have enough funds in your wallet."
+        }
       } else {
         return callback(e)
       }
@@ -133,6 +149,15 @@ module.exports = function(el){
     }
 
     callback(null, tx)
+
+    function attemptToEmptyWallet(){
+      return amount === balance ||
+        toFixedFloor(amount / 10000, 0) === toFixedFloor(balance / 10000, 0)
+    }
+  }
+
+  function getSendableBalance(){
+    return satoshiToBtc(getWallet().getBalance() - estimateTotalFee())
   }
 
   function setPreferredCurrency(currency, old){

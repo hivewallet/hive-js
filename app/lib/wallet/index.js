@@ -381,6 +381,14 @@ function reset(callback){
   })
 }
 
+function estimateTotalFee(){
+  var inputCount = wallet.getUnspentOutputs().length
+  var byteSize = inputCount * 148 + 2 * 34 + 10
+  var network = wallet.getMasterKey().network
+
+  return network.feePerKb * Math.ceil(byteSize / 1000)
+}
+
 module.exports = {
   openWalletWithPin: openWalletWithPin,
   createWallet: createWallet,
@@ -389,5 +397,6 @@ module.exports = {
   getWallet: getWallet,
   walletExists: walletExists,
   reset: reset,
-  sync: sync
+  sync: sync,
+  estimateTotalFee: estimateTotalFee
 }
