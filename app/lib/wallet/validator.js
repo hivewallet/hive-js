@@ -27,11 +27,13 @@ function validateSend(wallet, to, btcValue, callback){
       var hasAndNeeded = getHasAndNeeded(message)
       var has = hasAndNeeded[0]
       var needed = hasAndNeeded[1]
-      var fundsUnavailableMessage = "Some funds are temporarily unavailable. To send this transaction, you'll need to wait for your pending transactions to be confirmed first (this shouldn't take more than a few minutes)."
       var spendAll = attemptToEmptyWallet()
 
       if(sufficientWithPending(needed) || (spendAll && hasPendingUtxo())){
-        message = fundsUnavailableMessage
+        var error = new Error("Some funds are temporarily unavailable. To send this transaction, you'll need to wait for your pending transactions to be confirmed first (this shouldn't take more than a few minutes).")
+        error.href = "https://github.com/hivewallet/hive-osx/wiki/Sending-Bitcoin-from-a-pending-transaction"
+        error.linkText = "What does this mean?"
+        return callback(error)
       } else if(spendAll){
         var sendableBalance = satoshiToBtc(amount - (needed - has))
 

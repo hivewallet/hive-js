@@ -11,6 +11,9 @@
     </div>
     <h2 class="flash__heading {{type}}">{{title}}</h2>
     <p class="flash__message">{{message}}</p>
+    {{#href}}
+      <p class="flash__link"><a href="{{href}}" target="_blank">{{linkText}}</a></p>
+    {{/href}}
   </div>
   <span class="flash__cancel _cancel"></span>
 </div>

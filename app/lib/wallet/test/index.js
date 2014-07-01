@@ -15,6 +15,7 @@ describe('validate', function(){
   wallet.setUnspentOutputs([utxo])
 
   var fundsUnavailableMessage = "Some funds are temporarily unavailable. To send this transaction, you'll need to wait for your pending transactions to be confirmed first (this shouldn't take more than a few minutes)."
+  var fundsUnavailableLink = "https://github.com/hivewallet/hive-osx/wiki/Sending-Bitcoin-from-a-pending-transaction"
 
   describe('address', function(){
     it('catches invalid address', function(done){
@@ -81,6 +82,7 @@ describe('validate', function(){
 
         validateSend(wallet, to, 0.0002, function(err){
           expect(err.message).toEqual(fundsUnavailableMessage)
+          expect(err.href).toContain(fundsUnavailableLink)
           done()
         })
       })
@@ -114,6 +116,7 @@ describe('validate', function(){
       it('prompt user to wait', function(done){
         validateSend(wallet, to, 0.00049998, function(err){
           expect(err.message).toEqual(fundsUnavailableMessage)
+          expect(err.href).toContain(fundsUnavailableLink)
           done()
         })
       })
