@@ -24,8 +24,16 @@ function validateSend(wallet, to, btcValue, callback){
     if(message.match(/dust threshold/)) {
       message = 'Please enter an amount above ' + satoshiToBtc(network.dustThreshold)
     } else if(message.match(/Not enough funds/)) {
-      if(attemptToEmptyWallet()){
-        var sendableBalance = satoshiToBtc(amount - getShortAmount(message))
+      var hasAndNeeded = getHasAndNeeded(message)
+      var has = hasAndNeeded[0]
+      var needed = hasAndNeeded[1]
+      var fundsUnavailableMessage = "Some funds are temporarily unavailable. To send this transaction, you'll need to wait for your pending transactions to be confirmed first (this shouldn't take more than a few minutes)."
+      var spendAll = attemptToEmptyWallet()
+
+      if(sufficientWithPending(needed) || (spendAll && hasPendingUtxo())){
+        message = fundsUnavailableMessage
+      } else if(spendAll){
+        var sendableBalance = satoshiToBtc(amount - (needed - has))
 
         message = [
           "It seems like you are trying to empty your wallet.",
@@ -49,16 +57,25 @@ function validateSend(wallet, to, btcValue, callback){
   var fee = network.estimateFee(tx)
   callback(null, satoshiToBtc(fee))
 
+  function sufficientWithPending(needed){
+    return needed <= wallet.getBalance()
+  }
+
   function attemptToEmptyWallet(){
     var balance = wallet.getBalance()
     return balance - network.feePerKb < amount && amount <= balance
   }
 
-  function getShortAmount(message){
-    var values = message.replace(/[^\d]+(\d+)[^\d]+(\d+)/, "$1 $2").split(' ').map(function(m){
+  function getHasAndNeeded(message) {
+    return message.replace(/[^\d]+(\d+)[^\d]+(\d+)/, "$1 $2").split(' ').map(function(m){
       return parseInt(m)
     })
-    return values[1] - values[0]
+  }
+
+  function hasPendingUtxo(){
+    return wallet.getUnspentOutputs().some(function(utxo){
+      return utxo.pending
+    })
   }
 }
 

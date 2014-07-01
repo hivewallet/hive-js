@@ -14,6 +14,8 @@ describe('validate', function(){
   }
   wallet.setUnspentOutputs([utxo])
 
+  var fundsUnavailableMessage = "Some funds are temporarily unavailable. To send this transaction, you'll need to wait for your pending transactions to be confirmed first (this shouldn't take more than a few minutes)."
+
   describe('address', function(){
     it('catches invalid address', function(done){
       validateSend(wallet, '123', 0, function(err){
@@ -55,7 +57,7 @@ describe('validate', function(){
     describe('trying to empty wallet without including fee', function(){
       it('amount equals balance exactly', function(done){
         validateSend(wallet, to, 0.00029999, function(err){
-          expect(err.message).toEqual(getExpectedMessage(0.00019999))
+          expect(err.message).toEqual(sendableAmountMessage(0.00019999))
           expect(err.sendableBalance).toEqual(0.00019999)
           done()
         })
@@ -63,13 +65,27 @@ describe('validate', function(){
 
       it('balance - feePerKb < amount < balance', function(done){
         validateSend(wallet, to, 0.0002, function(err){
-          expect(err.message).toEqual(getExpectedMessage(0.00019999))
+          expect(err.message).toEqual(sendableAmountMessage(0.00019999))
           expect(err.sendableBalance).toEqual(0.00019999)
           done()
         })
       })
 
-      function getExpectedMessage(amount){
+      it('asks user to try later when there is pending utxo', function(done){
+        var pendingUtxo = cloneObject(utxo)
+        pendingUtxo.pending = true
+        pendingUtxo.outputIndex = 1
+        pendingUtxo.value = 0 // lazy: does not need to reset after test
+
+        wallet.setUnspentOutputs([utxo, pendingUtxo])
+
+        validateSend(wallet, to, 0.0002, function(err){
+          expect(err.message).toEqual(fundsUnavailableMessage)
+          done()
+        })
+      })
+
+      function sendableAmountMessage(amount){
         return "It seems like you are trying to empty your wallet. Taking transaction fee into account, we estimated that the max amount you can send is " + amount + ". We have amended the value in the amount field for you."
       }
     })
@@ -81,6 +97,31 @@ describe('validate', function(){
         done()
       })
     })
+
+    describe('when confirmed balance < amount + fee <= balance', function(){
+      beforeEach(function(){
+        var pendingUtxo = cloneObject(utxo)
+        pendingUtxo.pending = true
+        pendingUtxo.outputIndex = 1
+
+        wallet.setUnspentOutputs([utxo, pendingUtxo])
+      })
+
+      afterEach(function(){
+        wallet.setUnspentOutputs([utxo])
+      })
+
+      it('prompt user to wait', function(done){
+        validateSend(wallet, to, 0.00049998, function(err){
+          expect(err.message).toEqual(fundsUnavailableMessage)
+          done()
+        })
+      })
+    })
   })
 
+  // quick and dirty: does not deal with functions on object
+  function cloneObject(obj){
+    return JSON.parse(JSON.stringify(obj))
+  }
 })
