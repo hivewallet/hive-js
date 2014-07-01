@@ -14,6 +14,7 @@ var showError = require('hive-flash-modal').showError
 var showInfo = require('hive-flash-modal').showInfo
 var showConfirmation = require('hive-confirm-overlay')
 var Address = require('bitcoinjs-lib').Address
+var assert = require('assert')
 
 module.exports = function(el){
   var ractive = new Ractive({
@@ -114,10 +115,12 @@ module.exports = function(el){
     var address = ractive.get('to')
     var wallet = getWallet()
     var balance = wallet.getBalance()
+    var network = wallet.getMasterKey().network
     var tx = null
 
     try{
-      Address.fromBase58Check(address)
+      var addressObj = Address.fromBase58Check(address)
+      assert(addressObj.version === network.pubKeyHash)
     } catch(e) {
       return callback(new Error('Please enter a valid address to send to.'))
     }
@@ -129,7 +132,6 @@ module.exports = function(el){
       var userMessage = message
 
       if(message.match(/dust threshold/)) {
-        var network = wallet.getMasterKey().network
         userMessage = 'Please an amount above ' + satoshiToBtc(network.dustThreshold)
       } else if(message.match(/Not enough funds/)) {
         if(attemptToEmptyWallet()){
