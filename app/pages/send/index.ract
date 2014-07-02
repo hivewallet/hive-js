@@ -31,7 +31,6 @@
               </select>
             </span>
             <input id="fiat" class="_input" type="number" min="0" value="{{fiatValue}}" on-keyup="fiat-to-bitcoin">
-            {{test_val}}
           </div>
 
 
