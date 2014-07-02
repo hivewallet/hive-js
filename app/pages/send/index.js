@@ -5,7 +5,6 @@ var Big = require('big.js')
 var emitter = require('hive-emitter')
 var db = require('hive-db')
 var getWallet = require('hive-wallet').getWallet
-var estimateTotalFee = require('hive-wallet').estimateTotalFee
 var currencies = require('hive-ticker-api').currencies
 var btcToSatoshi = require('hive-convert').btcToSatoshi
 var satoshiToBtc = require('hive-convert').satoshiToBtc
