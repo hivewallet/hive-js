@@ -15,9 +15,21 @@
   border-bottom-right-radius: 3px;
 }
 
+.flash__content {
+  text-align: center;
+  padding-bottom: 40px;
+  margin: 0 auto;
+}
+
+.flash__header {
+  @include clickbtn;
+  position: relative;
+  padding-top: 40px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
 
 .flash__icon {
-  @include clickbtn;
   width: 120px;
   height: 120px;
   display: block;
@@ -25,16 +37,7 @@
   position: relative;
 }
 
-.flash__content {
-  text-align: center;
-  padding-left: 20px;
-  padding-right: 20px;
-  padding-top: 40px;
-  padding-bottom: 40px;
-  margin: 0 auto;
-}
-
-.flash__heading {
+.flash__title {
   @extend .jigsaw-bold;
   font-size: 24px;
   padding-bottom: 10px;
@@ -48,15 +51,14 @@
   }
 }
 
-
 .flash__message {
   color: #a8a7a9;
   font-size: 18px;
+  max-width: 200px;
+  margin: 0 auto;
 }
 
-
 .flash__cancel {
-  @include clickbtn;
   position: absolute;
   top: 10px;
   right: 10px;

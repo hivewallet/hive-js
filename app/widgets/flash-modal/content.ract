@@ -1,21 +1,23 @@
 
 <div class="flash">
   <div class="flash__content">
-    <div class="flash__icon" on-click="close">
-      {{#error}}
-        {{>svg_cancel}}
-      {{/error}}
-      {{#warning}}
-        {{>svg_warning}}
-      {{/warning}}
+    <div class="flash__header" on-click="close">
+      <span class="flash__cancel">
+        {{>svg_close}}
+      </span>
+      <div class="flash__icon">
+        {{#error}}
+          {{>svg_cancel}}
+        {{/error}}
+        {{#warning}}
+          {{>svg_warning}}
+        {{/warning}}
+      </div>
+      <h2 class="flash__title {{type}}">{{title}}</h2>
     </div>
-    <h2 class="flash__heading {{type}}">{{title}}</h2>
     <p class="flash__message">{{message}}</p>
     {{#href}}
       <p class="flash__link"><a href="{{href}}" target="_blank">{{linkText}}</a></p>
     {{/href}}
   </div>
-  <span class="flash__cancel" on-click="close">
-    {{>svg_close}}
-  </span>
 </div>
