@@ -33,6 +33,11 @@
             <input id="fiat" class="_input" type="number" min="0" value="{{fiatValue}}" on-keyup="fiat-to-bitcoin">
           </div>
 
+          {{#exchangeRateUnavailable}}
+          <div class="_input-error">
+            <span>Exchange rate unavailable for the selected currency</span>
+          </div>
+          {{/exchangeRateUnavailable}}
 
       </div>
 

@@ -91,7 +91,9 @@ module.exports = function(el){
     var fiat = ractive.nodes.fiat.value
     if(fiat == undefined || fiat === '') return;
 
-    var exchangeRate = ractive.get('exchangeRates')[ractive.get('selectedFiat')]
+    var exchangeRate = getExchangeRate()
+    if(!exchangeRate) return;
+
     var bitcoin = toFixedFloor(new Big(fiat).div(exchangeRate), 8)
 
     ractive.set('value', bitcoin)
@@ -102,13 +104,20 @@ module.exports = function(el){
     if(bitcoin == undefined || bitcoin === '') return;
 
 
-    var exchangeRate = ractive.get('exchangeRates')[ractive.get('selectedFiat')]
+    var exchangeRate = getExchangeRate()
+    if(!exchangeRate) return;
+
     var val = new Big(bitcoin).times(exchangeRate)
     var fiat = toFixedFloor(val, 2)
 
     ractive.set('fiatValue', fiat)
   })
 
+  function getExchangeRate(){
+    var exchangeRate = ractive.get('exchangeRates')[ractive.get('selectedFiat')]
+    ractive.set("exchangeRateUnavailable", exchangeRate == undefined)
+    return exchangeRate
+  }
 
   function setPreferredCurrency(currency, old){
     if(old == undefined) return; //when loading wallet
