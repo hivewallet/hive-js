@@ -32,6 +32,12 @@ module.exports = function (){
     }))
     app.use(helmet.iexss())
     app.use(helmet.xframe('sameorigin'))
+
+    var ninetyDaysInMilliseconds = 90 * 24 * 60 * 60 * 1000
+    app.use(helmet.hsts({
+      maxAge: ninetyDaysInMilliseconds,
+      includeSubdomains: true
+    }))
   }
 
   app.use(express.bodyParser())
