@@ -16,7 +16,6 @@ var validateSend = require('./validator')
 
 var Transaction = Bitcoin.Transaction
 var Wallet = Bitcoin.Wallet
-Transaction.feePerKb = 10000
 
 var api = null
 var wallet = null
