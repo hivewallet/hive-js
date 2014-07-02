@@ -84,10 +84,6 @@ module.exports = function(el){
     })
   })
 
-  emitter.on('ticker', function(rates){
-    ractive.set('exchangeRates', rates)
-  })
-
   ractive.on('help', function() {
     showTooltip({
       message: 'Gravatar (globally recognised avatar) is a service that lets you re-use the same avatar across websites and apps by specifying an email address.',
