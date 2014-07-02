@@ -32,6 +32,10 @@ function openModal(type, data){
     data: data
   })
 
+  ractive.on('close', function(){
+    ractive.fire('cancel')
+  })
+
   return ractive
 }
 

@@ -12,6 +12,7 @@
   }
 
   ._icon {
+    @include clickbtn;
     display: block;
     position: absolute;
     right: 0;
@@ -51,7 +52,8 @@
 }
 
 .support__close {
-  padding-top: 20px;
+  @include clickbtn;
+  margin-top: 20px;
   text-align: center;
   color: $grey;
 }

@@ -1,7 +1,7 @@
 
 <div class="flash">
   <div class="flash__content">
-    <div class="flash__icon">
+    <div class="flash__icon" on-click="close">
       {{#error}}
         {{>svg_cancel}}
       {{/error}}
@@ -15,5 +15,7 @@
       <p class="flash__link"><a href="{{href}}" target="_blank">{{linkText}}</a></p>
     {{/href}}
   </div>
-  <span class="flash__cancel _cancel"></span>
+  <span class="flash__cancel" on-click="close">
+    {{>svg_close}}
+  </span>
 </div>
