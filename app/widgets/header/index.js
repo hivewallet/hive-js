@@ -84,7 +84,7 @@ module.exports = function(el){
   })
 
   function bitcoinToFiat(amount, exchangeRate) {
-    if(amount == undefined) return;
+    if(amount == undefined || exchangeRate == undefined) return "Unkown";
 
     var btc = satoshiToBtc(amount)
     return new Big(exchangeRate).times(btc).toFixed(2)
