@@ -401,22 +401,51 @@
 
   ._input {
     @extend .jigsaw-light;
-    background: none;
-    border: none;
+    background-color: darken($purple--light, 10%);
+    border: 1px solid $purple--light;
     color: white;
-    opacity: 0;
     margin-top: 5px;
-    padding: 0;
-    margin: 0;
-    position: absolute;
-    bottom: 0;
-    left: -9000px;
-    width: 50px;
+    height: 50px;
+    padding-left: 10px;
+    border-radius: 3px;
 
     &:active, &:focus {
       outline: 0;
-      border: none;
+      border: 1px solid $purple--highlight;
     }
+  }
+}
+
+.litecoin {
+  .auth__input-group {
+    ._input {
+      background-color: darken($silver, 25%);
+      border: 1px solid $silver;
+
+      &:active, &:focus {
+       border: 1px solid $silver;
+      }
+    }
+  }
+}
+
+#setPin {
+  @extend .jigsaw-light;
+  background: none;
+  border: none;
+  color: white;
+  opacity: 0;
+  margin-top: 5px;
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  bottom: 0;
+  left: -9000px;
+  width: 50px;
+
+  &:active, &:focus {
+    outline: 0;
+    border: none;
   }
 }
 
