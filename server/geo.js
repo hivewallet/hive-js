@@ -17,6 +17,7 @@ function save(lat, lon, userInfo, callback) {
   var user = cloneObject(userInfo)
   user.location = geomodel.create_point(lat, lon),
   user.geocells = geomodel.generate_geocells(user.location)
+  user.timestamp = new Date().getTime()
 
   records[user.id] = user
 

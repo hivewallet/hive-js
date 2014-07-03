@@ -20,7 +20,12 @@ describe('geo', function(){
 
       geo.save(lat, lon, userInfo, function(){
         assert.equal(geo.all().length, 1)
-        assert.deepEqual(geo.all()[0], {
+        var entry = geo.all()[0]
+
+        assert(new Date().getTime() - entry.timestamp < 100)
+        delete entry.timestamp
+
+        assert.deepEqual(entry, {
           id: userInfo.id,
           name: userInfo.name,
           email: userInfo.email,
