@@ -1,4 +1,7 @@
 <div class="tooltip">
+  <span class="tooltip__cancel" on-click="close">
+    {{>svg_close}}
+  </span>
   <p class="tooltip__message">{{message}}</p>
   {{#link}}
   <p class="tooltip__link">

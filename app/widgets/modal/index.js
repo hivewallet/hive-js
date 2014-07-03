@@ -13,13 +13,7 @@ var Modal = Ractive.extend({
   init: function(){
 
     var self = this
-
-    var htmlEl = document.getElementsByTagName('html')[0]
-    var appEl = document.getElementById('app')
     var fadeEl = self.find('.js__fadeEl')
-
-    appEl.classList.add('is_hidden')
-    htmlEl.classList.add('prevent_scroll')
 
     fadeIn(fadeEl, function(){
       fadeEl.focus()
@@ -43,8 +37,6 @@ var Modal = Ractive.extend({
       var onDismiss = self.get('onDismiss')
       if(onDismiss) onDismiss();
       fadeOut(fadeEl, function() {
-        appEl.classList.remove('is_hidden')
-        htmlEl.classList.remove('prevent_scroll')
         self.teardown()
       })
     }

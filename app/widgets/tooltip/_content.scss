@@ -1,7 +1,10 @@
 
 .tooltip {
+  position: relative;
+  cursor: default;
   padding: 20px;
-  max-width: 280px;
+  padding-top: 40px;
+  max-width: 300px;
   background-color: white;
   border-radius: 4px;
   margin: 0 auto;
@@ -9,6 +12,21 @@
 
   font-size: 18px;
   box-shadow: 0 2px 2px 1px rgba(000,000,000,0.2);
+}
+
+.tooltip__cancel {
+  @include clickbtn;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 30px;
+  height: 30px;
+  padding: 5px;
+  z-index: 1000;
+
+  .svg-close {
+    fill: $grey;
+  }
 }
 
 .litecoin {
