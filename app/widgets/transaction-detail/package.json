@@ -1,0 +1,12 @@
+{
+  "name": "hive-transaction-detail",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "style": "index.css",
+  "author": "",
+  "license": "GPL-3.0",
+  "browserify": {
+    "transform": ["ractify"]
+  }
+}

@@ -4,7 +4,7 @@
     <h3 class="_title">Your transaction history</h3>
   {{/transactions.length}}
   {{#transactions:index}}
-    <div class="transactions__item" title="{{id}}">
+    <div class="transactions__item" title="{{id}}" data-index="{{index}}" on-click="show-detail">
 
       <div class="_detail">
 

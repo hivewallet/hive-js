@@ -2,9 +2,11 @@
 
 var Ractive = require('hive-ractive')
 var emitter = require('hive-emitter')
+var toFixedFloor = require('hive-convert').toFixedFloor
 var satoshiToBtc = require('hive-convert').satoshiToBtc
 var getAvatarByIndex = require('hive-avatar').getAvatarByIndex
 var strftime = require('strftime')
+var showTransactionDetail = require('hive-transaction-detail')
 
 module.exports = function(el){
   var transactions = []
@@ -31,7 +33,11 @@ module.exports = function(el){
         return strftime('%b %d %l:%M %p', date)
       },
       truncate: function(amount) {
-        return amount.toFixed(5)
+        if(Math.abs(amount) > 0.00001) {
+          return toFixedFloor(amount, 5)
+        } else {
+          return amount
+        }
       },
       getAvatarByIndex: function(index) {
         return getAvatarByIndex(Math.round(((index / 10) % 1) * 10))
@@ -47,6 +53,12 @@ module.exports = function(el){
 
   emitter.on('update-transactions', function(newTxs) {
     ractive.set('transactions', newTxs)
+  })
+
+  ractive.on('show-detail', function(event) {
+    var index = event.node.getAttribute('data-index')
+    var data = ractive.get('transactions')[index]
+    showTransactionDetail(data)
   })
 
   return ractive

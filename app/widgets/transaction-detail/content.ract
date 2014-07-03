@@ -1,0 +1,30 @@
+
+{{#transaction}}
+  <div class="transaction__detail">
+    <span class="tooltip__cancel" on-click="close">
+      {{>svg_close}}
+    </span>
+
+    <div class="_amount {{directionClass(direction)}}">{{directionIcon(direction)}}{{satoshiToBtc(amount)}}</div>
+
+    {{#pending}}
+      <div class='_time'>pending confirmation</div>
+    {{/pending}}
+
+    {{^pending}}
+      <div class='_time'>{{formatTimestamp(timestamp)}}</div>
+    {{/pending}}
+
+    <div class="detail__strings">
+
+      <h3 class="_title">Transaction Id:</h3>
+      <span class="_value">{{id}}</span>
+      {{#toAddress}}
+        <h3 class="_title">Sent to:</h3>
+        <span class="_value">{{toAddress}}</span>
+      {{/toAddress}}
+
+    </div>
+
+  </div>
+{{/transaction}}
