@@ -17,7 +17,44 @@ module.exports = function(prevPage, data){
       footer: require('./footer.ract').template
     },
     data: {
-      userExists: userExists
+      userExists: userExists,
+      pinLength: 0,
+      boxes: [
+        {dot: false},
+        {dot: false},
+        {dot: false},
+        {dot: false}
+      ]
+    }
+  })
+
+  ractive.on('focus-pin', function(){
+    ractive.set('pinfocused', true)
+  })
+
+  ractive.on('blur-pin', function(){
+    ractive.set('pinfocused', false)
+  })
+
+  ractive.observe('pin', function(){
+    var val = ractive.nodes['setPin'].value
+    var new_length = val.length
+    var old_length = ractive.get('pinLength')
+    var boxes = ractive.get('boxes')
+
+    if(new_length === old_length) return;
+
+    if(new_length > old_length) {
+      boxes[new_length - 1].dot = true
+      ractive.set('boxes', boxes)
+      ractive.set('pinLength', new_length)
+      return;
+    }
+    if(new_length < old_length) {
+      boxes[old_length - 1].dot = false
+      ractive.set('boxes', boxes)
+      ractive.set('pinLength', new_length)
+      return;
     }
   })
 
