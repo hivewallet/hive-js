@@ -36,13 +36,6 @@ var fakeGeo = {
     } else {
       callback(new Error('save error'), null)
     }
-  },
-  remove: function(id, callback) {
-    if(id) {
-      callback(null)
-    } else {
-      callback(new Error('remove error'), null)
-    }
   }
 }
 var app = proxyquire('../express', {
@@ -233,7 +226,7 @@ describe('POST /location', function(){
 })
 
 describe('DELETE /location', function(){
-  it('returns ok on geo.remove success', function(done){
+  it('returns ok', function(done){
     deleteWithCookie('/location', function(err, res){
       assert.equal(res.status, 200)
       done()

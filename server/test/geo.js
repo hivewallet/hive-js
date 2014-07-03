@@ -78,10 +78,9 @@ describe('geo', function(){
       geo.save(lat, lon, userInfo, function(){
         assert.equal(geo.all().length, 1)
 
-        geo.remove(userInfo.id, function(){
-          assert.equal(geo.all().length, 0)
-          done()
-        })
+        geo.remove(userInfo.id)
+        assert.equal(geo.all().length, 0)
+        done()
       })
     })
   })

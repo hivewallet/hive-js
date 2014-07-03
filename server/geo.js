@@ -24,9 +24,8 @@ function save(lat, lon, userInfo, callback) {
   search(user.location, user.id, callback)
 }
 
-function remove(id, callback) {
+function remove(id) {
   delete records[id]
-  callback()
 }
 
 function getIdsOlderThan(age) {

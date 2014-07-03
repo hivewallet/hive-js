@@ -127,10 +127,8 @@ module.exports = function (){
   })
 
   app.delete('/location', function(req, res) {
-    geo.remove(req.session.tmpSessionID, function(err, found) {
-      if(err) return res.json(400, err)
-      res.json(200, found)
-    })
+    geo.remove(req.session.tmpSessionID)
+    res.json(200)
   })
 
   app.use(function(err, req, res, next){
