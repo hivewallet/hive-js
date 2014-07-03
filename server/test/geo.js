@@ -85,4 +85,23 @@ describe('geo', function(){
       })
     })
   })
+
+  describe('getIdsOlderThan', function(){
+    it('finds entries older than the age(in miliseconds) provided', function(done){
+      var userInfo1 = {id: "foo", name: "Kuba", email: "kuba@example.com"}
+      var lat1 = 34.23
+      var lon1 = 108.87
+
+      geo.save(lat, lon, userInfo, function(){
+        setTimeout(function(){
+          geo.save(lat1, lon1, userInfo1, function(){
+            var entries = geo.getIdsOlderThan(190)
+            assert.equal(entries.length, 1)
+            assert.equal(entries[0], userInfo.id)
+            done()
+          })
+        }, 200)
+      })
+    })
+  })
 })

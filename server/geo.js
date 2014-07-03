@@ -29,6 +29,15 @@ function remove(id, callback) {
   callback()
 }
 
+function getIdsOlderThan(age) {
+  var now = new Date().getTime()
+  return all().filter(function(e){
+    return now - e.timestamp > age
+  }).map(function(e){
+    return e.id
+  })
+}
+
 function search(location, id, callback){
   var onGeocells = function(geocells, finderCallback) {
     var candidates = all().filter(function(record){
@@ -56,5 +65,6 @@ module.exports = {
   all: all,
   reset: reset,
   save: save,
-  remove: remove
+  remove: remove,
+  getIdsOlderThan: getIdsOlderThan
 }
