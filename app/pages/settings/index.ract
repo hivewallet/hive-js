@@ -32,7 +32,9 @@
         <label class="_label">Gravatar Email
           <input value="{{user.email}}" type="email" class="_input" on-enter="submit-details"/>
         </label>
-        <span class="_help" on-click="help">?</span>
+        <span class="_help" on-click="help">
+          {{>svg_help}}
+        </span>
       </div>
 
 
