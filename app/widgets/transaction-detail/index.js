@@ -34,8 +34,6 @@ module.exports = function showTooltip(data){
     }
   })
 
-  console.log(data)
-
   ractive.on('close', function(){
     ractive.fire('cancel')
   })
