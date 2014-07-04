@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "aperture link && gulp build && node server/server.js",
+    "build": "aperture link && gulp build",
+    "start": "node server/server.js",
     "dev": "aperture link && gulp",
     "test": "npm run test-server; npm run test-client",
     "test-client": "karma start --single-run",
