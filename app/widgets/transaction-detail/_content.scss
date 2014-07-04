@@ -39,19 +39,14 @@
     margin-top: 10px;
   }
   ._value {
-    background-color: $grey--light;
+    @include textselect;
 
+    background-color: $grey--light;
     box-shadow: inset 0 2px 2px 1px rgba(000,000,000,0.2);
     padding: 10px;
     display: block;
     border-radius: 5px;
     font-size: 14px;
-    -webkit-touch-callout: text;
-    -webkit-user-select: text;
-    -khtml-user-select: text;
-    -moz-user-select: moz-text;
-    -ms-user-select: text;
-    user-select: text;
   }
 }
 

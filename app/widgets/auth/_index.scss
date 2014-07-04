@@ -89,6 +89,7 @@
   }
 
   ._passphrase {
+    @include textselect;
     font-family: monospace;
     padding: 20px;
     overflow: hidden;
@@ -157,6 +158,7 @@
 }
 
 .passphrase__warning {
+  @include noselect;
   font-size: 13px;
   background-color: $yellow;
   color: darken($yellow, 25%);

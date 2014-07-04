@@ -33,8 +33,8 @@
 // Stretchy element for 'media-object' layout behaviour
 
 @mixin media-obj() {
-  overflow:hidden; 
-  _overflow:visible; 
+  overflow:hidden;
+  _overflow:visible;
   zoom:1;
 }
 
@@ -48,6 +48,15 @@
   -moz-user-select: moz-none;
   -ms-user-select: none;
   user-select: none;
+}
+
+@mixin textselect() {
+  -webkit-touch-callout: text;
+  -webkit-user-select: text;
+  -khtml-user-select: text;
+  -moz-user-select: moz-text;
+  -ms-user-select: text;
+  user-select: text;
 }
 
 @mixin clickbtn() {

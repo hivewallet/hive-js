@@ -16,6 +16,7 @@
 
   ._address {
     @include ellipsis();
+    @include textselect;
     @extend .jigsaw-light;
     display: block;
     padding-right: 40px;
