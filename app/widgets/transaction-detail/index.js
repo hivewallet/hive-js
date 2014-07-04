@@ -12,26 +12,7 @@ module.exports = function showTooltip(data){
     partials: {
       content: require('./content.ract').template,
     },
-    data: {
-      transaction: data,
-      directionClass: function(direction){
-        return {
-          incoming: 'green',
-          outgoing: 'red'
-        }[direction]
-      },
-      directionIcon: function(direction){
-        return {
-          incoming: '+',
-          outgoing: ''
-        }[direction]
-      },
-      formatTimestamp: function(timestamp){
-        var date = new Date(timestamp)
-        return strftime('%b %d %l:%M %p', date)
-      },
-      satoshiToBtc: satoshiToBtc
-    }
+    data: data
   })
 
   ractive.on('close', function(){
