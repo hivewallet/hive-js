@@ -110,14 +110,14 @@
     }
 }
 
-.modal__container {
+#qr-modal {
   @extend .overlay;
   cursor: pointer;
   background: rgba(0, 0, 0, 0.6);
   overflow-y: hidden;
 }
 
-#qrcontainer {
+#qr-container {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -131,14 +131,18 @@
     transform: translateY(0);
   }
 
-  canvas {
+  .qr__content {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-left: -100px;
-    margin-top: -100px;
-
+    background-color: white;
+    top: 20px;
+    left: 15px;
+    right: 15px;
+    border-radius: 5px;
     border: 5px solid white;
+  }
+
+  canvas {
+    margin: 0 auto;
     border-radius: 3px;
   }
 }

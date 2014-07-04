@@ -1,0 +1,7 @@
+<div class="tooltip">
+  <span class="tooltip__cancel" on-click="close">
+    {{>svg_close}}
+  </span>
+  <div id="qr-canvas"></div>
+  <p class="tooltip__message">{{address}}</p>
+</div>

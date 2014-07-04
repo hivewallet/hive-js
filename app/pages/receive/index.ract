@@ -4,7 +4,7 @@
   <span class="_address">{{address}}</span>
   <div class="_btn" on-click="show-qr">
     <span class="_icon">
-      {{>svg_qr}}
+      {{>svg_help}}
     </span>
   </div>
 </div>
@@ -23,8 +23,3 @@
   <span class="_btn {{#broadcasting}}is_broadcasting{{/broadcasting}}{{#connecting}}is_connecting{{/connecting}}" on-click="toggle-broadcast">{{btn_message}}</span>
 </div>
 
-{{#qrVisible}}
-  <div id="qr-modal" class="modal__container">
-    <div id="qrcontainer" on-click="hide-qr"></div>
-  </div>
-{{/qrVisible}}

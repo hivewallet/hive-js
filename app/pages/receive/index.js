@@ -2,9 +2,9 @@
 
 var Ractive = require('hive-ractive')
 var emitter = require('hive-emitter')
-var qrcode = require('hive-qrcode')
 var Hive = require('hive-wallet')
 var showTooltip = require('hive-tooltip')
+var showQr = require('hive-qr-modal')
 var geo = require('hive-geo')
 var showError = require('hive-flash-modal').showError
 var showSetDetails = require('hive-set-details-modal')
@@ -59,30 +59,8 @@ module.exports = function(el){
   }
 
   ractive.on('show-qr', function(){
-    var data = {
-      overlay: 'qr'
-    }
-
-    ractive.set('qrVisible', true)
-    emitter.emit('open-overlay', data)
-
-    fadeIn(ractive.nodes['qr-modal'])
-
-    var qr = qrcode('bitcoin:' + getAddress())
-    var container = ractive.find('#qrcontainer')
-    container.innerHTML = ''
-    container.appendChild(qr)
-    setTimeout(function(){
-      container.classList.add('is_visible')
-    }, 100)
-  })
-
-  ractive.on('hide-qr', function(){
-    var container = ractive.find('#qrcontainer')
-    container.classList.remove('is_visible')
-    fadeOut(ractive.nodes['qr-modal'], function() {
-      ractive.set('qrVisible', false)
-      emitter.emit('close-overlay')
+    showQr({
+      address: ractive.get('address')
     })
   })
 
