@@ -44,7 +44,7 @@ module.exports = function(el){
     ractive.set('bitcoinBalance', wallet.getBalance())
   })
 
-  ractive.on('toggle', function(event){
+  ractive.on('toggle', function(){
     window.scrollTo(0, 0);
     emitter.emit('toggle-menu', !ractive.get('menuOpen'))
   })

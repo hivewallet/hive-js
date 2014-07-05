@@ -14,7 +14,7 @@ module.exports = function(prevPage){
     }
   })
 
-  ractive.on('back', function(event){
+  ractive.on('back', function(){
     prevPage()
     ractive.teardown()
   })

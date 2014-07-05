@@ -1,7 +1,6 @@
 'use strict';
 
 var Ractive = require('../auth')
-var Hive = require('hive-wallet')
 var pinPage = require('../pin')
 var animateCheckbox = require('hive-transitions/highlight.js')
 function confirm(data){
@@ -24,7 +23,7 @@ function confirm(data){
     }
   })
 
-  ractive.on('create-pin', function(event) {
+  ractive.on('create-pin', function() {
     if(!ractive.get('checked')) return animateCheckbox(ractive.nodes.check);
     pinPage(confirm, data)
     ractive.teardown()

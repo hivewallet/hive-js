@@ -48,7 +48,6 @@ module.exports = function(el){
   var $previewEl = ractive.nodes['details-preview']
   var $editEl = ractive.nodes['details-edit']
   var $initialUserEl = ractive.nodes['user_settings']
-  var $initialSecurityEl = ractive.nodes['security_settings']
   var $initialTokenEl = ractive.nodes['token_settings']
   var $userIcon = ractive.nodes['user_arrow']
   var $tokenIcon = ractive.nodes['token_arrow']
@@ -72,10 +71,6 @@ module.exports = function(el){
 
       setAvatar()
 
-      var hiddenState = {
-          display: 'none',
-          opacity: 0
-        }
       if(ractive.get('user.name')) {
         Profile.hide($editEl, ractive)
       } else {
@@ -128,7 +123,7 @@ module.exports = function(el){
     if(!details.firstName || details.firstName.trim() === 'undefined') {
       details.firstName = '';
       db.set('userInfo', details, function(err, response){
-        if(err) return handleUserError(response)
+        if(err) return handleUserError()
       })
       return showError({message: "A name is required to set your profile on Hive"})
     }
@@ -139,7 +134,7 @@ module.exports = function(el){
     }
 
     db.set('userInfo', details, function(err, response){
-      if(err) return handleUserError(response)
+      if(err) return handleUserError()
 
       Profile.hide($editEl, ractive, function(){
         Profile.show($previewEl, ractive)
@@ -172,7 +167,7 @@ module.exports = function(el){
     window.location.assign(url);
   })
 
-  function handleUserError(response) {
+  function handleUserError() {
     var data = {
       title: "Uh Oh!",
       message: "Could not save your details"

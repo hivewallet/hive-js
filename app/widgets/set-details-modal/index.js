@@ -39,7 +39,7 @@ function openModal(data){
       return showError({message: "Without a name, the payer wouldn't be able to identify you on waggle."})
     }
 
-    db.set('userInfo', details, function(err, resp){
+    db.set('userInfo', details, function(err){
       if(err) return data.callback(err);
 
       ractive.fire('cancel', undefined)

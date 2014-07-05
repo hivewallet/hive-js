@@ -11,7 +11,7 @@ module.exports = function(el){
     template: require('./index.ract').template
   })
 
-  var settings = initSettings(ractive.find("#settings"))
+  initSettings(ractive.find("#settings"))
 
   ractive.on('open-support', function(){
     openSupportModal()

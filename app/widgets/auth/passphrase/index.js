@@ -14,12 +14,12 @@ function enterPassphrase(prevPage){
     }
   })
 
-  ractive.on('back', function(event){
+  ractive.on('back', function(){
     prevPage()
     ractive.teardown()
   })
 
-  ractive.on('open-wallet-with-passphrase', function(event) {
+  ractive.on('open-wallet-with-passphrase', function() {
     var passphrase = getPassphrase()
 
     if (passphrase !== '') {

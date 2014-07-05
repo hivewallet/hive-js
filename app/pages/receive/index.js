@@ -10,8 +10,6 @@ var showError = require('hive-flash-modal').showError
 var showSetDetails = require('hive-set-details-modal')
 var fadeIn = require('hive-transitions/fade.js').fadeIn
 var fadeOut = require('hive-transitions/fade.js').fadeOut
-var setPulse = require('hive-transitions/fade.js').setPulse
-var clearPulse = require('hive-transitions/fade.js').clearPulse
 
 module.exports = function(el){
   var ractive = new Ractive({
@@ -52,7 +50,7 @@ module.exports = function(el){
   function waggleOn(){
     ractive.set('connecting', true)
     ractive.set('btn_message', 'Checking your location')
-    geo.search(function(err, results){
+    geo.search(function(err){
       if(err) return handleWaggleError(err)
       ractive.set('connecting', false)
       ractive.set('broadcasting', true)

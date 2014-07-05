@@ -1,7 +1,6 @@
 'use strict';
 
 var Ractive = require('hive-ractive')
-var Hive = require('hive-wallet')
 var emitter = require('hive-emitter')
 var showError = require('hive-flash-modal').showError
 var getNetwork = require('hive-network')
@@ -14,7 +13,6 @@ var Auth = Ractive.extend({
     footer: require('./choose/footer.ract').template
   },
   init: function(){
-    var timerId = null
     var self = this
     this.set('opening', false)
 

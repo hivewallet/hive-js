@@ -1,7 +1,6 @@
 'use strict';
 
 var Ractive = require('hive-modal')
-var emitter = require('hive-emitter')
 
 var defaults = {
   error: {

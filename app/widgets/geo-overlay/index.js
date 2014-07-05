@@ -1,11 +1,9 @@
 'use strict';
 
 var Ractive = require('hive-ractive')
-var getWallet = require('hive-wallet').getWallet
 var getAvatar = require('hive-avatar').getAvatar
 var emitter = require('hive-emitter')
 var geo = require('hive-geo')
-var db = require('hive-db')
 var showError = require('hive-flash-modal').showError
 var fadeIn = require('hive-transitions/fade.js').fadeIn
 var fadeOut = require('hive-transitions/fade.js').fadeOut
@@ -14,7 +12,7 @@ var resetPin = require('hive-transitions/pinDrop.js').reset
 
 module.exports = function(el){
   var nearbys = []
-  var xhr_timeout, oval_interval;
+  var xhr_timeout;
   var ractive = new Ractive({
     el: el,
     template: require('./index.ract').template,

@@ -1,9 +1,6 @@
 'use strict';
 
 var Ractive = require('hive-modal')
-var emitter = require('hive-emitter')
-var satoshiToBtc = require('hive-convert').satoshiToBtc
-var strftime = require('strftime')
 
 module.exports = function showTooltip(data){
 

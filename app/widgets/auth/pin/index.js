@@ -21,7 +21,7 @@ module.exports = function(prevPage, data){
     }
   })
 
-  ractive.on('enter-pin', function(event){
+  ractive.on('enter-pin', function(){
     if(!validatePin(getPin())){
       emitter.emit('clear-pin')
       return showError({ message: 'Pin must be a 4-digit number' })
@@ -47,8 +47,8 @@ module.exports = function(prevPage, data){
     ractive.set('pin', '')
   })
 
-  ractive.on('clear-credentials', function(event){
-    Hive.reset(function(err){
+  ractive.on('clear-credentials', function(){
+    Hive.reset(function(){
       location.reload(false);
     })
   })
