@@ -2,7 +2,6 @@ var Address = require('bitcoinjs-lib').Address
 var assert = require('assert')
 var btcToSatoshi = require('hive-convert').btcToSatoshi
 var satoshiToBtc = require('hive-convert').satoshiToBtc
-var toFixedFloor = require('hive-convert').toFixedFloor
 
 function validateSend(wallet, to, btcValue, callback){
   var amount = btcToSatoshi(btcValue)
@@ -28,9 +27,10 @@ function validateSend(wallet, to, btcValue, callback){
       var has = hasAndNeeded[0]
       var needed = hasAndNeeded[1]
       var spendAll = attemptToEmptyWallet()
+      var error
 
       if(sufficientWithPending(needed) || (spendAll && hasPendingUtxo())){
-        var error = new Error("Some funds are temporarily unavailable. To send this transaction, you'll need to wait for your pending transactions to be confirmed first (this shouldn't take more than a few minutes).")
+        error = new Error("Some funds are temporarily unavailable. To send this transaction, you'll need to wait for your pending transactions to be confirmed first (this shouldn't take more than a few minutes).")
         error.href = "https://github.com/hivewallet/hive-osx/wiki/Sending-Bitcoin-from-a-pending-transaction"
         error.linkText = "What does this mean?"
         return callback(error)
@@ -44,7 +44,7 @@ function validateSend(wallet, to, btcValue, callback){
           "We have amended the value in the amount field for you."
         ].join(' ')
 
-        var error = new Error(message)
+        error = new Error(message)
         error.sendableBalance = sendableBalance
 
         return new callback(error)

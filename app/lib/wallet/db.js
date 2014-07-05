@@ -8,14 +8,14 @@ var credentials = "credentials"
 function saveEncrypedSeed(id, encryptedSeed, callback) {
   db.get(credentials, function(err, doc){
     if(doc) {
-      return db.remove(doc, function(err, doc){
+      return db.remove(doc, function(err){
         if(err) return callback(err);
 
         saveEncrypedSeed(id, encryptedSeed, callback)
       })
     }
 
-    var doc = {
+    doc = {
       _id: credentials,
       id: id,
       seed: encryptedSeed
@@ -29,7 +29,7 @@ function getCredentials(callback) {
 }
 
 function deleteCredentials(doc, callback) {
-  db.remove(doc, function(err, res){
+  db.remove(doc, function(err){
     if(err) console.error('failed to delete credentials');
     return callback(err)
   })

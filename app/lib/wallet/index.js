@@ -24,7 +24,7 @@ var id = null
 
 function sendTx(tx, callback) {
   var txHex = tx.toHex()
-  api.sendTx(txHex, function(err, hiveTx){
+  api.sendTx(txHex, function(err){
     if(err) { return callback(err) }
 
     processPendingTx(tx)
@@ -78,7 +78,6 @@ function processLocalPendingTxs(callback) {
 }
 
 function addressUsed(address){
-  var usedAddresses = []
   for (var key in wallet.outputs){
     var output = wallet.outputs[key]
     if(output.address === address) {
@@ -127,7 +126,7 @@ function setPin(pin, callback) {
     emitter.emit('wallet-auth', {token: token, pin: pin})
 
     var encrypted = AES.encrypt(seed, token)
-    db.saveEncrypedSeed(id, encrypted, function(err, res){
+    db.saveEncrypedSeed(id, encrypted, function(err){
       if(err) return callback(err);
 
       firstTimeSync(callback)
@@ -148,7 +147,7 @@ function openWalletWithPin(pin, network, syncDone) {
     auth.login(id, pin, function(err, token){
       if(err){
         if(err.error === 'user_deleted') {
-          return db.deleteCredentials(credentials, function(deleteError){
+          return db.deleteCredentials(credentials, function(err){
             syncDone(err.error);
           })
         }
@@ -335,7 +334,7 @@ function findUnusedAddress(addressGenFn, done){
   function onAddresses(err, addresses) {
     if(err) return done(err)
 
-    var unusedAddress = undefined;
+    var unusedAddress;
     for(var i=0; i<addresses.length; i++){
       var address = addresses[i]
       if(address.txCount === 0){
