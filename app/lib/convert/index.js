@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 var Big = require('big.js')
 

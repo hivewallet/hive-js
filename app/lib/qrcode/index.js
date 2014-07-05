@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 // https://github.com/defunctzombie/qr.js/blob/515790fad4682b2d38008f229dbd814b0d2633e4/example/index.js
 var qr = require('qr.js')

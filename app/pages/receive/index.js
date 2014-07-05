@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 var Ractive = require('hive-ractive')
 var emitter = require('hive-emitter')

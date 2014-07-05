@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 function Transaction(id){
   this.id = id

@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 var Velocity = require('./index.js')
 var fadeOut = require('./fade.js').fadeOut

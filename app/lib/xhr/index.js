@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 var xhr = require('xhr')
 var showError = require('hive-flash-modal').showError

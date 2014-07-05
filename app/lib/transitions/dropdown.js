@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 var Velocity = require('./index.js')
 
