@@ -21,7 +21,8 @@ function openModal(data){
   var ractive = new Ractive({
     partials: {
       content: require('./content.ract').template
-    }
+    },
+    data: data
   })
 
   var params = {}
