@@ -1,7 +1,6 @@
 'use strict';
 
 var xhr = require('hive-xhr')
-var emitter = require('hive-emitter')
 var db = require('hive-db')
 var getWallet = require('hive-wallet').getWallet
 var uriRoot = window.location.origin
@@ -66,7 +65,7 @@ function remove(sync){
 }
 
 function getLocation(callback){
-  if (!navigator.geolocation){
+  if (!window.navigator.geolocation){
     return callback(new Error('Your browser does not support geolocation'))
   }
 
@@ -78,7 +77,7 @@ function getLocation(callback){
     callback(new Error('Unable to retrieve your location'))
   }
 
-  navigator.geolocation.getCurrentPosition(success, error)
+  window.navigator.geolocation.getCurrentPosition(success, error)
 }
 
 module.exports = {

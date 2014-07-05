@@ -26,7 +26,7 @@ function listAddresses(addresses, onAddresses){
     return onAddresses(error)
   }
 
-  makeRequest('address/info/' + addresses.join(','), function (err, resp, body) {
+  makeRequest('address/info/' + addresses.join(','), function (err, resp) {
     if(err) return onAddresses(err)
 
     if(resp.statusCode !== 200) {
@@ -79,7 +79,7 @@ function batchRequests(items, fn, callback) {
 
 function requestUnspent(addresses){
   return function(callback){
-    makeRequest('address/unspent/' + addresses.join(','), function (err, resp, body) {
+    makeRequest('address/unspent/' + addresses.join(','), function (err, resp) {
       if(err) return callback(err)
 
       var utxo = JSON.parse(resp.body).data
@@ -163,7 +163,7 @@ function getUnconfirmedTransactions(addresses, callback) {
 
 function requestTransactionsForAddresses(addresses){
   return function(callback){
-    makeRequest('address/txs/' + addresses.join(','), function (err, resp, body) {
+    makeRequest('address/txs/' + addresses.join(','), function (err, resp) {
       if(err) return callback(err)
 
       var txs = JSON.parse(resp.body).data
@@ -174,7 +174,7 @@ function requestTransactionsForAddresses(addresses){
 
 function requestUnconfirmedTransactionsForAddresses(addresses){
   return function(callback){
-    makeRequest('address/unconfirmed/' + addresses.join(','), function (err, resp, body) {
+    makeRequest('address/unconfirmed/' + addresses.join(','), function (err, resp) {
       if(err) return callback(err)
 
       var txs = JSON.parse(resp.body).data
@@ -260,7 +260,7 @@ function requestRawTransactions(txIds){
 
 function makeTransactionRequest(txIds, type){
   return function(callback){
-    makeRequest('tx/' + type + '/' + txIds.join(','), function (err, resp, body) {
+    makeRequest('tx/' + type + '/' + txIds.join(','), function (err, resp) {
       if(err) return callback(err)
 
       var txs = JSON.parse(resp.body).data
