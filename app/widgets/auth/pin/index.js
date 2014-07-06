@@ -18,13 +18,7 @@ module.exports = function(prevPage, data){
     },
     data: {
       userExists: userExists,
-      pinLength: 0,
-      boxes: [
-        {dot: false},
-        {dot: false},
-        {dot: false},
-        {dot: false}
-      ]
+      boxes: [false, false, false, false]
     }
   })
 
@@ -37,25 +31,14 @@ module.exports = function(prevPage, data){
   })
 
   ractive.observe('pin', function(){
-    var val = ractive.nodes['setPin'].value
-    var new_length = val.length
-    var old_length = ractive.get('pinLength')
+    var dots = ractive.nodes['setPin'].value.length
     var boxes = ractive.get('boxes')
 
-    if(new_length === old_length) return;
+    boxes.forEach(function(_, i){
+      boxes[i] = i < dots
+    })
 
-    if(new_length > old_length) {
-      boxes[new_length - 1].dot = true
-      ractive.set('boxes', boxes)
-      ractive.set('pinLength', new_length)
-      return;
-    }
-    if(new_length < old_length) {
-      boxes[old_length - 1].dot = false
-      ractive.set('boxes', boxes)
-      ractive.set('pinLength', new_length)
-      return;
-    }
+    ractive.set('boxes', boxes)
   })
 
   ractive.on('enter-pin', function(event){
