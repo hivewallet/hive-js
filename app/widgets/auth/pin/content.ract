@@ -7,7 +7,16 @@
       {{^userExists}}
         Set a pin for quick access:
       {{/userExists}}
-      <input id="setPin" class="_input" type="password" pattern="[0-9]*" placeholder="4-digit pin" value="{{pin}}" on-enter='enter-pin' />
+      <div class="pinfield {{#pinfocused}}is_focused{{/pinfocused}}">
+        {{#boxes}}
+          <div class="_box">
+            {{#.}}
+              <span class="_dot"></span>
+            {{/.}}
+          </div>
+        {{/boxes}}
+      </div>
+      <input id="setPin" class="_input" type="password" maxlength="4" pattern="[0-9]*" value="{{pin}}" on-enter="enter-pin" on-focus="focus-pin" on-blur="blur-pin"/>
     </label>
   </div>
 </div>
