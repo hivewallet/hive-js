@@ -2,8 +2,10 @@
 
 var Ractive = require('hive-ractive')
 var emitter = require('hive-emitter')
-var initSettings = require('hive-settings')
 var openSupportModal = require('hive-support-modal')
+var Dropdown = require('hive-transitions/dropdown.js')
+var initAccount = require('hive-dropdown-account')
+var initToken = require('hive-dropdown-token')
 
 module.exports = function(el){
   var ractive = new Ractive({
@@ -11,7 +13,8 @@ module.exports = function(el){
     template: require('./index.ract').template
   })
 
-  initSettings(ractive.find("#settings"))
+  initAccount(ractive.nodes.account_settings)
+  initToken(ractive.nodes.token_settings)
 
   ractive.on('open-support', function(){
     openSupportModal()

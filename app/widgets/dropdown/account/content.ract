@@ -1,0 +1,25 @@
+
+<div id="details-preview">
+  <div class="settings__avatar"></div>
+  <h3 class="settings__name">{{user.name}}</h3>
+  <span class="settings__editBtn" on-click="edit-details">Change your details</span>
+</div>
+
+<div id="details-edit">
+  <div class="settings__input-group">
+    <label class="_label">Your name
+      <input type="text" value="{{user.name}}" class="_input" />
+    </label>
+  </div>
+
+  <div class="settings__input-group">
+    <label class="_label">Gravatar Email
+      <input value="{{user.email}}" type="email" class="_input" on-enter="submit-details"/>
+    </label>
+    <span class="_help" on-click="help">
+      {{>svg_help}}
+    </span>
+  </div>
+
+  <div class="settings__btn" on-click="submit-details">Submit</div>
+</div>
