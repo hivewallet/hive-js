@@ -18,10 +18,10 @@
     <div class="detail__strings">
 
       <h3 class="_title">Transaction Id:</h3>
-      <span class="_value">{{id}}</span>
+      <code class="_value">{{id}}</code>
       {{#toAddress}}
         <h3 class="_title">Sent to:</h3>
-        <span class="_value">{{toAddress}}</span>
+        <code class="_value">{{toAddress}}</code>
       {{/toAddress}}
 
     </div>

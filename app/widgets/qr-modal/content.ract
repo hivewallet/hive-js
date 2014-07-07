@@ -3,5 +3,8 @@
     {{>svg_close}}
   </span>
   <div id="qr-canvas"></div>
-  <p class="tooltip__message">{{address}}</p>
+  <div class="detail__strings">
+    <h3 class="_title">Your wallet address:</h3>
+    <code class="_value">{{address}}</code>
+  </div>
 </div>

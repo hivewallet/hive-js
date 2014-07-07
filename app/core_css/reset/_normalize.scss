@@ -228,7 +228,7 @@ code,
 kbd,
 pre,
 samp {
-  font-family: monospace, monospace;
+  @extend .jigsaw-light;
   font-size: 1em;
 }
 

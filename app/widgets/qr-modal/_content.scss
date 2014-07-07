@@ -1,31 +1,6 @@
 
-.tooltip {
-  position: relative;
-  cursor: default;
-  padding: 20px;
-  padding-top: 40px;
-  max-width: 300px;
-  background-color: white;
-  border-radius: 4px;
+#qr-canvas {
   margin: 0 auto;
-  margin-top: 40px;
-
-  font-size: 18px;
-  box-shadow: 0 2px 2px 1px rgba(000,000,000,0.2);
+  width: 200px;
+  height: 200px;
 }
-
-.tooltip__cancel {
-  @include clickbtn;
-  position: absolute;
-  top: 0px;
-  right: 0px;
-  width: 45px;
-  height: 45px;
-  padding: 10px;
-  z-index: 1000;
-
-  .svg-close {
-    fill: $grey;
-  }
-}
-
