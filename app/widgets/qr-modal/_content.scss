@@ -4,3 +4,57 @@
   width: 200px;
   height: 200px;
 }
+
+.detail__strings {
+  @include wrapdat;
+  padding-top: 20px;
+  ._title {
+    margin-top: 10px;
+  }
+  ._value {
+    @include textselect;
+
+    background-color: $grey--light;
+    box-shadow: inset 0 2px 2px 1px rgba(000,000,000,0.2);
+    padding: 10px;
+    padding-top: 14px;
+    padding-bottom: 14px;
+    display: block;
+    border-radius: 5px;
+    font-size: 13px;
+    line-height: 1.8;
+  }
+}
+
+._value {
+  font-size: 13px;
+  text-align: center;
+}
+
+._actions {
+  text-align: center;
+  padding-top: 10px;
+
+  ._btn {
+    @extend .hivebtn;
+    display: inline-block;
+    width: 36px;
+    height: 36px;
+    right: 3px;
+    top: 50%;
+    padding: 0;
+    padding-top: 7px;
+    border-radius: 2px;
+
+    ._icon {
+      width: 20px;
+      height: 20px;
+      display: block;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-top: -13px;
+      margin-left: -15px;
+    }
+  }
+}
