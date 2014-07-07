@@ -54,6 +54,7 @@ partials.svg_logo_key = require('hive-svg/logo_key.ract').template
 partials.svg_logo_stack = require('hive-svg/logo_stack.ract').template
 partials.svg_logo = require('hive-svg/logo.ract').template
 partials.svg_qr = require('hive-svg/qr.ract').template
+partials.svg_expand = require('hive-svg/expand.ract').template
 partials.svg_receive = require('hive-svg/receive.ract').template
 partials.svg_refresh = require('hive-svg/refresh.ract').template
 partials.svg_send = require('hive-svg/send.ract').template

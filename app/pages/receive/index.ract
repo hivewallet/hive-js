@@ -4,7 +4,7 @@
   <span class="_address">{{address}}</span>
   <div class="_btn" on-click="show-qr">
     <span class="_icon">
-      {{>svg_qr}}
+      {{>svg_expand}}
     </span>
   </div>
 </div>
