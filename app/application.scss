@@ -43,8 +43,8 @@
 @import "widgets/transaction-detail/_content";
 @import "widgets/qr-modal/_content";
 @import "widgets/dropdown/_index";
-@import "widgets/dropdown/account/_content";
-@import "widgets/dropdown/token/_content";
+@import "widgets/account/_content";
+@import "widgets/token/_content";
 
 // pages
 @import "pages/send/_index";
