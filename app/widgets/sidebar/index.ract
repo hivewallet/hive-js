@@ -8,7 +8,10 @@
 
 </div>
 
-<div id="settings"></div>
+<div id="settings">
+  <div id="account_settings"></div>
+  <div id="token_settings"></div>
+</div>
 
 <div class="settings__footer">
   <div class="sidebar__logout" on-click="logout">

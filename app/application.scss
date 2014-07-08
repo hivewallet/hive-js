@@ -42,12 +42,14 @@
 @import "widgets/support-modal/_index";
 @import "widgets/transaction-detail/_content";
 @import "widgets/qr-modal/_content";
+@import "widgets/dropdown/_index";
+@import "widgets/dropdown/account/_content";
+@import "widgets/dropdown/token/_content";
 
 // pages
 @import "pages/send/_index";
 @import "pages/receive/_index";
 @import "pages/history/_index";
-@import "pages/settings/_index";
 
 // loader
 @import "loader/_index";

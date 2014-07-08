@@ -1,0 +1,15 @@
+<div class="tokens">
+  {{#tokens}}
+    <div id="{{token}}" on-click="switch-token" class="token__item {{getNetworkClass(token)}}">
+      <span class="_icon i-{{token}}-token">
+        {{#bitcoin}}
+          {{>svg_token_bitcoin}}
+        {{/bitcoin}}
+        {{#litecoin}}
+          {{>svg_token_litecoin}}
+        {{/litecoin}}
+      </span>
+      <h3 class="_title">{{capitalize(token)}}</h3>
+    </div>
+  {{/tokens}}
+</div>

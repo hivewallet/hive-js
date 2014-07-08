@@ -1,10 +1,9 @@
 {
-  "name": "hive-settings",
+  "name": "hive-dropdown",
   "version": "0.0.0",
-  "description": "",
   "main": "index.js",
   "style": "index.css",
-  "author": "",
+  "author": "Wei Lu",
   "license": "GPL-3.0",
   "browserify": {
     "transform": ["ractify"]
