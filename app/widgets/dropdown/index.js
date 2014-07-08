@@ -16,22 +16,29 @@ var Dropdown = Ractive.extend({
   init: function(){
 
     var self = this
+    var arrow = self.nodes.arrow
+    var elem = self.nodes.content
+
+    if(self.get('start_open')) {
+      openSelf()
+    } else {
+      closeSelf()
+    }
 
     self.on('toggle', function(){
-
       if(self.get('animating')) return;
-
-      var arrow = self.nodes.arrow
-      var elem = self.nodes.content
-
-      if(self.get('dropdown_open')) {
-        self.set('dropdown_open', false)
-        animateDropdown.hide(elem, arrow, self)
-      } else {
-        self.set('dropdown_open', true)
-        animateDropdown.show(elem, arrow, self)
-      }
+      self.get('dropdown_open') ? closeSelf() : openSelf();
     })
+
+    function closeSelf() {
+      self.set('dropdown_open', false)
+      animateDropdown.hide(elem, arrow, self)
+    }
+
+    function openSelf() {
+      self.set('dropdown_open', true)
+      animateDropdown.show(elem, arrow, self)
+    }
   }
 })
 

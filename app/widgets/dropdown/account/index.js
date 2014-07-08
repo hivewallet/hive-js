@@ -18,6 +18,7 @@ module.exports = function init(el) {
     },
     data: {
       title: 'Your Details',
+      start_open: true,
       user: {
         name: '',
         email: ''
