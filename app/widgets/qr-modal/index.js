@@ -3,6 +3,7 @@
 var Ractive = require('hive-modal')
 var emitter = require('hive-emitter')
 var qrcode = require('hive-qrcode')
+var getNetwork = require('hive-network')
 
 module.exports = function showTooltip(data){
 
@@ -15,7 +16,7 @@ module.exports = function showTooltip(data){
   })
 
   var canvas = ractive.nodes['qr-canvas']
-  var qr = qrcode('bitcoin:' + ractive.get('address'))
+  var qr = qrcode(getNetwork() + ':' + ractive.get('address'))
   canvas.appendChild(qr)
 
   ractive.on('close', function(){

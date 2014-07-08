@@ -29,12 +29,6 @@
   }
 }
 
-.litecoin {
-  .tooltip {
-    background-color: darken($silver, 30%);
-  }
-}
-
 .tooltip__message {
   @extend .jigsaw-regular;
 }
