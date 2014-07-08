@@ -17,7 +17,7 @@ var Dropdown = Ractive.extend({
 
     var self = this
     var arrow = self.nodes.arrow
-    var elem = self.nodes.content
+    var elem = self.nodes[self.get('id')]
 
     if(self.get('start_open')) {
       openSelf()

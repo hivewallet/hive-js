@@ -29,7 +29,6 @@
 
   &:hover {
     text-decoration: underline;
-
   }
 }
 
@@ -77,14 +76,14 @@
 }
 
 
-#user_settings {
+#account_dropdown {
   ._content {
-    min-height: 280px;
+    min-height: 300px;
   }
 }
 
 #details-preview {
-  padding-top: 20px;
+  padding-top: 32px;
 }
 
 
@@ -93,6 +92,7 @@
   background-color: darken($purple--light, 5%);
 
   ._content {
+
     padding-top: 20px;
     padding-right: 23px;
     padding-left: 20px;

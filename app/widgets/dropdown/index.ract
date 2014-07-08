@@ -11,7 +11,7 @@
   </span>
 </div>
 
-<div class="settings__group" id="content">
+<div class="settings__group" id="{{id}}">
   <div class="_content">
     {{>content}}
   </div>

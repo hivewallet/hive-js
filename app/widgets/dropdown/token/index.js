@@ -13,6 +13,7 @@ module.exports = function init(el) {
     },
     data: {
       title: 'Available Tokens',
+      id: 'token_dropdown',
       tokens: [
         {
           token: 'bitcoin',

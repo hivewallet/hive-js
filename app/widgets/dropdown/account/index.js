@@ -18,6 +18,7 @@ module.exports = function init(el) {
     },
     data: {
       title: 'Your Details',
+      id: 'account_dropdown',
       start_open: true,
       user: {
         name: '',
