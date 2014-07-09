@@ -65,6 +65,7 @@ module.exports = function(prevPage, data){
 
   emitter.on('clear-pin', function() {
     ractive.set('pin', '')
+    ractive.set('boxes', [false, false, false, false])
   })
 
   ractive.on('clear-credentials', function(){
