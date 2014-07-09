@@ -3,7 +3,7 @@
 var Hive = require('hive-wallet')
 var Ractive = require('../auth')
 var pinPage = require('../pin')
-var showError = require('hive-flash-modal').showError
+var showError = require('hive-modal-flash').showError
 
 function enterPassphrase(prevPage){
   var ractive = new Ractive({

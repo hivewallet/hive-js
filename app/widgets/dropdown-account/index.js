@@ -2,8 +2,8 @@
 
 var Ractive = require('hive-dropdown')
 var Profile = require('hive-transitions/profileAnimation.js')
-var showTooltip = require('hive-tooltip')
-var showError = require('hive-flash-modal').showError
+var showTooltip = require('hive-modal-tooltip')
+var showError = require('hive-modal-flash').showError
 var emitter = require('hive-emitter')
 var Avatar = require('hive-avatar')
 var db = require('hive-db')

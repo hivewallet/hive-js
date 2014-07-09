@@ -3,7 +3,7 @@
 var Ractive = require('../auth')
 var Hive = require('hive-wallet')
 var confirmPassphrasePage = require('../create-confirm')
-var showError = require('hive-flash-modal').showError
+var showError = require('hive-modal-flash').showError
 
 module.exports = function(prevPage){
   var ractive = new Ractive({

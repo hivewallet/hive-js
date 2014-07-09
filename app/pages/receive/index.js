@@ -3,11 +3,11 @@
 var Ractive = require('hive-ractive')
 var emitter = require('hive-emitter')
 var Hive = require('hive-wallet')
-var showTooltip = require('hive-tooltip')
-var showQr = require('hive-qr-modal')
+var showTooltip = require('hive-modal-tooltip')
+var showQr = require('hive-modal-qr')
 var geo = require('hive-geo')
-var showError = require('hive-flash-modal').showError
-var showSetDetails = require('hive-set-details-modal')
+var showError = require('hive-modal-flash').showError
+var showSetDetails = require('hive-modal-set-details')
 var fadeIn = require('hive-transitions/fade.js').fadeIn
 var fadeOut = require('hive-transitions/fade.js').fadeOut
 

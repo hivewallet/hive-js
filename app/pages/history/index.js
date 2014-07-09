@@ -6,7 +6,7 @@ var toFixedFloor = require('hive-convert').toFixedFloor
 var satoshiToBtc = require('hive-convert').satoshiToBtc
 var getAvatarByIndex = require('hive-avatar').getAvatarByIndex
 var strftime = require('strftime')
-var showTransactionDetail = require('hive-transaction-detail')
+var showTransactionDetail = require('hive-modal-transaction-detail')
 
 module.exports = function(el){
   var transactions = []

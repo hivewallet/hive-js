@@ -7,7 +7,7 @@ var getWallet = require('hive-wallet').getWallet
 var satoshiToBtc = require('hive-convert').satoshiToBtc
 var toFixedFloor = require('hive-convert').toFixedFloor
 var Big = require('big.js')
-var showError = require('hive-flash-modal').showError
+var showError = require('hive-modal-flash').showError
 var db = require('hive-db')
 
 module.exports = function(el){

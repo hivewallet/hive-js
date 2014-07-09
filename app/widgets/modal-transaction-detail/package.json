@@ -1,10 +1,10 @@
 {
-  "name": "hive-set-details-modal",
+  "name": "hive-modal-transaction-detail",
   "version": "0.0.0",
   "description": "",
   "main": "index.js",
   "style": "index.css",
-  "author": "Wei Lu",
+  "author": "",
   "license": "GPL-3.0",
   "browserify": {
     "transform": ["ractify"]

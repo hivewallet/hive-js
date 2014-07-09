@@ -2,7 +2,7 @@
 
 var Ractive = require('hive-modal')
 var db = require('hive-db')
-var showError = require('hive-flash-modal').showError
+var showError = require('hive-modal-flash').showError
 var sendRequest = require('hive-zendesk')
 var getNetwork = require('hive-network')
 

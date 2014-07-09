@@ -2,7 +2,7 @@
 
 var Ractive = require('hive-ractive')
 var emitter = require('hive-emitter')
-var openSupportModal = require('hive-support-modal')
+var openSupportModal = require('hive-modal-support')
 var Dropdown = require('hive-transitions/dropdown.js')
 var initAccount = require('hive-dropdown-account')
 var initToken = require('hive-dropdown-token')

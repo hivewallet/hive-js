@@ -1,8 +1,8 @@
 'use strict';
 
 var Ractive = require('hive-modal')
-var showError = require('hive-flash-modal').showError
-var showInfo = require('hive-flash-modal').showInfo
+var showError = require('hive-modal-flash').showError
+var showInfo = require('hive-modal-flash').showInfo
 var disablePin = require('hive-wallet').disablePin
 
 function openModal(){

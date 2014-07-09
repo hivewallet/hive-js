@@ -1,7 +1,7 @@
 'use strict';
 
 var xhr = require('xhr')
-var showError = require('hive-flash-modal').showError
+var showError = require('hive-modal-flash').showError
 
 function makeRequest(params, callback){
   if(params && !params.timeout) {

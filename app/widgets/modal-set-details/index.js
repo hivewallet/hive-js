@@ -3,7 +3,7 @@
 var Ractive = require('hive-modal')
 var db = require('hive-db')
 var emitter = require('hive-emitter')
-var showError = require('hive-flash-modal').showError
+var showError = require('hive-modal-flash').showError
 
 function fetchDetails(callback){
   db.get(function(err, doc){

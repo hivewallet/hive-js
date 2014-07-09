@@ -2,7 +2,7 @@
 
 var Ractive = require('hive-ractive')
 var emitter = require('hive-emitter')
-var showError = require('hive-flash-modal').showError
+var showError = require('hive-modal-flash').showError
 var getNetwork = require('hive-network')
 
 var Auth = Ractive.extend({
