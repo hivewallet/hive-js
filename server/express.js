@@ -40,17 +40,18 @@ module.exports = function (){
     }))
   }
 
+  var anHour = 1000*60*60
   app.use(express.bodyParser())
   app.use(express.cookieParser(process.env.COOKIE_SALT))
   app.use(express.cookieSession({
     cookie: {
-      maxAge: 1000*60*60,
+      maxAge: anHour,
       httpOnly: true,
       proxy: true
     }
   }))
   app.use(express.compress())
-  app.use(express.static(path.join(__dirname, '..', 'build')))
+  app.use(express.static(path.join(__dirname, '..', 'build'), { maxAge: anHour }))
 
   app.post('/register', validateAuthParams(false), function(req, res) {
     var name = req.body.wallet_id
