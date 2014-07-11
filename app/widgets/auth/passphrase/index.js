@@ -30,7 +30,7 @@ function enterPassphrase(prevPage){
   })
 
   function getPassphrase() {
-    return (ractive.get('passphrase') || '').trim()
+    return (ractive.get('passphrase').toLowerCase() || '').trim()
   }
 
   function onWalletCreated(err, data) {
