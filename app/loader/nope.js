@@ -1,2 +1,2 @@
-var message = "Your browser doesn't seem to have enough awesomesause to support Hive. <br/><br/> If you are in private browsing mode, try switching to normal mode. Otherwise, try Chrome."
+var message = "Sorry, Hive Wallet didn't load. <br/><br/> Try updating your browser, or switching out of private browsing mode. If all else fails, download Chrome."
 document.getElementById('loader-message').innerHTML = message
