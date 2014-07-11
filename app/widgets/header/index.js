@@ -9,6 +9,7 @@ var toFixedFloor = require('hive-convert').toFixedFloor
 var Big = require('big.js')
 var showError = require('hive-modal-flash').showError
 var db = require('hive-db')
+var spinner = require('hive-transitions/spinner.js')
 
 module.exports = function(el){
   var ractive = new Ractive({
@@ -53,14 +54,22 @@ module.exports = function(el){
     ractive.set('menuOpen', open)
   }
 
+  var refreshEl = ractive.nodes.refresh_el
+
+  function cancelSpinner() {
+    ractive.set('updating_transactions', false)
+    spinner.stop(refreshEl)
+  }
+
   ractive.on('sync', function(event){
     event.original.preventDefault();
     if(!ractive.get('updating_transactions')) {
       ractive.set('updating_transactions', true)
+      spinner.spin(refreshEl)
+      setTimeout(cancelSpinner, 30000)
       sync(function(err, txs){
         if(err) return showError(err)
-
-        ractive.set('updating_transactions', false)
+        cancelSpinner()
         emitter.emit('update-balance')
         emitter.emit('update-transactions', txs)
       })

@@ -29,8 +29,8 @@
     </div>
   {{/showFiat}}
 
-  <div class='header__refresh {{#updating_transactions}}is_updating{{/updating_transactions}}' on-click="sync">
-    <span class="_icon">
+  <div class='header__refresh' on-click="sync">
+    <span id="refresh_el" class="_icon">
       {{>svg_refresh}}
     </span>
   </div>
