@@ -18,7 +18,7 @@ module.exports = function(prevPage, data){
     },
     data: {
       userExists: userExists,
-      boxes: [false, false, false, false]
+      boxes: [{visible: false}, {visible: false}, {visible: false}, {visible: false}]
     }
   })
 
@@ -31,11 +31,15 @@ module.exports = function(prevPage, data){
   })
 
   ractive.observe('pin', function(){
-    var dots = ractive.nodes['setPin'].value.length
     var boxes = ractive.get('boxes')
+    var value = ractive.nodes['setPin'].value
+    var length = value.length
+    var temp_string = value + ''
+    var arr = temp_string.split('')
 
     boxes.forEach(function(_, i){
-      boxes[i] = i < dots
+      boxes[i].number = arr[i]
+      boxes[i].visible = i < length
     })
 
     ractive.set('boxes', boxes)
@@ -48,24 +52,22 @@ module.exports = function(prevPage, data){
     }
 
     ractive.set('opening', true)
-    if(ractive.get('userExists')) {
-      ractive.set('progress', 'Verifying pin')
-    } else {
-      ractive.set('progress', 'Setting pin')
-    }
 
     if(userExists) {
+      ractive.set('progress', 'Verifying pin')
       return Hive.walletExists(function(walletExists){
         if(walletExists) { return openWithPin() }
         setPin()
       })
     }
+    ractive.set('progress', 'Setting pin')
+    ractive.set('userExists', true)
     setPin()
   })
 
   emitter.on('clear-pin', function() {
     ractive.set('pin', '')
-    ractive.set('boxes', [false, false, false, false])
+    ractive.set('boxes', [{visible: false}, {visible: false}, {visible: false}, {visible: false}])
   })
 
   ractive.on('clear-credentials', function(){
