@@ -9,6 +9,7 @@ var fadeIn = require('hive-transitions/fade.js').fadeIn
 var fadeOut = require('hive-transitions/fade.js').fadeOut
 var animatePin = require('hive-transitions/pinDrop.js').drop
 var resetPin = require('hive-transitions/pinDrop.js').reset
+var spinner = require('hive-transitions/spinner.js')
 
 module.exports = function(el){
   var nearbys = []
@@ -43,13 +44,11 @@ module.exports = function(el){
 
   ractive.on('search-again',function(event) {
     event.original.preventDefault()
-    ractive.set('searching', true)
-    ractive.fire('search-nearby')
+    ractive.fire('refresh-list')
   })
 
-  ractive.on('refresh-list', function(event) {
-    event.original.preventDefault()
-    ractive.set('updating_nearbys', true)
+  ractive.on('refresh-list', function() {
+    spinner.spin(ractive.nodes.refresh_el)
     lookupGeo(undefined)
   })
 
@@ -84,6 +83,7 @@ module.exports = function(el){
   function lookupGeo(context) {
     geo.search(function(err, results){
       if(err) {
+        spinner.stop(ractive.nodes.refresh_el)
         return showError({
           message: err.message,
           onDismiss: function(){
@@ -110,7 +110,7 @@ module.exports = function(el){
           ractive.set('nearbys', [])
           ractive.set('results', false)
         }
-        ractive.set('updating_nearbys', false)
+        spinner.stop(ractive.nodes.refresh_el)
       }
     })
   }

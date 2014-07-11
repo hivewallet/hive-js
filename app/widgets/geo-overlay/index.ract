@@ -3,8 +3,8 @@
     <div class="geo__header">
 
     {{^searching}}
-      <div class='_refresh {{#updating_nearbys}}is_updating{{/updating_nearbys}}' on-click="refresh-list">
-        <span class="_icon">
+      <div class='_refresh' on-click="refresh-list">
+        <span id="refresh_el" class="_icon">
           {{>svg_refresh}}
         </span>
       </div>
