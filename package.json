@@ -38,7 +38,7 @@
     "bl": "^0.7.0",
     "browserify": "^4.2.0",
     "browserify-zepto": "~1.1.2",
-    "browsernizr": "^1.0.2",
+    "browsernizr": "git://github.com/weilu/browsernizr#indexedDB",
     "cradle": "~0.6.7",
     "ecstatic": "~0.4.13",
     "es3ify": "~0.1.3",
