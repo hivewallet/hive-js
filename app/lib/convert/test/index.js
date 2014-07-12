@@ -42,6 +42,10 @@ describe('convert', function(){
       expect(convert.toFixedFloor(10.1299, 2)).toEqual('10.12')
     })
 
+    it('does not have precision issues', function(){
+      expect(convert.toFixedFloor(-0.009, 5)).toEqual('-0.00900')
+    })
+
     it('pads digits', function(){
       expect(convert.toFixedFloor(10, 2)).toEqual('10.00')
     })

@@ -14,7 +14,7 @@ function satoshiToBtc(satoshi) {
 
 function toFixedFloor(x, decimal){
   var factor = Math.pow(10, decimal)
-  var y = parseInt(x * factor)
+  var y = parseInt(new Big(x).times(factor))
   return (y / factor).toFixed(decimal)
 }
 
