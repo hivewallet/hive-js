@@ -197,7 +197,7 @@ function sync(done) {
       processLocalPendingTxs(function(err, pendingTxs){
         if(err) return done(err);
 
-        txs.concat(pendingTxs)
+        txs = txs.concat(pendingTxs)
         done(null, consolidateTransactions(txs))
       })
     })
@@ -252,8 +252,10 @@ function sync(done) {
 
     // prepare pending Txs for uniqueify
     sorted.forEach(function(tx){
-      if(sorted.pending) tx.timestamp = null
+      if(tx.pending) tx.timestamp = null;
+      delete tx.raw
     })
+
     return uniqueify(sorted)
   }
 
