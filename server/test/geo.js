@@ -5,14 +5,14 @@ describe('geo', function(){
   var userInfo, lat, lon
 
   beforeEach(function(){
-    userInfo = {id: "foobar", name: "Wei Lu", email: "wei@example.com"}
+    userInfo = {id: "foobar", name: "Wei Lu", email: "wei@example.com", network: "litecoin"}
     lat = 34.2308391
     lon = 108.8686767
     geo.reset()
   })
 
   describe('save', function(){
-    it('stores geo, user id, user name and email', function(done){
+    it('stores geo, user id, user name, email and network', function(done){
       var geocells = [
         'd', 'da', 'da5', 'da51', 'da519', 'da519c', 'da519ce', 'da519cee',
         'da519cee5', 'da519cee57', 'da519cee570', 'da519cee5702', 'da519cee57022'
@@ -29,6 +29,7 @@ describe('geo', function(){
           id: userInfo.id,
           name: userInfo.name,
           email: userInfo.email,
+          network: userInfo.network,
           location: {lat: lat, lon: lon},
           geocells: geocells
         })
@@ -47,12 +48,12 @@ describe('geo', function(){
     })
 
     it('invokes callback with records within geo.SEARCH_RADIUS', function(done){
-      var userInfo1 = {id: "foo", name: "Kuba", email: "kuba@example.com"}
+      var userInfo1 = {id: "foo", name: "Kuba", email: "kuba@example.com", network: "litecoin"}
       var lat1 = 34.23
       var lon1 = 108.87
       // 153m from Wei
 
-      var userInfo2 = {id: "bar", name: "Wendell", email: "wendell@example.com"}
+      var userInfo2 = {id: "bar", name: "Wendell", email: "wendell@example.com", network: "litecoin"}
       var lat2 = 34.22
       var lon2 = 108.87
       // 1209 from Wei
@@ -66,6 +67,42 @@ describe('geo', function(){
             var distance = results[0][1]
             assert.equal(user.id, "foo")
             assert.equal(parseInt(distance), 153)
+            done()
+          })
+        })
+      })
+    })
+
+    it('excludes search results with a different network', function(done){
+      var userInfo1 = {id: "foo", name: "Kuba", email: "kuba@example.com", network: "litecoin"}
+      var userInfo2 = {id: "bar", name: "Wendell", email: "wendell@example.com", network: "bitcoin"}
+
+      geo.save(lat, lon, userInfo1, function(){
+        geo.save(lat, lon, userInfo2, function(){
+          geo.save(lat, lon, userInfo, function(err, results){
+            assert.equal(results.length, 1)
+
+            assert.equal(results[0][0].id, "foo")
+            done()
+          })
+        })
+      })
+    })
+
+    it('retuns users from all networks when no network is specified', function(done){
+      var userInfo1 = {id: "foo", name: "Kuba", email: "kuba@example.com", network: "litecoin"}
+      var userInfo2 = {id: "bar", name: "Wendell", email: "wendell@example.com", network: "bitcoin"}
+
+      geo.save(lat, lon, userInfo1, function(){
+        geo.save(lat, lon, userInfo2, function(){
+
+          delete userInfo.network
+
+          geo.save(lat, lon, userInfo, function(err, results){
+            assert.equal(results.length, 2)
+
+            var userIds = results.map(function(r){ return r[0].id })
+            assert.deepEqual(userIds, ["foo", "bar"])
             done()
           })
         })
@@ -87,7 +124,7 @@ describe('geo', function(){
 
   describe('getIdsOlderThan', function(){
     it('finds entries older than the age(in miliseconds) provided', function(done){
-      var userInfo1 = {id: "foo", name: "Kuba", email: "kuba@example.com"}
+      var userInfo1 = {id: "foo", name: "Kuba", email: "kuba@example.com", network: "litecoin"}
       var lat1 = 34.23
       var lon1 = 108.87
 

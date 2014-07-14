@@ -21,7 +21,7 @@ function save(lat, lon, userInfo, callback) {
 
   records[user.id] = user
 
-  search(user.location, user.id, callback)
+  search(user.location, user.id, user.network, callback)
 }
 
 function remove(id) {
@@ -37,10 +37,11 @@ function getIdsOlderThan(age) {
   })
 }
 
-function search(location, id, callback){
+function search(location, id, network, callback){
   var onGeocells = function(geocells, finderCallback) {
     var candidates = all().filter(function(record){
-      return record.id !== id && haveIntersection(record.geocells, geocells)
+      var recordQualifies = (record.id !== id && haveIntersection(record.geocells, geocells))
+      return recordQualifies && (network == null || record.network == network)
     })
     finderCallback(null, candidates)
   }
