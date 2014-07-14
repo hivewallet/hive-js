@@ -42,14 +42,9 @@ module.exports = function(el){
     ractive.fire('close-geo')
   })
 
-  ractive.on('search-again',function(event) {
-    event.original.preventDefault()
-    ractive.fire('refresh-list')
-  })
-
-  ractive.on('refresh-list', function() {
+  ractive.on('search-again', function() {
     spinner.spin(ractive.nodes.refresh_el)
-    lookupGeo(undefined)
+    lookupGeo()
   })
 
   ractive.on('search-nearby', function(){
@@ -69,7 +64,6 @@ module.exports = function(el){
       }
       ractive.set('nearbys', [])
       ractive.set('searching', false)
-      ractive.set('results', false)
       emitter.emit('close-overlay')
       geo.remove()
     })
@@ -95,30 +89,27 @@ module.exports = function(el){
       if(context === 'new') {
         // set a brief timeout so it "feels" like we're searching
         xhr_timeout = setTimeout(function(){
-          if(results.length >= 1){
-            ractive.set('results', true)
-            setNearbys(results)
-          }
+          setNearbys(results)
           var pinEl = ractive.nodes['geo-pin']
           resetPin(pinEl)
           ractive.set('searching', false)
         }, 1500)
       } else {
-        if(results.length >= 1){
-          setNearbys(results)
-        } else {
-          ractive.set('nearbys', [])
-          ractive.set('results', false)
-        }
+        setNearbys(results)
         spinner.stop(ractive.nodes.refresh_el)
       }
     })
   }
 
   function setNearbys(results) {
-    nearbys = results.map(function(record){
-      return record[0]
-    })
+    if(results == null || results.length < 1) {
+      nearbys = []
+    } else {
+      nearbys = results.map(function(record){
+        return record[0]
+      })
+    }
+
     ractive.set('nearbys', nearbys)
   }
 

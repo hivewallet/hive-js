@@ -3,7 +3,7 @@
     <div class="geo__header">
 
     {{^searching}}
-      <div class='_refresh' on-click="refresh-list">
+      <div class='_refresh' on-click="search-again">
         <span id="refresh_el" class="_icon">
           {{>svg_refresh}}
         </span>
@@ -34,32 +34,24 @@
 
     {{^searching}}
 
+    {{#nearbys}}
+    <div class="geo__results">
+      <div class="_item" on-click="select"
+        data-wallet={{address}}
+        data-name={{name}}
+        data-email={{email}}>
+        <img class="_avatar" src="{{getAvatar(email, avatarIndex)}}" />
+        <h3 class="_name">{{name}}</h3>
+      </div>
+    </div>
+    {{/nearbys}}
 
-      {{#results}}
-
-        <div class="geo__results">
-          {{#nearbys}}
-            <div class="_item" on-click="select"
-               data-wallet={{address}}
-               data-name={{name}}
-               data-email={{email}}>
-                <img class="_avatar" src="{{getAvatar(email, avatarIndex)}}" />
-                <h3 class="_name">{{name}}</h3>
-            </div>
-          {{/nearbys}}
-        </div>
-      {{/results}}
-
-      {{^results}}
-
-        <div class="geo__noresults">
-
-          <p class="_message">No Hive users found nearby</p>
-          <div class="_btn" on-click="search-again">Search Again</div>
-
-        </div>
-
-      {{/results}}
+    {{^nearbys}}
+    <div class="geo__noresults">
+      <p class="_message">No Hive users found nearby</p>
+      <div class="_btn" on-click="search-again">Search Again</div>
+    </div>
+    {{/nearbys}}
 
     {{/searching}}
 
