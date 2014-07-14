@@ -31,6 +31,7 @@ module.exports = function (){
       safari5: true
     }))
     app.use(helmet.iexss())
+    app.use(helmet.nosniff())
     app.use(helmet.xframe('sameorigin'))
 
     var ninetyDaysInMilliseconds = 90 * 24 * 60 * 60 * 1000
