@@ -12,14 +12,12 @@ var resetPin = require('hive-transitions/pinDrop.js').reset
 var spinner = require('hive-transitions/spinner.js')
 
 module.exports = function(el){
-  var nearbys = []
-  var xhr_timeout;
   var ractive = new Ractive({
     el: el,
     template: require('./index.ract').template,
     data: {
       exchangeRates: {},
-      nearbys: nearbys,
+      nearbys: [],
       searching: true,
       getAvatar: getAvatar
     }
@@ -42,11 +40,6 @@ module.exports = function(el){
     ractive.fire('close-geo')
   })
 
-  ractive.on('search-again', function() {
-    spinner.spin(ractive.nodes.refresh_el)
-    lookupGeo()
-  })
-
   ractive.on('search-nearby', function(){
     var pinEl = ractive.nodes['geo-pin']
     var pulseEl = ractive.nodes['geo-pulse']
@@ -54,6 +47,11 @@ module.exports = function(el){
       animatePin(pinEl, pulseEl)
     })
     lookupGeo('new')
+  })
+
+  ractive.on('search-again', function() {
+    spinner.spin(ractive.nodes.refresh_el)
+    lookupGeo()
   })
 
   ractive.on('close-geo', function(){
@@ -67,7 +65,6 @@ module.exports = function(el){
       emitter.emit('close-overlay')
       geo.remove()
     })
-
   })
 
   window.onbeforeunload = function() {
@@ -88,7 +85,7 @@ module.exports = function(el){
 
       if(context === 'new') {
         // set a brief timeout so it "feels" like we're searching
-        xhr_timeout = setTimeout(function(){
+        setTimeout(function(){
           setNearbys(results)
           var pinEl = ractive.nodes['geo-pin']
           resetPin(pinEl)
@@ -102,6 +99,8 @@ module.exports = function(el){
   }
 
   function setNearbys(results) {
+    var nearbys
+
     if(results == null || results.length < 1) {
       nearbys = []
     } else {
