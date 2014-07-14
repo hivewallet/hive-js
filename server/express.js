@@ -30,7 +30,7 @@ module.exports = function (){
       setAllHeaders: false,
       safari5: true
     }))
-    app.use(helmet.iexss())
+    app.use(helmet.xssFilter())
     app.use(helmet.nosniff())
     app.use(helmet.xframe('sameorigin'))
 
