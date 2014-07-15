@@ -12,7 +12,7 @@ module.exports = function (){
   var app = express()
   app.use(requireHTTPS)
 
-  if(process.env.NODE_ENV === "production"){
+  if(isProduction()){
     var proxyHost = process.env.PROXY_URL.replace("https://", '')
     app.use(helmet.csp({
       'default-src': ["'self'"],
@@ -52,7 +52,9 @@ module.exports = function (){
     }
   }))
   app.use(express.compress())
-  app.use(express.static(path.join(__dirname, '..', 'build'), { maxAge: anHour }))
+
+  var cacheControl = isProduction() ? { maxAge: anHour } : null
+  app.use(express.static(path.join(__dirname, '..', 'build'), cacheControl))
 
   app.post('/register', validateAuthParams(false), function(req, res) {
     var name = req.body.wallet_id
@@ -165,10 +167,14 @@ module.exports = function (){
 
   function requireHTTPS(req, res, next) {
     var herokuForwardedFromHTTPS = req.headers['x-forwarded-proto'] === 'https'
-    if (!herokuForwardedFromHTTPS && process.env.NODE_ENV === 'production') {
+    if (!herokuForwardedFromHTTPS && isProduction()) {
       return res.redirect('https://' + req.get('host') + req.url)
     }
     next()
+  }
+
+  function isProduction(){
+    return process.env.NODE_ENV === 'production'
   }
   return app
 }
