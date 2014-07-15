@@ -33,6 +33,12 @@
       display: block;
     }
   }
+
+  @include breakpoint(portrait) {
+    &.closed {
+      transform: translateX(320px);
+    }
+  }
 }
 
 #sidebar {
@@ -63,6 +69,10 @@
   &.open {
     transform: translateX(0);
     position: relative;
+  }
+
+  @include breakpoint(portrait) {
+    width: 320px;
   }
 }
 
