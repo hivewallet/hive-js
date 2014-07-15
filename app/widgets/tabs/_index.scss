@@ -27,8 +27,8 @@
   color: white;
 
   @include breakpoint(portrait) {
-    text-align: center;
-    padding-left: 0;
+    padding-bottom: 30px;
+    padding-top: 30px;
   }
 
   &:hover {

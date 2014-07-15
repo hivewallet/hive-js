@@ -8,6 +8,7 @@
 }
 
 #main {
+  @include clear;
   position: relative;
   background-color: $background;
   flex: 1; // take up full width
@@ -26,11 +27,18 @@
     overflow: hidden;
   }
 
-
   .content {
+
     display: none;
+    padding-left: 20px;
+    padding-right: 20px;
+
     &.current {
       display: block;
+    }
+    @include breakpoint(portrait) {
+      padding-left: 30px;
+      padding-right: 30px;
     }
   }
 
@@ -83,7 +91,4 @@
   }
 }
 
-.content {
-  padding-left: 10px;
-  padding-right: 10px;
-}
+

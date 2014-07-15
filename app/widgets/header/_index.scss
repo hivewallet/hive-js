@@ -11,6 +11,11 @@
     padding-top: 22px;
     padding-bottom: 22px;
   }
+
+  @include breakpoint(portrait) {
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
 }
 
 .litecoin {
@@ -38,6 +43,13 @@
     padding-top: 5px;
     margin-left: 3px;
   }
+
+  @include breakpoint(portrait) {
+    margin-top: 10px;
+    ._amount {
+      font-size: 43px;
+    }
+  }
 }
 
 .icon_atom {
@@ -46,17 +58,29 @@
   padding-top: 12px;
   text-align: center;
   margin-bottom: 5px;
+
+
 }
 
 .header__toggle {
   @extend .icon_atom;
   padding-left: 10px;
 
+  @include breakpoint(portrait) {
+    width: 100px;
+    padding-top: 20px;
+  }
+
   ._icon {
     width: 25px;
     height: 25px;
     display: block;
     margin: 0 auto;
+
+    @include breakpoint(portrait) {
+      width: 35px;
+      height: 35px;
+    }
   }
 }
 
@@ -73,11 +97,21 @@
 .header__refresh {
   @extend .icon_atom;
   padding-right: 10px;
+
+  @include breakpoint(portrait) {
+    width: 100px;
+    padding-top: 20px;
+  }
   ._icon {
     width: 25px;
     height: 25px;
     display: block;
     margin: 0 auto;
+
+    @include breakpoint(portrait) {
+      width: 35px;
+      height: 35px;
+    }
   }
 
   &.is_updating {
