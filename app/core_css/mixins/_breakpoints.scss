@@ -10,6 +10,7 @@ $mquery: false !default;
 $iphone5: 28em;
 
 $portrait: 48em;    // based on ipad ~ 768px
+$portrait-height: 56em;
 $landscape: 64em;   // based on ipad ~ 1024px
 
 @mixin breakpoint($point) {
@@ -17,8 +18,9 @@ $landscape: 64em;   // based on ipad ~ 1024px
   @if $point == portrait {
 
     $width: $portrait;
+    $height: $portrait-height;
 
-    @media (min-width: $width) {
+    @media (min-width: $width) and (min-height: $height) {
       $mquery: true;
       @content;
       $mquery: false;
