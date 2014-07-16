@@ -13,6 +13,7 @@ var API = ThirdParty.Blockr
 var uniqueify = require('uniqueify')
 var async = require('async')
 var validateSend = require('./validator')
+var rng = require('secure-random').randomBuffer
 
 var Transaction = Bitcoin.Transaction
 var Wallet = Bitcoin.Wallet
@@ -101,13 +102,15 @@ function nextReceiveAddress() {
 function createWallet(passphrase, network, callback) {
   var message = passphrase ? 'Decoding seed phrase' : 'Generating...'
   emitter.emit('wallet-opening', message)
-  worker.postMessage({passphrase: passphrase})
-  worker.addEventListener('message', function(e) {
-    var err = e.data.error
-    if(err) {
-      return callback(err)
-    }
 
+  var data = {passphrase: passphrase}
+  if(!passphrase){
+   data.entropy = rng(128 / 8).toString('hex')
+  }
+
+  worker.postMessage(data)
+
+  worker.addEventListener('message', function(e) {
     var mnemonic = initWallet(e.data, network)
     auth.exist(id, function(err, userExists){
       if(err) return callback(err);
@@ -116,6 +119,10 @@ function createWallet(passphrase, network, callback) {
       mnemonic = null
     })
   }, false)
+
+  worker.addEventListener('error', function(e) {
+    return callback(e)
+  })
 }
 
 function setPin(pin, callback) {
