@@ -3,6 +3,9 @@
 var app = require('./express')()
 var http = require('http')
 var geo = require('./geo')
+var agent = require('webkit-devtools-agent')
+
+agent.start(9999, 'localhost', 3333, true)
 
 var server = http.createServer(app)
 server.listen(process.env.PORT || 9009, function() {
@@ -16,3 +19,10 @@ setInterval(function(){
   oldEntries.forEach(geo.remove)
 }, interval)
 
+process.on('SIGUSR2', function() {
+  if (agent.server) {
+    agent.stop()
+  } else {
+    agent.start()
+  }
+})
