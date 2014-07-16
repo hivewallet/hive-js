@@ -4,6 +4,7 @@ require('browsernizr/test/storage/websqldatabase')
 require('browsernizr/test/indexedDB')
 require('browsernizr/test/workers/webworkers')
 require('browsernizr/test/blob')
+require('browsernizr/test/crypto/getrandomvalues')
 
 var token = require('hive-network')()
 var animateLogo = require('hive-transitions/loader.js').in
@@ -30,7 +31,7 @@ Modernizr.on('indexeddb', function(hasIndexedDB){
   var supportsPouchDB = hasIndexedDB || Modernizr.websqldatabase
 
   Modernizr.load({
-    test: supportsPouchDB && (Modernizr.localstorage && Modernizr.webworkers && Modernizr.blobconstructor),
+    test: supportsPouchDB && (Modernizr.localstorage && Modernizr.webworkers && Modernizr.blobconstructor && Modernizr.getrandomvalues),
     yep: 'assets/js/application.js',
     nope: 'assets/js/nope.js',
     callback: function(testResult, key) {
