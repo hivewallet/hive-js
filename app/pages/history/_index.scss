@@ -1,5 +1,4 @@
 
-
 #history {
 
   .green {
@@ -15,6 +14,10 @@
  ._title {
   padding-top: 5px;
   padding-bottom: 5px;
+
+  @include breakpoint(portrait) {
+    font-size: 20px;
+  }
  }
 }
 
@@ -31,6 +34,10 @@
     width: 55px;
     float: left;
     margin-right: 10px;
+
+    @include breakpoint(portrait) {
+      @include icon(80px, 80px, block, '/assets/img/avatar_1.png');
+    }
   }
 
   ._address {
@@ -40,6 +47,12 @@
     margin-left: 10px;
     padding-top: 23px;
     font-size: 21px;
+
+    @include breakpoint(portrait) {
+      padding-top: 32px;
+      padding-bottom: 30px;
+      font-size: 26px;
+    }
   }
 
   ._expandBtn {
@@ -58,10 +71,10 @@
   ._amount {
     @extend .jigsaw-light;
     font-size: 24px;
-  }
 
-  ._currency {
-    font-size: 14px;
+    @include breakpoint(portrait) {
+      font-size: 32px;
+    }
   }
 
   ._time {
@@ -69,6 +82,9 @@
     font-size: 14px;
     margin-top: -5px;
     color: $grey;
+    @include breakpoint(portrait) {
+      font-size: 16px;
+    }
   }
 
 }

@@ -61,6 +61,11 @@
   margin-top: 2px;
   margin-bottom: 5px;
   opacity: 0.3;
+
+  @include breakpoint(portrait) {
+    width: 36px;
+    height: 36px;
+  }
 }
 
 .tab__text {
@@ -68,6 +73,10 @@
   @extend .jigsaw-light;
   font-size: 14px;
   opacity: 0.3;
+
+  @include breakpoint(portrait) {
+    font-size: 18px;
+  }
 }
 
 .hide--portrait {
