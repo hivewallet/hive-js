@@ -1,5 +1,8 @@
-<div class="flash">
-  <div class="set-details__container">
+<div class="modal _cancel">
+  <div class="modal__content set-details">
+    <span class="modal__cancel" on-click="close">
+        {{>svg_close}}
+    </span>
     <div class="_info">
       Before you start using Waggle, you need to enter a name that will help others identify you.
     </div>

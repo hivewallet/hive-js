@@ -1,30 +1,12 @@
 
+
 .flash {
-  cursor: default;
-  position: absolute;
-  margin-bottom: 30px;
-  top: 0;
-  left: 50%;
-  margin-left: -150px;
-  width: 300px;
-
-  background-color: $background;
-  box-shadow: 0 2px 2px 1px rgba(000,000,000,0.2);
-
-  border-bottom-left-radius: 3px;
-  border-bottom-right-radius: 3px;
-}
-
-.flash__content {
   text-align: center;
-  padding-bottom: 40px;
-  margin: 0 auto;
+  width: 300px;
 }
 
 .flash__header {
   @include clickbtn;
-  position: relative;
-  padding-top: 40px;
   padding-left: 20px;
   padding-right: 20px;
 }
@@ -58,16 +40,3 @@
   margin: 0 auto;
 }
 
-.flash__cancel {
-  position: absolute;
-  top: 0px;
-  right: 0px;
-  width: 45px;
-  height: 45px;
-  padding: 10px;
-  z-index: 1000;
-
-  .svg-close {
-    fill: $grey;
-  }
-}

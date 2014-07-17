@@ -1,8 +1,8 @@
 
-<div class="flash">
-  <div class="flash__content">
+<div class="modal _cancel">
+  <div class="modal__content flash">
     <div class="flash__header" on-click="close">
-      <span class="flash__cancel">
+      <span class="modal__cancel">
         {{>svg_close}}
       </span>
       <div class="flash__icon">

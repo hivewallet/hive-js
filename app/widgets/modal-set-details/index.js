@@ -29,6 +29,10 @@ function openModal(data){
     }
   })
 
+  ractive.on('close', function(){
+    ractive.fire('cancel')
+  })
+
   ractive.on('submit-details', function(){
     var details = {
       firstName: ractive.get('name') + '',

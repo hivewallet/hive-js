@@ -119,6 +119,44 @@
   -webkit-overflow-scrolling: touch;
 }
 
+// inside overlay
+.modal {
+  @include clickbtn;
+  display: flex;
+  min-height: 100%;
+  align-items: center;
+  padding: 20px;
+}
+
+.modal__content {
+  cursor: default;
+  position: relative;
+  margin: 0 auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border-radius: 3px;
+  background-color: $background;
+  box-shadow: 0 2px 2px 1px rgba(000,000,000,0.2);
+
+  padding:40px;
+}
+
+.modal__cancel {
+  @include clickbtn;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 45px;
+  height: 45px;
+  padding: 10px;
+  z-index: 1000;
+
+  .svg-close {
+    fill: $grey;
+  }
+}
+
+
 // hacky fix for overlay ordering...
 
 .z-1000 {
@@ -133,14 +171,4 @@
   * {
     z-index: 9000;
   }
-}
-
-
-.overlay__close {
-  @include clickbtn;
-  @include icon(30px, 30px, block, '/assets/img/close.svg');
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  z-index: 9000;
 }
