@@ -152,14 +152,21 @@
 .geo__noresults {
 
   position: absolute;
-  top: 45%;
+  top: 35%;
   left: 50%;
   margin-left: -100px;
   width: 200px;
   z-index: 500;
 
+  ._icon {
+    width: 140px;
+    height: 140px;
+    margin: 0 auto;
+    margin-bottom: 20px;
+  }
+
   ._message {
-    font-size: 14px;
+    font-size: 16px;
     text-align: center;
     color: white;
     padding-bottom: 10px;
@@ -167,5 +174,9 @@
 
   ._btn {
     @extend .hivebtn--yellow;
+    color: lighten($purple, 10%);
+    &:hover {
+      color: lighten($purple, 10%);
+    }
   }
 }

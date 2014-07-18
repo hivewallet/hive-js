@@ -48,6 +48,7 @@
 
     {{^nearbys}}
     <div class="geo__noresults">
+      <div class="_icon">{{>svg_waggle_not_found}}</div>
       <p class="_message">No Hive users found nearby</p>
       <div class="_btn" on-click="search-again">Search Again</div>
     </div>
