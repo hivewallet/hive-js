@@ -1,5 +1,5 @@
-<div class="flash">
-  <div class="support">
+<div class="modal _cancel">
+  <div class="modal__content support">
     <div class="_info">
       Having problems?
       <span class="_icon svg-close" on-click="close">
