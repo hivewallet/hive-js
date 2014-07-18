@@ -17,4 +17,10 @@
     </span>
     <span class="tab__text">History</span>
   </a>
+  <a data-tab='tokens' class="tab" on-click="select">
+    <span class="tab__icon">
+      {{>svg_token}}
+    </span>
+    <span class="tab__text">Tokens</span>
+  </a>
 </div>

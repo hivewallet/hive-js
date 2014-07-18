@@ -1,16 +1,12 @@
 'use strict';
 
-var Ractive = require('hive-dropdown')
+var Ractive = require('hive-ractive')
 var getNetwork = require('hive-network')
 
-module.exports = function init(el) {
-
+module.exports = function(el){
   var ractive = new Ractive({
     el: el,
-    partials: {
-      content: require('./content.ract').template,
-      icon: require('./icon.ract').template
-    },
+    template: require('./index.ract').template,
     data: {
       title: 'Available Tokens',
       id: 'token_dropdown',

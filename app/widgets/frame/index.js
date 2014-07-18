@@ -8,7 +8,7 @@ var initSidebar = require('hive-sidebar')
 var initSend = require('hive-send')
 var initReceive = require('hive-receive')
 var initHistory = require('hive-history')
-
+var initTokens = require('hive-tokens')
 
 module.exports = function(el){
   var ractive = new Ractive({
@@ -25,7 +25,8 @@ module.exports = function(el){
   var tabs = {
     send: initSend(ractive.nodes['send']),
     receive: initReceive(ractive.nodes['receive']),
-    history: initHistory(ractive.nodes['history'])
+    history: initHistory(ractive.nodes['history']),
+    tokens: initTokens(ractive.nodes['tokens'])
   }
 
   var currentPage = tabs.send

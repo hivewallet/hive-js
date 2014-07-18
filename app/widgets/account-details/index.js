@@ -1,6 +1,6 @@
 'use strict';
 
-var Ractive = require('hive-dropdown')
+var Ractive = require('hive-ractive')
 var Profile = require('hive-transitions/profileAnimation.js')
 var showTooltip = require('hive-modal-tooltip')
 var showError = require('hive-modal-flash').showError
@@ -12,10 +12,7 @@ module.exports = function init(el) {
 
   var ractive = new Ractive({
     el: el,
-    partials: {
-      content: require('./content.ract').template,
-      icon: require('./icon.ract').template
-    },
+    template: require('./index.ract').template,
     data: {
       title: 'Your Details',
       id: 'account_dropdown',

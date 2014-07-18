@@ -1,0 +1,41 @@
+.tokens {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 20px;
+}
+
+.token__item {
+  @include clickbtn;
+  width: 45%;
+  text-align: center;
+  opacity: 0.8;
+
+  ._icon {
+    margin-bottom: 10px;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    display: inline-block;
+
+    &.i-bitcoin-token {
+      background-color: #F7931A;
+    }
+    &.i-litecoin-token {
+      background-color: #C4C4C4;
+    }
+  }
+  ._title {
+    font-size: 18px;
+  }
+
+  &.current {
+    opacity: 1;
+    ._icon {
+      border: 5px solid $purple--highlight;
+    }
+  }
+
+  &:hover {
+    opacity: 1;
+  }
+}
