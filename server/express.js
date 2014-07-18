@@ -45,11 +45,11 @@ module.exports = function (){
   app.use(express.bodyParser())
   app.use(express.cookieParser(process.env.COOKIE_SALT))
   app.use(express.cookieSession({
+    proxy: true,
     cookie: {
       maxAge: anHour,
       httpOnly: true,
-      proxy: true,
-      secure: true
+      secure: isProduction()
     }
   }))
   app.use(express.compress())
