@@ -1,18 +1,10 @@
 
 .transaction__detail {
-  position: relative;
-  cursor: default;
   padding: 20px;
-  padding-top: 40px;
-  max-width: 300px;
-  background-color: white;
-  border-radius: 4px;
-  margin: 0 auto;
-  margin-top: 40px;
+  min-width: 280px;
+  max-width: 350px;
 
   font-size: 18px;
-  box-shadow: 0 2px 2px 1px rgba(000,000,000,0.2);
-
   @extend .jigsaw-light;
 
   ._amount {

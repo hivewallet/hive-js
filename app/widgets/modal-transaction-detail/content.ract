@@ -1,6 +1,7 @@
 
 {{#transaction}}
-  <div class="transaction__detail">
+<div class="modal">
+  <div class="modal__content transaction__detail">
     <span class="tooltip__cancel" on-click="close">
       {{>svg_close}}
     </span>
@@ -27,4 +28,5 @@
     </div>
 
   </div>
+</div>
 {{/transaction}}
