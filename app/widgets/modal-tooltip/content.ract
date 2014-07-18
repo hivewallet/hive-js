@@ -1,11 +1,13 @@
-<div class="tooltip">
-  <span class="tooltip__cancel" on-click="close">
-    {{>svg_close}}
-  </span>
-  <p class="tooltip__message">{{message}}</p>
-  {{#link}}
-  <p class="tooltip__link">
-    <a href="{{link.url}}" target="_blank">{{link.text}}</a>
-  </p>
-  {{/link}}
+<div class="modal _cancel">
+  <div class="modal__content tooltip">
+    <span class="tooltip__cancel" on-click="close">
+      {{>svg_close}}
+    </span>
+    <p class="tooltip__message">{{message}}</p>
+    {{#link}}
+    <p class="tooltip__link">
+      <a href="{{link.url}}" target="_blank">{{link.text}}</a>
+    </p>
+    {{/link}}
+  </div>
 </div>
