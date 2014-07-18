@@ -48,7 +48,8 @@ module.exports = function (){
     cookie: {
       maxAge: anHour,
       httpOnly: true,
-      proxy: true
+      proxy: true,
+      secure: true
     }
   }))
   app.use(express.compress())
