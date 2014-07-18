@@ -1,5 +1,5 @@
-<div class="overlay--confirm _cancel js__fadeEl" on-click="cancel">
-  <div class="confirm__content {{#success}}_success{{/success}} {{#error}}_error{{/error}}">
+<div class="modal _cancel">
+  <div class="modal__content confirm {{#success}}_success{{/success}} {{#error}}_error{{/error}}">
 
   {{#confirmation}}
 

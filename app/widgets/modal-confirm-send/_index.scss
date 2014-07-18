@@ -5,12 +5,12 @@
   background-color: rgba(0,0,0,0.6x);
 }
 
-.confirm__content {
-  margin-top: 80px;
-  margin-right: 10px;
-  margin-left: 10px;
+.confirm {
+  padding: 0;
   padding-top: 20px;
   background-color: white;
+  min-width: 280px;
+  max-width: 450px;
 
   &._error {
     background-color: $red;
@@ -31,6 +31,8 @@
 .confirm__transaction{
 
   text-align: center;
+  padding-left: 20px;
+  padding-right: 20px;
 
   ._amount {
     padding-top: 20px;
@@ -69,7 +71,9 @@
   }
 
   ._address {
+    @include wrapdat;
     @extend .jigsaw-light;
+    font-size: 13px;
     display: block;
     text-align: center;
   }
@@ -79,6 +83,7 @@
 
   padding: 20px;
   background-color: white;
+  border-radius: 3px;
 
   display: flex;
 
@@ -157,7 +162,6 @@
 
   .confirm__inputs {
 
-    padding: 20px;
     background-color: white;
 
     display: flex;

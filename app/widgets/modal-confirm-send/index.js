@@ -10,7 +10,9 @@ function open(data){
   data.confirmation = true
 
   var ractive = new Ractive({
-    template: require('./index.ract').template,
+    partials: {
+      content: require('./_content.ract').template
+    },
     data: data
   })
 
