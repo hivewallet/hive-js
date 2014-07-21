@@ -4,12 +4,22 @@
   min-width: 280px;
   max-width: 350px;
 
+  @include breakpoint(portrait) {
+    padding: 40px;
+    max-width: 520px;
+  }
+
   font-size: 18px;
   @extend .jigsaw-light;
 
   ._amount {
     text-align: center;
     font-size: 32px;
+
+    @include breakpoint(portrait) {
+      font-size: 44px;
+    }
+
     &.red {
       color: $red;
     }
@@ -21,6 +31,9 @@
   ._time {
     text-align: center;
     color: $grey;
+    @include breakpoint(portrait) {
+      font-size: 24px;
+    }
   }
 }
 

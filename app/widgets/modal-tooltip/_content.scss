@@ -3,6 +3,9 @@
   font-size: 18px;
   min-width: 280px;
   max-width: 350px;
+  @include breakpoint(portrait) {
+    max-width: 450px;
+  }
 }
 
 .tooltip__cancel {
@@ -22,11 +25,21 @@
 
 .tooltip__message {
   @extend .jigsaw-regular;
+
+  @include breakpoint(portrait) {
+    font-size: 24px;
+  }
 }
 
 .tooltip__link {
   padding-top: 20px;
+
+  @include breakpoint(portrait) {
+    font-size: 24px;
+  }
+
   a {
+
     color: $purple--highlight;
     &:hover {
       color: $purple--highlight;

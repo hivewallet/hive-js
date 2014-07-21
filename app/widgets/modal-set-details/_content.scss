@@ -1,13 +1,28 @@
 .set-details {
-  max-width: 500px;
+  max-width: 400px;
+
+  @include breakpoint(portrait) {
+    max-width: 450px;
+  }
 
   ._info {
     @extend .jigsaw-light;
     margin-bottom: 10px;
     padding-bottom: 10px;
     border-bottom: 1px solid $grey;
+
+    @include breakpoint(portrait) {
+      font-size: 24px;
+    }
   }
 
+  ._btn {
+    @extend .hivebtn;
+    margin-top: 20px;
+    @include breakpoint(portrait) {
+      font-size: 24px;
+    }
+  }
 }
 
 .set-details__field {
@@ -16,6 +31,9 @@
     @include noselect;
     cursor: pointer;
     display: block;
+    @include breakpoint(portrait) {
+      font-size: 18px;
+    }
   }
 
   ._input {
@@ -25,6 +43,10 @@
     height: 50px;
     padding-left: 10px;
     border-radius: 3px;
+
+    @include breakpoint(portrait) {
+      font-size: 24px;
+    }
 
     &:active, &:focus {
       outline: 0;

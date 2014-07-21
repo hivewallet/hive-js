@@ -13,6 +13,6 @@
       </label>
     </div>
 
-    <div class="settings__btn" on-click="submit-details">Save</div>
+    <div class="_btn" on-click="submit-details">Save</div>
   </div>
 </div>

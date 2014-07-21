@@ -1,7 +1,7 @@
 
 <div class="modal _cancel">
-  <div class="modal__content tooltip">
-    <span class="tooltip__cancel" on-click="close">
+  <div class="modal__content qr__container">
+    <span class="modal__cancel" on-click="close">
       {{>svg_close}}
     </span>
     <div id="qr-canvas"></div>

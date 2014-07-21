@@ -1,6 +1,6 @@
 <div class="modal _cancel">
   <div class="modal__content tooltip">
-    <span class="tooltip__cancel" on-click="close">
+    <span class="modal__cancel" on-click="close">
       {{>svg_close}}
     </span>
     <p class="tooltip__message">{{message}}</p>
