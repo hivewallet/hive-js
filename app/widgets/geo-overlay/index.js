@@ -67,10 +67,6 @@ module.exports = function(el){
     })
   })
 
-  window.onbeforeunload = function() {
-    geo.remove(true)
-  }
-
   function lookupGeo(context) {
     geo.search(function(err, results){
       if(err) {

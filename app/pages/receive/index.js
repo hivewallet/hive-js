@@ -58,6 +58,16 @@ module.exports = function(el){
     })
   }
 
+  window.addEventListener('beforeunload', removeGeoData)
+
+  function removeGeoData() {
+    geo.remove(true)
+  }
+
+  ractive.on('teardown', function(){
+    window.removeEventListener('beforeunload', removeGeoData)
+  }, false)
+
   ractive.on('show-qr', function(){
     showQr({
       address: ractive.get('address')
