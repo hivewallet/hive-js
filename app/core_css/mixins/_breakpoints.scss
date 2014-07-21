@@ -18,9 +18,10 @@ $landscape: 64em;   // based on ipad ~ 1024px
   @if $point == portrait {
 
     $width: $portrait;
+    $maxwidth: $landscape;
     $height: $portrait-height;
 
-    @media (min-width: $width) and (min-height: $height) {
+    @media (min-width: $width) and (min-height: $height) and (max-width: $maxwidth) {
       $mquery: true;
       @content;
       $mquery: false;
