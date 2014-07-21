@@ -53,6 +53,12 @@ Click on the bottom link "fix this" to create an admin user, say:
 
 This project has js & css live reload setup. If you wish to use it to boost your productivity, head over to chrome store and download [the LiveReload extension](https://chrome.google.com/webstore/detail/livereload/jnihajbhpnppcggbcgedagnkighmdlei). After turning it on, you'd never need to hit the refresh button anymore.
 
+### Testing deployment inside Vagrant
+
+1. [Install Vagrant](http://www.vagrantup.com/downloads.html)
+2. symlink the playbook file into place: `ln -s path/to/ansible/repo provisioners`
+3. `vagrant up` or `vagrant reload --provision`
+
 ## Contributing
 
 ### Instructions
@@ -61,6 +67,12 @@ This project has js & css live reload setup. If you wish to use it to boost your
 2. Push changes to your fork
 3. Create a pull request
 
+Pull requests are very welcome. If you want to send us any code, try your best to adhere to our coding guidelines:
+
+- [JavaScript](https://github.com/hivewallet/hive-js/wiki/Hive-JS-coding-style-guide)
+- [HTML](https://github.com/hivewallet/hive-js/wiki/Hive-HTML-coding-style-guide)
+- [CSS](https://github.com/hivewallet/hive-js/wiki/Hive-CSS-coding-style-guide)
+- [Git](https://github.com/hivewallet/hive-js/wiki/Hive-Git-guidelines)
 
 ### Running the test suite
 
@@ -73,11 +85,9 @@ This project has js & css live reload setup. If you wish to use it to boost your
     # just client
     npm run test-client
 
-### Testing deployment inside Vagrant
+### Donation
 
-1. [Install Vagrant](http://www.vagrantup.com/downloads.html)
-2. symlink the playbook file into place: `ln -s path/to/ansible/repo provisioners`
-3. `vagrant up` or `vagrant reload --provision`
+If you like Hive, you can also send us donations in BTC to 142m1MpXHhymF4aASiWwYohe1Y55v5BQwc
 
 ## License
 
