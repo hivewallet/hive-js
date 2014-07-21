@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "author": "Wei Lu",
-  "license": "GPL-3.0",
+  "license": "GPL-2.0+",
   "dependencies": {
     "xhr": "~1.7.0"
   },

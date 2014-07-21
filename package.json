@@ -13,7 +13,7 @@
     "postinstall": "aperture open"
   },
   "author": "",
-  "license": "GPL-3.0",
+  "license": "GPL-2.0+",
   "devDependencies": {
     "karma-script-launcher": "^0.1.0",
     "karma-chrome-launcher": "^0.1.2",
