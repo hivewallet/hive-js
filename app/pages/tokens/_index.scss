@@ -1,41 +1,93 @@
+#tokens {
+
+  &.content {
+    padding: 0px;
+    @include breakpoint(portrait) {
+      padding-top: 20px;
+    }
+  }
+
+  ._title {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 5px;
+
+    @include breakpoint(portrait) {
+      font-size: 20px;
+      padding-left: 40px;
+    }
+  }
+}
 .tokens {
-  display: flex;
-  justify-content: space-between;
-  padding-top: 20px;
+  display: block;
 }
 
 .token__item {
+  @include clear;
   @include clickbtn;
-  width: 45%;
-  text-align: center;
-  opacity: 0.8;
+  padding: 15px;
+
+  @include breakpoint(portrait) {
+    padding: 30px;
+  }
 
   ._icon {
-    margin-bottom: 10px;
     border-radius: 50%;
-    width: 80px;
-    height: 80px;
+    width: 50px;
+    height: 50px;
     display: inline-block;
+    float: left;
+    border: 2px solid white;
+    margin-right: 20px;
 
-    &.i-bitcoin-token {
-      background-color: #F7931A;
-    }
-    &.i-litecoin-token {
-      background-color: #C4C4C4;
+    @include breakpoint(portrait) {
+      width: 80px;
+      height: 80px;
     }
   }
-  ._title {
+
+  ._name {
+    @include media-obj;
     font-size: 18px;
+    padding-top: 13px;
+
+    @include breakpoint(portrait) {
+      font-size: 26px;
+      padding-top: 22px;
+    }
+  }
+
+  ._arrow {
+    opacity: 0.6;
+    float: right;
+    width: 25px;
+    height: 25px;
+    margin-top: 13px;
+    transform: rotate(270deg);
+
+    @include breakpoint(portrait) {
+      width: 40px;
+      height: 40px;
+      margin-top: 22px;
+    }
   }
 
   &.current {
-    opacity: 1;
-    ._icon {
-      border: 5px solid $purple--highlight;
-    }
+    cursor: default;
   }
+}
 
-  &:hover {
-    opacity: 1;
+
+.token--bitcoin {
+  background-color: $purple--light;
+  ._name {
+    color: white;
+  }
+}
+
+.token--litecoin {
+  background-color: #C4C4C4;
+  ._name {
+    color: darken($silver, 30%);
   }
 }
