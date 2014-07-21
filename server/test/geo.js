@@ -47,6 +47,9 @@ describe('geo', function(){
       })
     })
 
+  })
+
+  describe('search', function(){
     it('invokes callback with records within geo.SEARCH_RADIUS', function(done){
       var userInfo1 = {id: "foo", name: "Kuba", email: "kuba@example.com", network: "litecoin"}
       var lat1 = 34.23
@@ -60,7 +63,7 @@ describe('geo', function(){
 
       geo.save(lat1, lon1, userInfo1, function(){
         geo.save(lat2, lon2, userInfo2, function(){
-          geo.save(lat, lon, userInfo, function(err, results){
+          geo.search(lat, lon, userInfo, function(err, results){
             assert.equal(results.length, 1)
 
             var user = results[0][0]
@@ -79,7 +82,7 @@ describe('geo', function(){
 
       geo.save(lat, lon, userInfo1, function(){
         geo.save(lat, lon, userInfo2, function(){
-          geo.save(lat, lon, userInfo, function(err, results){
+          geo.search(lat, lon, userInfo, function(err, results){
             assert.equal(results.length, 1)
 
             assert.equal(results[0][0].id, "foo")
@@ -98,7 +101,7 @@ describe('geo', function(){
 
           delete userInfo.network
 
-          geo.save(lat, lon, userInfo, function(err, results){
+          geo.search(lat, lon, userInfo, function(err, results){
             assert.equal(results.length, 2)
 
             var userIds = results.map(function(r){ return r[0].id })
