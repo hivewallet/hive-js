@@ -1,5 +1,4 @@
 
-<h3 class="_title">Available Tokens</h3>
 <div class="tokens">
   {{#tokens}}
     <div id="{{token}}" on-click="switch-token" class="token__item {{getNetworkClass(token)}} token--{{token}}">
