@@ -22,7 +22,7 @@
       <input class="_input" id="support_email" type="text" value="{{email}}"/>
     </div>
 
-    <div class="settings__btn" on-click="submit-details">Submit</div>
+    <div class="_btn" on-click="submit-details">Submit</div>
     <div class="support__close" on-click="close">Nevermind</div>
   </div>
 </div>
