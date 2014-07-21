@@ -22,32 +22,23 @@ function fetchUserInfo(callback){
   })
 }
 
+function save(callback){
+  requestLocationEndpoint('POST', function(err, resp, body){
+    if(resp.statusCode !== 201) {
+      console.error(body)
+      return callback(body)
+    }
+    callback(null)
+  })
+}
+
 function search(callback){
-  getLocation(function(err, lat, lon){
-    if(err) return callback(err);
-
-    fetchUserInfo(function(err){
-      if(err) {
-        console.error(err)
-        //proceed with an earlier version of userInfo
-      }
-
-      userInfo.lat = lat
-      userInfo.lon = lon
-
-      xhr({
-        uri: uriRoot + "/location",
-        headers: { "Content-Type": "application/json" },
-        method: 'POST',
-        body: JSON.stringify(userInfo)
-      }, function(err, resp, body){
-        if(resp.statusCode !== 200) {
-          console.error(body)
-          return callback(body)
-        }
-        callback(null, JSON.parse(body))
-      })
-    })
+  requestLocationEndpoint('PUT', function(err, resp, body){
+    if(resp.statusCode !== 200) {
+      console.error(body)
+      return callback(body)
+    }
+    callback(null, JSON.parse(body))
   })
 }
 
@@ -82,7 +73,31 @@ function getLocation(callback){
   window.navigator.geolocation.getCurrentPosition(success, error)
 }
 
+function requestLocationEndpoint(method, callback){
+  getLocation(function(err, lat, lon){
+    if(err) return callback(err);
+
+    fetchUserInfo(function(err){
+      if(err) {
+        console.error(err)
+        //proceed with an earlier version of userInfo
+      }
+
+      userInfo.lat = lat
+      userInfo.lon = lon
+
+      xhr({
+        uri: uriRoot + "/location",
+        headers: { "Content-Type": "application/json" },
+        method: method,
+        body: JSON.stringify(userInfo)
+      }, callback)
+    })
+  })
+}
+
 module.exports = {
   search: search,
+  save: save,
   remove: remove
 }

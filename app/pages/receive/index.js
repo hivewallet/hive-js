@@ -50,7 +50,7 @@ module.exports = function(el){
   function waggleOn(){
     ractive.set('connecting', true)
     ractive.set('btn_message', 'Checking your location')
-    geo.search(function(err){
+    geo.save(function(err){
       if(err) return handleWaggleError(err)
       ractive.set('connecting', false)
       ractive.set('broadcasting', true)
