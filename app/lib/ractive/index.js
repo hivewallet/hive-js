@@ -1,5 +1,6 @@
 'use strict';
 var Ractive = require('ractive/build/ractive.runtime')
+var translate = require('hive-i18n')
 
 // extracted from https://github.com/RactiveJS/Ractive-events-keys
 var makeKeyDefinition = function ( code ) {
@@ -80,5 +81,7 @@ Ractive.prototype.show = function(){
   this.fire('before-show')
   this.el.classList.add('current')
 }
+
+Ractive.data = { translate: translate }
 
 module.exports = Ractive
