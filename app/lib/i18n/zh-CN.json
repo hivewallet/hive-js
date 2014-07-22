@@ -1,5 +1,11 @@
 {
   "Back to": "返回",
   "Create new wallet": "新建钱包",
-  "Open existing wallet": "打开钱包"
+  "Open existing wallet": "打开钱包",
+  "We are about to generate your very own passphrase": "我们将为您生成您的钱包口令",
+  "This keeps your account secure and lets you open your wallet on multiple devices": "为保证您的帐户安全，并让您在多个设备上打开你的钱包,",
+  "It is very important you write this down": "请您一定将口令写下来并安全保管。",
+  "Generate passphrase": "生成口令",
+  "Go back": "返回",
+  "Generating": "生成中……",
 }
