@@ -67,4 +67,10 @@
   "Nevermind": "Nevermind",
   "Before you start using Waggle, you need to enter a name that will help others identify you.": "Before you start using Waggle, you need to enter a name that will help others identify you.",
   "Save": "Save",
+  "Your transaction history": "Your transaction history",
+  "pending confirmation": "pending confirmation",
+  "Received": "Received",
+  "You do not have any transactions yet": "You don't have any transactions yet",
+  "Transaction Id:": "Transaction Id:",
+  "Sent to:": "Sent to:",
 }

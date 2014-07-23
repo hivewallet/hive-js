@@ -1,7 +1,7 @@
 
 <div class="transactions">
   {{#transactions.length}}
-    <h3 class="_title">Your transaction history</h3>
+    <h3 class="_title">{{translate("Your transaction history")}}</h3>
   {{/transactions.length}}
   {{#transactions:index}}
     <div class="transactions__item" title="{{id}}" data-index="{{index}}" on-click="show-detail">
@@ -11,7 +11,7 @@
         <div class="_amount {{directionClass(direction)}}">{{directionIcon(direction)}}{{truncate(satoshiToBtc(amount))}}</div>
 
         {{#pending}}
-          <span class='_time'>pending confirmation</span>
+        <span class='_time'>{{translate("pending confirmation")}}</span>
         {{/pending}}
 
         {{^pending}}
@@ -20,7 +20,7 @@
 
       </div>
 
-      <div class="_address">{{toAddress || 'Received'}}</div>
+      <div class="_address">{{toAddress || translate('Received')}}</div>
 
     </div>
   {{/transactions}}
@@ -29,7 +29,7 @@
       <div class="_icon">
         {{>svg_help}}
       </div>
-      <div class="_message">You don't have any transactions yet</div>
+      <div class="_message">{{translate("You do not have any transactions yet")}}</div>
     </div>
   {{/transactions}}
 </div>
