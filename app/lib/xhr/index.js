@@ -10,7 +10,7 @@ function makeRequest(params, callback){
 
   xhr(params, function(err){
     if(err && err.message === 'Internal XMLHttpRequest Error') {
-      return showError({ message: "Request timeout. Please check your internet connection." })
+      return showError({ message: "Request timeout. Please check your internet connection" })
     }
     callback.apply(null, arguments)
   })
