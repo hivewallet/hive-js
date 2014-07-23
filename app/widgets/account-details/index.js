@@ -14,8 +14,6 @@ module.exports = function init(el) {
     el: el,
     template: require('./index.ract').template,
     data: {
-      title: 'Your Details',
-      id: 'account_dropdown',
       start_open: true,
       user: {
         name: '',
@@ -24,7 +22,6 @@ module.exports = function init(el) {
       editingName: false,
       editingEmail: false,
       animating: false,
-      user_settings: true
     }
   })
 
