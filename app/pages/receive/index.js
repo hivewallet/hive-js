@@ -50,13 +50,23 @@ module.exports = function(el){
   function waggleOn(){
     ractive.set('connecting', true)
     ractive.set('btn_message', 'Checking your location')
-    geo.search(function(err){
+    geo.save(function(err){
       if(err) return handleWaggleError(err)
       ractive.set('connecting', false)
       ractive.set('broadcasting', true)
       ractive.set('btn_message', 'Turn Waggle off')
     })
   }
+
+  window.addEventListener('beforeunload', removeGeoData)
+
+  function removeGeoData() {
+    geo.remove(true)
+  }
+
+  ractive.on('teardown', function(){
+    window.removeEventListener('beforeunload', removeGeoData)
+  }, false)
 
   ractive.on('show-qr', function(){
     showQr({

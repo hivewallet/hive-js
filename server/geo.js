@@ -14,14 +14,18 @@ function reset(){
 }
 
 function save(lat, lon, userInfo, callback) {
-  var user = cloneObject(userInfo)
-  user.location = geomodel.create_point(lat, lon),
-  user.geocells = geomodel.generate_geocells(user.location)
-  user.timestamp = new Date().getTime()
+  try {
+    var user = cloneObject(userInfo)
+    user.location = geomodel.create_point(lat, lon)
+    user.geocells = geomodel.generate_geocells(user.location)
+    user.timestamp = new Date().getTime()
 
-  records[user.id] = user
+    records[user.id] = user
 
-  search(user.location, user.id, user.network, callback)
+    callback()
+  } catch(e) {
+    callback(e)
+  }
 }
 
 function remove(id) {
@@ -37,16 +41,24 @@ function getIdsOlderThan(age) {
   })
 }
 
-function search(location, id, network, callback){
-  var onGeocells = function(geocells, finderCallback) {
-    var candidates = all().filter(function(record){
-      var recordQualifies = (record.id !== id && haveIntersection(record.geocells, geocells))
-      return recordQualifies && (network == null || record.network == network)
-    })
-    finderCallback(null, candidates)
-  }
+function search(lat, lon, userInfo, callback){
+  try {
+    var location = geomodel.create_point(lat, lon)
+    var id = userInfo.id
+    var network = userInfo.network
 
-  geomodel.proximity_fetch(location, 10, SEARCH_RADIUS, onGeocells, callback)
+    var onGeocells = function(geocells, finderCallback) {
+      var candidates = all().filter(function(record){
+        var recordQualifies = (record.id !== id && haveIntersection(record.geocells, geocells))
+        return recordQualifies && (network == null || record.network == network)
+      })
+      finderCallback(null, candidates)
+    }
+
+    geomodel.proximity_fetch(location, 10, SEARCH_RADIUS, onGeocells, callback)
+  } catch(e) {
+    callback(e)
+  }
 }
 
 
@@ -65,6 +77,7 @@ module.exports = {
   all: all,
   reset: reset,
   save: save,
+  search: search,
   remove: remove,
   getIdsOlderThan: getIdsOlderThan
 }

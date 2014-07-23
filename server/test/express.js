@@ -32,9 +32,16 @@ var geoRes = [[user1, 50], [user2, 123]]
 var fakeGeo = {
   save: function(lat, lon, userInfo, callback){
     if(userInfo.id && userInfo.name !== 'Fail Me') {
-      callback(null, geoRes)
+      callback(null)
     } else {
       callback(new Error('save error'), null)
+    }
+  },
+  search: function(lat, lon, userInfo, callback){
+    if(userInfo.id && userInfo.name !== 'Fail Me') {
+      callback(null, geoRes)
+    } else {
+      callback(new Error('search error'), null)
     }
   }
 }
@@ -194,8 +201,8 @@ describe('POST /location', function(){
       email: "wei@example.com"
     }
     post('/location', data, null, function(err, res){
-      assert.equal(res.status, 200)
-      assert.deepEqual(JSON.parse(res.text), geoRes)
+      assert.equal(res.status, 201)
+      assert.deepEqual(res.text, 'Created')
       assert(res.headers['set-cookie'])
       done()
     })
@@ -205,10 +212,10 @@ describe('POST /location', function(){
     var data = { lat: 123.4, lon: 45.6 }
     var setCookie
     post('/location', data, null, function(err, res){
-      assert.equal(res.status, 200)
+      assert.equal(res.status, 201)
       setCookie = res.headers['set-cookie']
       post('/location', data, setCookie, function(err, res){
-        assert.equal(res.status, 200)
+        assert.equal(res.status, 201)
         assert.deepEqual(res.headers['set-cookie'], setCookie)
         done()
       })
@@ -219,6 +226,54 @@ describe('POST /location', function(){
     var data = { name: 'Fail Me' }
 
     post('/location', data, null, function(err, res){
+      assert.equal(res.status, 400)
+      done()
+    })
+  })
+})
+
+describe('PUT /location', function(){
+  function put(endpoint, data, cookie, callback){
+    request(app)
+      .put(endpoint)
+      .set('cookie', cookie)
+      .send(data)
+      .end(callback)
+  }
+
+  it('returns ok on geo.search success', function(done){
+    var data = {
+      lat: 123.4,
+      lon: 45.6,
+      name: "Wei Lu",
+      email: "wei@example.com"
+    }
+    put('/location', data, null, function(err, res){
+      assert.equal(res.status, 200)
+      assert.deepEqual(JSON.parse(res.text), geoRes)
+      assert(res.headers['set-cookie'])
+      done()
+    })
+  })
+
+  it('does not regenerate id when there is already one', function(done){
+    var data = { lat: 123.4, lon: 45.6 }
+    var setCookie
+    put('/location', data, null, function(err, res){
+      assert.equal(res.status, 200)
+      setCookie = res.headers['set-cookie']
+      put('/location', data, setCookie, function(err, res){
+        assert.equal(res.status, 200)
+        assert.deepEqual(res.headers['set-cookie'], setCookie)
+        done()
+      })
+    })
+  })
+
+  it('returns vad request on geo.search error', function(done){
+    var data = { name: 'Fail Me' }
+
+    put('/location', data, null, function(err, res){
       assert.equal(res.status, 400)
       done()
     })

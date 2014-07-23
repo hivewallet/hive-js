@@ -112,6 +112,26 @@ module.exports = function (){
   })
 
   app.post('/location', function(req, res) {
+    var args = prepareGeoData(req, res)
+    args.push(function(err) {
+      if(err) return res.json(400, err);
+      res.send(201)
+    })
+
+    geo.save.apply(null, args)
+  })
+
+  app.put('/location', function(req, res) {
+    var args = prepareGeoData(req, res)
+    args.push(function(err, results) {
+      if(err) return res.json(400, err)
+      res.json(200, results)
+    })
+
+    geo.search.apply(null, args)
+  })
+
+  function prepareGeoData(req, res){
     var data = req.body
 
     var lat = data.lat
@@ -125,15 +145,12 @@ module.exports = function (){
       req.session.tmpSessionID = id
     }
     data.id = id
-    geo.save(lat, lon, data, function(err, found) {
-      if(err) return res.json(400, err)
-      res.json(200, found)
-    })
-  })
+    return [lat, lon, data]
+  }
 
   app.delete('/location', function(req, res) {
     geo.remove(req.session.tmpSessionID)
-    res.json(200)
+    res.send(200)
   })
 
   app.use(function(err, req, res, next){
