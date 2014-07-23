@@ -3,7 +3,7 @@
     <form>
 
       <div class="send__address">
-        <label class="_label" for="to">Wallet address
+        <label class="_label" for="to">{{translate("Wallet address")}}
           <input id="to" class="_input" type="text" autocorrect="off" autocapitalize="off" value="{{to}}" />
         </label>
         <div class="_btn" on-click="open-geo">
@@ -15,7 +15,7 @@
 
       <div class="send__amount">
 
-        <label class="_label" for="bitcoin">Amount</label>
+        <label class="_label" for="bitcoin">{{translate("Amount")}}</label>
 
           <div class="_input-group">
             <span class="_currency">{{denomination}}</span>
@@ -47,7 +47,7 @@
             <input id="fiat" class="_input _error" type="number" min="0" value="{{fiatValue}}" on-keyup="fiat-to-bitcoin">
           </div>
           <div class="_input-error__message">
-            <span>Exchange rate unavailable for the selected currency</span>
+            <span>{{translate("Exchange rate unavailable for the selected currency")}}</span>
           </div>
           {{/exchangeRateUnavailable}}
 
@@ -58,7 +58,7 @@
 
   <div class="send__buttons">
     {{^validating}}
-      <div on-click="open-send" class="send__btn">Confirm</div>
+      <div on-click="open-send" class="send__btn">{{translate("Confirm")}}</div>
     {{/validating}}
     {{#validating}}
       <div class="send__btn--validating">
