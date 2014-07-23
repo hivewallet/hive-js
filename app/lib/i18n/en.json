@@ -56,4 +56,9 @@
   "Create a gravatar": "Create a gravatar",
   "Logout": "Logout",
   "Support": "Support",
+  "Send": "Send",
+  "Receive": "Receive",
+  "History": "History",
+  "Tokens": "Tokens",
+  "Waggle lets you broadcast your wallet address to other nearby Hive users by comparing GPS data. This data it is deleted once you turn Waggle off.": "Waggle lets you broadcast your wallet address to other nearby Hive users by comparing GPS data. This data it is deleted once you turn Waggle off.",
 }
