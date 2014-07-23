@@ -7,6 +7,6 @@
     <span class="_icon">
       {{>svg_refresh}}
     </span>
-    <span class="_text">{{translate(progress)}}</span>
+    <span class="_text">{{translate(progress)}}...</span>
   </div>
 {{/opening}}
