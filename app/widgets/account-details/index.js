@@ -65,7 +65,7 @@ module.exports = function init(el) {
       message: 'Gravatar (globally recognised avatar) is a service that lets you re-use the same avatar across websites and apps by specifying an email address.',
       link: {
         text: 'Create a gravatar',
-        url: 'https://en.gravatar.com/'
+        url: 'https://gravatar.com/'
       }
     })
   })
