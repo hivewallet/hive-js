@@ -29,7 +29,8 @@ function openModal(data){
   ractive.on('submit-details', function(){
     var hasError = ['name', 'email', 'description'].some(function(field){
       if(isBlankField(field)) {
-        var options = {message: "cannot be blank", interpolations: { blankField: field }}
+        var translatedField = ractive.data.translate(field)
+        var options = {message: "cannot be blank", interpolations: { blankField: translatedField }}
         showError(options)
         return true
       }
