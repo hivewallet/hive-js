@@ -114,7 +114,7 @@ module.exports = function init(el) {
 
   function handleUserError() {
     var data = {
-      title: "Uh Oh!",
+      title: "Uh Oh...",
       message: "Could not save your details"
     }
     showError(data)

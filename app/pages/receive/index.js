@@ -35,7 +35,7 @@ module.exports = function(el){
       waggleOff()
     } else {
       showSetDetails(function(err){
-        if(err) return showError({message: 'Failed to save your details'})
+        if(err) return showError({message: 'Could not save your details'})
         waggleOn()
       })
     }

@@ -55,7 +55,7 @@ module.exports = function(el){
           ractive.set('value', interpolations.sendableBalance)
           return showInfo({message: err.message, interpolations: interpolations})
         }
-        return showError({title: 'Uh oh!', message: err.message, href: err.href, linkText: err.linkText, interpolations: interpolations})
+        return showError({title: 'Uh Oh...', message: err.message, href: err.href, linkText: err.linkText, interpolations: interpolations})
       }
 
       showConfirmation({

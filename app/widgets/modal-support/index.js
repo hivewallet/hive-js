@@ -29,7 +29,8 @@ function openModal(data){
   ractive.on('submit-details', function(){
     var hasError = ['name', 'email', 'description'].some(function(field){
       if(isBlankField(field)) {
-        showError({message: field + " can't be blank"})
+        var options = {message: "cannot be blank", interpolations: { blankField: field }}
+        showError(options)
         return true
       }
 
