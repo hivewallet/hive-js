@@ -14,10 +14,10 @@
 
 <div class="settings__footer">
   <div class="sidebar__logout" on-click="logout">
-    <span class="_text">Logout</span>
+    <span class="_text">{{translate("Logout")}}</span>
   </div>
 
   <div class="sidebar__support" on-click="open-support">
-    <span class="_text">Support</span>
+    <span class="_text">{{translate("Support")}}</span>
   </div>
 </div>

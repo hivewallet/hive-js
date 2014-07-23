@@ -48,4 +48,12 @@
   "name": "name",
   "email": "email",
   "description": "description",
+  "Change your details": "Change your details",
+  "Your name": "Your name",
+  "Gravatar email": "Gravatar email",
+  "Submit": "Submit",
+  "Gravatar (globally recognised avatar) is a service that lets you re-use the same avatar across websites and apps by specifying an email address.": "Gravatar (globally recognised avatar) is a service that lets you re-use the same avatar across websites and apps by specifying an email address.",
+  "Create a gravatar": "Create a gravatar",
+  "Logout": "Logout",
+  "Support": "Support",
 }
