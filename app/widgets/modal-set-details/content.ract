@@ -4,15 +4,15 @@
         {{>svg_close}}
     </span>
     <div class="_info">
-      Before you start using Waggle, you need to enter a name that will help others identify you.
+      {{translate("Before you start using Waggle, you need to enter a name that will help others identify you.")}}
     </div>
     <div class="set-details__field">
       <label class="_label">
-          Your name
+        {{translate("Your name")}}
         <input class="_input" type="text" value="{{name}}" on-enter='submit-details' />
       </label>
     </div>
 
-    <div class="_btn" on-click="submit-details">Save</div>
+    <div class="_btn" on-click="submit-details">{{translate("Save")}}</div>
   </div>
 </div>
