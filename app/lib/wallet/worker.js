@@ -9,7 +9,7 @@ self.addEventListener('message', function(e) {
 
   var valid = bip39.validate(mnemonic)
   if(!valid) {
-    return self.postMessage({error: "Invalid passphrase"})
+    throw new Error('Invalid passphrase')
   }
   var seed = bip39.mnemonicToSeed(mnemonic)
 

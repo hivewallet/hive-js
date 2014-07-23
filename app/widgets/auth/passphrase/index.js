@@ -37,7 +37,7 @@ function enterPassphrase(prevPage){
     ractive.set('opening', false)
 
     if(err) {
-      return showError({ message: err })
+      return showError(err)
     }
 
     pinPage(enterPassphrase, data)

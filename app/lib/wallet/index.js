@@ -121,7 +121,7 @@ function createWallet(passphrase, network, callback) {
   }, false)
 
   worker.addEventListener('error', function(e) {
-    return callback(e)
+    return callback({message: e.message.replace("Uncaught Error: ", '')})
   })
 }
 
