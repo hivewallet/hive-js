@@ -85,7 +85,7 @@ module.exports = function(el){
   }
 
   function handleWaggleError(err) {
-    console.log(err)
+    console.error(err)
 
     var data = {
       title: 'Uh Oh...',
