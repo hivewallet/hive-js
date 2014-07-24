@@ -35,15 +35,7 @@ module.exports = function(el){
     var token = event.node.id
     if(token === getNetwork()) return;
 
-    var host = window.location.host
-    var url
-
-    if(token === 'bitcoin') {
-      url = 'http://' + host + '/'
-    } else {
-      url = 'http://' + host + '/?network=' + token
-    }
-
+    var url = window.location.href.replace(/\?network=\w+/, '') + '?network=' + token
     window.location.assign(url);
   })
 
