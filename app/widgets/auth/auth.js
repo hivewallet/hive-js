@@ -9,7 +9,7 @@ var Auth = Ractive.extend({
   el: document.getElementById("auth"),
   template: require('./index.ract').template,
   partials: {
-    header: require('./choose/header.ract').template,
+    header: require('./header.ract').template,
     footer: require('./choose/footer.ract').template
   },
   init: function(){
