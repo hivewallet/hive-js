@@ -95,4 +95,6 @@
   "Close": "Close",
   "Transaction Failed": "Transaction Failed",
   "Please make sure you are connected to the internet.": "Please make sure you are connected to the internet.",
+  "Sorry, Hive Wallet did not load.": "Sorry, Hive Wallet didn't load.",
+  "Try updating your browser, or switching out of private browsing mode. If all else fails, download Chrome for your device.": "Try updating your browser, or switching out of private browsing mode. If all else fails, download Chrome for your device.",
 }
