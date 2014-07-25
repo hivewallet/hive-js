@@ -362,9 +362,8 @@
 }
 
 .auth__pin {
-  max-width: 200px;
+  max-width: 250px;
   margin: 0 auto;
-  padding-bottom: 10px;
   color: white;
 
   @include breakpoint(portrait) {
@@ -483,6 +482,14 @@
 
     @include breakpoint(portrait) {
       font-size: 18px;
+    }
+
+    &.pin {
+      max-width: 200px;
+      margin: 0 auto;
+      @include breakpoint(portrait) {
+        max-width: 100%;
+      }
     }
   }
 

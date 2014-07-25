@@ -1,28 +1,39 @@
 <div class="auth__pin">
   <div class="auth__input-group">
-    <label class="_label">
-      {{#userExists}}
-        Enter your pin:
-      {{/userExists}}
-      {{^userExists}}
-        Set a pin for quick access:
-      {{/userExists}}
-      <div class="pinfield {{#pinfocused}}is_focused{{/pinfocused}}">
-        {{#boxes}}
-          <div class="_box">
-            {{#visible}}
-              {{#userExists}}
-                <span class="_dot"></span>
-              {{/userExists}}
-              {{^userExists}}
-                <span class="_text">{{number}}</span>
-              {{/userExists}}
-            {{/visible}}
-          </div>
-        {{/boxes}}
+    {{^opening}}
+      <label class="_label pin">
+        {{#userExists}}
+          Enter your pin:
+        {{/userExists}}
+        {{^userExists}}
+          Set a pin for quick access:
+        {{/userExists}}
+        <div class="pinfield {{#pinfocused}}is_focused{{/pinfocused}}">
+          {{#boxes}}
+            <div class="_box">
+              {{#visible}}
+                {{#userExists}}
+                  <span class="_dot"></span>
+                {{/userExists}}
+                {{^userExists}}
+                  <span class="_text">{{number}}</span>
+                {{/userExists}}
+              {{/visible}}
+            </div>
+          {{/boxes}}
+        </div>
+        <input id="setPin" class="_input" type="password" maxlength="4" pattern="[0-9]*" value="{{pin}}" on-enter="enter-pin" on-focus="focus-pin" on-blur="blur-pin"/>
+      </label>
+    {{/opening}}
+
+    {{#opening}}
+      <div class="auth__btn--loading">
+        <span class="_icon">
+          {{>svg_refresh}}
+        </span>
+        <span class="_text">{{progress}}</span>
       </div>
-      <input id="setPin" class="_input" type="password" maxlength="4" pattern="[0-9]*" value="{{pin}}" on-enter="enter-pin" on-focus="focus-pin" on-blur="blur-pin"/>
-    </label>
+    {{/opening}}
+
   </div>
 </div>
-

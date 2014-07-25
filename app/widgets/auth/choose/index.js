@@ -7,7 +7,6 @@ var createIntroPage = require('../create-intro')
 module.exports = function choose(){
   var ractive = new Ractive({
     partials: {
-      header: require('./header.ract').template,
       actions: require('./actions.ract').template
     }
   })
