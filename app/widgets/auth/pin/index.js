@@ -43,6 +43,11 @@ module.exports = function(prevPage, data){
     })
 
     ractive.set('boxes', boxes)
+
+    if(boxes[3].visible) {
+      ractive.nodes.setPin.blur();
+      ractive.fire('enter-pin')
+    }
   })
 
   ractive.on('enter-pin', function(){
