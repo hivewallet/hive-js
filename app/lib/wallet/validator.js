@@ -33,7 +33,7 @@ function validateSend(wallet, to, btcValue, callback){
       var error
 
       if(sufficientWithPending(needed) || (spendAll && hasPendingUtxo())){
-        error = new Error("Some funds are temporarily unavailable. To send this transaction, you will need to wait for your pending transactions to be confirmed first (this should not take more than a few minutes)")
+        error = new Error("Some funds are temporarily unavailable. To send this transaction, you will need to wait for your pending transactions to be confirmed first (this should not take more than a few minutes).")
         error.href = "https://github.com/hivewallet/hive-osx/wiki/Sending-Bitcoin-from-a-pending-transaction"
         error.linkText = "What does this mean?"
         return callback(error)

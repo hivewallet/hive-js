@@ -89,7 +89,7 @@ module.exports = function(el){
 
     var data = {
       title: 'Uh Oh...',
-      message: "We could not connect you to Waggle, please check your internet connection"
+      message: "We could not connect you to Waggle, please check your internet connection."
     }
 
     showError(data)
