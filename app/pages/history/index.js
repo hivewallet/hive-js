@@ -4,7 +4,6 @@ var Ractive = require('hive-ractive')
 var emitter = require('hive-emitter')
 var toFixedFloor = require('hive-convert').toFixedFloor
 var satoshiToBtc = require('hive-convert').satoshiToBtc
-var getAvatarByIndex = require('hive-avatar').getAvatarByIndex
 var strftime = require('strftime')
 var showTransactionDetail = require('hive-modal-transaction-detail')
 
@@ -38,9 +37,6 @@ module.exports = function(el){
         } else {
           return amount
         }
-      },
-      getAvatarByIndex: function(index) {
-        return getAvatarByIndex(Math.round(((index / 10) % 1) * 10))
       },
       satoshiToBtc: satoshiToBtc
     }
