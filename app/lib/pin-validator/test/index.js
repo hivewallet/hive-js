@@ -13,6 +13,10 @@ describe('pin validator', function(){
     expect(validate('aaaa')).toBeFalsy()
   })
 
+  it('returns false if it is a mix of numbers and digits', function(){
+    expect(validate('11a2')).toBeFalsy()
+  })
+
   it('returns false if less than 4 digits', function(){
     expect(validate('111')).toBeFalsy()
   })
@@ -23,15 +27,5 @@ describe('pin validator', function(){
 
   it('returns true if valid', function(){
     expect(validate('1111')).toBeTruthy()
-  })
-
-  describe('when allow blank flag is turned on', function(){
-    it('returns true for empty string', function(){
-      expect(validate('', true)).toBeTruthy()
-    })
-
-    it('returns true for undefined', function(){
-      expect(validate(undefined, true)).toBeTruthy()
-    })
   })
 })
