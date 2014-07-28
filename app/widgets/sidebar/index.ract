@@ -4,7 +4,7 @@
   <div class="sidebar__logo">
     {{>svg_logo}}
   </div>
-  <span class="sidebar__version">v0.1.9</span>
+  <span class="sidebar__version">v0.1.10</span>
 
 </div>
 
