@@ -5,7 +5,15 @@
 {{/userExists}}
 
 {{#userExists}}
-  <div class="auth__altmsg">
-    <span class="_link" on-click="clear-credentials">Open a different wallet</span>
-  </div>
+  {{^opening}}
+    <div class="auth__altmsg">
+      <span class="_link" on-click="clear-credentials">Open a different wallet</span>
+    </div>
+  {{/opening}}
+
+  {{#opening}}
+    <div class="auth__altmsg">
+      <span>This might take some time,<br/> please be patient.</span>
+    </div>
+  {{/opening}}
 {{/userExists}}
