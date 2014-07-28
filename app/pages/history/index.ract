@@ -20,15 +20,6 @@
 
       </div>
 
-      <div class="_avatar">
-      {{#toAddress}}
-        {{>svg_sent}}
-      {{/toAddress}}
-      {{^toAddress}}
-        {{>svg_received}}
-      {{/toAddress}}
-      </div>
-
       <div class="_address">{{toAddress || 'Received'}}</div>
 
     </div>

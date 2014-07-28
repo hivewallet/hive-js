@@ -23,9 +23,14 @@
 .transactions__item {
   @include clear;
   @include clickbtn;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding-top: 20px;
+  padding-bottom: 20px;
   border-top: 1px solid darken($grey--light, 10%);
+
+  @include breakpoint(portrait) {
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
 
   ._avatar {
     @include icon(55px, 55px, block, '/assets/img/avatar_1.png');
@@ -43,13 +48,11 @@
     @include ellipsis();
     @include media-obj;
     @extend .jigsaw-light;
-    margin-left: 10px;
-    padding-top: 23px;
+    padding-top: 13px;
     font-size: 21px;
 
     @include breakpoint(portrait) {
-      padding-top: 32px;
-      padding-bottom: 30px;
+      padding-top: 18px;
       font-size: 26px;
     }
   }
@@ -63,7 +66,6 @@
   ._detail {
     float: right;
     text-align: right;
-    padding-top: 24px;
     margin-left: 10px;
   }
 
