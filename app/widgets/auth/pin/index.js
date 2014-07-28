@@ -18,7 +18,11 @@ module.exports = function(prevPage, data){
     },
     data: {
       userExists: userExists,
-      boxes: [{visible: false}, {visible: false}, {visible: false}, {visible: false}]
+      pin: '',
+      boxes: [null, null, null, null],
+      visible: function(number){
+        return number != null
+      }
     }
   })
 
@@ -31,22 +35,17 @@ module.exports = function(prevPage, data){
   })
 
   ractive.observe('pin', function(){
-    var boxes = ractive.get('boxes')
-    var value = ractive.nodes['setPin'].value
-    var length = value.length
-    var temp_string = value + ''
-    var arr = temp_string.split('')
+    var pin = ractive.nodes['setPin'].value
 
-    boxes.forEach(function(_, i){
-      boxes[i].number = arr[i]
-      boxes[i].visible = i < length
-    })
-
-    ractive.set('boxes', boxes)
-
-    if(boxes[3].visible) {
+    var boxes = pin.split('')
+    if(boxes.length === 4) {
       ractive.nodes.setPin.blur()
       ractive.fire('enter-pin')
+    } else {
+      for(var i=boxes.length; i<4; i++) {
+        boxes[i] = null
+      }
+      ractive.set('boxes', boxes)
     }
   })
 
@@ -71,8 +70,9 @@ module.exports = function(prevPage, data){
   })
 
   emitter.on('clear-pin', function() {
+    ractive.nodes['setPin'].value = ''
     ractive.set('pin', '')
-    ractive.set('boxes', [{visible: false}, {visible: false}, {visible: false}, {visible: false}])
+    ractive.set('boxes', [null, null, null, null])
   })
 
   ractive.on('clear-credentials', function(){
