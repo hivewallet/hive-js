@@ -16,16 +16,33 @@ function styles(callback){
   })
 }
 
-function scripts(callback) {
-  bundle('./app/application.js', './build/assets/js/application.js', callback)
+function scripts() {
+  bundle('./app/application.js', './build/assets/js/application.js')
 }
 
-function loader(callback) {
-  bundle('./app/loader/nope.js', './build/assets/js/nope.js', callback)
-  bundle('./app/loader/index.js', './build/assets/js/loader.js', callback)
+function loader() {
+  bundle('./app/loader/nope.js', './build/assets/js/nope.js')
+  bundle('./app/loader/index.js', './build/assets/js/loader.js')
 }
 
-function bundle(inFile, outFilename, callback){
+function html() {
+  copy('./app/index.html', './build/index.html')
+}
+
+function copy(from, to){
+  var callback = done(from, 'copy')
+
+  var inStream = fs.createReadStream(from)
+  inStream.on('error', callback)
+  inStream.on('end', callback)
+
+  var outStream = fs.createWriteStream(to)
+  outStream.on('error', callback)
+
+  inStream.pipe(outStream)
+}
+
+function bundle(inFile, outFilename){
   watchify.args.entries = path.join(__dirname, inFile)
   var bundler = browserify(watchify.args)
 
@@ -46,41 +63,29 @@ function bundle(inFile, outFilename, callback){
   // bundle
   var dest = fs.createWriteStream(outFilename);
   bundler.bundle()
-    .on('error', onError)
-    .on('end', onEnd)
+    .on('error', done(inFile, 'compilation'))
+    .on('end', done(inFile, 'compilation'))
     .pipe(dest)
-
-  function onError(err){
-    console.error(inFile, "compilation failed")
-    console.error(err.message);
-    console.error(err.stack)
-
-    if(callback) callback(err)
-  }
-
-  function onEnd(){
-    console.log(inFile, "compiled")
-    if(callback) callback()
-  }
 }
 
 function isProduction(){
   return process.env.NODE_ENV === "production"
 }
 
-function done(filename, err){
-  if(err) {
-    console.error(filename, "compilation failed")
-    console.error(err.message);
-    console.error(err.stack)
-    return
+function done(filename, action){
+  return function(err) {
+    if(err) {
+      console.error(filename, action, "failed")
+      console.error(err.message);
+      console.error(err.stack)
+      return
+    }
+    console.log(filename, action, "succeeded")
   }
-  console.log(filename, "compiled")
 }
 
-styles(function(err){
-  done('application.css')
-})
+styles(done('application.css', 'compilation'))
 
 scripts()
 loader()
+html()
