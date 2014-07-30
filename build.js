@@ -1,6 +1,8 @@
 var fs = require('fs')
+var path = require('path')
 var sass = require('node-sass')
 var autoprefixer = require('autoprefixer')
+var watchify = require('watchify')
 var browserify = require('browserify')
 
 function styles(callback){
@@ -15,13 +17,22 @@ function styles(callback){
 }
 
 function scripts(callback) {
-  var bundler = browserify('./app/application.js')
-  bundle(bundler, './build/assets/js/application.js', callback)
+  bundle('./app/application.js', './build/assets/js/application.js', callback)
 }
 
-function bundle(bundler, outFilename, callback){
+function bundle(inFile, outFilename, callback){
+  watchify.args.entries = path.join(__dirname, inFile)
+  var bundler = browserify(watchify.args)
+
+  if(!isProduction()){
+    bundler = watchify(bundler)
+    bundler.on('update', function(ids){
+      console.log(outFilename, 'updated due to changes in', ids)
+    })
+  }
+
   bundler = bundler.transform('ractify')
-  if(process.env.NODE_ENV === "production") {
+  if(isProduction()) {
     bundler = bundler.transform({global: true}, 'uglifyify')
   }
 
@@ -30,6 +41,10 @@ function bundle(bundler, outFilename, callback){
     .on('error', callback)
     .on('end', callback)
     .pipe(dest)
+}
+
+function isProduction(){
+  return process.env.NODE_ENV === "production"
 }
 
 function done(filename, err){

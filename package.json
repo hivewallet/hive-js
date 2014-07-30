@@ -36,7 +36,7 @@
     "big.js": "^2.5.0",
     "bitcoinjs-lib": "^1.0.0",
     "bl": "^0.7.0",
-    "browserify": "^4.2.1",
+    "browserify": "^5.9.1",
     "browserify-zepto": "~1.1.2",
     "browsernizr": "git://github.com/weilu/browsernizr#indexedDB",
     "cradle": "~0.6.7",
@@ -67,7 +67,8 @@
     "uglifyify": "^2.5.0",
     "uniqueify": "~1.0.0",
     "velocity-animate": "git://github.com/haustraliaer/velocity.git",
-    "vinyl-source-stream": "^0.1.1"
+    "vinyl-source-stream": "^0.1.1",
+    "watchify": "^1.0.1"
   },
   "aperture": {
     "sources": [
