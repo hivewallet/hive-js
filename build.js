@@ -9,8 +9,21 @@ var async = require('async')
 var mkdirp = require('mkdirp')
 var glob = require('glob')
 var exec = require('child_process').exec
+var lrserver = require('tiny-lr')()
+var buildServer = require('./server/express')
 
-function styles(callback){
+function serve(callback) {
+  var livereloadport = 35729
+  var serverport = 8080
+
+  var server = buildServer()
+  server.listen(serverport)
+  lrserver.listen(livereloadport)
+
+  done('server', 'start', callback)()
+}
+
+function styles(callback) {
   var inFile = './app/application.scss'
   var outFile = './build/assets/css/application.css'
   var cb = done(inFile, 'compilation', callback)
@@ -124,6 +137,7 @@ function done(filename, action, next){
 }
 
 var tasks = {
+  serve: serve,
   assets: assets,
   html: html,
   styles: styles,
@@ -148,6 +162,7 @@ var tasks = {
 
 tasks.default = function(){
   tasks.build(function(){
+    serve()
     test()
   })
 }
