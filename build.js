@@ -7,6 +7,7 @@ var browserify = require('browserify')
 var cpr = require('cpr').cpr
 var async = require('async')
 var mkdirp = require('mkdirp')
+var glob = require('glob')
 
 function styles(callback){
   var inFile = './app/application.scss'
@@ -46,6 +47,10 @@ function assets(callback) {
   copy('./app/assets/', './build/assets/', callback)
 }
 
+function test(callback) {
+  bundle(glob.sync("./app/@(widgets|lib)/*/test/*"), './build/assets/js/tests/index.js', callback)
+}
+
 function copy(from, to, callback){
   cpr(from, to, {
     deleteFirst: true,
@@ -54,7 +59,10 @@ function copy(from, to, callback){
 }
 
 function bundle(inFile, outFilename, callback){
-  watchify.args.entries = path.join(__dirname, inFile)
+  if(typeof inFile === 'string') inFile = [inFile]
+  watchify.args.entries = inFile.map(function(file){
+    return path.join(__dirname, file)
+  })
   var bundler = browserify(watchify.args)
 
   // watch
@@ -77,8 +85,8 @@ function bundle(inFile, outFilename, callback){
 
     var dest = fs.createWriteStream(outFilename);
     bundler.bundle()
-      .on('error', done(inFile, 'compilation', callback))
-      .on('end', done(inFile, 'compilation', callback))
+      .on('error', done(outFilename, 'compilation', callback))
+      .on('end', done(outFilename, 'compilation', callback))
       .pipe(dest)
   })
 }
@@ -113,4 +121,6 @@ assets(function(err){
   styles()
   scripts()
   loader()
+
+  test()
 })
