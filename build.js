@@ -123,15 +123,44 @@ function done(filename, action, next){
   }
 }
 
-assets(function(err){
-  if(err) return;
+var tasks = {
+  assets: assets,
+  html: html,
+  styles: styles,
+  scripts: scripts,
+  loader: loader,
+  test: test,
+  sketch: sketch,
+  build: function(callback){
+    callback = callback || function(){}
+    assets(function(err){
+      if(err) return callback(err);
 
-  html()
-  styles()
-  scripts()
-  loader()
+      html()
+      styles()
+      scripts()
+      loader()
 
-  test()
-})
+      callback()
+    })
+  },
+}
 
-// sketch()
+tasks.default = function(){
+  tasks.build(function(){
+    test()
+  })
+}
+
+task = process.argv.reduce(function(memo, arg){
+  if(memo === false && arg.match(/build.js/)) {
+    return null
+  }
+  if(memo === null) {
+    return arg
+  }
+  return memo
+}, false) || 'default'
+
+tasks[task]()
+
