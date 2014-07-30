@@ -8,6 +8,7 @@ var cpr = require('cpr').cpr
 var async = require('async')
 var mkdirp = require('mkdirp')
 var glob = require('glob')
+var exec = require('child_process').exec
 
 function styles(callback){
   var inFile = './app/application.scss'
@@ -49,6 +50,14 @@ function assets(callback) {
 
 function test(callback) {
   bundle(glob.sync("./app/@(widgets|lib)/*/test/*"), './build/assets/js/tests/index.js', callback)
+}
+
+function sketch(callback) {
+  var inFile = './app/assets-master.sketch'
+  var outFolder = './app/assets/img/'
+  var cb = done(outFolder, 'scketch export', callback)
+
+  exec("sketchtool export artboards " + inFile + " --output=" + outFolder, cb)
 }
 
 function copy(from, to, callback){
@@ -124,3 +133,5 @@ assets(function(err){
 
   test()
 })
+
+// sketch()
