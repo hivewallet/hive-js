@@ -4,45 +4,56 @@ var sass = require('node-sass')
 var autoprefixer = require('autoprefixer')
 var watchify = require('watchify')
 var browserify = require('browserify')
+var cpr = require('cpr').cpr
+var async = require('async')
+var mkdirp = require('mkdirp')
 
 function styles(callback){
-  sass.render({
-    file: './app/application.scss',
-    success: function(css){
-      var prefixed = autoprefixer.process(css).css
-      fs.writeFile('./build/assets/css/application.css', prefixed, callback)
-    },
-    error: callback
+  var inFile = './app/application.scss'
+  var outFile = './build/assets/css/application.css'
+  var cb = done(inFile, 'compilation', callback)
+
+  prepareDir(outFile, function(err){
+    if(err) return cb(err);
+
+    sass.render({
+      file: inFile,
+      success: function(css){
+        var prefixed = autoprefixer.process(css).css
+        fs.writeFile(outFile, prefixed, cb)
+      },
+      error: cb
+    })
   })
 }
 
-function scripts() {
-  bundle('./app/application.js', './build/assets/js/application.js')
+function scripts(callback) {
+  bundle('./app/application.js', './build/assets/js/application.js', callback)
 }
 
-function loader() {
-  bundle('./app/loader/nope.js', './build/assets/js/nope.js')
-  bundle('./app/loader/index.js', './build/assets/js/loader.js')
+function loader(callback) {
+  async.parallel([
+    function(cb) { bundle('./app/loader/nope.js', './build/assets/js/nope.js', cb) },
+    function(cb) { bundle('./app/loader/index.js', './build/assets/js/loader.js', cb) }
+  ], callback)
 }
 
-function html() {
-  copy('./app/index.html', './build/index.html')
+function html(callback) {
+  copy('./app/index.html', './build/index.html', callback)
 }
 
-function copy(from, to){
-  var callback = done(from, 'copy')
-
-  var inStream = fs.createReadStream(from)
-  inStream.on('error', callback)
-  inStream.on('end', callback)
-
-  var outStream = fs.createWriteStream(to)
-  outStream.on('error', callback)
-
-  inStream.pipe(outStream)
+function assets(callback) {
+  copy('./app/assets/', './build/assets/', callback)
 }
 
-function bundle(inFile, outFilename){
+function copy(from, to, callback){
+  cpr(from, to, {
+    deleteFirst: true,
+    overwrite: true
+  }, done(from, 'copy', callback))
+}
+
+function bundle(inFile, outFilename, callback){
   watchify.args.entries = path.join(__dirname, inFile)
   var bundler = browserify(watchify.args)
 
@@ -61,31 +72,45 @@ function bundle(inFile, outFilename){
   }
 
   // bundle
-  var dest = fs.createWriteStream(outFilename);
-  bundler.bundle()
-    .on('error', done(inFile, 'compilation'))
-    .on('end', done(inFile, 'compilation'))
-    .pipe(dest)
+  prepareDir(outFilename, function(err){
+    if(err) return cb(err);
+
+    var dest = fs.createWriteStream(outFilename);
+    bundler.bundle()
+      .on('error', done(inFile, 'compilation', callback))
+      .on('end', done(inFile, 'compilation', callback))
+      .pipe(dest)
+  })
 }
 
 function isProduction(){
   return process.env.NODE_ENV === "production"
 }
 
-function done(filename, action){
+function prepareDir(filename, callback){
+  mkdirp(path.dirname(filename), callback)
+}
+
+function done(filename, action, next){
   return function(err) {
     if(err) {
       console.error(filename, action, "failed")
+      console.error(err);
       console.error(err.message);
       console.error(err.stack)
-      return
+    } else {
+      console.log(filename, action, "succeeded")
     }
-    console.log(filename, action, "succeeded")
+
+    if(next) next(err)
   }
 }
 
-styles(done('application.css', 'compilation'))
+assets(function(err){
+  if(err) return;
 
-scripts()
-loader()
-html()
+  html()
+  styles()
+  scripts()
+  loader()
+})
