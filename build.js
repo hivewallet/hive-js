@@ -11,6 +11,7 @@ var glob = require('glob')
 var exec = require('child_process').exec
 var lrserver = require('tiny-lr')()
 var buildServer = require('./server/express')
+var catw = require('catw')
 
 function serve(callback) {
   var livereloadport = 35729
@@ -57,8 +58,8 @@ function html(callback) {
   copy('./app/index.html', './build/index.html', callback)
 }
 
-function assets(callback) {
-  copy('./app/assets/', './build/assets/', callback)
+function images(callback) {
+  copy('./app/assets/img', './build/assets/img', callback)
 }
 
 function test(callback) {
@@ -71,6 +72,12 @@ function sketch(callback) {
   var cb = done(outFolder, 'scketch export', callback)
 
   exec("sketchtool export artboards " + inFile + " --output=" + outFolder, cb)
+}
+
+function watch(callback) {
+  catw('app/index.html').on('stream', html)
+  catw('app/**/*.scss').on('stream', styles)
+  catw('app/assets/img/*').on('stream', images)
 }
 
 function copy(from, to, callback){
@@ -132,37 +139,34 @@ function done(filename, action, next){
       console.log(filename, action, "succeeded")
     }
 
-    if(next) next(err)
+    if(typeof next === 'function') next(err)
   }
 }
 
 var tasks = {
   serve: serve,
-  assets: assets,
+  images: images,
   html: html,
   styles: styles,
   scripts: scripts,
   loader: loader,
   test: test,
   sketch: sketch,
+  watch: watch,
   build: function(callback){
-    callback = callback || function(){}
-    assets(function(err){
-      if(err) return callback(err);
-
-      html()
-      styles()
-      scripts()
-      loader()
-
-      callback()
-    })
+    scripts()
+    loader()
+    html()
+    styles()
+    images()
+    callback()
   },
 }
 
 tasks.default = function(){
   tasks.build(function(){
     serve()
+    watch()
     test()
   })
 }

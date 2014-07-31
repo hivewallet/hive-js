@@ -39,6 +39,7 @@
     "browserify": "^5.9.1",
     "browserify-zepto": "~1.1.2",
     "browsernizr": "git://github.com/weilu/browsernizr#indexedDB",
+    "catw": "^0.2.0",
     "cpr": "^0.3.2",
     "cradle": "~0.6.7",
     "ecstatic": "~0.4.13",
