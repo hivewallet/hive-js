@@ -76,7 +76,7 @@ module.exports = function(el){
 
   ractive.on('help', function() {
     showTooltip({
-      message: 'Waggle lets you broadcast your wallet address to other nearby Hive users by comparing GPS data. This data it is deleted once you turn Waggle off.'
+      message: 'Waggle lets you broadcast your wallet address to other nearby Hive users by comparing GPS data. This data is deleted once you turn Waggle off.'
     })
   })
 
