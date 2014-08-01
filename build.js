@@ -2,7 +2,6 @@ var fs = require('fs')
 var path = require('path')
 var sass = require('node-sass')
 var autoprefixer = require('autoprefixer')
-var watchify = require('watchify')
 var browserify = require('browserify')
 var cpr = require('cpr')
 var async = require('async')
@@ -77,11 +76,17 @@ function sketch(callback) {
 }
 
 function watch(callback) {
-  var watcher = new Watcher(['app/**/*', '!app/**/node_modules/**/*', 'build/**/*.@(html|css|js|png|svg|ico)'])
+  var watcher = new Watcher(['app/**/*', '!app/**/node_modules/**/*', 'build/**/*.*', '!**/*~'])
   watcher.on('all', function(type, file){
     var cwd = process.cwd()
     if(minimatch(file, cwd + '/app/**/*.scss')){
       styles()
+    } else if(minimatch(file, cwd + '/app/loader/**/*.js')){
+      loader()
+      test()
+    } else if(minimatch(file, cwd + '/app/**/*.@(js|json|ract)')){
+      scripts()
+      test()
     } else if(minimatch(file, cwd + '/app/assets/img/*')){
       images()
     } else if(minimatch(file, cwd + '/app/index.html')){
@@ -106,19 +111,7 @@ function copy(from, to, callback){
 }
 
 function bundle(inFile, outFilename, callback){
-  if(typeof inFile === 'string') inFile = [inFile]
-  watchify.args.entries = inFile.map(function(file){
-    return path.join(__dirname, file)
-  })
-  var bundler = browserify(watchify.args)
-
-  // watch
-  if(!isProduction()){
-    bundler = watchify(bundler)
-    bundler.on('update', function(ids){
-      console.log(inFile, 'updated due to changes in', ids)
-    })
-  }
+  var bundler = browserify(inFile)
 
   // transforms
   bundler = bundler.transform('ractify')

@@ -72,8 +72,7 @@
     "uglifyify": "^2.5.0",
     "uniqueify": "~1.0.0",
     "velocity-animate": "git://github.com/haustraliaer/velocity.git",
-    "vinyl-source-stream": "^0.1.1",
-    "watchify": "^1.0.1"
+    "vinyl-source-stream": "^0.1.1"
   },
   "aperture": {
     "sources": [
