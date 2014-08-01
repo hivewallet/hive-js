@@ -56,7 +56,7 @@ function loader(callback) {
 }
 
 function html(callback) {
-  copy('./app/index.html', './build/index.html', callback)
+  copy('./app/index.html', './build/', callback)
 }
 
 function images(callback) {
