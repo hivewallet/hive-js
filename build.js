@@ -4,15 +4,16 @@ var sass = require('node-sass')
 var autoprefixer = require('autoprefixer')
 var watchify = require('watchify')
 var browserify = require('browserify')
-var cpr = require('cpr').cpr
+var cpr = require('cpr')
 var async = require('async')
 var mkdirp = require('mkdirp')
 var glob = require('glob')
 var exec = require('child_process').exec
 var lrserver = require('tiny-lr')()
 var buildServer = require('./server/express')
-var catw = require('catw')
+var Watcher = require('gaze').Gaze
 var request = require('request')
+var minimatch = require('minimatch')
 
 var livereloadport = 35729
 
@@ -76,28 +77,25 @@ function sketch(callback) {
 }
 
 function watch(callback) {
-  catw('app/index.html', function(){
-    html(refresh('/index.html'))
-  })
-
-  catw('app/**/*.scss', styles)
-  catw('app/assets/img/*').on('stream', images)
-
-  refreshOnChange()
-}
-
-function refreshOnChange() {
-  glob.sync("./build/assets/@(css|js|img|tests)/*.*").forEach(function(filename){
-    catw(filename, refresh(filename.replace('./build', '')))
+  var watcher = new Watcher(['app/**/*', '!app/**/node_modules/**/*', 'build/**/*.@(html|css|js|png|svg|ico)'])
+  watcher.on('all', function(type, file){
+    var cwd = process.cwd()
+    if(minimatch(file, cwd + '/app/**/*.scss')){
+      styles()
+    } else if(minimatch(file, cwd + '/app/assets/img/*')){
+      images()
+    } else if(minimatch(file, cwd + '/app/index.html')){
+      html()
+    } else if(minimatch(file, cwd + '/build/**/*.*')){
+      refresh(file.replace(cwd + '/build', ''))
+    }
   })
 }
 
 function refresh(filename) {
-  return function() {
-    request('http://localhost:' + livereloadport + "/changed?files=" + filename, function(){
-      console.log("notified client to reload", filename)
-    })
-  }
+  request('http://localhost:' + livereloadport + "/changed?files=" + filename, function(){
+    console.log("notified client to reload", filename)
+  })
 }
 
 function copy(from, to, callback){
