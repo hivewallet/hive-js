@@ -12,11 +12,12 @@ var exec = require('child_process').exec
 var lrserver = require('tiny-lr')()
 var buildServer = require('./server/express')
 var catw = require('catw')
+var request = require('request')
+
+var livereloadport = 35729
 
 function serve(callback) {
-  var livereloadport = 35729
   var serverport = 8080
-
   var server = buildServer()
   server.listen(serverport)
   lrserver.listen(livereloadport)
@@ -75,9 +76,28 @@ function sketch(callback) {
 }
 
 function watch(callback) {
-  catw('app/index.html').on('stream', html)
-  catw('app/**/*.scss').on('stream', styles)
+  catw('app/index.html', function(){
+    html(refresh('/index.html'))
+  })
+
+  catw('app/**/*.scss', styles)
   catw('app/assets/img/*').on('stream', images)
+
+  refreshOnChange()
+}
+
+function refreshOnChange() {
+  glob.sync("./build/assets/@(css|js|img|tests)/*.*").forEach(function(filename){
+    catw(filename, refresh(filename.replace('./build', '')))
+  })
+}
+
+function refresh(filename) {
+  return function() {
+    request('http://localhost:' + livereloadport + "/changed?files=" + filename, function(){
+      console.log("notified client to reload", filename)
+    })
+  }
 }
 
 function copy(from, to, callback){
