@@ -172,12 +172,7 @@ var tasks = {
   sketch: sketch,
   watch: watch,
   build: function(callback){
-    scripts()
-    loader()
-    html()
-    styles()
-    images()
-    callback()
+    async.parallel([ scripts, loader, html, styles, images ], callback)
   },
 }
 
