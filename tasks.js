@@ -126,7 +126,10 @@ function bundle(inFile, outFilename, callback){
   prepareDir(outFilename, function(err){
     if(err) return cb(err);
 
-    fs.unlinkSync(outFilename)
+    if(fs.existsSync(outFilename)) {
+      fs.unlinkSync(outFilename)
+    }
+
     var dest = fs.createWriteStream(outFilename);
     bundler.bundle()
       .on('error', done(outFilename, 'compilation', callback))
