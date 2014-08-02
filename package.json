@@ -55,6 +55,7 @@
     "helmet": "^0.3.2",
     "minimatch": "^1.0.0",
     "mkdirp": "^0.5.0",
+    "node-sass": "^0.9.3",
     "ractify": "~0.4.0",
     "ractive": "~0.4.0",
     "request": "^2.39.0",
