@@ -1,6 +1,6 @@
 'use strict';
 var Ractive = require('ractive/build/ractive.runtime')
-var translate = require('hive-i18n')
+var translate = require('hive-i18n').translate
 
 // extracted from https://github.com/RactiveJS/Ractive-events-keys
 var makeKeyDefinition = function ( code ) {

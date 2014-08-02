@@ -16,6 +16,9 @@ var minimatch = require('minimatch')
 
 var livereloadport = 35729
 
+process.env.LANGUAGE = process.env.LANGUAGE || 'en'
+var language = process.env.LANGUAGE
+
 function serve(callback) {
   var serverport = 8080
   var server = buildServer()
@@ -45,12 +48,12 @@ function styles(callback) {
 }
 
 function scripts(callback) {
-  bundle('./app/application.js', './build/assets/js/application.js', callback)
+  bundle('./app/application.js', './build/assets/js/application-' + language + '.js', callback)
 }
 
 function loader(callback) {
   async.parallel([
-    function(cb) { bundle('./app/loader/nope.js', './build/assets/js/nope.js', cb) },
+    function(cb) { bundle('./app/loader/nope.js', './build/assets/js/nope-' + language + '.js', cb) },
     function(cb) { bundle('./app/loader/index.js', './build/assets/js/loader.js', cb) }
   ], callback)
 }
@@ -123,6 +126,7 @@ function bundle(inFile, outFilename, callback){
   prepareDir(outFilename, function(err){
     if(err) return cb(err);
 
+    fs.unlinkSync(outFilename)
     var dest = fs.createWriteStream(outFilename);
     bundler.bundle()
       .on('error', done(outFilename, 'compilation', callback))
@@ -164,28 +168,24 @@ var tasks = {
   test: test,
   sketch: sketch,
   watch: watch,
-  build: function(callback){
-    async.parallel([ scripts, loader, html, styles, images ], callback)
+  default: function(){
+    async.parallel([ scripts, loader, html, styles, images ], function(){
+      serve()
+      watch()
+      test()
+    })
   },
 }
 
-tasks.default = function(){
-  tasks.build(function(){
-    serve()
-    watch()
-    test()
+module.exports = tasks
+
+process.on('message', function(task){
+  if(typeof task === 'string') task = [task]
+  task = task.map(function(t){
+    return tasks[t]
   })
-}
 
-task = process.argv.reduce(function(memo, arg){
-  if(memo === false && arg.match(/build.js/)) {
-    return null
-  }
-  if(memo === null) {
-    return arg
-  }
-  return memo
-}, false) || 'default'
-
-tasks[task]()
-
+  async.parallel(task, function(err){
+    process.send('done', err)
+  })
+})

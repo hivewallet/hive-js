@@ -1,0 +1,11 @@
+{
+  "name": "hive-loader",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "author": "Wei Lu",
+  "license": "GPL-2.0+",
+  "browserify": {
+    "transform": [ "envify" ]
+  }
+}

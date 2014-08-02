@@ -1,5 +1,5 @@
 'use strict';
-var translate = require('hive-i18n')
+var translate = require('hive-i18n').translate
 
 var message = translate("Sorry, Hive Wallet did not load.") +
   "<br/><br/>" +
