@@ -20,9 +20,6 @@ function openModal(type, data){
   data.title = data.title || defaults[type].title
   data.type = type
 
-  data.href = data.href
-  data.linkText = data.linkText
-
   var ractive = new Ractive({
     el: document.getElementById('flash-modal'),
     partials: {

@@ -25,7 +25,7 @@ function enterPassphrase(prevPage){
     if (passphrase !== '') {
       Hive.createWallet(passphrase, ractive.getNetwork(), onWalletCreated)
       ractive.set('opening', true)
-      ractive.set('progress', 'Checking passphrase...')
+      ractive.set('progress', 'Checking passphrase')
     }
   })
 

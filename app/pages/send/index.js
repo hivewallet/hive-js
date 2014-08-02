@@ -50,11 +50,12 @@ module.exports = function(el){
 
     validateSend(getWallet(), to, amount, function(err, fee){
       if(err) {
+        var interpolations = err.interpolations
         if(err.message.match(/trying to empty your wallet/)){
-          ractive.set('value', err.sendableBalance)
-          return showInfo({message: err.message})
+          ractive.set('value', interpolations.sendableBalance)
+          return showInfo({message: err.message, interpolations: interpolations})
         }
-        return showError({title: 'Uh oh!', message: err.message, href: err.href, linkText: err.linkText})
+        return showError({title: 'Uh Oh...', message: err.message, href: err.href, linkText: err.linkText, interpolations: interpolations})
       }
 
       showConfirmation({

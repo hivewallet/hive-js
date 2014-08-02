@@ -9,7 +9,7 @@
     <div class="_amount {{directionClass(direction)}}">{{directionIcon(direction)}}{{satoshiToBtc(amount)}}</div>
 
     {{#pending}}
-      <div class='_time'>pending confirmation</div>
+      <div class='_time'>{{translate("pending confirmation")}}</div>
     {{/pending}}
 
     {{^pending}}
@@ -18,10 +18,10 @@
 
     <div class="detail__strings">
 
-      <h3 class="_title">Transaction Id:</h3>
+      <h3 class="_title">{{translate("Transaction Id:")}}</h3>
       <code class="_value">{{id}}</code>
       {{#toAddress}}
-        <h3 class="_title">Sent to:</h3>
+        <h3 class="_title">{{translate("Sent to:")}}</h3>
         <code class="_value">{{toAddress}}</code>
       {{/toAddress}}
 

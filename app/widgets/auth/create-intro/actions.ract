@@ -1,5 +1,5 @@
 {{^opening}}
-  <div class="auth__btn" on-click="generate-phrase">Generate passphrase</div>
+  <div class="auth__btn" on-click="generate-phrase">{{translate("Generate passphrase")}}</div>
 {{/opening}}
 
 {{#opening}}
@@ -7,6 +7,6 @@
     <span class="_icon">
       {{>svg_refresh}}
     </span>
-    <span class="_text">{{progress}}</span>
+    <span class="_text">{{translate(progress)}}...</span>
   </div>
 {{/opening}}

@@ -40,7 +40,7 @@ function openModal(data){
     }
 
     if(!details.firstName || details.firstName.trim() === 'undefined') {
-      return showError({message: "Without a name, the payer wouldn't be able to identify you on waggle."})
+      return showError({message: "Without a name, the payer would not be able to identify you on waggle."})
     }
 
     db.set('userInfo', details, function(err){

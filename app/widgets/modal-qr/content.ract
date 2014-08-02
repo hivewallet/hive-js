@@ -6,7 +6,7 @@
     </span>
     <div id="qr-canvas"></div>
     <div class="detail__strings">
-      <h3 class="_title">Your wallet address:</h3>
+      <h3 class="_title">{{translate("Your wallet address")}}:</h3>
       <code class="_value">{{address}}</code>
       <div class="_actions">
         <a class="_btn" href="mailto:?body={{address}}%0A%0ASent%20from%20Hive%20Wallet%0Awww.hivewallet.com">

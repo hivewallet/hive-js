@@ -14,8 +14,6 @@ module.exports = function init(el) {
     el: el,
     template: require('./index.ract').template,
     data: {
-      title: 'Your Details',
-      id: 'account_dropdown',
       start_open: true,
       user: {
         name: '',
@@ -24,7 +22,6 @@ module.exports = function init(el) {
       editingName: false,
       editingEmail: false,
       animating: false,
-      user_settings: true
     }
   })
 
@@ -68,7 +65,7 @@ module.exports = function init(el) {
       message: 'Gravatar (globally recognised avatar) is a service that lets you re-use the same avatar across websites and apps by specifying an email address.',
       link: {
         text: 'Create a gravatar',
-        url: 'https://en.gravatar.com/'
+        url: 'https://gravatar.com/'
       }
     })
   })
@@ -114,7 +111,7 @@ module.exports = function init(el) {
 
   function handleUserError() {
     var data = {
-      title: "Uh Oh!",
+      title: "Uh Oh...",
       message: "Could not save your details"
     }
     showError(data)

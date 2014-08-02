@@ -21,7 +21,10 @@ function validateSend(wallet, to, btcValue, callback){
     var message = e.message
 
     if(message.match(/dust threshold/)) {
-      message = 'Please enter an amount above ' + satoshiToBtc(network.dustThreshold)
+      message = 'Please enter an amount above'
+      error = new Error(message)
+      error.interpolations = { dust: satoshiToBtc(network.dustThreshold) }
+      return new callback(error)
     } else if(message.match(/Not enough funds/)) {
       var hasAndNeeded = getHasAndNeeded(message)
       var has = hasAndNeeded[0]
@@ -30,7 +33,7 @@ function validateSend(wallet, to, btcValue, callback){
       var error
 
       if(sufficientWithPending(needed) || (spendAll && hasPendingUtxo())){
-        error = new Error("Some funds are temporarily unavailable. To send this transaction, you'll need to wait for your pending transactions to be confirmed first (this shouldn't take more than a few minutes).")
+        error = new Error("Some funds are temporarily unavailable. To send this transaction, you will need to wait for your pending transactions to be confirmed first (this should not take more than a few minutes).")
         error.href = "https://github.com/hivewallet/hive-osx/wiki/Sending-Bitcoin-from-a-pending-transaction"
         error.linkText = "What does this mean?"
         return callback(error)
@@ -38,18 +41,17 @@ function validateSend(wallet, to, btcValue, callback){
         var sendableBalance = satoshiToBtc(amount - (needed - has))
 
         message = [
-          "It seems like you are trying to empty your wallet.",
+          "It seems like you are trying to empty your wallet",
           "Taking transaction fee into account, we estimated that the max amount you can send is",
-          sendableBalance + ".",
-          "We have amended the value in the amount field for you."
-        ].join(' ')
+          "We have amended the value in the amount field for you"
+        ].join('. ')
 
         error = new Error(message)
-        error.sendableBalance = sendableBalance
+        error.interpolations = { sendableBalance: sendableBalance }
 
         return new callback(error)
       } else {
-        message = "You don't have enough funds in your wallet"
+        message = "You do not have enough funds in your wallet"
       }
     }
 

@@ -3,7 +3,7 @@
 
   {{#confirmation}}
 
-    <h3 class="confirm__header">Confirm transaction</h3>
+    <h3 class="confirm__header">{{translate("Confirm transaction")}}</h3>
 
     <div class="confirm__transaction">
 
@@ -12,7 +12,7 @@
         <span class="_currency">{{denomination}}</span>
       </div>
 
-      <span class="_fee">+{{fee}} {{denomination}} transaction fee</span>
+      <span class="_fee">+{{fee}} {{denomination}} {{translate("transaction fee")}}</span>
       <span class="_icon">
         {{>svg_sendto}}
       </span>
@@ -21,9 +21,9 @@
     </div>
 
     <div class="confirm__inputs">
-      <div class="_cancel" on-click="test-error">Cancel</div>
+      <div class="_cancel" on-click="test-error">{{translate("Cancel")}}</div>
       {{^sending}}
-        <div class="_send" on-click="send">Send</div>
+        <div class="_send" on-click="send">{{translate("Send")}}</div>
       {{/sending}}
       {{#sending}}
         <div class="_send--sending">
@@ -43,11 +43,11 @@
       {{>svg_success}}
     </div>
 
-    <h3 class="confirm__responseTitle">Transaction Successful</h3>
+    <h3 class="confirm__responseTitle">{{translate("Transaction Successful")}}</h3>
 
-    <p class="confirm__responseMsg">Your transaction will appear in your history tab shortly.</p>
+    <p class="confirm__responseMsg">{{translate("Your transaction will appear in your history tab shortly.")}}</p>
     <div class="confirm__inputs">
-      <div class="_cancel" on-click="clear">Close</div>
+      <div class="_cancel" on-click="clear">{{translate("Close")}}</div>
     </div>
   {{/success}}
 
@@ -58,12 +58,12 @@
       {{>svg_error}}
     </div>
 
-    <h3 class="confirm__responseTitle">Transaction Failed</h3>
+    <h3 class="confirm__responseTitle">{{translate("Transaction Failed")}}</h3>
 
-    <p class="confirm__responseMsg">Please make sure you are connected to the internet.</p>
+    <p class="confirm__responseMsg">{{translate("Please make sure you are connected to the internet.")}}</p>
 
     <div class="confirm__inputs">
-      <div class="_cancel" on-click="cancel">Close</div>
+      <div class="_cancel" on-click="cancel">{{translate("Close")}}</div>
     </div>
   {{/error}}
 

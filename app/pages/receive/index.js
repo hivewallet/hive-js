@@ -35,7 +35,7 @@ module.exports = function(el){
       waggleOff()
     } else {
       showSetDetails(function(err){
-        if(err) return showError({message: 'Failed to save your details'})
+        if(err) return showError({message: 'Could not save your details'})
         waggleOn()
       })
     }
@@ -85,11 +85,11 @@ module.exports = function(el){
   }
 
   function handleWaggleError(err) {
-    console.log(err)
+    console.error(err)
 
     var data = {
       title: 'Uh Oh...',
-      message: "We couldn't connect you to Waggle, please check your internet connection."
+      message: "We could not connect you to Waggle, please check your internet connection."
     }
 
     showError(data)

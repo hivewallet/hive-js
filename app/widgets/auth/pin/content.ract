@@ -3,10 +3,10 @@
     {{^opening}}
       <label class="_label pin">
         {{#userExists}}
-          Enter your pin:
+          {{translate("Enter your PIN")}}:
         {{/userExists}}
         {{^userExists}}
-          Set a pin for quick access:
+          {{translate("Set a PIN for quick access")}}:
         {{/userExists}}
         <div class="pinfield {{#pinfocused}}is_focused{{/pinfocused}}">
           {{#boxes}}
@@ -31,7 +31,7 @@
         <span class="_icon">
           {{>svg_refresh}}
         </span>
-        <span class="_text">{{progress}}</span>
+        <span class="_text">{{translate(progress)}}...</span>
       </div>
     {{/opening}}
 

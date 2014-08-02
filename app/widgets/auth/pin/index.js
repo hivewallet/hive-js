@@ -52,19 +52,19 @@ module.exports = function(prevPage, data){
   ractive.on('enter-pin', function(){
     if(!validatePin(getPin())){
       emitter.emit('clear-pin')
-      return showError({ message: 'Pin must be a 4-digit number' })
+      return showError({ message: 'PIN must be a 4-digit number' })
     }
 
     ractive.set('opening', true)
 
     if(userExists) {
-      ractive.set('progress', 'Verifying pin')
+      ractive.set('progress', 'Verifying PIN')
       return Hive.walletExists(function(walletExists){
         if(walletExists) { return openWithPin() }
         setPin()
       })
     }
-    ractive.set('progress', 'Setting pin')
+    ractive.set('progress', 'Setting PIN')
     ractive.set('userExists', true)
     setPin()
   })

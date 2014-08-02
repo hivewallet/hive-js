@@ -1,19 +1,19 @@
 {{^userExists}}
   {{^opening}}
-    <span class="_link" on-click="back">Review passphrase again</span>
+  <span class="_link" on-click="back">{{translate("Review passphrase again")}}</span>
   {{/opening}}
 {{/userExists}}
 
 {{#userExists}}
   {{^opening}}
     <div class="auth__altmsg">
-      <span class="_link" on-click="clear-credentials">Open a different wallet</span>
+      <span class="_link" on-click="clear-credentials">{{translate("Open a different wallet")}}</span>
     </div>
   {{/opening}}
 
   {{#opening}}
     <div class="auth__altmsg">
-      <span>This might take some time,<br/> please be patient.</span>
+      <span>{{translate("This might take some time,")}}<br/> {{translate("please be patient.")}}</span>
     </div>
   {{/opening}}
 {{/userExists}}

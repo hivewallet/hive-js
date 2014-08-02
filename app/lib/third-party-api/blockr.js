@@ -22,7 +22,7 @@ function Blockr(network){
 
 function listAddresses(addresses, onAddresses){
   if(!addresses || !addresses.length) {
-    var error = new Error("Addresses can't be blank")
+    var error = new Error("Addresses cannot be blank")
     return onAddresses(error)
   }
 
