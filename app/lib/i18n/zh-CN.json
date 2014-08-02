@@ -26,6 +26,8 @@
   "PIN must be a 4-digit number": "PIN码必须是4位数字",
   "Verifying PIN": "验证PIN码",
   "Setting PIN": "设置PIN码",
+  "This might take some time,": "这项操作可能需要一些时间，",
+  "please be patient.": "请耐心等候",
   "Your PIN is incorrect": "您的PIN码不正确",
   "Request timeout. Please check your internet connection.": "请求超时，请检查您的网络连接。",
   "Could not save your details": "无法保存您的个人资料",
