@@ -7,9 +7,13 @@ var test = require('./test')
 var scripts = require('./scripts')
 var images = require('./images')
 var html = require('./html')
-var livereloadport = require('./serve').livereloadport
+var lrserver = require('tiny-lr')()
+
+var livereloadport = 35729
 
 function watch(callback) {
+  lrserver.listen(livereloadport)
+
   var watcher = new Watcher(['app/**/*', '!app/**/node_modules/**/*', 'build/**/*.*', '!**/*~'])
   watcher.on('all', function(type, file){
     var cwd = process.cwd()

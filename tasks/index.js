@@ -1,7 +1,7 @@
 var async = require('async')
 
 var tasks = {
-  serve: require('./serve').serve,
+  serve: require('./serve'),
   images: require('./images'),
   html: require('./html'),
   styles: require('./styles'),
