@@ -63,6 +63,7 @@ module.exports = {
   bundle: bundle,
   copy: copy,
   prepareDir: prepareDir,
-  done: done
+  done: done,
+  isProduction: isProduction
 }
 
