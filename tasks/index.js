@@ -15,8 +15,8 @@ var tasks = {
 
 tasks.default = function(){
   async.parallel([ tasks.scripts, tasks.loader, tasks.html, tasks.styles, tasks.images ], function(){
-    tasks.serve()
     tasks.watch()
+    tasks.serve()
     tasks.test()
   })
 }
