@@ -17,7 +17,10 @@ if(task === 'build') {
   fs.readdirSync('./app/lib/i18n/translations').map(function(f){
     return f.replace('.json', '')
   }).forEach(function(language) {
-    var scripts = cp.fork('./tasks', {env: { LANGUAGE: language }})
+    var env = envClone()
+    env.LANGUAGE = language
+
+    var scripts = cp.fork('./tasks', {env: env})
     scripts.send(['scripts', 'loader'])
     children.push(scripts)
   })
@@ -42,4 +45,8 @@ var childCount = children.length
 function maybeDone() {
   childCount--;
   if(childCount === 0) process.exit()
+}
+
+function envClone() {
+  return JSON.parse(JSON.stringify(process.env))
 }
