@@ -9,7 +9,8 @@ var tasks = {
   loader: require('./loader'),
   test: require('./test'),
   sketch: require('./sketch'),
-  watch: require('./watch')
+  watch: require('./watch'),
+  transifexPull: require('./transifex').pull,
 }
 
 tasks.default = function(){
