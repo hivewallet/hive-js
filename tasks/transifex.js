@@ -1,31 +1,60 @@
 var async = require('async')
 var fs = require('fs')
-var Transifex = require("transifex")
+var request = require("request")
 
-var transifex = new Transifex({
-    project_slug: "hive-js",
-    credential: process.env.TRANSIFEX_USER + ":" + process.env.TRANSIFEX_PASSWORD
-})
+var BASE_URL = "https://www.transifex.com/api/2/project/hive-js/"
+var PROJECT_URL = BASE_URL + "?details"
+var authHeader = "Basic " + new Buffer(process.env.TRANSIFEX_USER + ":" + process.env.TRANSIFEX_PASSWORD).toString("base64");
+
+function languageUrl(language) {
+  return BASE_URL + "language/" + language + "/?details"
+}
+
+function translationUrl(language) {
+  return BASE_URL + "resource/translation/translation/" + language + "/?file"
+}
+
+function get(url, options, callback) {
+  if(typeof options === 'function') {
+    callback = options
+    options = {}
+  }
+
+  options.url = url
+  options.headers = { "Authorization": authHeader }
+  if(options.json == undefined) options.json = true
+
+  request(options, function(error, response, body) {
+    if (error) return callback(error);
+
+    if (response.statusCode !== 200) {
+      return callback(new Error(url + " returned " + response.statusCode))
+    }
+
+    callback(null, body)
+  })
+}
 
 function pull(done) {
   console.log('fetching available languages...')
 
   completePercentages = {}
 
-  transifex.projectInstanceMethods(null, function(err, project){
+  get(PROJECT_URL, function(err, project){
     if(err) return done(err)
 
     async.filter(project.teams, function(language, callback){
-      transifex.languageInstanceMethod(null, language, true, function(err, translation){
+      get(languageUrl(language), function(err, translation){
         if(err) {
           console.error(err.message);
           console.error(err.stack)
           return callback(false)
         }
 
-        var include = translation.completed_percentage >= 90
+        var completed_percentage = Math.round(translation.translated_segments * 100 / translation.total_segments)
+        var include = completed_percentage >= 90
         if(include) {
-          completePercentages[language] = translation.completed_percentage
+          completePercentages[language] = completed_percentage
         }
 
         callback(include)
@@ -41,7 +70,7 @@ function pull(done) {
 
   function updateTranslation(language){
     return function(callback){
-      transifex.translationInstanceMethod(null, 'translation', language, function(err, translation){
+      get(translationUrl(language), { json: false }, function(err, translation){
         if(err) return callback(err);
 
         var filename = "./app/lib/i18n/translations/" + language.toLowerCase().replace('_', '-') + ".json"
