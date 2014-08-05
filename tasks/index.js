@@ -11,6 +11,7 @@ var tasks = {
   sketch: require('./sketch'),
   watch: require('./watch'),
   transifexPull: require('./transifex').pull,
+  transifexPush: require('./transifex').push
 }
 
 tasks.default = function(){

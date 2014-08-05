@@ -2,8 +2,10 @@ var async = require('async')
 var fs = require('fs')
 var request = require("request")
 
+var SOURCE_DIR = "./app/lib/i18n/translations/"
 var BASE_URL = "https://www.transifex.com/api/2/project/hive-js/"
 var PROJECT_URL = BASE_URL + "?details"
+var RESOURCE_URL = BASE_URL + "resource/translation/content/"
 var authHeader = "Basic " + new Buffer(process.env.TRANSIFEX_USER + ":" + process.env.TRANSIFEX_PASSWORD).toString("base64");
 
 function languageUrl(language) {
@@ -14,7 +16,7 @@ function translationUrl(language) {
   return BASE_URL + "resource/translation/translation/" + language + "/?file"
 }
 
-function get(url, options, callback) {
+function requestAPI(url, options, callback) {
   if(typeof options === 'function') {
     callback = options
     options = {}
@@ -28,6 +30,7 @@ function get(url, options, callback) {
     if (error) return callback(error);
 
     if (response.statusCode !== 200) {
+      //FIXME: TypeError: This handle type can't be sent
       return callback(new Error(url + " returned " + response.statusCode))
     }
 
@@ -40,11 +43,11 @@ function pull(done) {
 
   completePercentages = {}
 
-  get(PROJECT_URL, function(err, project){
+  requestAPI(PROJECT_URL, function(err, project){
     if(err) return done(err)
 
     async.filter(project.teams, function(language, callback){
-      get(languageUrl(language), function(err, translation){
+      requestAPI(languageUrl(language), function(err, translation){
         if(err) {
           console.error(err.message);
           console.error(err.stack)
@@ -70,10 +73,10 @@ function pull(done) {
 
   function updateTranslation(language){
     return function(callback){
-      get(translationUrl(language), { json: false }, function(err, translation){
+      requestAPI(translationUrl(language), { json: false }, function(err, translation){
         if(err) return callback(err);
 
-        var filename = "./app/lib/i18n/translations/" + language.toLowerCase().replace('_', '-') + ".json"
+        var filename = SOURCE_DIR + language.toLowerCase().replace('_', '-') + ".json"
         fs.writeFile(filename, translation, function(err){
           if(err) {
             console.error('Failed to update', filename)
@@ -88,6 +91,20 @@ function pull(done) {
   }
 }
 
+function push(done) {
+  var sourceContent = fs.readFileSync(SOURCE_DIR + 'en.json', { encoding: 'utf8' })
+
+  console.log('uploading source file...')
+
+  requestAPI(RESOURCE_URL, {method: "PUT", json: {content: sourceContent}}, function(err, data) {
+    if(err) return done(err);
+
+    console.log(data)
+    done()
+  })
+}
+
 module.exports = {
-  pull: pull
+  pull: pull,
+  push: push
 }
