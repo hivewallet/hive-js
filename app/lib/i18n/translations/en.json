@@ -44,7 +44,7 @@
   "Just saying...": "Just saying...",
   "Your browser does not support geolocation": "Your browser does not support geolocation",
   "Unable to retrieve your location": "Unable to retrieve your location",
-  "Without a name, the payer would not be able to identify you on waggle.": "Without a name, the payer wouldn't be able to identify you on waggle.",
+  "Without a name, the payer would not be able to identify you on Waggle.": "Without a name, the payer wouldn't be able to identify you on Waggle.",
   "cannot be blank": "%(blankField)s cannot be blank",
   "name": "name",
   "email": "email",
