@@ -1,6 +1,5 @@
-var Watcher = require('gaze').Gaze
+var watch = require('glob-watcher')
 var request = require('request')
-var minimatch = require('minimatch')
 var styles = require('./styles')
 var loader = require('./loader')
 var test = require('./test')
@@ -11,27 +10,23 @@ var lrserver = require('tiny-lr')()
 
 var livereloadport = 35729
 
-function watch(callback) {
+function watcher(callback) {
   lrserver.listen(livereloadport)
 
-  var watcher = new Watcher(['app/**/*', '!app/**/node_modules/**/*', 'build/**/*.*', '!**/*~'])
-  watcher.on('all', function(type, file){
-    var cwd = process.cwd()
-    if(minimatch(file, cwd + '/app/**/*.scss')){
-      styles()
-    } else if(minimatch(file, cwd + '/app/loader/**/*.js')){
-      loader()
-      test()
-    } else if(minimatch(file, cwd + '/app/**/*.@(js|json|ract)')){
-      scripts()
-      test()
-    } else if(minimatch(file, cwd + '/app/assets/img/*')){
-      images()
-    } else if(minimatch(file, cwd + '/app/index.html')){
-      html()
-    } else if(minimatch(file, cwd + '/build/**/*.*')){
-      refresh(file.replace(cwd + '/build', ''))
-    }
+  watch(['app/**/*.scss'], styles)
+  watch(['app/**/*.js', 'app/**/*.json', 'app/**/*.ract', '!app/**/node_modules/**/*', '!app/loader/**'], function(event){
+    scripts()
+    test()
+  })
+  watch(['app/loader/**/*.js'], function(){
+    loader()
+    test()
+  })
+  watch(['app/assets/img/*'], images)
+  watch('app/index.html', html)
+  watch(['app/**/test/*.js', '!app/**/node_modules/**/*'], test)
+  watch('build/**/*', function(event){
+    refresh(event.path.replace(process.cwd() + '/build', ''))
   })
 }
 
@@ -41,4 +36,4 @@ function refresh(filename) {
   })
 }
 
-module.exports = watch
+module.exports = watcher
