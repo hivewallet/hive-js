@@ -16,7 +16,7 @@ module.exports = function init(el) {
     data: {
       start_open: true,
       user: {
-        name: '',
+        firstName: '',
         email: ''
       },
       editingName: false,
@@ -28,17 +28,14 @@ module.exports = function init(el) {
   var $previewEl = ractive.nodes['details-preview']
   var $editEl = ractive.nodes['details-edit']
 
-  emitter.on('db-ready', function(){
+  emitter.once('db-ready', function(){
     db.get(function(err, doc){
       if(err) return console.error(err);
 
-      ractive.set('user.name', doc.userInfo.firstName)
-      ractive.set('user.email', doc.userInfo.email)
-      ractive.set('user.avatarIndex', doc.userInfo.avatarIndex)
-
+      ractive.set('user', doc.userInfo)
       setAvatar()
 
-      if(ractive.get('user.name')) {
+      if(ractive.get('user.firstName')) {
         Profile.hide($editEl, ractive)
       } else {
         Profile.hide($previewEl, ractive)
@@ -54,7 +51,7 @@ module.exports = function init(el) {
   })
 
   emitter.on('details-updated', function(details){
-    ractive.set('user.name', details.firstName)
+    ractive.set('user.firstName', details.firstName)
     Profile.hide($editEl, ractive, function(){
       Profile.show($previewEl, ractive)
     })
@@ -73,28 +70,21 @@ module.exports = function init(el) {
   ractive.on('submit-details', function(){
     if(ractive.get('animating')) return;
 
-    var email = ractive.get('user.email')
+    var details = ractive.get('user')
 
-    var details = {
-      firstName: ractive.get('user.name') + '',
-      email: email
-    }
-
-    if(!details.firstName || details.firstName.trim() === 'undefined') {
-      details.firstName = '';
-      db.set('userInfo', details, function(err, response){
-        if(err) return handleUserError()
-      })
+    if(blank(details.firstName)) {
       return showError({message: "A name is required to set your profile on Hive"})
     }
 
-    var avatarIndex = ractive.get('user.avatarIndex')
-    if(blank(email) && avatarIndex == undefined) {
+    if(blank(details.email) && details.avatarIndex == undefined) {
       details.avatarIndex = Avatar.randAvatarIndex()
     }
 
     db.set('userInfo', details, function(err, response){
       if(err) return handleUserError()
+
+      ractive.set('user', details)
+      setAvatar()
 
       Profile.hide($editEl, ractive, function(){
         Profile.show($previewEl, ractive)

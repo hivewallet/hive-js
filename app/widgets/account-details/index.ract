@@ -1,14 +1,14 @@
 
 <div id="details-preview">
   <div class="settings__avatar"></div>
-  <h3 class="settings__name">{{user.name}}</h3>
+  <h3 class="settings__name">{{user.firstName}}</h3>
   <span class="settings__editBtn" on-click="edit-details">{{translate("Change your details")}}</span>
 </div>
 
 <div id="details-edit">
   <div class="settings__input-group">
     <label class="_label">{{translate("Your name")}}
-      <input type="text" value="{{user.name}}" class="_input" />
+      <input type="text" value="{{user.firstName}}" class="_input" />
     </label>
   </div>
 
