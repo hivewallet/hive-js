@@ -93,8 +93,10 @@
   "Transaction Successful": "Transaction Successful",
   "Your transaction will appear in your history tab shortly.": "Your transaction will appear in your history tab shortly.",
   "Close": "Close",
+  "Report": "Report",
   "Transaction Failed": "Transaction Failed",
   "Please make sure you are connected to the internet.": "Please make sure you are connected to the internet.",
+  "Below are network error logs that could help us identify your issue. Type your additional comments above.": "Below are network error logs that could help us identify your issue. Type your additional comments above.",
   "Sorry, Hive Wallet did not load.": "Sorry, Hive Wallet didn't load.",
   "Try updating your browser, or switching out of private browsing mode. If all else fails, download Chrome for your device.": "Try updating your browser, or switching out of private browsing mode. If all else fails, download Chrome for your device."
 }

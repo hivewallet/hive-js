@@ -6,14 +6,13 @@ var showError = require('hive-modal-flash').showError
 var sendRequest = require('hive-zendesk')
 var getNetwork = require('hive-network')
 
-function fetchDetails(){
+function fetchDetails(data){
   db.get(function(err, doc){
     if(err) return showError(err);
 
-    openModal({
-      name: doc.userInfo.firstName,
-      email: doc.userInfo.email
-    })
+    data.name = doc.userInfo.firstName,
+    data.email = doc.userInfo.email
+    openModal(data)
   })
 }
 

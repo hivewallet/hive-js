@@ -63,6 +63,7 @@
     <p class="confirm__responseMsg">{{translate("Please make sure you are connected to the internet.")}}</p>
 
     <div class="confirm__inputs">
+      <div class="_report" on-click="open-support">{{translate("Report")}}</div>
       <div class="_cancel" on-click="cancel">{{translate("Close")}}</div>
     </div>
   {{/error}}

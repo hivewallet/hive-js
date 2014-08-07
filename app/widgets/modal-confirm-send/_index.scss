@@ -134,6 +134,15 @@
     }
   }
 
+  ._report {
+    @extend .hivebtn;
+    margin-right: 5px;
+
+    @include breakpoint(portrait) {
+      font-size: 24px;
+    }
+  }
+
   ._send {
     @extend .hivebtn;
     margin-left: 5px;
