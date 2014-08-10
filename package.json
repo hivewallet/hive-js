@@ -42,7 +42,7 @@
     "browsernizr": "git://github.com/weilu/browsernizr#indexedDB",
     "compression": "^1.0.10",
     "cookie-parser": "^1.3.2",
-    "cookie-session": "^1.0.2",
+    "cookie-session": "git://github.com/weilu/cookie-session#upgrade-cookies",
     "cpr": "^0.3.2",
     "cradle": "~0.6.7",
     "events": "^1.0.0",

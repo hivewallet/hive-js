@@ -14,11 +14,11 @@ var helmet = require('helmet')
 
 module.exports = function (){
   var app = express()
+
   app.use(requireHTTPS)
 
   if(isProduction()){
     app.set('trust proxy', true)
-
     var proxyHost = process.env.PROXY_URL.replace("https://", '')
     app.use(helmet.csp({
       'default-src': ["'self'"],
