@@ -24,7 +24,7 @@ function fetchUserInfo(callback){
 
 function save(callback){
   requestLocationEndpoint('POST', function(err, resp, body){
-    if(resp.statusCode !== 201) {
+    if(!resp || resp.statusCode !== 201) {
       console.error(body)
       return callback(body)
     }
@@ -34,7 +34,7 @@ function save(callback){
 
 function search(callback){
   requestLocationEndpoint('PUT', function(err, resp, body){
-    if(resp.statusCode !== 200) {
+    if(!resp || resp.statusCode !== 200) {
       console.error(body)
       return callback(body)
     }
@@ -49,7 +49,7 @@ function remove(sync){
     method: 'DELETE',
     sync: sync
   }, function(err, resp, body){
-    if(resp.statusCode !== 200) {
+    if(!resp || resp.statusCode !== 200) {
       console.error(body)
     } else {
       console.log('location data removed')
