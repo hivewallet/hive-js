@@ -17,6 +17,8 @@ module.exports = function (){
   app.use(requireHTTPS)
 
   if(isProduction()){
+    app.set('trust proxy', true)
+
     var proxyHost = process.env.PROXY_URL.replace("https://", '')
     app.use(helmet.csp({
       'default-src': ["'self'"],
@@ -51,7 +53,6 @@ module.exports = function (){
   app.use(cookieSession({
     signed: false,
     overwrite: false,
-    secureProxy: isProduction(),
     maxAge: anHour,
     httpOnly: true,
     secure: isProduction()
