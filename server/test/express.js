@@ -202,7 +202,6 @@ describe('POST /location', function(){
     }
     post('/location', data, null, function(err, res){
       assert.equal(res.status, 201)
-      assert.deepEqual(res.text, 'Created')
       assert(res.headers['set-cookie'])
       done()
     })
@@ -210,13 +209,11 @@ describe('POST /location', function(){
 
   it('does not regenerate id when there is already one', function(done){
     var data = { lat: 123.4, lon: 45.6 }
-    var setCookie
     post('/location', data, null, function(err, res){
       assert.equal(res.status, 201)
-      setCookie = res.headers['set-cookie']
-      post('/location', data, setCookie, function(err, res){
+      post('/location', data, res.headers['set-cookie'], function(err, res){
         assert.equal(res.status, 201)
-        assert.deepEqual(res.headers['set-cookie'], setCookie)
+        assert.deepEqual(res.headers['set-cookie'], undefined)
         done()
       })
     })
@@ -258,13 +255,11 @@ describe('PUT /location', function(){
 
   it('does not regenerate id when there is already one', function(done){
     var data = { lat: 123.4, lon: 45.6 }
-    var setCookie
     put('/location', data, null, function(err, res){
       assert.equal(res.status, 200)
-      setCookie = res.headers['set-cookie']
-      put('/location', data, setCookie, function(err, res){
+      put('/location', data, res.headers['set-cookie'], function(err, res){
         assert.equal(res.status, 200)
-        assert.deepEqual(res.headers['set-cookie'], setCookie)
+        assert.deepEqual(res.headers['set-cookie'], undefined)
         done()
       })
     })

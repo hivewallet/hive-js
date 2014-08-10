@@ -1,6 +1,10 @@
 "use strict"
 
 var express = require('express')
+var bodyParser = require('body-parser')
+var cookieParser = require('cookie-parser')
+var cookieSession = require('cookie-session')
+var compress = require('compression')
 var path = require('path')
 var auth = require('./auth')
 var geo = require('./geo')
@@ -42,17 +46,17 @@ module.exports = function (){
   }
 
   var anHour = 1000*60*60
-  app.use(express.bodyParser())
-  app.use(express.cookieParser(process.env.COOKIE_SALT))
-  app.use(express.cookieSession({
-    proxy: true,
-    cookie: {
-      maxAge: anHour,
-      httpOnly: true,
-      secure: isProduction()
-    }
+  app.use(bodyParser())
+  app.use(cookieParser(process.env.COOKIE_SALT))
+  app.use(cookieSession({
+    signed: false,
+    overwrite: false,
+    secureProxy: isProduction(),
+    maxAge: anHour,
+    httpOnly: true,
+    secure: isProduction()
   }))
-  app.use(express.compress())
+  app.use(compress())
 
   var cacheControl = isProduction() ? { maxAge: anHour } : null
   app.use(express.static(path.join(__dirname, '..', 'build'), cacheControl))
@@ -62,12 +66,12 @@ module.exports = function (){
     auth.register(name, req.body.pin, function(err, token){
       if(err) {
         console.error('error', err)
-        return res.send(400, err)
+        return res.status(400).send(err)
       }
 
       setCookie(req, name, function(){
         console.log('registered wallet %s', name)
-        res.send(200, token)
+        res.status(200).send(token)
       })
     })
   })
@@ -77,27 +81,27 @@ module.exports = function (){
     auth.login(name, req.body.pin, function(err, token){
       if(err) {
         console.error('error', err)
-        return res.send(400, err)
+        return res.status(400).send(err)
       }
 
       setCookie(req, name, function(){
         console.log('authenticated wallet %s', name)
-        res.send(200, token)
+        res.status(200).send(token)
       })
     })
   })
 
   app.get('/exist', function(req, res){
     var name = req.query.wallet_id
-    if (!name) return res.send(400, {error: 'Bad request'});
+    if (!name) return res.status(400).json({error: 'Bad request'});
 
     auth.exist(name, function(err, userExist){
       if(err) {
         console.error('error', err)
-        return res.send(400, err)
+        return res.status(400).send(err)
       }
 
-      res.send(200, userExist)
+      res.status(200).send(userExist)
     })
   })
 
@@ -106,16 +110,17 @@ module.exports = function (){
     var pin = req.body.pin
 
     auth.disablePin(id, pin, function(err){
-      if(err) return res.send(400, err)
-      res.send(200)
+      if(err) return res.status(400).send(err)
+      res.status(200).send()
     })
   })
 
   app.post('/location', function(req, res) {
     var args = prepareGeoData(req, res)
+
     args.push(function(err) {
-      if(err) return res.json(400, err);
-      res.send(201)
+      if(err) return res.status(400).json(err);
+      res.status(201).send()
     })
 
     geo.save.apply(null, args)
@@ -124,8 +129,8 @@ module.exports = function (){
   app.put('/location', function(req, res) {
     var args = prepareGeoData(req, res)
     args.push(function(err, results) {
-      if(err) return res.json(400, err)
-      res.json(200, results)
+      if(err) return res.status(400).json(err)
+      res.status(200).json(results)
     })
 
     geo.search.apply(null, args)
@@ -145,24 +150,25 @@ module.exports = function (){
       req.session.tmpSessionID = id
     }
     data.id = id
+
     return [lat, lon, data]
   }
 
   app.delete('/location', function(req, res) {
     geo.remove(req.session.tmpSessionID)
-    res.send(200)
+    res.status(200).send()
   })
 
   app.use(function(err, req, res, next){
     console.error(err.stack);
-    res.send(500, 'Oops! something went wrong.');
+    res.status(500).send('Oops! something went wrong.');
   })
 
 
   function validateAuthParams(allowMissingPin) {
     return function (req, res, next) {
       if (!req.body.wallet_id || !validatePin(req.body.pin, allowMissingPin)) {
-        return res.send(400, {error: 'Bad request'})
+        return res.status(400).json({error: 'Bad request'})
       }
 
       next()
@@ -174,7 +180,7 @@ module.exports = function (){
     if (session_id && session_id === req.body.id) {
       next()
     } else {
-      return res.send(401)
+      return res.status(401).send()
     }
   }
 
