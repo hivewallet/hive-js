@@ -1,5 +1,5 @@
 {
-    "Back to hivewallet.com": "Back to hivewallet.com",
+    "Back to hivewallet.com": "hivewallet.comへ戻る",
     "Create new wallet": "新規ウォレットを作成",
     "Open existing wallet": "既存ウォレットを開く",
     "We are about to generate your very own passphrase": "個人パスフレーズを作成します",
@@ -53,7 +53,7 @@
     "Your name": "名前",
     "Gravatar email": "グラバターのEメール",
     "Submit": "設定する",
-    "Gravatar (globally recognised avatar) is a service that lets you re-use the same avatar across websites and apps by specifying an email address.": "グラバターとはユーザーイメージがEメールアドレスの入力のみでインターネット上どこでも使える便利な機能です。",
+    "Gravatar (globally recognised avatar) is a service that lets you re-use the same avatar across websites and apps by specifying an email address.": "グラバターとはEメールアドレスの入力であなたのアイコンがインターネット上どこでも使用できるサービスです。",
     "Create a gravatar": "グラバターを作成",
     "Logout": "ログアウト",
     "Support": "サポート",
@@ -86,7 +86,7 @@
     "Confirm": "確認する",
     "No Hive users found nearby": "Hiveユーザーを確認できませんでした",
     "Search Again": "再度検索する",
-    "Searching...": "Searching...",
+    "Searching...": "検索中...",
     "Searching your area for other Hive Web users": "他のHiveウェブユーザーを検索中",
     "Confirm transaction": "取引を確認する",
     "transaction fee": "手数料",
@@ -94,10 +94,10 @@
     "Transaction Successful": "取引完了",
     "Your transaction will appear in your history tab shortly.": "取引は間もなく履歴欄に表示されます。",
     "Close": "閉じる",
-    "Report": "Report",
+    "Report": "レポートする",
     "Transaction Failed": "取引できませんでした",
     "Please make sure you are connected to the internet.": "インターネットに接続されているか確認してください。",
-    "Please describe what happened above. Below are network error logs that could help us identify your issue.": "Please describe what happened above. Below are network error logs that could help us identify your issue.",
+    "Please describe what happened above. Below are network error logs that could help us identify your issue.": "何が起きたか説明して下さい。下記のネットワークエラーログがあなたの問題解決をサポートします。",
     "Sorry, Hive Wallet did not load.": "Hiveウォレットは読み込めません",
     "Try updating your browser, or switching out of private browsing mode. If all else fails, download Chrome for your device.": "ブラウザをアップデートする、もしくはプライベートモードを通常モードに切り替えて下さい。それでもだめならChromeをダウンロードしてください。"
 }
