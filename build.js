@@ -19,30 +19,39 @@ if(task === 'build') {
   }).forEach(function(language) {
     process.env.LANGUAGE = language
     var scripts = cp.fork('./tasks', {env: process.env})
-    scripts.send(['scripts', 'loader'])
-    children.push(scripts)
+    children.push([scripts, ['scripts', 'loaderNope']])
   })
   delete process.env.LANGUAGE
 
   var others = cp.fork('./tasks')
-  others.send(['html', 'styles', 'images'])
-  children.push(others)
+  children.push([others, ['html', 'styles', 'images', 'loaderIndex']])
 } else if (task === 'serve' || task === 'watch') {
   var child = cp.fork('./tasks')
   child.send(task)
 } else {
   var child = cp.fork('./tasks')
-  child.send(task)
-  children.push(child)
+  children.push([child, task])
 }
 
-children.forEach(function(c) {
-  c.on('message', maybeDone)
+children.forEach(function(pair) {
+  var child = pair[0]
+  child.on('message', maybeDone)
 })
 
 var childCount = children.length
 function maybeDone() {
-  childCount--;
-  if(childCount === 0) process.exit()
+  childCount--
+
+  if(children.length > 0) {
+    var next = children.splice(0, 1)[0]
+    next[0].send(next[1])
+  } else if(childCount === 0){
+    process.exit()
+  }
 }
+
+// 4 child processes at a time
+children.splice(0, 4).forEach(function(pair){
+  pair[0].send(pair[1])
+})
 
