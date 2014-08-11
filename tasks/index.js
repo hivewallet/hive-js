@@ -31,6 +31,10 @@ process.on('message', function(task){
   })
 
   async.parallel(task, function(err){
-    process.send('done', err)
+    if(err) {
+      console.error(err.message)
+      console.error(err.stack)
+    }
+    process.send('done')
   })
 })

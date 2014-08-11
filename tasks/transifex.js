@@ -66,6 +66,7 @@ function pull(done) {
   })
 
   function updateTranslations(languages) {
+    console.log("Languages to update", languages)
     async.parallel(languages.map(function(language){
       return updateTranslation(language)
     }), done)
@@ -83,7 +84,7 @@ function pull(done) {
             return callback(err)
           }
 
-          console.log(language, 'updated. Complete percentage:', completePercentages[language] + '%')
+          console.log(language, 'done. Complete percentage:', completePercentages[language] + '%')
           callback()
         })
       })
