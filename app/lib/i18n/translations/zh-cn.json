@@ -1,5 +1,5 @@
 {
-    "Back to": "返回",
+    "Back to hivewallet.com": "返回hivewallet.com",
     "Create new wallet": "新建钱包",
     "Open existing wallet": "打开钱包",
     "We are about to generate your very own passphrase": "我们将为您生成您的钱包口令",
@@ -86,6 +86,7 @@
     "Confirm": "确认",
     "No Hive users found nearby": "附近没有Hive用户",
     "Search Again": "重新搜索",
+    "Searching...": "搜寻中……",
     "Searching your area for other Hive Web users": "搜索您所在地区的其他Hive用户",
     "Confirm transaction": "确认交易",
     "transaction fee": "交易手续费",
@@ -93,8 +94,10 @@
     "Transaction Successful": "交易成功",
     "Your transaction will appear in your history tab shortly.": "您的交易不久将出现在您的历史记录页面。",
     "Close": "关闭",
+    "Report": "报错",
     "Transaction Failed": "交易失败",
     "Please make sure you are connected to the internet.": "请确认您已连接到互联网。",
+    "Please describe what happened above. Below are network error logs that could help us identify your issue.": "请在线上描述错误发生经过。下面是网络错误日志，可以帮助我们识别您的问题。",
     "Sorry, Hive Wallet did not load.": "对不起，Hive钱包加载失败。",
     "Try updating your browser, or switching out of private browsing mode. If all else fails, download Chrome for your device.": "尝试更新您的浏览器，或退出匿名浏览模式。如果仍然不能加载，请下载Chrome浏览器。"
 }

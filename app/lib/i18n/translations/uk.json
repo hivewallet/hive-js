@@ -1,5 +1,5 @@
 {
-    "Back to": "Назад до",
+    "Back to hivewallet.com": "Назад до hivewallet.com",
     "Create new wallet": "Створити новий гаманець",
     "Open existing wallet": "Відкрити існуючий гаманець",
     "We are about to generate your very own passphrase": "Зараз буде згенерований Ваш особистий пароль",
@@ -86,6 +86,7 @@
     "Confirm": "Підтвердити",
     "No Hive users found nearby": "Інших користувачів Hive не знайдено",
     "Search Again": "Шукати ще раз",
+    "Searching...": "Searching...",
     "Searching your area for other Hive Web users": "Пошук інших користувачів Hive Web у вашому районі",
     "Confirm transaction": "Підтвердить транзакцію",
     "transaction fee": "плата за транзакцію",
@@ -93,8 +94,10 @@
     "Transaction Successful": "Транзакція пройшла успішно",
     "Your transaction will appear in your history tab shortly.": "Транзакція незабаром з'явиться у закладці \"Історія\".",
     "Close": "Закрити",
+    "Report": "Report",
     "Transaction Failed": "Транзакція не пройшла",
     "Please make sure you are connected to the internet.": "Будь ласка, перевірте чи приєдані ви до Інтернету.",
+    "Please describe what happened above. Below are network error logs that could help us identify your issue.": "Please describe what happened above. Below are network error logs that could help us identify your issue.",
     "Sorry, Hive Wallet did not load.": "Вибачаємося, Hive Wallet не завантажився.",
     "Try updating your browser, or switching out of private browsing mode. If all else fails, download Chrome for your device.": "Спробуйте поновити ваш інтернет-браузер, або переключіться із приватного режиму. Якщо це не спрацює, спробуйте браузер Chrome. "
 }

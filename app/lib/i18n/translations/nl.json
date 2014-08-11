@@ -1,5 +1,5 @@
 {
-    "Back to": "Terug naar",
+    "Back to hivewallet.com": "Terug naar hivewallet.com",
     "Create new wallet": "Maak nieuwe portemonnee",
     "Open existing wallet": "Open bestaande portemonnee",
     "We are about to generate your very own passphrase": "We staan ​​op het punt om uw eigen wachtwoordzin te genereren",
@@ -86,6 +86,7 @@
     "Confirm": "Bevestig",
     "No Hive users found nearby": "Geen Hive gebruikers in de buurt gevonden",
     "Search Again": "Opnieuw zoeken",
+    "Searching...": "Searching...",
     "Searching your area for other Hive Web users": "Bezig met het doorzoeken van uw gebied voor andere Hive Web gebruikers",
     "Confirm transaction": "Bevestig transactie",
     "transaction fee": "transactiekosten",
@@ -93,8 +94,10 @@
     "Transaction Successful": "Transactie Succesvol",
     "Your transaction will appear in your history tab shortly.": "Uw transactie zal binnenkort verschijnen in uw geschiedenis tab. ",
     "Close": "Sluiten",
+    "Report": "Report",
     "Transaction Failed": "Transactie is mislukt",
     "Please make sure you are connected to the internet.": "Zorg ervoor dat u verbonden bent met het internet.",
+    "Please describe what happened above. Below are network error logs that could help us identify your issue.": "Please describe what happened above. Below are network error logs that could help us identify your issue.",
     "Sorry, Hive Wallet did not load.": "Sorry, Hive Wallet kon niet worden geladen.",
     "Try updating your browser, or switching out of private browsing mode. If all else fails, download Chrome for your device.": "Probeer uw browser bij te werken, of schakel de private browsing mode uit. Als niets lukt, download dan Chrome voor uw apparaat."
 }
