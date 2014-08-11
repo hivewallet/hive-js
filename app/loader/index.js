@@ -55,7 +55,7 @@ function findTranslation(){
   var language = navigator.language.toLocaleLowerCase() || 'en'
   return languages.filter(function(l){
     return language === l || language.substr(0, 2) === l
-  })[0]
+  })[0] || 'en'
 }
 
 //monkey patch URL for safari 6
