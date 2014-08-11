@@ -41,8 +41,8 @@ function open(data){
 
   ractive.on('open-support', function(){
     ractive.fire('cancel')
-    var message = ractive.data.translate("Below are network error logs that could help us identify your issue. Type your additional comments above.")
-    openSupportModal({description: "\n" + message + "\n\n" + ractive.get('error')})
+    var message = ractive.data.translate("Please describe what happened above. Below are network error logs that could help us identify your issue.")
+    openSupportModal({description: "\n----\n" + message + "\n\n" + ractive.get('error')})
   })
 
   function onTxSent(err, transaction){
