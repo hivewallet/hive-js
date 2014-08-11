@@ -112,13 +112,17 @@
     @include textselect;
     font-family: monospace;
     padding: 20px;
-    overflow: hidden;
+    overflow: auto;
     font-size: 16px;
     line-height: 1.6;
     background-color: #343157;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
     box-shadow: inset 0px 1px 3px 0px rgba(0,0,0,0.25);
+
+    code {
+
+    }
   }
 }
 
@@ -189,7 +193,6 @@
 }
 
 .passphrase__warning {
-  @include noselect;
   font-size: 13px;
   background-color: $yellow;
   color: darken($yellow, 25%);
