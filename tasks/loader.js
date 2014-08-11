@@ -5,9 +5,21 @@ process.env.LANGUAGE = process.env.LANGUAGE || 'en'
 
 function loader(callback) {
   async.parallel([
-    function(cb) { bundle('./app/loader/nope.js', './build/assets/js/nope-' + process.env.LANGUAGE + '.js', cb) },
-    function(cb) { bundle('./app/loader/index.js', './build/assets/js/loader.js', cb) }
+    index,
+    nope
   ], callback)
 }
 
-module.exports = loader
+function index(callback) {
+  bundle('./app/loader/index.js', './build/assets/js/loader.js', callback)
+}
+
+function nope(callback) {
+  bundle('./app/loader/nope.js', './build/assets/js/nope-' + process.env.LANGUAGE + '.js', callback)
+}
+
+module.exports = {
+  loader: loader,
+  index: index,
+  nope: nope
+}
