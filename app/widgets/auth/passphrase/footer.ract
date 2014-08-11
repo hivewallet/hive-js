@@ -1,1 +1,6 @@
-<span class="_link" on-click="back">{{translate("Go back")}}</span>
+{{^opening}}
+  <span class="_link" on-click="back">{{translate("Go back")}}</span>
+{{/opening}}
+{{#opening}}
+  <div style="height: 31px;"></div>
+{{/opening}}
