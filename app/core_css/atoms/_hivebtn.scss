@@ -39,7 +39,6 @@
   }
 }
 
-
 .hivebtn--red {
   @extend .hivebtn;
 
@@ -52,6 +51,11 @@
 
   background-color: $yellow;
   box-shadow: 0 3px 0 0 darken($yellow, 10%);
+  color: darken($yellow, 20%);
+
+  &:hover {
+    color: darken($yellow, 20%);
+  }
 }
 
 

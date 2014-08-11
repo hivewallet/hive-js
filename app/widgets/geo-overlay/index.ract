@@ -47,10 +47,13 @@
     {{/nearbys}}
 
     {{^nearbys}}
-    <div class="geo__noresults">
-      <div class="_icon">{{>svg_waggle_not_found}}</div>
+    <div class="geo__noresults {{#searchingAgain}}is_searching{{/searchingAgain}}">
+      <div class="_icon">{{>svg_waggle}}</div>
       <p class="_message">{{translate("No Hive users found nearby")}}</p>
-      <div class="_btn" on-click="search-again">{{translate("Search Again")}}</div>
+      <div class="_btn" on-click="search-again">
+        {{#searchingAgain}}{{translate("Searching...")}}{{/searchingAgain}}
+        {{^searchingAgain}}{{translate("Search Again")}}{{/searchingAgain}}
+      </div>
     </div>
     {{/nearbys}}
 

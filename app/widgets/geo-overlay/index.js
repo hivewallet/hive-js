@@ -50,6 +50,7 @@ module.exports = function(el){
   })
 
   ractive.on('search-again', function() {
+    ractive.set('searchingAgain', true)
     spinner.spin(ractive.nodes.refresh_el)
     lookupGeo()
   })
@@ -69,6 +70,14 @@ module.exports = function(el){
 
   function lookupGeo(context) {
     geo.search(function(err, results){
+
+      if(ractive.get('searchingAgain')) {
+        // wait for spinner to spin down
+        setTimeout(function(){
+          ractive.set('searchingAgain', false)
+        }, 1000)
+      }
+
       if(err) {
         spinner.stop(ractive.nodes.refresh_el)
         return showError({

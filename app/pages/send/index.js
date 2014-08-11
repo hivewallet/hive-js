@@ -111,6 +111,14 @@ module.exports = function(el){
     ractive.set('fiatValue', fiat)
   })
 
+  ractive.on('focusAmountInput', function(event) {
+    event.node.parentNode.style.zIndex = 5000
+  })
+
+  ractive.on('blurAmountInput', function(event) {
+    event.node.parentNode.style.zIndex = ''
+  })
+
   function getExchangeRate(){
     var exchangeRate = ractive.get('exchangeRates')[ractive.get('selectedFiat')]
     ractive.set("exchangeRateUnavailable", exchangeRate == undefined)
