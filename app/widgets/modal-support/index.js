@@ -10,6 +10,7 @@ function fetchDetails(data){
   db.get(function(err, doc){
     if(err) return showError(err);
 
+    data = data || {}
     data.name = doc.userInfo.firstName,
     data.email = doc.userInfo.email
     openModal(data)
