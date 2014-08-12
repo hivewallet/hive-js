@@ -86,7 +86,7 @@
     "Confirm": "Bestätige",
     "No Hive users found nearby": "Es sind keine Hive Benutzer in Deiner Nähe",
     "Search Again": "Erneut suchen",
-    "Searching...": "Searching...",
+    "Searching...": "Suchen...",
     "Searching your area for other Hive Web users": "Suche andere Hive Benutzer in Deiner Gegend",
     "Confirm transaction": "Transaktion bestätigen",
     "transaction fee": "Transaktionsgebühr",
@@ -94,10 +94,10 @@
     "Transaction Successful": "Die Transaktion ist erfolgreich verlaufen",
     "Your transaction will appear in your history tab shortly.": "Deine Transaktion wird in Kürze in der Chronik erscheinen.",
     "Close": "Schließen",
-    "Report": "Report",
+    "Report": "Melden",
     "Transaction Failed": "Die Transaktion ist fehlgeschlagen",
     "Please make sure you are connected to the internet.": "Stelle sicher, dass Du zum Internet verbunden bist.",
-    "Please describe what happened above. Below are network error logs that could help us identify your issue.": "Please describe what happened above. Below are network error logs that could help us identify your issue.",
+    "Please describe what happened above. Below are network error logs that could help us identify your issue.": "Bitte beschreiben Sie was oben passiert ist. Unten finden Sie Netzwerk Fehlerlogs die uns helfen können Ihr Problem zu ermitteln.",
     "Sorry, Hive Wallet did not load.": "Entschuldigung, die Hive Brieftasche konnte nicht geladen werden.",
     "Try updating your browser, or switching out of private browsing mode. If all else fails, download Chrome for your device.": "Versuche Deinen Webbrowser zu aktualisieren oder beende den Inkognito-Modus. Ansonsten lade Dir den Chrome Browser für Dein Gerät herunter."
 }
