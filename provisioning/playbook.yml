@@ -13,13 +13,13 @@
       with_items:
         - nginx
         - nodejs
+        - npm
         - git-core
 
     - name: install npm globals
       npm: state=present global=yes name={{ item }}
       sudo: yes
       with_items:
-        - gulp
         - aperture
         - forever
 
@@ -37,7 +37,7 @@
 
     - name: build
       # shell: npm run build chdir="{{ app_dir }}"
-      shell: aperture link && gulp build chdir="{{ app_dir }}"
+      shell: aperture link && nodejs build.js build chdir="{{ app_dir }}"
       sudo_user: "{{ app_user }}"
       environment:
         NODE_ENV: "{{ NODE_ENV }}"
