@@ -1,6 +1,7 @@
 var async = require('async')
 var fs = require('fs')
 var request = require("request")
+var transifexFormatToRfc4646 = require("hive-language-code-convert")
 
 var SOURCE_DIR = "./app/lib/i18n/translations/"
 var BASE_URL = "https://www.transifex.com/api/2/project/hive-js/"
@@ -77,7 +78,7 @@ function pull(done) {
       requestAPI(translationUrl(language), { json: false }, function(err, translation){
         if(err) return callback(err);
 
-        var filename = SOURCE_DIR + language.toLowerCase().replace('_', '-') + ".json"
+        var filename = SOURCE_DIR + transifexFormatToRfc4646(language).toLowerCase() + ".json"
         fs.writeFile(filename, translation, function(err){
           if(err) {
             console.error('Failed to update', filename)
