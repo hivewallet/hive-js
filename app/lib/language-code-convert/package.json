@@ -1,0 +1,8 @@
+{
+  "name": "hive-language-code-convert",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "author": "Wei Lu",
+  "license": "GPL-2.0+"
+}
