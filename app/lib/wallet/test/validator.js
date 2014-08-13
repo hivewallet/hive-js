@@ -3,7 +3,7 @@ var networks = require('bitcoinjs-lib').networks
 var validateSend = require('../validator')
 
 describe('validate', function(){
-  var wallet = new Wallet(new Buffer('ff', 'hex'), networks.testnet)
+  var wallet = new Wallet(new Buffer(128/8), networks.testnet)
   var to = 'mqMRh2h5QbLyD4K3jZQMk2DzRwf2GwSoSQ'
   var from = wallet.generateAddress()
   var utxo = {
@@ -14,7 +14,7 @@ describe('validate', function(){
   }
   wallet.setUnspentOutputs([utxo])
 
-  var fundsUnavailableMessage = "Some funds are temporarily unavailable. To send this transaction, you'll need to wait for your pending transactions to be confirmed first (this shouldn't take more than a few minutes)."
+  var fundsUnavailableMessage = "Some funds are temporarily unavailable. To send this transaction, you will need to wait for your pending transactions to be confirmed first (this should not take more than a few minutes)."
   var fundsUnavailableLink = "https://github.com/hivewallet/hive-osx/wiki/Sending-Bitcoin-from-a-pending-transaction"
 
   describe('address', function(){
@@ -43,31 +43,33 @@ describe('validate', function(){
   describe('send amount', function(){
     it('must be above dust threshold', function(done){
       validateSend(wallet, to, 0.00000546, function(err){
-        expect(err.message).toEqual('Please enter an amount above 0.00000546')
+        expect(err.message).toEqual('Please enter an amount above')
         done()
       })
     })
 
     it('catches amount more than wallet balance', function(done){
       validateSend(wallet, to, 0.0003, function(err){
-        expect(err.message).toEqual("You don't have enough funds in your wallet")
+        expect(err.message).toEqual("You do not have enough funds in your wallet")
         done()
       })
     })
 
     describe('trying to empty wallet without including fee', function(){
+      var sendableAmountMessage = "It seems like you are trying to empty your wallet. Taking transaction fee into account, we estimated that the max amount you can send is. We have amended the value in the amount field for you"
+
       it('amount equals balance exactly', function(done){
         validateSend(wallet, to, 0.00029999, function(err){
-          expect(err.message).toEqual(sendableAmountMessage(0.00019999))
-          expect(err.sendableBalance).toEqual(0.00019999)
+          expect(err.message).toEqual(sendableAmountMessage)
+          expect(err.interpolations.sendableBalance).toEqual(0.00019999)
           done()
         })
       })
 
       it('balance - feePerKb < amount < balance', function(done){
         validateSend(wallet, to, 0.0002, function(err){
-          expect(err.message).toEqual(sendableAmountMessage(0.00019999))
-          expect(err.sendableBalance).toEqual(0.00019999)
+          expect(err.message).toEqual(sendableAmountMessage)
+          expect(err.interpolations.sendableBalance).toEqual(0.00019999)
           done()
         })
       })
@@ -86,10 +88,6 @@ describe('validate', function(){
           done()
         })
       })
-
-      function sendableAmountMessage(amount){
-        return "It seems like you are trying to empty your wallet. Taking transaction fee into account, we estimated that the max amount you can send is " + amount + ". We have amended the value in the amount field for you."
-      }
     })
 
     it('returns fee when amount is valid', function(done){
