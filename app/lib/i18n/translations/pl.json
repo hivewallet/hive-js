@@ -86,7 +86,7 @@
     "Confirm": "Potwierdź",
     "No Hive users found nearby": "Nie wykryto żadnych użytkowników Hive w twojej okolicy",
     "Search Again": "Wyszukaj ponownie",
-    "Searching...": "Searching...",
+    "Searching...": "Wyszukiwanie...",
     "Searching your area for other Hive Web users": "Wyszukiwanie innych użytkowników Hive w twojej okolicy",
     "Confirm transaction": "Potwierdź transakcję",
     "transaction fee": "opłata transakcyjna",
@@ -94,10 +94,10 @@
     "Transaction Successful": "Transakcja wykonana pomyślnie",
     "Your transaction will appear in your history tab shortly.": "Transakcja za chwilę pojawi się w zakładce \"Historia\".",
     "Close": "Zamknij",
-    "Report": "Report",
+    "Report": "Zgłoś problem",
     "Transaction Failed": "Transakcja nie mogła zostać wykonana",
     "Please make sure you are connected to the internet.": "Upewnij się, że masz połączenie z Internetem.",
-    "Please describe what happened above. Below are network error logs that could help us identify your issue.": "Please describe what happened above. Below are network error logs that could help us identify your issue.",
+    "Please describe what happened above. Below are network error logs that could help us identify your issue.": "Opisz powyżej kreski, co się stało. Poniżej dołączone są logi, które mogą nam pomóc rozwiązać Twój problem.",
     "Sorry, Hive Wallet did not load.": "Niestety, Hive nie może być załadowany.",
     "Try updating your browser, or switching out of private browsing mode. If all else fails, download Chrome for your device.": "Spróbuj zaktualizować swoją przeglądarkę lub wyłączyć trybu incognito. Jeśli mimo wszystko nie możesz uruchomić Hive, spróbuj zainstalować przeglądarkę Chrome."
 }
