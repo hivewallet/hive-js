@@ -10,7 +10,7 @@ function validateSend(wallet, to, btcValue, callback){
 
   try{
     var addressObj = Address.fromBase58Check(to)
-    assert(addressObj.version === network.pubKeyHash)
+    assert(addressObj.version === network.pubKeyHash || addressObj.version === network.scriptHash)
   } catch(e) {
     return callback(new Error('Please enter a valid address to send to'))
   }

@@ -32,8 +32,15 @@ describe('validate', function(){
       })
     })
 
-    it('allows valid address', function(done){
+    it('allows valid pubKeyHash address', function(done){
       validateSend(wallet, to, 0.0001, function(err){
+        expect(err).toBeNull()
+        done()
+      })
+    })
+
+    it('allows valid p2sh address', function(done){
+      validateSend(wallet, '2MvR3wixpB1usCNRugN6ufwxfT4GEFxoRhQ', 0.0001, function(err){
         expect(err).toBeNull()
         done()
       })
