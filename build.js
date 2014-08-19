@@ -59,8 +59,10 @@ function initTasks(children) {
 }
 
 function runTasks(children) {
-  // 4 child processes at a time
-  children.splice(0, 4).forEach(function(pair){
+  var processCount = process.env.PROCESS_COUNT || 4
+  console.info('Max number of concurrent build processes:', processCount)
+
+  children.splice(0, processCount).forEach(function(pair){
     pair[0].send(pair[1])
   })
 }
