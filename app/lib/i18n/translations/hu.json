@@ -86,7 +86,7 @@
     "Confirm": "Megerősítés",
     "No Hive users found nearby": "Nem található Hive felhasználó a közelben",
     "Search Again": "Keresés újra",
-    "Searching...": "Searching...",
+    "Searching...": "Keresés...",
     "Searching your area for other Hive Web users": "Hive Web felhasználók keresése a közelben",
     "Confirm transaction": "Tranzakció megerősítése",
     "transaction fee": "tranzakciós illeték",
@@ -94,10 +94,10 @@
     "Transaction Successful": "Sikeres tranzakció",
     "Your transaction will appear in your history tab shortly.": "A tranzakciód hamarosan megjelenik az előzményeid között",
     "Close": "Bezár",
-    "Report": "Report",
+    "Report": "Jelentés",
     "Transaction Failed": "Tranzakció hiba",
     "Please make sure you are connected to the internet.": "Győződj meg róla, hogy csatlakozol-e az internethez",
-    "Please describe what happened above. Below are network error logs that could help us identify your issue.": "Please describe what happened above. Below are network error logs that could help us identify your issue.",
+    "Please describe what happened above. Below are network error logs that could help us identify your issue.": "Kérjük írja le, hogy mi történt. Alább található a hálózati hiba napló ami segít beazonosítani a problémát.",
     "Sorry, Hive Wallet did not load.": "A Hive tárca nem tudott betöltődni",
     "Try updating your browser, or switching out of private browsing mode. If all else fails, download Chrome for your device.": "Próbáld meg frissíteni a böngésződ vagy lépj ki a privát böngésző módból. Ha ez sem működik töltsd le a Chrome-ot a készülékedre."
 }
