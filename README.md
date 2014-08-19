@@ -49,6 +49,11 @@ Click on the bottom link "fix this" to create an admin user, say:
     DB_HOST=127.0.0.1 DB_PORT=5984 DB_USER=admin DB_PASSWORD=password COOKIE_SALT=secret PROXY_URL=https://hive-proxy.herokuapp.com npm run dev
     open http://localhost:8080
 
+Optional environment variables:
+
+    NODE_ENV        # default to nothing, should be `production` in prod
+    PROCESS_COUNT   # default to 4. If your prod box has limited resources, reduce it.
+
 ### Live Reload (Optional)
 
 This project has js & css live reload setup. If you wish to use it to boost your productivity, head over to chrome store and download [the LiveReload extension](https://chrome.google.com/webstore/detail/livereload/jnihajbhpnppcggbcgedagnkighmdlei). After turning it on, you'd never need to hit the refresh button anymore.
