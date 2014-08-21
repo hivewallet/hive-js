@@ -13,8 +13,8 @@
       with_items:
         - nginx
         - nodejs
-        - npm
         - git-core
+        - g++
 
     - name: install npm globals
       npm: state=present global=yes name={{ item }}
