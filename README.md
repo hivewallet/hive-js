@@ -61,7 +61,7 @@ This project has js & css live reload setup. If you wish to use it to boost your
 ### Testing deployment inside Vagrant
 
 1. [Install Vagrant](http://www.vagrantup.com/downloads.html)
-2. symlink the playbook file into place: `ln -s path/to/ansible/repo provisioners`
+2. symlink the playbook file into place: `ln -s path/to/ansible/repo provisioners` (Windows users can add directory to %PATH%)
 3. `vagrant up` or `vagrant reload --provision`
 
 ## Contributing
