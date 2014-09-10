@@ -627,3 +627,18 @@
     }
   }
 }
+
+.ios__link__container {
+  padding-top: 20px;
+}
+
+.appstore__link {
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  width: 135px;
+  height: 40px;
+  // background-image: url('../img/appstore_icon.svg');
+  background-size: 135px 40px;
+}
+

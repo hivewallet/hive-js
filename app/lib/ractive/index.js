@@ -71,6 +71,7 @@ partials.svg_waggle = require('hive-svg/waggle.ract').template
 partials.svg_warning = require('hive-svg/warning.ract').template
 partials.svg_waggle_not_found = require('hive-svg/waggle_not_found.ract').template
 partials.svg_error = require('hive-svg/error.ract').template
+partials.svg_appstore = require('hive-svg/appstore.ract').template
 
 Ractive.prototype.hide = function(){
   this.fire('before-hide')
