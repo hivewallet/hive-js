@@ -8,6 +8,7 @@ var showError = require('hive-modal-flash').showError
 function enterPassphrase(prevPage){
   var ractive = new Ractive({
     partials: {
+      header: require('./header.ract').template,
       content: require('./content.ract').template,
       actions: require('./actions.ract').template,
       footer: require('./footer.ract').template

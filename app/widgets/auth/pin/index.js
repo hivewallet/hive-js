@@ -12,8 +12,8 @@ module.exports = function(prevPage, data){
 
   var ractive = new Ractive({
     partials: {
+      header: require('./header.ract').template,
       content: require('./content.ract').template,
-      actions: require('./actions.ract').template,
       footer: require('./footer.ract').template
     },
     data: {

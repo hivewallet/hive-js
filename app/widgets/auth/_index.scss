@@ -47,6 +47,7 @@
   text-align: center;
   padding-bottom: 20px;
   color: white;
+  max-width: 300px;
 
   ._img {
     width: 105px;
@@ -642,3 +643,10 @@
   background-size: 135px 40px;
 }
 
+.opening__padding {
+  padding-top: 31px;
+
+  @include breakpoint(portrait) {
+    padding-top: 34px;
+  }
+}
