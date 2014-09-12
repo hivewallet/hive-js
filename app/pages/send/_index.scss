@@ -2,7 +2,16 @@
 .send__address {
 
   display: flex;
+  position: relative;
   margin-bottom: 20px;
+
+  .close__input {
+    right: 52px;
+    top: 28px;
+    .svg-close {
+      fill: #969594;
+    }
+  }
 
   ._label {
     @include noselect;
@@ -53,6 +62,7 @@
     @extend .jigsaw-light;
     margin-top: 5px;
     padding-left: 10px;
+    padding-right: 34px;
     border-radius: 2px;
 
     height: auto;
