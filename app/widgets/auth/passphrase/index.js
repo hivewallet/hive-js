@@ -30,6 +30,21 @@ function enterPassphrase(prevPage){
     }
   })
 
+  ractive.observe('passphrase', function() {
+    if(ractive.nodes.passphraseField.value.length === 0) {
+      ractive.set('passphraseEntered', false)
+    } else {
+      ractive.set('passphraseEntered', true)
+    }
+  })
+
+  ractive.on('clearPassphrase', function(){
+    var passfield = ractive.nodes.passphraseField
+    ractive.set('passphrase', '')
+    ractive.set('passphraseEntered', false)
+    passfield.focus()
+  })
+
   function getPassphrase() {
     return (ractive.get('passphrase').toLowerCase() || '').trim()
   }

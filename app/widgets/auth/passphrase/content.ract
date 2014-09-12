@@ -3,5 +3,9 @@
     <label class="_label">{{translate("Enter Passphrase")}}:
       <input id="passphraseField" class="_input" type="text" placeholder="12-word passphrase" autocorrect="on" autocapitalize="off" value="{{passphrase}}" on-enter="open-wallet-with-passphrase" />
     </label>
+
+    {{#passphraseEntered}}
+      <div class="close__input" on-click="clearPassphrase">{{> svg_close}}</div>
+    {{/passphraseEntered}}
   </div>
 </div>

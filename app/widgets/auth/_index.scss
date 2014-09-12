@@ -477,6 +477,7 @@
 }
 
 .auth__input-group {
+  position: relative;
 
   ._label {
     @include noselect;
@@ -505,6 +506,7 @@
     margin-top: 5px;
     height: 50px;
     padding-left: 10px;
+    padding-right: 34px;
     border-radius: 3px;
 
     @include breakpoint(portrait) {
@@ -649,4 +651,18 @@
   @include breakpoint(portrait) {
     padding-top: 34px;
   }
+}
+
+.close__input {
+  @include clickbtn;
+  width: 35px;
+  height: 48px;
+  opacity: 0.4;
+  position: absolute;
+  right: 0;
+  top: 30px;
+  padding-left: 5px;
+  padding-right: 10px;
+  padding-top: 14px;
+  padding-bottom: 14px;
 }
