@@ -81,7 +81,7 @@ module.exports = function(el){
   })
 
   function getAddress(){
-    return Hive.getWallet().currentAddress
+    return Hive.getWallet().getNextAddress()
   }
 
   function handleWaggleError(err) {
