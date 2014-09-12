@@ -104,7 +104,7 @@ module.exports = function(prevPage, data){
   }
 
   function setPin(){
-    Hive.setPin(getPin(), ractive.onSyncDone)
+    Hive.setPin(getPin(), ractive.getNetwork(), ractive.onSyncDone)
   }
 
   return ractive
