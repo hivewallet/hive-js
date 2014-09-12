@@ -477,7 +477,6 @@
 }
 
 .auth__input-group {
-  position: relative;
 
   ._label {
     @include noselect;
@@ -498,21 +497,29 @@
     }
   }
 
+  .input__container {
+    position: relative;
+    margin-top: 5px;
+
+    @include breakpoint(portrait) {
+      margin-bottom: 5px;
+    }
+  }
+
   ._input {
     @extend .jigsaw-light;
     background-color: darken($purple--light, 10%);
     border: 1px solid $purple--light;
     color: white;
-    margin-top: 5px;
     height: 50px;
     padding-left: 10px;
-    padding-right: 34px;
+    padding-right: 38px;
     border-radius: 3px;
 
     @include breakpoint(portrait) {
       font-size: 20px;
       height: 72px;
-      margin-bottom: 5px;
+      padding-right: 58px;
     }
 
     &:active, &:focus {
@@ -641,7 +648,6 @@
   margin-bottom: 20px;
   width: 135px;
   height: 40px;
-  // background-image: url('../img/appstore_icon.svg');
   background-size: 135px 40px;
 }
 
@@ -653,16 +659,37 @@
   }
 }
 
+
+
 .close__input {
   @include clickbtn;
   width: 35px;
-  height: 48px;
   opacity: 0.4;
   position: absolute;
   right: 0;
-  top: 30px;
-  padding-left: 5px;
-  padding-right: 10px;
-  padding-top: 14px;
-  padding-bottom: 14px;
+  top: 0;
+  bottom: 0;
+
+
+  @include breakpoint(portrait) {
+    width: 54px;
+  }
+
+  ._icon {
+    display: block;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    margin-top: -10px;
+
+    @include breakpoint(portrait) {
+      width: 30px;
+      height: 30px;
+      right: 15px;
+      margin-top: -15px;
+    }
+  }
+
 }

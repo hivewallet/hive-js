@@ -4,11 +4,16 @@
 
       <div class="send__address">
         <label class="_label" for="to">{{translate("Wallet address")}}
-          <input id="to" class="_input" type="text" autocorrect="off" autocapitalize="off" value="{{to}}" />
+          <div class="input__container">
+            <input id="to" class="_input" type="text" autocorrect="off" autocapitalize="off" value="{{to}}" />
+            {{#toEntered}}
+              <div class="close__input" on-click="clearTo">
+                <span class="_icon">{{> svg_close}}</span>
+              </div>
+            {{/toEntered}}
+          </div>
         </label>
-        {{#toEntered}}
-          <div class="close__input" on-click="clearTo">{{> svg_close}}</div>
-        {{/toEntered}}
+
         <div class="_btn" on-click="open-geo">
           <span class="_icon">
             {{>svg_waggle}}

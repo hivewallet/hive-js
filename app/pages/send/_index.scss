@@ -2,14 +2,18 @@
 .send__address {
 
   display: flex;
-  position: relative;
   margin-bottom: 20px;
 
+  .input__container {
+    position: relative;
+    margin-top: 5px;
+  }
+
   .close__input {
-    right: 52px;
-    top: 28px;
-    .svg-close {
-      fill: #969594;
+    ._icon{
+      .svg-close {
+        fill: #969594;
+      }
     }
   }
 
@@ -60,9 +64,8 @@
   ._input {
     @extend .generic_box;
     @extend .jigsaw-light;
-    margin-top: 5px;
     padding-left: 10px;
-    padding-right: 34px;
+    padding-right: 38px;
     border-radius: 2px;
 
     height: auto;
@@ -75,6 +78,7 @@
     @include breakpoint(portrait) {
       font-size: 26px;
       border-radius: 3px;
+      padding-right: 58px;
     }
   }
 }
