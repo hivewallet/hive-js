@@ -111,6 +111,21 @@ module.exports = function(el){
     ractive.set('fiatValue', fiat)
   })
 
+  ractive.observe('to', function() {
+    if(ractive.nodes.to.value.length === 0) {
+      ractive.set('toEntered', false)
+    } else {
+      ractive.set('toEntered', true)
+    }
+  })
+
+  ractive.on('clearTo', function(){
+    var passfield = ractive.nodes.to
+    ractive.set('to', '')
+    ractive.set('toEntered', false)
+    passfield.focus()
+  })
+
   ractive.on('focusAmountInput', function(event) {
     event.node.parentNode.style.zIndex = 5000
   })

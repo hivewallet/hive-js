@@ -12,8 +12,8 @@ module.exports = function(prevPage, data){
 
   var ractive = new Ractive({
     partials: {
+      header: require('./header.ract').template,
       content: require('./content.ract').template,
-      actions: require('./actions.ract').template,
       footer: require('./footer.ract').template
     },
     data: {
@@ -38,35 +38,43 @@ module.exports = function(prevPage, data){
     var pin = ractive.nodes['setPin'].value
 
     var boxes = pin.split('')
+
     if(boxes.length === 4) {
       ractive.nodes.setPin.blur()
       ractive.fire('enter-pin')
-    } else {
-      for(var i=boxes.length; i<4; i++) {
-        boxes[i] = null
-      }
-      ractive.set('boxes', boxes)
     }
+
+    for(var i=boxes.length; i<4; i++) {
+      boxes[i] = null
+    }
+    ractive.set('boxes', boxes)
+
   })
 
   ractive.on('enter-pin', function(){
-    if(!validatePin(getPin())){
-      emitter.emit('clear-pin')
-      return showError({ message: 'PIN must be a 4-digit number' })
-    }
 
-    ractive.set('opening', true)
+    setTimeout(function(){
 
-    if(userExists) {
-      ractive.set('progress', 'Verifying PIN')
-      return Hive.walletExists(function(walletExists){
-        if(walletExists) { return openWithPin() }
-        setPin()
-      })
-    }
-    ractive.set('progress', 'Setting PIN')
-    ractive.set('userExists', true)
-    setPin()
+      if(!validatePin(getPin())){
+        emitter.emit('clear-pin')
+        return showError({ message: 'PIN must be a 4-digit number' })
+      }
+
+      ractive.set('opening', true)
+
+      if(userExists) {
+        ractive.set('progress', 'Verifying PIN')
+        return Hive.walletExists(function(walletExists){
+          if(walletExists) { return openWithPin() }
+          setPin()
+        })
+      }
+      ractive.set('progress', 'Setting PIN')
+      ractive.set('userExists', true)
+      setPin()
+
+    }, 500)
+
   })
 
   emitter.on('clear-pin', function() {

@@ -47,6 +47,7 @@
   text-align: center;
   padding-bottom: 20px;
   color: white;
+  max-width: 300px;
 
   ._img {
     width: 105px;
@@ -307,21 +308,6 @@
   &:hover {
     color: rgba(255,255,255, 0.3);
   }
-
-  ._icon {
-    display: block;
-    width: 25px;
-    height: 25px;
-    position: absolute;
-    left: 10px;
-    top: 18px;
-    opacity: 0.3;
-    animation:  infinite-spinning 1s linear infinite;
-
-    @include breakpoint(portrait) {
-      top: 23px;
-    }
-  }
 }
 
 .litecoin {
@@ -496,20 +482,29 @@
     }
   }
 
+  .input__container {
+    position: relative;
+    margin-top: 5px;
+
+    @include breakpoint(portrait) {
+      margin-bottom: 5px;
+    }
+  }
+
   ._input {
     @extend .jigsaw-light;
     background-color: darken($purple--light, 10%);
     border: 1px solid $purple--light;
     color: white;
-    margin-top: 5px;
     height: 50px;
     padding-left: 10px;
+    padding-right: 38px;
     border-radius: 3px;
 
     @include breakpoint(portrait) {
       font-size: 20px;
       height: 72px;
-      margin-bottom: 5px;
+      padding-right: 58px;
     }
 
     &:active, &:focus {
@@ -625,5 +620,77 @@
         border: 1px solid lighten($silver, 10%);
       }
     }
+  }
+}
+
+.ios__link__container {
+  padding-top: 20px;
+}
+
+.appstore__link {
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  width: 135px;
+  height: 40px;
+  background-size: 135px 40px;
+}
+
+.opening__padding {
+  padding-top: 31px;
+
+  @include breakpoint(portrait) {
+    padding-top: 34px;
+  }
+}
+
+
+
+.close__input {
+  @include clickbtn;
+  width: 35px;
+  opacity: 0.4;
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+
+
+  @include breakpoint(portrait) {
+    width: 54px;
+  }
+
+  ._icon {
+    display: block;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    margin-top: -10px;
+
+    @include breakpoint(portrait) {
+      width: 30px;
+      height: 30px;
+      right: 15px;
+      margin-top: -15px;
+    }
+  }
+
+}
+
+.loading__spinner {
+  display: block;
+  width: 25px;
+  height: 25px;
+  margin: 0 auto;
+  margin-bottom: 10px;
+  margin-top: 25px;
+  opacity: 0.3;
+  animation:  infinite-spinning 1s linear infinite;
+
+  @include breakpoint(portrait) {
+    width: 45px;
+    height: 45px;
   }
 }

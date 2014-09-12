@@ -2,5 +2,5 @@
   <span class="_link" on-click="back">{{translate("Go back")}}</span>
 {{/opening}}
 {{#opening}}
-  <div style="height: 31px;"></div>
+  <div class="opening__padding"></div>
 {{/opening}}

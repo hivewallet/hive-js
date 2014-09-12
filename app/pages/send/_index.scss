@@ -4,6 +4,19 @@
   display: flex;
   margin-bottom: 20px;
 
+  .input__container {
+    position: relative;
+    margin-top: 5px;
+  }
+
+  .close__input {
+    ._icon{
+      .svg-close {
+        fill: #969594;
+      }
+    }
+  }
+
   ._label {
     @include noselect;
     cursor: pointer;
@@ -51,8 +64,8 @@
   ._input {
     @extend .generic_box;
     @extend .jigsaw-light;
-    margin-top: 5px;
     padding-left: 10px;
+    padding-right: 38px;
     border-radius: 2px;
 
     height: auto;
@@ -65,6 +78,7 @@
     @include breakpoint(portrait) {
       font-size: 26px;
       border-radius: 3px;
+      padding-right: 58px;
     }
   }
 }

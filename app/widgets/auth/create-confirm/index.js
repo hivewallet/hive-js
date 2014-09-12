@@ -7,8 +7,7 @@ function confirm(data){
   var ractive = new Ractive({
     partials: {
       header: require('./header.ract').template,
-      actions: require('./actions.ract').template,
-      footer: require('./footer.ract').template
+      actions: require('./actions.ract').template
     },
     data: {
       passphrase: data.mnemonic
