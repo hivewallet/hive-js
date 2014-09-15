@@ -7,7 +7,7 @@
   "license": "GPL-2.0+",
   "dependencies": {
     "bip39": "^2.0.0",
-    "cb-wallet": "^0.2.0",
+    "cb-wallet": "^0.2.1",
     "workerify": "git://github.com/weilu/workerify.git"
   },
   "browserify": {

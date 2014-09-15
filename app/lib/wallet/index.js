@@ -113,7 +113,7 @@ function getAccountsFromSeed(networkName, done) {
 
 function initWallet(externalAccount, internalAccount, networkName, done){
   var network = Bitcoin.networks[networkName]
-  new Wallet(externalAccount.toBase58(), internalAccount.toBase58(), networkName, function(err, w) {
+  new Wallet(externalAccount, internalAccount, networkName, function(err, w) {
     if(err) return done(err)
 
     wallet = w
