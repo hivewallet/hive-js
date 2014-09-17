@@ -8,13 +8,13 @@
 
     <div class="_amount {{directionClass(direction)}}">{{directionIcon(direction)}}{{satoshiToBtc(amount)}}</div>
 
-    {{#pending}}
-      <div class='_time'>{{translate("pending confirmation")}}</div>
-    {{/pending}}
-
-    {{^pending}}
+    {{#confirmations}}
       <div class='_time'>{{formatTimestamp(timestamp)}}</div>
-    {{/pending}}
+    {{/confirmations}}
+
+    {{^confirmations}}
+      <div class='_time'>{{translate("pending confirmation")}}</div>
+    {{/confirmations}}
 
     <div class="detail__strings">
 

@@ -120,30 +120,33 @@ function initWallet(externalAccount, internalAccount, networkName, done){
     wallet.denomination = denominations[networkName].default
 
     var txObjs = wallet.getTransactionHistory()
-    var txs = txObjs.map(function(tx) {
-      var id = tx.getId()
-      var metadata = wallet.txMetadata[id]
-      var direction, toAddress
-      if(metadata.value > 0) {
-        direction =  'incoming'
-      } else {
-        toAddress = Bitcoin.Address.fromOutputScript(tx.outs[0].script, network).toString()
-        direction = 'outgoing'
-      }
-
-      return {
-        id: id,
-        amount: metadata.value,
-        direction: direction,
-        toAddress: toAddress,
-        timestamp: new Date().getTime(),
-        confirmations: metadata.confirmations,
-        fee: metadata.fee
-      }
-    })
-
-    done(null, txs)
+    done(null, txObjs.map(function(tx) {
+      return parseTx(wallet, tx)
+    }))
   })
+}
+
+function parseTx(wallet, tx) {
+  var id = tx.getId()
+  var metadata = wallet.txMetadata[id]
+  var direction, toAddress
+  if(metadata.value > 0) {
+    direction =  'incoming'
+  } else {
+    var network = Bitcoin.networks[wallet.networkName]
+    toAddress = Bitcoin.Address.fromOutputScript(tx.outs[0].script, network).toString()
+    direction = 'outgoing'
+  }
+
+  return {
+    id: id,
+    amount: metadata.value,
+    direction: direction,
+    toAddress: toAddress,
+    timestamp: new Date().getTime(),
+    confirmations: metadata.confirmations,
+    fee: metadata.fee
+  }
 }
 
 function sync(done) {
@@ -180,5 +183,6 @@ module.exports = {
   walletExists: walletExists,
   reset: reset,
   sync: sync,
-  validateSend: validateSend
+  validateSend: validateSend,
+  parseTx: parseTx
 }
