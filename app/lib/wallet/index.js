@@ -129,14 +129,28 @@ function initWallet(externalAccount, internalAccount, networkName, done){
 function parseTx(wallet, tx) {
   var id = tx.getId()
   var metadata = wallet.txMetadata[id]
+  var network = Bitcoin.networks[wallet.networkName]
   var toAddress
   if(metadata.value <= 0) {
-    var network = Bitcoin.networks[wallet.networkName]
     toAddress = Bitcoin.Address.fromOutputScript(tx.outs[0].script, network).toString()
   }
 
   var timestamp = metadata.timestamp
   timestamp = timestamp ? timestamp * 1000 : new Date().getTime()
+
+  var node = wallet.txGraph.findNodeById(id)
+  var prevOutputs = node.prevNodes.reduce(function(inputs, n) {
+    inputs[n.id] = n.tx.outs
+    return inputs
+  }, {})
+
+  var inputs = tx.ins.map(function(input) {
+    var buffer = new Buffer(input.hash)
+    Array.prototype.reverse.call(buffer)
+    var inputTxId = buffer.toString('hex')
+
+    return prevOutputs[inputTxId][input.index]
+  })
 
   return {
     id: id,
@@ -144,7 +158,18 @@ function parseTx(wallet, tx) {
     toAddress: toAddress,
     timestamp: timestamp,
     confirmations: metadata.confirmations,
-    fee: metadata.fee
+    fee: metadata.fee,
+    ins: parseOutputs(inputs, network),
+    outs: parseOutputs(tx.outs, network)
+  }
+
+  function parseOutputs(outputs, network) {
+    return outputs.map(function(output){
+      return {
+        address: Bitcoin.Address.fromOutputScript(output.script, network).toString(),
+        amount: output.value
+      }
+    })
   }
 }
 

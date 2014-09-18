@@ -55,6 +55,14 @@
     border-radius: 5px;
     font-size: 14px;
     line-height: 1.8;
+    overflow: hidden;
+
+    ._address {
+      float: left;
+    }
+    ._number {
+      float: right;
+    }
   }
 }
 
