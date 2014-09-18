@@ -130,10 +130,6 @@ function parseTx(wallet, tx) {
   var id = tx.getId()
   var metadata = wallet.txMetadata[id]
   var network = Bitcoin.networks[wallet.networkName]
-  var toAddress
-  if(metadata.value <= 0) {
-    toAddress = Bitcoin.Address.fromOutputScript(tx.outs[0].script, network).toString()
-  }
 
   var timestamp = metadata.timestamp
   timestamp = timestamp ? timestamp * 1000 : new Date().getTime()
@@ -155,7 +151,6 @@ function parseTx(wallet, tx) {
   return {
     id: id,
     amount: metadata.value,
-    toAddress: toAddress,
     timestamp: timestamp,
     confirmations: metadata.confirmations,
     fee: metadata.fee,

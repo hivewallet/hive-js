@@ -22,7 +22,7 @@
 
       </div>
 
-      <div class="_address">{{toAddress || translate('Received')}}</div>
+      <div class="_address">{{amount > 0 ? translate('Received') : outs[0].address}}</div>
 
     </div>
   {{/transactions}}
