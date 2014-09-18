@@ -129,13 +129,10 @@ function initWallet(externalAccount, internalAccount, networkName, done){
 function parseTx(wallet, tx) {
   var id = tx.getId()
   var metadata = wallet.txMetadata[id]
-  var direction, toAddress
-  if(metadata.value > 0) {
-    direction =  'incoming'
-  } else {
+  var toAddress
+  if(metadata.value <= 0) {
     var network = Bitcoin.networks[wallet.networkName]
     toAddress = Bitcoin.Address.fromOutputScript(tx.outs[0].script, network).toString()
-    direction = 'outgoing'
   }
 
   var timestamp = metadata.timestamp
@@ -144,7 +141,6 @@ function parseTx(wallet, tx) {
   return {
     id: id,
     amount: metadata.value,
-    direction: direction,
     toAddress: toAddress,
     timestamp: timestamp,
     confirmations: metadata.confirmations,

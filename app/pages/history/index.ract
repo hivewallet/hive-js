@@ -8,7 +8,9 @@
 
       <div class="_detail">
 
-        <div class="_amount {{directionClass(direction)}}">{{directionIcon(direction)}}{{truncate(satoshiToBtc(amount))}}</div>
+        <div class="_amount {{amount > 0 ? 'green' : 'red'}}">
+          {{amount > 0 ? '+' : ''}} {{truncate(satoshiToBtc(amount))}}
+        </div>
 
         {{#confirmations}}
           <span class='_time'>{{formatTimestamp(timestamp)}}</span>

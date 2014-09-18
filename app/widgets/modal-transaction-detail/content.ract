@@ -6,7 +6,9 @@
       {{>svg_close}}
     </span>
 
-    <div class="_amount {{directionClass(direction)}}">{{directionIcon(direction)}}{{satoshiToBtc(amount)}}</div>
+    <div class="_amount {{amount > 0 ? 'green' : 'red'}}">
+      {{amount > 0 ? '+' : ''}} {{truncate(satoshiToBtc(amount))}}
+    </div>
 
     {{#confirmations}}
       <div class='_time'>{{formatTimestamp(timestamp)}}</div>
