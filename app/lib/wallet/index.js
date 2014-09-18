@@ -83,9 +83,8 @@ function openWalletWithPin(pin, network, syncDone) {
         return syncDone(err.error)
       }
 
-      emitter.emit('wallet-auth', {token: token, pin: pin})
-
       assignSeedAndId(AES.decrypt(encryptedSeed, token))
+      emitter.emit('wallet-auth', {token: token, pin: pin})
 
       var accounts = getAccountsFromSeed(network)
       initWallet(accounts.externalAccount, accounts.internalAccount, network, syncDone)
