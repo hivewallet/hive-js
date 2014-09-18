@@ -3,6 +3,7 @@
 var Ractive = require('hive-modal')
 var emitter = require('hive-emitter')
 var getWallet = require('hive-wallet').getWallet
+var parseTx = require('hive-wallet').parseTx
 var btcToSatoshi = require('hive-convert').btcToSatoshi
 var openSupportModal = require('hive-modal-support')
 
@@ -36,7 +37,17 @@ function open(data){
     } catch(err) {
       return handleTransactionError()
     }
-    wallet.sendTx(tx, onTxSent)
+
+    wallet.sendTx(tx, function (err){
+      if(err) return handleTransactionError(err);
+
+      ractive.set('confirmation', false)
+      ractive.set('success', true)
+
+      // update balance & tx history
+      emitter.emit('wallet-ready')
+      emitter.emit('transactions-loaded', [parseTx(wallet, tx)])
+    })
   })
 
   ractive.on('open-support', function(){
@@ -45,16 +56,6 @@ function open(data){
     openSupportModal({description: "\n----\n" + message + "\n\n" + ractive.get('error')})
   })
 
-  function onTxSent(err, transaction){
-    if(err) return handleTransactionError(err)
-
-    ractive.set('confirmation', false)
-    ractive.set('success', true)
-
-    // update balance & tx history
-    emitter.emit('wallet-ready')
-    emitter.emit('transactions-loaded', [transaction])
-  }
 
   function handleTransactionError(err) {
     ractive.set('confirmation', false)

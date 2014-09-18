@@ -15,18 +15,6 @@ module.exports = function(el){
     data: {
       updating_transactions: false,
       transactions: transactions,
-      directionClass: function(direction){
-        return {
-          incoming: 'green',
-          outgoing: 'red'
-        }[direction]
-      },
-      directionIcon: function(direction){
-        return {
-          incoming: '+',
-          outgoing: ''
-        }[direction]
-      },
       formatTimestamp: function(timestamp){
         var date = new Date(timestamp)
         return strftime('%b %d %l:%M %p', date)

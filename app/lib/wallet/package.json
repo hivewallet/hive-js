@@ -6,15 +6,16 @@
   "author": "",
   "license": "GPL-2.0+",
   "dependencies": {
-    "bip39": "~1.1.0",
-    "workerify": "git://github.com/weilu/workerify.git",
-    "envify": "^1.2.1",
-    "pouchdb": "2.2.3"
+    "bip39": "^2.0.0",
+    "cb-wallet": "^0.5.0",
+    "workerify": "git://github.com/weilu/workerify.git"
   },
   "browserify": {
     "transform": [
-      "workerify",
-      "envify"
+      "workerify"
     ]
+  },
+  "devDependencies": {
+    "sinon": "^1.10.3"
   }
 }

@@ -5,9 +5,6 @@
   "main": "index.js",
   "author": "",
   "license": "GPL-2.0+",
-  "dependencies": {
-    "pouchdb": "2.2.3"
-  },
   "browserify": {
     "transform": [ "envify" ]
   }

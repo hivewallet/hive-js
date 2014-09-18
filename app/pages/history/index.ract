@@ -8,15 +8,17 @@
 
       <div class="_detail">
 
-        <div class="_amount {{directionClass(direction)}}">{{directionIcon(direction)}}{{truncate(satoshiToBtc(amount))}}</div>
+        <div class="_amount {{amount > 0 ? 'green' : 'red'}}">
+          {{amount > 0 ? '+' : ''}} {{truncate(satoshiToBtc(amount))}}
+        </div>
 
-        {{#pending}}
-        <span class='_time'>{{translate("pending confirmation")}}</span>
-        {{/pending}}
-
-        {{^pending}}
+        {{#confirmations}}
           <span class='_time'>{{formatTimestamp(timestamp)}}</span>
-        {{/pending}}
+        {{/confirmations}}
+
+        {{^confirmations}}
+          <span class='_time'>{{translate("pending confirmation")}}</span>
+        {{/confirmations}}
 
       </div>
 
