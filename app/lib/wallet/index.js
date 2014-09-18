@@ -138,12 +138,15 @@ function parseTx(wallet, tx) {
     direction = 'outgoing'
   }
 
+  var timestamp = metadata.timestamp
+  timestamp = timestamp ? timestamp * 1000 : new Date().getTime()
+
   return {
     id: id,
     amount: metadata.value,
     direction: direction,
     toAddress: toAddress,
-    timestamp: new Date().getTime(),
+    timestamp: timestamp,
     confirmations: metadata.confirmations,
     fee: metadata.fee
   }
