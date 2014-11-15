@@ -1,6 +1,7 @@
 'use strict';
 
-var worker = new Worker('./worker.js')
+var work = require('webworkify')
+var worker = work(require('./worker.js'))
 var auth = require('./auth')
 var db = require('./db')
 var emitter = require('hive-emitter')

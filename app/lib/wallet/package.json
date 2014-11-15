@@ -8,12 +8,7 @@
   "dependencies": {
     "bip39": "^2.0.0",
     "cb-wallet": "^0.6.1",
-    "workerify": "git://github.com/weilu/workerify.git"
-  },
-  "browserify": {
-    "transform": [
-      "workerify"
-    ]
+    "webworkify": "^1.0.0"
   },
   "devDependencies": {
     "sinon": "^1.10.3"
