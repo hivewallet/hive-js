@@ -10,10 +10,7 @@ var denominations = require('hive-denomination')
 var Wallet = require('cb-wallet')
 var validateSend = require('./validator')
 var rng = require('secure-random').randomBuffer
-
-var Bitcoin = require('bitcoinjs-lib')
-var Transaction = Bitcoin.Transaction
-var HDNode = Bitcoin.HDNode
+var bitcoin = require('bitcoinjs-lib')
 
 var wallet = null
 var seed = null
@@ -101,8 +98,8 @@ function assignSeedAndId(s) {
 function getAccountsFromSeed(networkName, done) {
   emitter.emit('wallet-opening', 'Synchronizing Wallet')
 
-  var network = Bitcoin.networks[networkName]
-  var accountZero = HDNode.fromSeedHex(seed, network).deriveHardened(0)
+  var network = bitcoin.networks[networkName]
+  var accountZero = bitcoin.HDNode.fromSeedHex(seed, network).deriveHardened(0)
 
   return {
     externalAccount: accountZero.derive(0),
@@ -111,7 +108,7 @@ function getAccountsFromSeed(networkName, done) {
 }
 
 function initWallet(externalAccount, internalAccount, networkName, done){
-  var network = Bitcoin.networks[networkName]
+  var network = bitcoin.networks[networkName]
   new Wallet(externalAccount, internalAccount, networkName, function(err, w) {
     if(err) return done(err)
 
@@ -128,7 +125,7 @@ function initWallet(externalAccount, internalAccount, networkName, done){
 function parseTx(wallet, tx) {
   var id = tx.getId()
   var metadata = wallet.txMetadata[id]
-  var network = Bitcoin.networks[wallet.networkName]
+  var network = bitcoin.networks[wallet.networkName]
 
   var timestamp = metadata.timestamp
   timestamp = timestamp ? timestamp * 1000 : new Date().getTime()
@@ -160,7 +157,7 @@ function parseTx(wallet, tx) {
   function parseOutputs(outputs, network) {
     return outputs.map(function(output){
       return {
-        address: Bitcoin.Address.fromOutputScript(output.script, network).toString(),
+        address: bitcoin.Address.fromOutputScript(output.script, network).toString(),
         amount: output.value
       }
     })
