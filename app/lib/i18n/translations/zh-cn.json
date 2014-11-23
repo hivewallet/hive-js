@@ -22,7 +22,7 @@
     "Enter your PIN": "输入登录口令",
     "Set a PIN for quick access": "设置一个登录口令，以便快速访问",
     "Review passphrase again": "再次检查安全种子",
-    "Open a different wallet": "打开一个不同的钱包",
+    "Open a different wallet": "打开另一个钱包",
     "PIN must be a 4-digit number": "登录口令必须是4位数字",
     "Verifying PIN": "验证登录口令",
     "Setting PIN": "设置登录口令",
