@@ -58,7 +58,7 @@
     "minimatch": "^1.0.0",
     "mkdirp": "^0.5.0",
     "node-sass": "^0.9.3",
-    "pouchdb": "2.2.3",
+    "pouchdb": "^3.2.0",
     "ractify": "~0.4.0",
     "ractive": "~0.4.0",
     "request": "^2.39.0",
