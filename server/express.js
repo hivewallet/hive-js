@@ -23,7 +23,7 @@ module.exports = function (){
     app.use(helmet.csp({
       'default-src': ["'self'"],
       'connect-src': [
-        "'self'",
+        "'self'", "blob:",
         'api.bitcoinaverage.com', 'chain.so', // tickers
         'btc.blockr.io', 'tbtc.blockr.io', 'ltc.blockr.io', // blockchain APIs
         process.env.DB_HOST, proxyHost
