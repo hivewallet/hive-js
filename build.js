@@ -9,7 +9,11 @@ task = process.argv.reduce(function(memo, arg) {
     return arg
   }
   return memo
-}, false) || 'default'
+}, false) || 'dev'
+
+if(task.indexOf('help') >= 0) {
+  return console.log("Available build tasks: " + Object.keys(require('./tasks')).sort().join(', '))
+}
 
 if(task === 'build') {
   var children = collectTasks()

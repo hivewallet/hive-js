@@ -16,7 +16,7 @@ var tasks = {
   transifexPush: require('./transifex').push
 }
 
-tasks.default = function(){
+tasks.dev = function(){
   async.parallel([ tasks.scripts, tasks.loader, tasks.html, tasks.styles, tasks.images ], function(){
     tasks.watch()
     tasks.serve()
