@@ -40,9 +40,9 @@ module.exports = function (){
     app.use(helmet.nosniff())
     app.use(helmet.xframe('sameorigin'))
 
-    var ninetyDaysInMilliseconds = 90 * 24 * 60 * 60 * 1000
+    var hundredEightyDaysInMilliseconds = 180 * 24 * 60 * 60 * 1000
     app.use(helmet.hsts({
-      maxAge: ninetyDaysInMilliseconds,
+      maxAge: hundredEightyDaysInMilliseconds,
       includeSubdomains: true
     }))
   }
