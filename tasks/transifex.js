@@ -23,6 +23,14 @@ function requestAPI(url, options, callback) {
     options = {}
   }
 
+  if(process.env.TRANSIFEX_USER == null) {
+    return callback(new Error('process.env.TRANSIFEX_USER is missing'))
+  }
+
+  if(process.env.TRANSIFEX_PASSWORD == null) {
+    return callback(new Error('process.env.TRANSIFEX_PASSWORD is missing'))
+  }
+
   options.url = url
   options.headers = { "Authorization": authHeader }
   if(options.json == undefined) options.json = true
