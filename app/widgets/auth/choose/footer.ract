@@ -1,5 +1,1 @@
-<div id="ios" class="ios__link__container">
-  <a class="appstore__link" href="https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=906990301&mt=8" onClick="trackEvent('Exit', 'iOS');" target="_blank">{{>svg_appstore}}</a>
-</div>
-
 <a class="_link" href="http://hivewallet.com">{{translate("Back to hivewallet.com")}}</a>
