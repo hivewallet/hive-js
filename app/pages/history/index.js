@@ -19,13 +19,6 @@ module.exports = function(el){
         var date = new Date(timestamp)
         return strftime('%b %d %l:%M %p', date)
       },
-      truncate: function(amount) {
-        if(Math.abs(amount) > 0.00001) {
-          return toFixedFloor(amount, 5)
-        } else {
-          return amount
-        }
-      },
       satoshiToBtc: satoshiToBtc
     }
   })

@@ -9,7 +9,7 @@
       <div class="_detail">
 
         <div class="_amount {{amount > 0 ? 'green' : 'red'}}">
-          {{amount > 0 ? '+' : ''}} {{truncate(satoshiToBtc(amount))}}
+          {{amount > 0 ? '+' : ''}} {{satoshiToBtc(amount)}}
         </div>
 
         {{#confirmations}}
