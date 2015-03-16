@@ -15,7 +15,7 @@ function fetchUserInfo(callback){
     userInfo.name = doc.userInfo.firstName
     userInfo.email = doc.userInfo.email
     userInfo.avatarIndex = doc.userInfo.avatarIndex
-    userInfo.address = getWallet().currentAddress
+    userInfo.address = getWallet().getNextAddress()
     userInfo.network = getNetwork()
 
     callback()
