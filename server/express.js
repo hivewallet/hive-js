@@ -20,6 +20,10 @@ module.exports = function (){
   if(isProduction()){
     app.set('trust proxy', true)
     var proxyHost = process.env.PROXY_URL.replace("https://", '')
+    var proxyQueryIndex = proxyHost.indexOf('/?')
+    if(proxyQueryIndex > 0) {
+      proxyHost = proxyHost.substring(0, proxyQueryIndex)
+    }
     app.use(helmet.csp({
       'default-src': ["'self'"],
       'connect-src': [
