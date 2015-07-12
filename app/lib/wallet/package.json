@@ -6,7 +6,7 @@
   "author": "",
   "license": "GPL-2.0+",
   "dependencies": {
-    "bip39": "^2.0.0",
+    "bip39": "^2.1.2",
     "cb-wallet": "^0.8.1",
     "webworkify": "^1.0.0"
   },
