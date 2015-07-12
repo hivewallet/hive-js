@@ -120,6 +120,15 @@ module.exports = function (){
     })
   })
 
+  app.get('/reset', function(req, res){
+    var name = req.query.wallet_id
+    if (!name) return res.status(400).json({error: 'Bad request'});
+
+    auth.resetPin(name, function(err){
+      res.status(200).send(err)
+    })
+  })
+
   app.post('/location', function(req, res) {
     var args = prepareGeoData(req, res)
 

@@ -171,9 +171,26 @@ function deleteUser(user, callback) {
   })
 }
 
+function resetPin(name, callback) {
+  name = userPrefix + name
+  userDB.get(name, function (err, doc) {
+    if(err){
+      if(err.error === 'not_found') {
+        return callback({error: 'user_deleted'})
+      }
+
+      console.error('error getting doc', err)
+      callback({error: 'auth_failed'})
+    } else {
+      deleteUser(doc, callback)
+    }
+  })
+}
+
 module.exports = {
   register: register,
   login: login,
   exist: exist,
-  disablePin: disablePin
+  disablePin: disablePin,
+  resetPin: resetPin
 }

@@ -89,6 +89,10 @@ module.exports = function(prevPage, data){
     })
   })
 
+  ractive.on('reset-pin', function() {
+    Hive.resetPin(ractive.onSyncDone)
+  })
+
   ractive.on('back', function(){
     if(prevPage) prevPage(data)
     ractive.teardown()

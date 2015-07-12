@@ -61,6 +61,18 @@ function setPin(pin, network, callback) {
   })
 }
 
+function resetPin(callback) {
+  db.getCredentials(function(err, credentials){
+    if(err) return callback(err);
+
+    auth.resetPin(credentials.id, function() {
+      db.deleteCredentials(credentials, function(){
+        callback('user_deleted')
+      })
+    })
+  })
+}
+
 function disablePin(pin, callback) {
   auth.disablePin(id, pin, callback)
 }
@@ -194,6 +206,7 @@ module.exports = {
   openWalletWithPin: openWalletWithPin,
   createWallet: createWallet,
   setPin: setPin,
+  resetPin: resetPin,
   disablePin: disablePin,
   getWallet: getWallet,
   walletExists: walletExists,
