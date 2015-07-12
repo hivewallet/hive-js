@@ -64,6 +64,19 @@ This project has js & css live reload setup. If you wish to use it to boost your
 2. symlink the playbook file into place: `ln -s path/to/ansible/repo provisioners` (Windows users can add directory to %PATH%)
 3. `vagrant up` or `vagrant reload --provision`
 
+### Deploy to Heroku
+
+After all the regular heroku setup and hive-js setup as layed out above, install the heroku-hive-deploy plugin:
+
+    # one-time install
+    plugins:install https://github.com/hone/heroku-hive-deploy.git
+
+    # deploy from your local hive-js dir:
+    heroku deploy:hive `pwd`
+
+    # alternatively, you can also deploy from a git uri:
+    heroku deploy:hive <git uri>
+
 ## Contributing
 
 ### Instructions
