@@ -104,11 +104,13 @@ module.exports = function(prevPage, data){
   }
 
   function openWithPin(){
-    Hive.openWalletWithPin(getPin(), ractive.getNetwork(), ractive.onSyncDone)
+    Hive.openWalletWithPin(getPin(), ractive.getNetwork(),
+                           ractive.onSyncDone, null, ractive.onBalanceDone)
   }
 
   function setPin(){
-    Hive.setPin(getPin(), ractive.getNetwork(), ractive.onSyncDone)
+    Hive.setPin(getPin(), ractive.getNetwork(),
+                           ractive.onSyncDone, null, ractive.onBalanceDone)
   }
 
   return ractive

@@ -38,7 +38,7 @@ window.initHiveApp = function() {
     _html.removeClass('prevent_scroll')
   })
 
-  emitter.on('wallet-ready', function(){
+  emitter.on('balance-ready', function(){
     auth.hide()
     frame.show()
   })
