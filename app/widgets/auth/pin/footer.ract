@@ -8,7 +8,7 @@
   {{^opening}}
     <div class="auth__altmsg">
       <span class="_link" on-click="clear-credentials">{{translate("Open a different wallet")}}</span>
-      <span class="_link" on-click="reset-pin">Forgot PIN</span>
+      <span class="_link" on-click="reset-pin">{{translate("Forgot PIN")}}</span>
     </div>
   {{/opening}}
 
