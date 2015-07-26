@@ -8,7 +8,7 @@
   "dependencies": {
     "bip39": "^2.1.2",
     "bitcoinjs-lib": "^1.5.7",
-    "cb-wallet": "^0.10.1",
+    "cb-wallet": "^0.10.2",
     "webworkify": "^1.0.0"
   },
   "devDependencies": {
