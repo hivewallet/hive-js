@@ -73,7 +73,7 @@ module.exports = function(el){
         if(err) return showError(err)
         cancelSpinner()
         emitter.emit('update-balance')
-        emitter.emit('update-transactions', txs)
+        emitter.emit('set-transactions', txs)
       })
     }
   })
