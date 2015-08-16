@@ -6,7 +6,7 @@
   "author": "Wei Lu",
   "license": "GPL-2.0+",
   "dependencies": {
-    "brfs": "^1.2.0",
+    "brfs": "1.2.0",
     "counterpart": "^0.16.0"
   },
   "browserify": {
